@@ -1,0 +1,44 @@
+title: The Union Leaders
+on-arrival: {!
+// Each union leader has a mood, 0 (friendly) to 100 (at war). Laws, pay
+// policy, disputes and the Union Leaders card move them; each month they
+// drift back towards the union's usual temper. Militant leaders keep the
+// strikes simmering; friendly moderates win ballots and sap union power.
+//   tuc_mood       Len Murray, General Secretary of the TUC
+//   tgwu_mood      Moss Evans, Transport and General Workers' Union
+//   num_mood       Joe Gormley, then Arthur Scargill, National Union of Mineworkers
+//   istc_mood      Bill Sirs, Iron and Steel Trades Confederation
+//   nupe_mood      Alan Fisher, then Rodney Bickerstaffe, NUPE (health and councils)
+//   moderates_mood Frank Chapple of the electricians and Terry Duffy of the engineers
+var base = {tuc: 50, tgwu: 55, num: Q.scargill ? 72 : 50, istc: 45, nupe: 60, moderates: 35};
+if (Q.time >= 49 && Q.nupe_leader != 'Rodney Bickerstaffe') {
+    // Fisher retires in 1982
+    Q.nupe_leader = 'Rodney Bickerstaffe';
+}
+if (Q.unions_last_tick != Q.time && Q.con_in_government) {
+    Q.unions_last_tick = Q.time;
+    for (var u in base) {
+        var key = u + '_mood';
+        Q[key] += (base[u] - Q[key]) * 0.04;
+        // the dole queues anger the general unions
+        if (Q.unemployment > 10 && (u == 'tuc' || u == 'tgwu')) {
+            Q[key] += 0.2;
+        }
+    }
+    // militant leaders keep disputes going
+    var militancy = (Q.tgwu_mood + Q.num_mood + Q.nupe_mood) / 3;
+    if (militancy > 60) {
+        Q.strike_wave += 0.02 * (militancy - 60);
+    }
+    // friendly moderates win the union elections, and the militants lose ground
+    if (Q.moderates_mood < 30) {
+        Q.union_power -= 0.1;
+    }
+}
+for (var u2 in base) {
+    var k2 = u2 + '_mood';
+    Q[k2] = Math.max(0, Math.min(100, Q[k2]));
+}
+!}
+
+# Run by post_event after every action.

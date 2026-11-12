@@ -9,6 +9,8 @@ Q.lib_name = "Alliance";
 // Labour MPs defect to the new Social Democratic Party
 Q.lab_mps -= 13;
 Q.lib_mps += 13;
+Q.sdp_lab_mps = 13;
+Q.labour_civil_war += 10;
 // the Alliance is a lasting new force: shift the baselines as well as today's polls
 var surge = {ab: 16, c1: 18, c2: 16, de: 12};
 for (var c in surge) {

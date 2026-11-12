@@ -482,7 +482,7 @@ Q.timers = ['advisor_action',
             'industry', 'housing', 'law_order', 'foreign_affairs',
             'defence', 'northern_ireland', 'public_pay', 'reshuffle',
             'nhs', 'education', 'social_security', 'europe', 'immigration',
-            'energy', 'local_government', 'regions',
+            'energy', 'local_government', 'regions', 'union_leaders',
             // events
             'by_election', 'gilt_crisis'];
 for (var t of Q.timers) {
@@ -607,6 +607,33 @@ Q.prev_regions = [
 ];
 Q.election_regions = [];
 this._runActions(this.game.scenes['regional_economy'].onArrival);
+
+// ---------------------------------------------------------------
+// The union leaders: each mood runs from 0 (friendly) to 100 (at war);
+// see union_leaders.scene.dry.
+// ---------------------------------------------------------------
+Q.tuc_mood = 45;
+Q.tgwu_mood = 55;
+Q.num_mood = 45;
+Q.istc_mood = 40;
+Q.nupe_mood = 60;
+Q.moderates_mood = 35;
+Q.num_leader = 'Joe Gormley';
+Q.nupe_leader = 'Alan Fisher';
+Q.unions_last_tick = 0;
+Q.day_of_action_seen = 0;
+Q.day_of_action_big = 0;
+
+// ---------------------------------------------------------------
+// Labour's civil war (0-100) and the drain of its MPs to the SDP;
+// see labour_civil_war.scene.dry.
+// ---------------------------------------------------------------
+Q.labour_civil_war = 15;
+Q.civil_war_last_tick = 0;
+Q.sdp_lab_mps = 0;
+Q.sdp_month_defections = 0;
+Q.militant_seen = 0;
+Q.sdp_twenty_seen = 0;
 
 // project the starting polls
 this._runActions(this.game.scenes['election_algorithm'].onArrival);

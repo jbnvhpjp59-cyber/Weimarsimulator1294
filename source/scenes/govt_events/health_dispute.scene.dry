@@ -1,6 +1,6 @@
 title: The Health Service Dispute
 tags: event
-view-if: con_in_government = 1 and time >= 52 and time <= 56 and health_dispute = 0 and (nhs_contracting = 1 or union_power >= 50 or nhs_funding = 0)
+view-if: con_in_government = 1 and time >= 52 and time <= 56 and health_dispute = 0 and (nhs_contracting = 1 or union_power >= 50 or nhs_funding = 0 or nupe_mood >= 70)
 max-visits: 1
 new-page: true
 on-arrival: health_dispute = 1; strike_wave += 2
@@ -15,18 +15,18 @@ Nurses, porters and ancillary staff have rejected a pay offer of between 4% and 
 
 @hold
 subtitle: Union power falls if we win. A long and unpopular dispute.
-on-arrival: union_power -= 4; strike_wave += 1; thatcher_rating -= 2; de_con -= 2; c2_con -= 1; dry_dissent -= 3; wet_dissent += 4
+on-arrival: union_power -= 4; strike_wave += 1; thatcher_rating -= 2; nupe_mood += 15; tuc_mood += 5; de_con -= 2; c2_con -= 1; dry_dissent -= 3; wet_dissent += 4
 
 The dispute drags on for months, with emergency cover only in many hospitals. In the end the unions accept a two-year deal close to the original offer. They have been beaten, and they won't forget it.
 
 @nurses
 subtitle: -1 budget. Divides the strikers.
-on-arrival: budget -= 1; union_power -= 2; strike_wave -= 1; c1_con += 1*(1-dissent); de_con += 1*(1-dissent); wet_dissent -= 2
+on-arrival: budget -= 1; union_power -= 2; strike_wave -= 1; c1_con += 1*(1-dissent); de_con += 1*(1-dissent); wet_dissent -= 2; nupe_mood += 5
 
 The nurses get a pay review body of their own and a better offer, and their support for the dispute ebbs away. The ancillary workers fight on alone, and lose.
 
 @settle
 subtitle: -2 budget. Peace in the hospitals; the dries call it surrender.
-on-arrival: budget -= 2; union_power += 3; strike_wave -= 2; de_con += 1*(1-dissent); wet_dissent -= 4; dry_dissent += 6; economic_liberalism -= 1
+on-arrival: budget -= 2; union_power += 3; strike_wave -= 2; de_con += 1*(1-dissent); wet_dissent -= 4; dry_dissent += 6; economic_liberalism -= 1; nupe_mood -= 15
 
 The money is found from the contingency reserve. The hospitals return to normal, and other public-sector unions start drafting their claims.

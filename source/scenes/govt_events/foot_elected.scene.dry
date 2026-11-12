@@ -17,6 +17,7 @@ Q.ab_lab -= 3;
 Q.c2_lab -= 2;
 Q.de_lab -= 1;
 Q.labour_credibility -= 5;
+Q.labour_civil_war += 15;
 !}
 face-image: img/events/foot.jpg
 

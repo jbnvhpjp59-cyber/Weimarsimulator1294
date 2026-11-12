@@ -386,6 +386,9 @@ if (Q.month_actions >= 1) {
 
 // unemployment region by region, which the seat model uses
 this._runActions(this.game.scenes['regional_economy'].onArrival);
+// the union leaders' moods, and Labour fighting itself
+this._runActions(this.game.scenes['union_leaders'].onArrival);
+this._runActions(this.game.scenes['labour_civil_war'].onArrival);
 
 // recalculate projected votes and seats
 this._runActions(this.game.scenes['election_algorithm'].onArrival);

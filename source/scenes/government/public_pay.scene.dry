@@ -18,18 +18,18 @@ There is no incomes policy any more, but the government is still the employer of
 
 @cash_limits
 subtitle: +1 budget. Strikes are likely.
-on-arrival: budget += 1; strike_wave += 1.5; union_power -= 2; inflation -= 0.3; dry_dissent -= 2; c2_con -= 1
+on-arrival: budget += 1; strike_wave += 1.5; union_power -= 2; inflation -= 0.3; dry_dissent -= 2; c2_con -= 1; nupe_mood += 8; tuc_mood += 3
 
 Pay rises are held below inflation. The civil service unions announce selective strikes.
 
 @generous
 subtitle: -2 budget.
-on-arrival: budget -= 2; strike_wave -= 1.5; union_power += 3; inflation += 0.5; dry_dissent += 4; wet_dissent -= 2
+on-arrival: budget -= 2; strike_wave -= 1.5; union_power += 3; inflation += 0.5; dry_dissent += 4; wet_dissent -= 2; nupe_mood -= 8; tuc_mood -= 3
 
 The settlements buy peace. The dries ask what happened to sound money.
 
 @review_bodies
 subtitle: -1 budget.
-on-arrival: budget -= 1; de_con += 1*(1-dissent); c1_con += 1*(1-dissent); wet_dissent -= 2
+on-arrival: budget -= 1; de_con += 1*(1-dissent); c1_con += 1*(1-dissent); wet_dissent -= 2; nupe_mood -= 4
 
 The nurses get an independent pay review body, taking their pay out of politics.

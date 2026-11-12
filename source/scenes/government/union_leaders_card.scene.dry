@@ -1,0 +1,53 @@
+title: The Union Leaders
+new-page: true
+is-card: true
+card-image: img/cards/union_leaders.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and union_leaders_timer <= 0
+on-arrival: union_leaders_timer = 4; month_actions += 1
+
+= The Union Leaders
+
+Len Murray at the TUC is [+ tuc_mood : unionmood +]. Moss Evans of the Transport and General Workers is [+ tgwu_mood : unionmood +]. [+ num_leader +] of the miners is [+ num_mood : unionmood +], and [+ nupe_leader +] of the public employees is [+ nupe_mood : unionmood +]. The moderates, Frank Chapple of the electricians and Terry Duffy of the engineers, are [+ moderates_mood : unionmood +].
+
+- @murray: Invite Len Murray to Downing Street.
+- @freeze_out: Freeze the TUC out of Whitehall.
+- @moderates: Court Frank Chapple and Terry Duffy.
+- @gormley: Keep Joe Gormley sweet.
+- @scargill_on_tv: Let Scargill do the talking.
+- @easy_discard
+- @cancel_advisor_action
+
+@murray
+subtitle: The TUC softens. The dries call it beer and sandwiches.
+on-arrival: tuc_mood -= 12; tgwu_mood -= 4; union_power += 1; strike_wave -= 0.5; dry_dissent += 3; wet_dissent -= 2
+
+Murray comes to Number 10 for an hour. Nothing is agreed, and both sides say the talks were useful. The TUC's General Council is a little less keen on a fight.
+
+@freeze_out
+subtitle: Union power falls. The TUC and the general unions harden.
+on-arrival: tuc_mood += 10; tgwu_mood += 6; union_power -= 2; economic_liberalism += 1; dry_dissent -= 3; wet_dissent += 2
+
+The TUC's letters are answered by junior officials, its advice is not sought, and nobody from the unions is invited to Chequers. The age of beer and sandwiches is over.
+
+@moderates
+subtitle: -1 resource. The moderates win more union elections. The left notices.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; moderates_mood -= 12; union_power -= 2; strike_wave -= 0.5; tgwu_mood += 4
+
+Ministers praise the electricians' and engineers' leaders in public and consult them in private. In the next round of postal ballots, moderate candidates win seats on both unions' executives.
+
+@gormley
+view-if: scargill = 0
+subtitle: -0.5 budget. The miners stay quiet, for now.
+on-arrival: budget -= 0.5; num_mood -= 12; dry_dissent += 2
+
+The Coal Board finds a little more money for the miners' pay and the pits' investment. Gormley, who is nearing retirement, has no wish to end his career with a national strike.
+
+@scargill_on_tv
+view-if: scargill = 1
+subtitle: Every interview he gives wins us votes. It also hardens the miners.
+on-arrival: num_mood += 8; c2_con += 1*(1-dissent); union_backlash += 3; wet_dissent += 1
+
+Ministers decline every invitation to debate with Scargill, and let him have the airwaves to himself. His talk of class war plays well at miners' rallies and badly almost everywhere else.
