@@ -46,10 +46,11 @@ Brittan takes the spending ministers one at a time and wins most of the argument
 
 @police_bill
 title: The Police and Criminal Evidence Bill
-view-if: con_in_government = 1 and pace_bill = 0
-subtitle: The right approves. The Liberals and civil libertarians don't.
-choose-if: advisor_action_timer = 0
-unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
-on-arrival: advisor_action_timer = 6; last_advisor_action = 1; pace_bill = 1; right_dissent -= 3; lib_relation -= 2; c2_con += 1*(1-dissent); wet_dissent += 1
+view-if: con_in_government = 1 and bill_pace = 0 and pace_act = 0 and time >= bill_pace_wait
+subtitle: The right approves. The Liberals and civil libertarians don't. Law in about seven months.
+choose-if: advisor_action_timer = 0 and bill_room = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next action. ?][? if advisor_action_timer = 0 : [+ bill_room_text +] ?]
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; pace_bill = 1; right_dissent -= 3; lib_relation -= 2; wet_dissent += 1; bill_new = "pace"
+call: bill_introduce
 
-A single code for police powers of stop, search, arrest and detention, with new safeguards for suspects. The police say it ties their hands; the civil liberties lobby says it frees them.
+A single code for police powers of stop, search, arrest and detention, with new safeguards for suspects. The police say it ties their hands; the civil liberties lobby says it frees them. It is a long bill, and it will spend months in committee.

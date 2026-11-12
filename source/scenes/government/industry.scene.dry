@@ -13,6 +13,7 @@ on-arrival: industry_timer = 4; month_actions += 1
 - @bail_out: Bail out British Leyland and British Steel.
 - @cut_subsidies: Cut the subsidies and let them shrink.
 - @privatise: Sell a state enterprise.
+- @telecoms: Introduce a bill to sell British Telecom.
 - @coal_stocks: Quietly build up coal stocks at the power stations.
 - @easy_discard
 - @cancel_advisor_action
@@ -32,13 +33,23 @@ on-arrival: budget += 2; unemployment += 0.7; strike_wave += 1; union_power -= 3
 Steelworks at Consett and Corby close, along with car plants and shipyards. Whole towns lose their main employer.
 
 @privatise
-view-if: privatisations < 5
+view-if: asset_sales < 4
 subtitle: +2 budget.
 choose-if: policy_privatisation = 1 or industry_dry = 1 or economic_liberalism >= 50
 unavailable-subtitle: Neither the party nor the public is ready for denationalisation.
-on-arrival: privatisations += 1; budget += 2; economic_liberalism += 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent) if privatisations >= 3; dry_dissent -= 3; wet_dissent += 2
+on-arrival: asset_sales += 1; privatisations += 1; budget += 2; economic_liberalism += 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent) if privatisations >= 3; dry_dissent -= 3; wet_dissent += 2
 
-[? if privatisations = 1 : The government sells its shares in British Aerospace. ?][? if privatisations = 2 : Cable & Wireless goes to the market. ?][? if privatisations = 3 : Britoil, the state's North Sea oil company, is floated. Ordinary investors queue for shares. ?][? if privatisations = 4 : Associated British Ports is sold. ?][? if privatisations = 5 : The government announces it will sell British Telecom, the biggest share offer in history. ?]
+[? if asset_sales = 1 : The government sells its shares in British Aerospace. ?][? if asset_sales = 2 : Cable & Wireless goes to the market. ?][? if asset_sales = 3 : Britoil, the state's North Sea oil company, is floated. Ordinary investors queue for shares. ?][? if asset_sales = 4 : Associated British Ports is sold. ?]
+
+@telecoms
+view-if: bill_telecoms = 0 and telecoms_sold = 0 and asset_sales >= 2 and time >= bill_telecoms_wait
+subtitle: +3 budget, and the biggest share issue in history, once it becomes law in about seven months.
+choose-if: (policy_privatisation = 1 or industry_dry = 1 or economic_liberalism >= 50) and bill_room = 1
+unavailable-subtitle: [? if bill_room = 0 : [+ bill_room_text +] ?][? if bill_room = 1 : Neither the party nor the public is ready to sell British Telecom. ?]
+on-arrival: dry_dissent -= 2; wet_dissent += 2; bill_new = "telecoms"
+call: bill_introduce
+
+[+ industry_secretary +] publishes the Telecommunications Bill. British Telecom will lose its monopoly and then its owner: more than half of the shares are to be sold. The engineers' union announces a campaign of industrial action.
 
 @coal_stocks
 view-if: coal_stocks < 3

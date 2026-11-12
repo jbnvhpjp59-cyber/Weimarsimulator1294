@@ -515,6 +515,59 @@ Q.voice_coached = 0;
 Q.minis = 0;
 // extra odds for the task force (Nott's action)
 Q.falklands_bonus = 0;
+// state sales: asset_sales counts the share sales on the Industry card;
+// privatisations also counts British Telecom, which needs an Act
+Q.asset_sales = 0;
+Q.telecoms_sold = 0;
+Q.pace_act = 0;
+
+// ---------------------------------------------------------------
+// Parliament. Each bill is a stage (0 = not introduced, 1-5 = on
+// its way, 6 = law) plus a few flags; see parliament/bill_tick.
+// ---------------------------------------------------------------
+this._runActions(this.game.scenes['bill_defs'].onArrival);
+Q.bill_new = '';
+Q.bill_new_fast = 0;
+Q.bills_introduced = 0;
+Q.bills_defeated = 0;
+Q.bills_active = 0;
+Q.bills_in_committee = 0;
+Q.bills_last_tick = 0;
+Q.bills_dissolved_for = 0;
+Q.bill_room = 0;
+Q.bill_room_text = '';
+Q.bill_lines_n = 0;
+for (var bl = 1; bl <= 8; bl++) {
+    Q['bill_line_' + bl] = '';
+}
+Q.acts_n = 0;
+Q.acts_list = '';
+Q.guillotines = 0;
+Q.divisions = 0;
+// the division being counted, and its result
+Q.div_key = '';
+Q.div_mode = '';
+Q.div_proj_rebels = 0;
+Q.div_proj_abstain = 0;
+Q.div_proj_majority = 0;
+Q.div_proj_deficit = 0;
+Q.div_partner_n = 0;
+Q.div_partner_text = '';
+Q.div_ayes = 0;
+Q.div_noes = 0;
+Q.div_majority = 0;
+Q.div_deficit = 0;
+Q.div_rebels = 0;
+Q.div_abstain = 0;
+Q.div_passed = 0;
+Q.lords_key = '';
+Q.lords_gave_way = 0;
+Q.assent_key = '';
+Q.wash_up_pending = 0;
+Q.wash_up_fell = '';
+Q.wash_up_fell_n = 0;
+Q.wash_up_passed = '';
+Q.wash_up_passed_n = 0;
 
 // project the starting polls
 this._runActions(this.game.scenes['election_algorithm'].onArrival);

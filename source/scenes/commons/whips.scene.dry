@@ -10,9 +10,10 @@ on-arrival: whips_timer = 3; month_actions += 1
 
 The Chief Whip brings the week's business. [? if govt_type = 1 : With a majority of [+ con_majority +], the government's bills will pass if the party holds together. ?][? if govt_type >= 2 : Without a majority of our own, every division is a negotiation. ?]
 
-Backbench rebellion: [+ rebellion_disp +] out of 10. [? if govt_type >= 2 : Our partners' discontent: [+ partner_dissent_disp +] out of 10. ?]
+Backbench rebellion: [+ rebellion_disp +] out of 10. [? if govt_type >= 2 : Our partners' discontent: [+ partner_dissent_disp +] out of 10. ?] [? if bills_active = 0 : No major government bill is going through the Commons. ?][? if bills_active = 1 : One major government bill is going through the Commons. ?][? if bills_active >= 2 : [+ bills_active +] major government bills are going through the Commons. ?] The Politics tab shows where each bill has got to.
 
 - @whip_hard: Crack the whip.
+- @guillotine: Guillotine a bill in committee.
 - @listen: Meet the 1922 Committee and listen.
 - @partners: Keep our partners on side.
 - @easy_discard
@@ -29,6 +30,23 @@ unavailable-subtitle: Requires 1 resource.
 on-arrival: resources -= 1; rebellion -= 1; wet_dissent -= 3; right_dissent -= 3; dry_dissent -= 2
 
 An evening in Committee Room 14. Nobody gets what they want, but everybody gets heard.
+
+@guillotine
+view-if: bills_in_committee >= 1
+subtitle: Bills in committee move on next month. The Opposition and the Liberals will cry foul.
+on-arrival: {!
+for (var k of Q.bill_keys) {
+    if (Q['bill_' + k] == 2 && Q['bill_' + k + '_amend'] != 1) {
+        Q['bill_' + k + '_due'] = Math.min(Q['bill_' + k + '_due'], Q.time + 1);
+    }
+}
+Q.lib_relation -= 2;
+Q.rebellion += 0.5;
+Q.wet_dissent += 1;
+Q.guillotines += 1;
+!}
+
+The Leader of the House moves a timetable motion: debate in committee will end on a fixed date, whether every clause has been discussed or not. Labour calls it the guillotine, and spends three hours saying so.
 
 @partners
 view-if: govt_type >= 2

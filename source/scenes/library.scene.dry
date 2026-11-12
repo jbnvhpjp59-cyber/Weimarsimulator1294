@@ -91,6 +91,8 @@ Winning power is only the beginning. The game continues until the next general e
 
 **The Cabinet.** When you take office you choose a dry or a wet for the Treasury, Employment and Industry, and how to fill the other six departments. Each minister decides which policies are possible: a wet Chancellor won't raise taxes in a recession, Jim Prior won't strip the unions of their immunities, and Francis Pym won't cut the Navy. The Reshuffle card moves ministers between departments, at a price, and a minister pushed too far may resign. The Politics tab shows who holds each post.
 
+**Parliament.** Most reforms need an Act of Parliament. Introducing a bill starts it on its way: a Second Reading division in the Commons a month later, then committee, Report and Third Reading, the House of Lords, and Royal Assent, about five to seven months in all. Its effects arrive only when it becomes law. The whips count the votes before each Second Reading: rebels come from the faction that dislikes the bill, more of them the angrier it is, and without a majority the Liberals or the Ulster Unionists decide the result. You can buy off rebels with concessions that weaken the bill, make the vote a matter of confidence, or withdraw it. Backbenchers may move amendments in committee, and the Lords may amend the bill; you can accept or overturn them. The Commons has time for three major bills at once, and the Government Business card can guillotine debate in committee. When Parliament is dissolved, bills that have reached the Lords are rushed through and the rest fall.
+
 **The Treasury.** The budget is the government's fiscal headroom. Tax cuts, spending and bail-outs use it up; cuts, privatisation and North Sea oil add to it. Every January the cost of unemployment benefit is deducted and growth brings in revenue. If the budget falls to -5, the markets revolt.
 
 **Policy.** Beyond the economy, the Government Affairs deck covers health, education, social security, the Common Market, immigration, energy and local government. Some reforms pay off slowly: breaking the link between pensions and earnings saves more each year, taxing benefits cuts the cost of unemployment, and a nuclear programme weakens the miners' grip on the power stations.
@@ -132,6 +134,8 @@ Prime Minister: [+ prime_minister +] ([+ pm_party +]). [? if lib_lab_pact : The 
 [? if con_in_government = 1 : The Cabinet is [+ cabinet_dry +]% dry. ?][? if con_in_government = 1 and wets_purged = 1 : The wets have been purged from the economic departments. ?]
 
 [? if govt_type = 1 and con_in_government = 1 : We have a majority of [+ con_majority +]. ?][? if govt_type = 2 and con_in_government = 1 : We govern with the support of the Ulster Unionists. ?][? if govt_type = 3 and con_in_government = 1 : We govern with Liberal support, vote by vote. ?][? if govt_type = 4 and con_in_government = 1 : We govern as a minority. ?]
+
+[? if acts_n >= 1 : **The statute book.** Acts passed by this government: [+ acts_list +]. ?][? if bills_defeated >= 1 : The Commons has defeated [+ bills_defeated +] of our bills at Second Reading. ?]
 
 The next general election must be held by [+ next_election_month : month +] [+ next_election_year +].
 

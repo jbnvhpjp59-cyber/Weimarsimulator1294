@@ -1,0 +1,22 @@
+title: Ping-Pong
+on-arrival: {!
+// The Commons overturns a Lords amendment to bill Q.lords_key. Usually the
+// peers give way; sometimes they insist, and the government has to concede.
+var k = Q.lords_key;
+Q['bill_' + k + '_lords'] = 2;
+if (Math.random() < 0.7) {
+    Q.lords_gave_way = 1;
+    Q['bill_' + k + '_insisted'] = 1;
+    Q['bill_' + k + '_due'] = Q.time + 1;
+    if (!Q.achievement_ping_pong) {
+        this.achieve('ping_pong');
+    }
+} else {
+    Q.lords_gave_way = 0;
+    Q['bill_' + k + '_watered'] = 1;
+    Q['bill_' + k + '_due'] = Q.time + 2;
+    Q.thatcher_rating -= 1;
+}
+!}
+
+# Called when the government overturns a Lords amendment.
