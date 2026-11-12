@@ -7,7 +7,7 @@ new-page: true
 
 = Willie Whitelaw
 
-Deputy Leader and Shadow Home Secretary. He ran against you in 1975 and has been loyal ever since. The wets trust him, which makes him invaluable.
+[? if con_in_government = 0 : Deputy Leader and Shadow Home Secretary. ?][? if con_in_government = 1 and home_secretary == "Whitelaw" : Deputy Prime Minister and Home Secretary. ?][? if con_in_government = 1 and home_secretary != "Whitelaw" : Deputy Prime Minister. ?] He ran against you in 1975 and has been loyal ever since. The wets trust him, which makes him invaluable.
 
 - @soothe_wets
 - @discipline

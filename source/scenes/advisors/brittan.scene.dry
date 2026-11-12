@@ -7,7 +7,7 @@ new-page: true
 
 = Leon Brittan
 
-[? if con_in_government = 0 : The Shadow spokesman on devolution. ?][? if con_in_government = 1 and time < 45 : Minister of State at the Home Office. ?][? if con_in_government = 1 and time >= 45 : Chief Secretary to the Treasury. ?] A barrister with a formidable command of detail. He is clever, careful and dry, and he looks less comfortable on television than he is in committee.
+[? if con_in_government = 0 : The Shadow spokesman on devolution. ?][? if con_in_government = 1 and home_secretary == "Brittan" : Home Secretary. ?][? if con_in_government = 1 and home_secretary != "Brittan" and time < 45 : Minister of State at the Home Office. ?][? if con_in_government = 1 and home_secretary != "Brittan" and time >= 45 : Chief Secretary to the Treasury. ?] A barrister with a formidable command of detail. He is clever, careful and dry, and he looks less comfortable on television than he is in committee.
 
 - @scotland_bill
 - @briefing

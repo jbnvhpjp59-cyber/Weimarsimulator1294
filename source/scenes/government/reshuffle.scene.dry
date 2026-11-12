@@ -5,33 +5,28 @@ card-image: img/cards/cabinet.jpg
 tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and reshuffle_timer <= 0 and months_in_office >= 6
 on-arrival: reshuffle_timer = 12; month_actions += 1
+call: cabinet_recalc
 
 = Reshuffle the Cabinet
 
-Chancellor: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. The Cabinet is [+ cabinet_dry +]% dry.
+The Cabinet is [+ cabinet_dry +]% dry. Chancellor: [+ chancellor +] ([+ chancellor_dry : drywet +]). Employment: [+ employment_secretary +] ([+ employment_dry : drywet +]). Industry: [+ industry_secretary +] ([+ industry_dry : drywet +]). Home Office: [+ home_secretary +]. Foreign Office: [+ foreign_secretary +]. Environment: [+ environment_secretary +]. Defence: [+ defence_secretary +]. Education: [+ education_secretary +]. Health and Social Security: [+ health_secretary +].
 
 [? if cabinet_revolt >= 5 : The wets in Cabinet are close to open revolt. ?]
 
-- @purge: Sack the wets and promote the believers.
+- @ministers.purge_start
+- @ministers: Move ministers between departments.
 - @bring_back: Bring the wets back into the economic departments.
 - @loyalists: Promote loyal managers.
 - @easy_discard
 - @cancel_advisor_action
 
-@purge
-view-if: wets_purged = 0
-subtitle: The Cabinet becomes yours. The sacked will not go quietly.
-on-arrival: wets_purged = 1; cabinet_dry += 35; cabinet_dry = 95 if cabinet_dry > 95; chancellor = "Howe"; chancellor_dry = 1; employment_secretary = "Tebbit"; employment_dry = 1; industry_secretary = "Joseph" if industry_dry = 0; industry_dry = 1; wet_dissent += 15; wet_strength -= 5; dry_dissent -= 8; cabinet_revolt = 0; rebellion += 2
-achievement: purge
-
-Ian Gilmour, Christopher Soames and Mark Carlisle are sacked. Jim Prior is moved to Northern Ireland. Norman Tebbit, Nigel Lawson and Cecil Parkinson come in. Gilmour tells the cameras outside Number 10 that it does no harm to throw the occasional man overboard, but it doesn't do much good if you're steering full speed ahead for the rocks.
-
 @bring_back
-view-if: cabinet_dry >= 40
-subtitle: Calms the wets, at the cost of the radical programme.
-on-arrival: wets_purged = 0; cabinet_dry -= 25; chancellor = "Pym" if chancellor_dry = 1 and cabinet_dry < 40; chancellor_dry = 0 if cabinet_dry < 40; employment_secretary = "Prior"; employment_dry = 0; wet_dissent -= 12; dry_dissent += 10; cabinet_revolt -= 3; rebellion -= 2
+view-if: employment_dry = 1 or industry_dry = 1
+subtitle: Jim Prior back to Employment, Peter Walker to Industry. Calms the wets, at the cost of the radical programme.
+on-arrival: wets_purged = 0; employment_secretary = "Prior"; employment_dry = 0; industry_secretary = "Walker"; industry_dry = 0; wet_dissent -= 12; dry_dissent += 10; cabinet_revolt -= 3; rebellion -= 2
+call: cabinet_recalc
 
-The economic departments go back to the consensus men. [? if chancellor_dry = 0 : Even the Treasury changes hands. ?]
+The economic departments go back to the consensus men. The Cabinet is now [+ cabinet_dry +]% dry.
 
 @loyalists
 on-arrival: loyalist_dissent -= 6; cabinet_revolt -= 2; rebellion -= 1

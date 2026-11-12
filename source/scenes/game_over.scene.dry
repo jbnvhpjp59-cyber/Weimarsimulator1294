@@ -442,7 +442,7 @@ There are 57 achievements.
 
 [? if game_achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
 
-[? if game_achievement_full_speed_ahead : **The Occasional Man Overboard** - drop Sir Ian Gilmour from your inner circle while in government. ?]
+[? if game_achievement_full_speed_ahead : **The Occasional Man Overboard** - drop or sack Sir Ian Gilmour while in government. ?]
 
 [? if game_achievement_broad_church : **Broad Church** - have a wet, a dry and a loyalist in your inner circle at once. ?]
 
@@ -558,7 +558,7 @@ There are 57 achievements.
 
 [? if achievement_purge and not game_achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
 
-[? if achievement_full_speed_ahead and not game_achievement_full_speed_ahead : **The Occasional Man Overboard** - drop Sir Ian Gilmour from your inner circle while in government. ?]
+[? if achievement_full_speed_ahead and not game_achievement_full_speed_ahead : **The Occasional Man Overboard** - drop or sack Sir Ian Gilmour while in government. ?]
 
 [? if achievement_broad_church and not game_achievement_broad_church : **Broad Church** - have a wet, a dry and a loyalist in your inner circle at once. ?]
 
@@ -674,7 +674,7 @@ There are 57 achievements.
 
 [? if not achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
 
-[? if not achievement_full_speed_ahead : **The Occasional Man Overboard** - drop Sir Ian Gilmour from your inner circle while in government. ?]
+[? if not achievement_full_speed_ahead : **The Occasional Man Overboard** - drop or sack Sir Ian Gilmour while in government. ?]
 
 [? if not achievement_broad_church : **Broad Church** - have a wet, a dry and a loyalist in your inner circle at once. ?]
 

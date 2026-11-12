@@ -8,7 +8,7 @@ on-arrival: defence_timer = 6; month_actions += 1
 
 = Defence
 
-The Ministry of Defence's budget is the third largest in Whitehall, and the Treasury wants it cut. The Navy wants it raised.
+The Ministry of Defence's budget is the third largest in Whitehall, and the Treasury wants it cut. The Navy wants it raised. The Defence Secretary is [+ defence_secretary +] ([+ defence_dry : drywet +]).
 
 - @nott_review: A defence review: cut the surface fleet.
 - @trident: Buy Trident to replace Polaris.
@@ -19,11 +19,13 @@ The Ministry of Defence's budget is the third largest in Whitehall, and the Trea
 
 @nott_review
 view-if: defence_cuts = 0
-subtitle: +2 budget. The Navy and the right will be furious.
+subtitle: +2 budget. The Navy and the right will be furious. Requires a dry Defence Secretary.
+choose-if: defence_dry = 1
+unavailable-subtitle: [+ defence_secretary +] won't cut the surface fleet.
 on-arrival: defence_cuts = 1; endurance_withdrawn = 1; budget += 2; right_dissent += 6; us_relation -= 3
 achievement: the_way_forward
 
-John Nott's review cuts the surface fleet to concentrate on the Atlantic and the nuclear deterrent. The aircraft carrier Invincible is to be sold to Australia, and the ice patrol ship HMS Endurance is to be withdrawn from the South Atlantic. In Buenos Aires, the junta reads the announcement closely.
+The defence review cuts the surface fleet to concentrate on the Atlantic and the nuclear deterrent. The aircraft carrier Invincible is to be sold to Australia, and the ice patrol ship HMS Endurance is to be withdrawn from the South Atlantic. In Buenos Aires, the junta reads the announcement closely.
 
 @trident
 view-if: trident = 0

@@ -7,7 +7,7 @@ new-page: true
 
 = John Nott
 
-[? if con_in_government = 0 : Shadow Trade Secretary. ?][? if con_in_government = 1 and time < 45 : Secretary of State for Trade. ?][? if con_in_government = 1 and time >= 45 : Secretary of State for Defence. ?] A former Gurkha officer and merchant banker. He is an economic dry with no sentimentality about institutions, the Navy included.
+[? if con_in_government = 0 : Shadow Trade Secretary. ?][? if con_in_government = 1 and defence_secretary != "Nott" : Secretary of State for Trade. ?][? if con_in_government = 1 and defence_secretary == "Nott" : Secretary of State for Defence. ?] A former Gurkha officer and merchant banker. He is an economic dry with no sentimentality about institutions, the Navy included.
 
 - @free_trade
 - @price_commission
@@ -37,7 +37,7 @@ Labour's Price Commission is wound up. Firms no longer need permission to raise 
 
 @defence_review
 title: The Way Forward
-view-if: con_in_government = 1 and defence_cuts = 0
+view-if: con_in_government = 1 and defence_cuts = 0 and defence_secretary == "Nott"
 subtitle: +2 budget. The Navy and the right will be furious, and the South Atlantic will notice.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [+ advisor_action_timer +] months before the next action.

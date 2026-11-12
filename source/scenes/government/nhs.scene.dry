@@ -35,7 +35,9 @@ on-arrival: prescription_charges += 1; budget += 0.5; de_con -= 2; c2_con -= 1; 
 
 @contract_out
 view-if: nhs_contracting = 0
-subtitle: +1 budget. The health service unions will fight it.
+subtitle: +1 budget. The health service unions will fight it. Requires a dry Health Secretary.
+choose-if: health_dry = 1
+unavailable-subtitle: [+ health_secretary +] won't take on the health unions.
 on-arrival: nhs_contracting = 1; budget += 1; union_power -= 3; strike_wave += 1; de_lab += 1; economic_liberalism += 1; wet_dissent += 2; dry_dissent -= 3
 
 Health authorities must put cleaning, catering and laundry out to competitive tender. Private contractors win most of the work by paying lower wages. NUPE and COHSE call it privatisation by the back door.
@@ -45,11 +47,13 @@ view-if: nhs_reorganised = 0
 subtitle: +0.5 budget.
 on-arrival: nhs_reorganised = 1; budget += 0.5; loyalist_dissent -= 2; dry_dissent -= 1
 
-Patrick Jenkin abolishes the area health authorities that Sir Keith Joseph created in 1974. One layer of administration disappears, and with it several thousand jobs.
+[+ health_secretary +] abolishes the area health authorities created in the 1974 reorganisation. One layer of administration disappears, and with it several thousand jobs.
 
 @private_insurance
 view-if: private_health = 0
-subtitle: The right and the professional classes approve. The NHS lobby is alarmed.
+subtitle: The right and the professional classes approve. The NHS lobby is alarmed. Requires a dry Health Secretary.
+choose-if: health_dry = 1
+unavailable-subtitle: [+ health_secretary +] won't encourage a two-tier health service.
 on-arrival: private_health = 1; ab_con += 2*(1-dissent); c1_con += 1*(1-dissent); de_con -= 2; de_lab += 1; economic_liberalism += 2; wet_dissent += 3; dry_dissent -= 2
 
 Employees on modest incomes no longer pay tax on private medical insurance provided by their employer. Membership of BUPA and its rivals grows quickly. The BMA warns of a two-tier health service.

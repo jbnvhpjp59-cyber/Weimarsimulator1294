@@ -1,0 +1,193 @@
+title: The January Reshuffle
+tags: event
+view-if: con_in_government = 1 and time >= 37 and time <= 39 and january_reshuffle_seen = 0 and defence_secretary == "Pym" and chancellor != "Nott" and home_secretary != "Nott" and foreign_secretary != "Nott" and environment_secretary != "Nott" and education_secretary != "Nott" and health_secretary != "Nott"
+max-visits: 1
+new-page: true
+on-arrival: january_reshuffle_seen = 1
+face-image: img/events/cabinet.jpg
+
+= The January Reshuffle
+
+Francis Pym has fought the Treasury over every penny of the defence budget, and he has said so in Cabinet, at length. The Treasury wants someone at Defence who will make the cuts. Pym could become Leader of the House, out of the way of the spending departments.
+
+- @nott_to_defence: Send John Nott to Defence, and make Pym Leader of the House.
+- @keep_pym: Leave Pym at Defence.
+
+@nott_to_defence
+subtitle: A dry at Defence. The Navy will be watching.
+on-arrival: defence_secretary = "Nott"; defence_dry = 1; wet_dissent += 3; dry_dissent -= 2; loyalist_dissent += 1
+call: cabinet_recalc
+
+John Nott moves from Trade to Defence with instructions to bring the budget under control. Pym takes over as Leader of the House, where his gloom about the economy is now a matter of public record.
+
+@keep_pym
+on-arrival: dry_dissent += 2; wet_dissent -= 2
+
+Pym stays at Defence and keeps fighting for every ship.
+
+#################### Resignations
+
+@wet_resigns
+title: A Resignation
+tags: event
+view-if: con_in_government = 1 and cabinet_revolt >= 6 and resignations < 2 and time - last_resignation >= 8 and (employment_dry = 0 or industry_dry = 0 or environment_dry = 0 or defence_dry = 0 or education_dry = 0 or health_dry = 0)
+new-page: true
+on-arrival: {!
+Q.last_resignation = Q.time;
+Q.resignations += 1;
+var posts = [['education_secretary', 'education_dry', 'Education'],
+             ['health_secretary', 'health_dry', 'Health and Social Security'],
+             ['environment_secretary', 'environment_dry', 'Environment'],
+             ['defence_secretary', 'defence_dry', 'Defence'],
+             ['employment_secretary', 'employment_dry', 'Employment'],
+             ['industry_secretary', 'industry_dry', 'Industry']];
+for (var p of posts) {
+    if (Q[p[1]] == 0) {
+        Q.resign_var = p[0];
+        Q.resign_name = Q[p[0]];
+        Q.resign_post = p[2];
+        break;
+    }
+}
+!}
+face-image: img/events/cabinet.jpg
+
+= A Resignation
+
+[+ resign_name +], the minister for [+ resign_post +], has written to say that he cannot support another round of cuts and will resign unless the government changes course. The letter will be in the newspapers by tomorrow morning either way.
+
+- @appoint_believer: Accept the resignation, and appoint a believer.
+- @persuade: Talk him round with concessions.
+
+@appoint_believer
+subtitle: The department gets a dry minister. The wets lose a voice in Cabinet, and gain a martyr.
+on-arrival: {!
+// a dry replacement who doesn't already hold a post
+var replacements = {
+    education_secretary: ['Boyson', 'Joseph'],
+    health_secretary: ['Fowler', 'Jenkin'],
+    environment_secretary: ['Ridley', 'Jenkin'],
+    defence_secretary: ['Nott', 'Lawson'],
+    employment_secretary: ['Tebbit', 'Lawson'],
+    industry_secretary: ['Jenkin', 'Joseph', 'Lawson']
+};
+var posts = ['chancellor', 'employment_secretary', 'industry_secretary', 'home_secretary', 'foreign_secretary',
+             'environment_secretary', 'defence_secretary', 'education_secretary', 'health_secretary'];
+var held = posts.map(function (v) { return Q[v]; });
+var pick = null;
+for (var name of replacements[Q.resign_var] || []) {
+    if (held.indexOf(name) < 0) { pick = name; break; }
+}
+Q[Q.resign_var] = pick || 'Biffen';
+Q[Q.resign_var.replace('_secretary', '_dry')] = 1;
+Q.resign_name = Q[Q.resign_var];
+Q.wet_dissent += 6;
+Q.dry_dissent -= 2;
+Q.rebellion += 1;
+Q.cabinet_revolt = Math.max(0, Q.cabinet_revolt - 3);
+!}
+call: cabinet_recalc
+
+The resignation is accepted with regret, in writing, within the hour. [+ resign_name +] takes over at [+ resign_post +]. The wets now have a martyr on the backbenches.
+
+@persuade
+subtitle: -1 budget. The minister stays; the Treasury loses.
+on-arrival: budget -= 1; spending += 1 if spending < 5; cabinet_revolt -= 2; wet_dissent -= 2; dry_dissent += 4
+
+A smaller cut for the department and a promise of a review in the autumn. The letter goes back in the drawer. The dries wonder who is running the government.
+
+@dry_walkout
+title: A Believer Walks Out
+tags: event
+view-if: con_in_government = 1 and u_turn = -1 and dry_walkout_seen = 0 and (industry_dry = 1 or education_dry = 1 or employment_dry = 1)
+max-visits: 1
+new-page: true
+on-arrival: {!
+Q.dry_walkout_seen = 1;
+var posts = [['industry_secretary', 'industry_dry', 'Industry'],
+             ['education_secretary', 'education_dry', 'Education'],
+             ['employment_secretary', 'employment_dry', 'Employment']];
+for (var p of posts) {
+    if (Q[p[1]] == 1) {
+        Q.resign_var = p[0];
+        Q.resign_name = Q[p[0]];
+        Q.resign_post = p[2];
+        break;
+    }
+}
+!}
+face-image: img/events/cabinet.jpg
+
+= A Believer Walks Out
+
+[+ resign_name +], at [+ resign_post +], has told you privately that the U-turn is a betrayal of everything the government was elected to do. He will resign tomorrow and say so in a personal statement to the Commons.
+
+- @let_go: Let him go, and appoint a wet.
+- @reassure: Promise him the change of course is only temporary.
+
+@let_go
+subtitle: The department gets a wet minister. The dries lose their champion in Cabinet.
+on-arrival: {!
+var replacements = {
+    industry_secretary: ['Walker'],
+    education_secretary: ['Carlisle'],
+    employment_secretary: ['Prior']
+};
+var posts = ['chancellor', 'employment_secretary', 'industry_secretary', 'home_secretary', 'foreign_secretary',
+             'environment_secretary', 'defence_secretary', 'education_secretary', 'health_secretary'];
+var held = posts.map(function (v) { return Q[v]; });
+var pick = (replacements[Q.resign_var] || []).filter(function (n) { return held.indexOf(n) < 0; })[0];
+Q[Q.resign_var] = pick || 'Pym';
+Q[Q.resign_var.replace('_secretary', '_dry')] = 0;
+Q.resign_name = Q[Q.resign_var];
+Q.dry_dissent += 8;
+Q.wet_dissent -= 3;
+Q.economic_liberalism -= 2;
+!}
+call: cabinet_recalc
+
+The personal statement is short and devastating. The dries cheer it from the backbenches. [+ resign_name +] takes over at [+ resign_post +].
+
+@reassure
+subtitle: He stays. Your word is now on the line.
+on-arrival: dry_dissent -= 3; wet_dissent += 4; thatcher_rating -= 1
+
+He agrees to stay, for now. The wets hear about the promise within a day.
+
+#################### A scandal
+
+@junior_scandal
+title: A Ministerial Scandal
+tags: event
+view-if: con_in_government = 1 and scandal_seen = 0 and months_in_office >= 10 and random_roll < 0.012 and in_campaign = 0
+max-visits: 1
+new-page: true
+on-arrival: scandal_seen = 1; thatcher_rating -= 1
+
+= A Ministerial Scandal
+
+A Sunday newspaper reports that a junior minister has been entertained at the expense of a company that won a government contract from his department. He insists he did nothing wrong. The opposition is demanding a statement.
+
+- @stand_by: Stand by him.
+- @demand_resignation: Demand his resignation.
+
+@stand_by
+subtitle: Loyalty is rewarded, unless there is more to come.
+on-arrival: {!
+Q.loyalist_dissent -= 3;
+if (Math.random() < 0.5) {
+    Q.scandal_worse = 1;
+    Q.thatcher_rating -= 4;
+    Q.rebellion += 1;
+} else {
+    Q.scandal_worse = 0;
+}
+!}
+
+[? if scandal_worse = 1 : A week later the paper prints his hotel bills. He resigns anyway, and the story becomes about your judgement. ?][? if scandal_worse = 0 : The story runs for a few days and then dies. ?]
+
+@demand_resignation
+subtitle: Quick and clean. The whips think you were hasty.
+on-arrival: thatcher_rating += 1; loyalist_dissent += 2
+
+He is gone by the evening. The papers move on, and the backbenches note how quickly you cut people loose.

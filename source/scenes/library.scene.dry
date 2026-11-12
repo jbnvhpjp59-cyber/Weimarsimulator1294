@@ -89,7 +89,7 @@ go-to: menu
 
 Winning power is only the beginning. The game continues until the next general election, which must come within five years. Win it, and the verdict of history weighs up your record.
 
-**The Cabinet.** When you take office you choose a dry or a wet for the Treasury, Employment and Industry. The minister decides which policies are possible: a wet Chancellor won't raise taxes in a recession, and Jim Prior won't strip the unions of their immunities. A reshuffle can change that, at a price.
+**The Cabinet.** When you take office you choose a dry or a wet for the Treasury, Employment and Industry, and how to fill the other six departments. Each minister decides which policies are possible: a wet Chancellor won't raise taxes in a recession, Jim Prior won't strip the unions of their immunities, and Francis Pym won't cut the Navy. The Reshuffle card moves ministers between departments, at a price, and a minister pushed too far may resign. The Politics tab shows who holds each post.
 
 **The Treasury.** The budget is the government's fiscal headroom. Tax cuts, spending and bail-outs use it up; cuts, privatisation and North Sea oil add to it. Every January the cost of unemployment benefit is deducted and growth brings in revenue. If the budget falls to -5, the markets revolt.
 
@@ -111,7 +111,23 @@ Prime Minister: [+ prime_minister +] ([+ pm_party +]). [? if lib_lab_pact : The 
 
 [? if con_in_government = 0 : The Labour government is led by [+ lab_leader +]. We are the Official Opposition. ?]
 
-[? if con_in_government = 1 : Chancellor of the Exchequer: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. Home Office: Whitelaw. Foreign Office: [+ foreign_secretary +]. ?]
+[? if con_in_government = 1 : Chancellor: [+ chancellor +] ([+ chancellor_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Employment: [+ employment_secretary +] ([+ employment_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Industry: [+ industry_secretary +] ([+ industry_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Home Office: [+ home_secretary +] ([+ home_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Foreign Office: [+ foreign_secretary +] ([+ foreign_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Environment: [+ environment_secretary +] ([+ environment_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Defence: [+ defence_secretary +] ([+ defence_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Education: [+ education_secretary +] ([+ education_dry : drywet +]). ?]
+
+[? if con_in_government = 1 : Health and Social Security: [+ health_secretary +] ([+ health_dry : drywet +]). ?]
 
 [? if con_in_government = 1 : The Cabinet is [+ cabinet_dry +]% dry. ?][? if con_in_government = 1 and wets_purged = 1 : The wets have been purged from the economic departments. ?]
 

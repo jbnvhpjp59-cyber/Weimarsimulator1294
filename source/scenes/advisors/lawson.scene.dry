@@ -7,7 +7,7 @@ new-page: true
 
 = Nigel Lawson
 
-[? if con_in_government = 0 : A Treasury spokesman in the Shadow Cabinet's second rank. ?][? if con_in_government = 1 and time < 45 : Financial Secretary to the Treasury. ?][? if con_in_government = 1 and time >= 45 : Secretary of State for Energy. ?] A former financial journalist, clever, combative and certain that he is right. He usually is about the numbers, and less often about the politics.
+[? if con_in_government = 0 : A Treasury spokesman in the Shadow Cabinet's second rank. ?][? if con_in_government = 1 and chancellor == "Lawson" : Chancellor of the Exchequer. ?][? if con_in_government = 1 and chancellor != "Lawson" and time < 45 : Financial Secretary to the Treasury. ?][? if con_in_government = 1 and chancellor != "Lawson" and time >= 45 : Secretary of State for Energy. ?] A former financial journalist, clever, combative and certain that he is right. He usually is about the numbers, and less often about the politics.
 
 - @tax_plan
 - @mtfs

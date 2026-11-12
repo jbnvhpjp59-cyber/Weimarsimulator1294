@@ -29,6 +29,8 @@ The Act replaces citizenship of the United Kingdom and Colonies with three new c
 @tighten_rules
 view-if: immigration_rules < 2
 subtitle: The right approves; the Liberals and the wets object.
+choose-if: immigration_rules = 0 or home_dry = 1
+unavailable-subtitle: [+ home_secretary +] won't go any further.
 on-arrival: immigration_rules += 1; right_dissent -= 3; c2_con += 1*(1-dissent); wet_dissent += 2; lib_relation -= 2
 
 [? if immigration_rules = 1 : Women settled here lose the automatic right to bring in husbands from abroad, under a new "primary purpose" rule. ?][? if immigration_rules = 2 : Entry clearance checks are tightened and appeals restricted. The queues at the High Commission in Dhaka grow longer. ?]

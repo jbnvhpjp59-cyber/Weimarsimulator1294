@@ -28,7 +28,9 @@ The grant from central government is cut again. Councils raise the rates to make
 
 @rate_capping
 view-if: rate_capping = 0 and rsg_cuts >= 1
-subtitle: Ratepayers approve. The wets fear for local democracy.
+subtitle: Ratepayers approve. The wets fear for local democracy. Requires a dry Environment Secretary.
+choose-if: environment_dry = 1
+unavailable-subtitle: [+ environment_secretary +] believes in local democracy.
 on-arrival: rate_capping = 1; c1_con += 2*(1-dissent); ab_con += 1*(1-dissent); right_dissent -= 2; wet_dissent += 3; rebellion += 1
 
 The Environment Secretary takes the power to cap the rates of councils that overspend. Ted Heath calls it "the most deplorable legislation" he has seen in years. Labour councils in Liverpool and Lambeth threaten to defy the law.
@@ -43,7 +45,9 @@ You made this promise in 1974, and you meant it. A Green Paper sets out the alte
 
 @abolish_glc
 view-if: glc_abolition = 0 and time >= 50
-subtitle: The right is delighted. The wets and the Lords will resist.
+subtitle: The right is delighted. The wets and the Lords will resist. Requires a dry Environment Secretary.
+choose-if: environment_dry = 1
+unavailable-subtitle: [+ environment_secretary +] won't abolish a whole tier of local government.
 on-arrival: glc_abolition = 1; right_dissent -= 4; c1_con += 1*(1-dissent); wet_dissent += 4; lib_relation -= 2; rebellion += 1
 achievement: glc
 
@@ -55,7 +59,7 @@ subtitle: -0.5 budget. New jobs, and a showcase for enterprise.
 on-arrival: docklands = 1; budget -= 0.5; economic_growth += 0.2; unemployment -= 0.1; c2_con += 1*(1-dissent); wet_dissent -= 2
 achievement: docklands
 
-Michael Heseltine creates development corporations for the London and Merseyside docklands, and Sir Geoffrey Howe declares the first enterprise zones, free of rates and planning controls. Eight square miles of derelict wharves on the Isle of Dogs wait for the developers.
+The Environment Secretary creates development corporations for the London and Merseyside docklands, and Sir Geoffrey Howe declares the first enterprise zones, free of rates and planning controls. Eight square miles of derelict wharves on the Isle of Dogs wait for the developers.
 
 @tendering
 view-if: council_tendering = 0

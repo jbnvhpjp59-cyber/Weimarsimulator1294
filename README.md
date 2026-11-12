@@ -12,7 +12,9 @@ Like the original, each month you play one card from your hand. Historical and c
 
 **Opposition (1978–79).** Callaghan's minority government survives on the Lib-Lab Pact. Build a manifesto, manage the wets and dries, court the minor parties, and decide how to play the Winter of Discontent. If Labour leads in September 1978, Callaghan may call an early election. After the devolution referendums, you can try to bring him down with a no-confidence motion.
 
-**Taking office.** Win a majority, or govern with the Ulster Unionists, the Liberals or as a minority. Then form your Cabinet: Treasury, Employment and Industry each go to a dry or a wet. Like the ministries in the original, the ministers decide which policies you can pursue.
+**Taking office.** Win a majority, or govern with the Ulster Unionists, the Liberals or as a minority. Then form your Cabinet: Treasury, Employment and Industry each go to a dry or a wet, and you decide how to fill the other six departments (the Home Office, the Foreign Office, Environment, Defence, Education, and Health and Social Security). Like the ministries in the original, the ministers decide which policies you can pursue: only a dry Defence Secretary will cut the surface fleet, only a dry Education Secretary will try vouchers, only a dry Environment Secretary will cap the rates or abolish the GLC, and so on. The Politics tab lists the whole Cabinet.
+
+**The Cabinet over time.** The Reshuffle card lets you move any minister between departments, purge the wets one department at a time, or bring them back. History offers its own moments: the January 1981 reshuffle that sent John Nott to Defence, and the September 1981 purge. Wet ministers may resign in protest at the cuts, a dry may walk out after a U-turn, and the occasional junior minister embarrasses you in the Sunday papers.
 
 **Government (1979–84).** The Government Affairs deck opens:
 
@@ -26,7 +28,7 @@ Like the original, each month you play one card from your hand. Historical and c
 | Housing | Right to buy, discounts, council building, mortgage relief |
 | Law and Order | Police pay, the "short sharp shock", a free vote on hanging, the Scarman reforms |
 | Foreign Affairs | The EEC rebate, compromise with Europe, the special relationship |
-| Defence | The Nott review (which invites the Falklands), Trident, HMS Endurance, NATO spending |
+| Defence | The defence review (dry Defence Secretary only; it invites the Falklands), Trident, HMS Endurance, NATO spending |
 | Northern Ireland, Public Sector Pay | Security vs. talks, cash limits vs. peace |
 | The Health Service | Funding above inflation, prescription charges, contracting out, private insurance, the Griffiths managers |
 | Education and Training | Assisted places, parental choice, university cuts, education vouchers, the Youth Training Scheme |
@@ -35,7 +37,7 @@ Like the original, each month you play one card from your hand. Historical and c
 | Immigration and Nationality | The British Nationality Act, immigration rules, the Vietnamese boat people, inner-city projects |
 | Energy and North Sea Oil | Oil taxes, selling BP shares, a nuclear programme (which weakens the miners), market energy prices |
 | Local Government | Rate Support Grant cuts, rate-capping, abolishing the rates, abolishing the GLC, the Docklands, tendering |
-| Reshuffle | Purge the wets, bring them back, promote loyalists |
+| Reshuffle | Move any minister, purge the wets department by department, bring them back, promote loyalists |
 | Government Business (Commons) | Whip the rebels, keep partners on side |
 
 **Advisers.** As with the original's party leadership, you keep three advisers at a time as pinned cards, starting with Whitelaw, Joseph and Howe. Each has special actions, with one action every six months. The "Your Inner Circle" card swaps them for any of thirteen others: Reece, Prior, Pym, Heseltine, Carrington, Tebbit, Lawson, Gilmour, Parkinson, Biffen, Brittan, Nott and St John-Stevas. Each has three or four actions, some only in opposition and some only in government. Dropping an adviser angers their faction; bringing one in strengthens theirs. In government, the pinned Number 10 card can call a snap election after three years.
@@ -130,8 +132,8 @@ From automated playthroughs of the full game on normal difficulty (400 games per
 
 | Strategy | Re-elected | Ousted in government | Lost the second election | Lost in 1979 |
 | --- | --- | --- | --- | --- |
-| Thatcher's historical choices | 80% | 12% | 6% | 2% |
-| Random choices | 66% | 12% | 7% | 15% |
+| Thatcher's historical choices | 81% | 11% | 6% | 2% |
+| Random choices | 64% | 17% | 6% | 13% |
 
 On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
 
