@@ -8,11 +8,11 @@ on-arrival: union_leaders_timer = 4; month_actions += 1
 
 = The Union Leaders
 
-Len Murray at the TUC is [+ tuc_mood : unionmood +]. Moss Evans of the Transport and General Workers is [+ tgwu_mood : unionmood +]. [+ num_leader +] of the miners is [+ num_mood : unionmood +], and [+ nupe_leader +] of the public employees is [+ nupe_mood : unionmood +]. The moderates, Frank Chapple of the electricians and Terry Duffy of the engineers, are [+ moderates_mood : unionmood +].
+[+ tuc_leader +] at the TUC is [+ tuc_mood : unionmood +]. [+ tgwu_leader +] of the Transport and General Workers is [+ tgwu_mood : unionmood +]. [+ num_leader +] of the miners is [+ num_mood : unionmood +], and [+ nupe_leader +] of the public employees is [+ nupe_mood : unionmood +]. The moderates, [+ moderates_names +], are [+ moderates_mood : unionmood +].
 
-- @murray: Invite Len Murray to Downing Street.
+- @murray: Invite the TUC's General Secretary to Downing Street.
 - @freeze_out: Freeze the TUC out of Whitehall.
-- @moderates: Court Frank Chapple and Terry Duffy.
+- @moderates: Court the moderate union leaders.
 - @gormley: Keep Joe Gormley sweet.
 - @scargill_on_tv: Let Scargill do the talking.
 - @easy_discard
@@ -22,7 +22,7 @@ Len Murray at the TUC is [+ tuc_mood : unionmood +]. Moss Evans of the Transport
 subtitle: The TUC softens. The dries call it beer and sandwiches.
 on-arrival: tuc_mood -= 12; tgwu_mood -= 4; union_power += 1; strike_wave -= 0.5; dry_dissent += 3; wet_dissent -= 2
 
-Murray comes to Number 10 for an hour. Nothing is agreed, and both sides say the talks were useful. The TUC's General Council is a little less keen on a fight.
+[+ tuc_leader +] comes to Number 10 for an hour. Nothing is agreed, and both sides say the talks were useful. The TUC's General Council is a little less keen on a fight.
 
 @freeze_out
 subtitle: Union power falls. The TUC and the general unions harden.

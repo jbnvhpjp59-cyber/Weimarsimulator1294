@@ -17,7 +17,9 @@ var WATCH = ['con_in_government', 'n_elections', 'ousted', 'autumn_election_1978
              'dry_walkout_seen', 'wets_purged', 'acts_n', 'bills_defeated', 'sdp_lab_mps', 'day_of_action_seen',
              'steel_strike_seen', 'health_dispute', 'eec_rebate', 'erm', 'interest_rate', 'inflation',
              'unemployment', 'con_votes', 'lab_votes', 'lib_votes', 'strike_wave', 'thatcher_rating',
-             'wash_up_pending'];
+             'wash_up_pending', 'miners_strike', 'orgreave_seen', 'sequestration_seen', 'nacods_struck',
+             'parkinson_resigned', 'gchq_ban', 'brighton_seen', 'hong_kong_declaration', 'anglo_irish', 'heseltine_out',
+             'bournemouth_seen', 'riots_1985_seen', 'libya_seen', 'wapping_seen'];
 var prev = Q.news_prev || {};
 var now = {};
 for (var w of WATCH) {
@@ -95,6 +97,28 @@ if (became('miners_beaten', 1)) add(8, 'Miners\' strike crumbles');
 if (became('scargill', 1)) add(6, 'Scargill to lead the miners');
 if (became('health_dispute', 1)) add(7, 'Hospitals hit by strikes');
 if (crossedUp('strike_wave', 6)) add(5, 'Strikes spread across the country');
+
+// the miners' strike, 1984-85
+if (became('miners_strike', 1)) add(9, 'Miners strike over pit closures');
+if (became('miners_strike', -1)) add(8, 'Pit closures withdrawn');
+if (became('miners_strike', 2)) add(10, 'Miners march back to work');
+if (became('miners_strike', 3)) add(10, 'Lights go out: miners win');
+if (became('miners_strike', 4)) add(9, 'Deal ends the miners\' strike');
+if (became('orgreave_seen', 1)) add(8, 'The battle of Orgreave');
+if (became('sequestration_seen', 1)) add(7, 'Courts move against the NUM\'s funds');
+if (became('nacods_struck', 1)) add(8, 'Pit deputies join the strike');
+
+// the second term
+if (became('parkinson_resigned', 1)) add(8, 'Parkinson resigns');
+if (became('gchq_ban', 1)) add(6, 'Unions banned at GCHQ');
+if (became('brighton_seen', 1)) add(10, 'IRA bomb at Brighton');
+if (became('hong_kong_declaration', 1)) add(6, 'The future of Hong Kong is settled');
+if (became('anglo_irish', 1)) add(8, 'Anglo-Irish Agreement signed');
+if (became('heseltine_out', 1)) add(10, 'Heseltine walks out');
+if (became('bournemouth_seen', 1)) add(7, 'Kinnock turns on Militant');
+if (became('riots_1985_seen', 1)) add(8, 'Riots in Handsworth and Tottenham');
+if (became('libya_seen', 1)) add(7, 'US bombers fly from British bases');
+if (became('wapping_seen', 1)) add(6, 'The battle of Wapping');
 
 // events
 if (became('mountbatten_seen', 1)) add(9, 'Mountbatten murdered');

@@ -1,0 +1,43 @@
+title: The Coal Dispute
+new-page: true
+is-card: true
+card-image: img/cards/power_station.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and miners_strike = 1 and coal_dispute_timer <= 0
+on-arrival: coal_dispute_timer = 2; month_actions += 1
+
+= The Coal Dispute
+
+The strike is in its [+ strike_months +] month[? if strike_months != 1 : s ?]. It is [+ strike_strength : strikehold +]. [? if coal_stocks >= 2 : The power stations have coal to spare. ?][? if coal_stocks <= 1 : The power stations are burning through what coal they have. ?]
+
+- @hold_firm_coal: Hold firm: no concessions.
+- @national_police: Coordinate the police forces nationally.
+- @tuc_mediation: Let the TUC try to mediate.
+- @offer_review: Offer an independent review of the closures.
+- @easy_discard
+- @cancel_advisor_action
+
+@hold_firm_coal
+subtitle: -0.3 budget. The strike wears down a little faster.
+on-arrival: budget -= 0.3; strike_strength -= 3; dry_dissent -= 2; wet_dissent += 1
+
+Ministers repeat that there will be no concessions, and the Coal Board offers more money to every miner who returns to work.
+
+@national_police
+view-if: police_national = 0
+subtitle: The pickets are stopped far from the pits. The civil libertarians object.
+on-arrival: police_national = 1; strike_strength -= 6; lib_relation -= 2; wet_dissent += 2; right_dissent -= 2
+
+The National Reporting Centre at Scotland Yard coordinates thousands of officers from every force in England and Wales. Cars full of pickets are turned back at county boundaries miles from the coalfields.
+
+@tuc_mediation
+subtitle: The TUC softens. Nothing much is agreed.
+on-arrival: tuc_mood -= 5; strike_strength -= 2; dry_dissent += 2
+
+[+ tuc_leader +] shuttles between the Coal Board and the NUM. The NUM won't accept any closures on economic grounds, and the talks end where they began.
+
+@offer_review
+subtitle: The strike ends with a compromise. The dries are appalled.
+on-arrival: miners_strike = 4; union_power += 3; num_mood -= 15; dry_dissent += 8; thatcher_rating -= 2; strike_wave = 1
+
+An independent review body will look at every closure, and no pit will shut while its case is heard. The NUM calls off the strike and calls it a victory. The dries call it 1981 again.

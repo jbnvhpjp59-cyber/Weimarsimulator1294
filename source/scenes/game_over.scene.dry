@@ -328,6 +328,14 @@ go-to: eg_menu
 
 Unemployment stands at [+ worst_region_u +]% in [+ worst_region +], and [+ u_southeast_disp +]% in the South East. Whatever the national figures say, the country is two economies now, and the map of the next election will show it: the Conservatives ever stronger in the South, Labour and its rivals left to fight over the North, Scotland and Wales.
 
+@miners_ending
+title: The miners.
+view-if: governed = 1 and miners_strike >= 2
+tags: endings
+go-to: eg_menu
+
+[? if miners_strike = 2 : The miners' strike was the decisive battle of the decade, and the government won it. The NUM is broken, the closures go on, and in the pit villages the bitterness will outlast everyone who lived through it. ?][? if miners_strike = 3 : The miners have beaten a Conservative government for the second time in ten years. The closure programme is dead, the NUM is the strongest union in the country, and every other union has noticed. ?][? if miners_strike = 4 : The miners' strike ended in a compromise that satisfied nobody. The closures go on, slowly, and the NUM is still standing. ?]
+
 @telecoms_ending
 title: British Telecom.
 view-if: telecoms_sold = 1
@@ -376,7 +384,7 @@ view-if: achievement_game_completed == 1
 tags: endings
 go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
-There are 63 achievements.
+There are 65 achievements.
 
 = In this playthrough
 
@@ -506,6 +514,10 @@ There are 63 achievements.
 
 [? if game_achievement_third_term : **Three in a Row** - win a third general election. ?]
 
+[? if game_achievement_long_strike : **The Long Strike** - defeat the 1984-85 miners' strike. ?]
+
+[? if game_achievement_sequestration : **Sequestration** - let the courts seize the NUM's funds. ?]
+
 = Unlocked in earlier games
 
 [? if achievement_prime_minister and not game_achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -634,6 +646,10 @@ There are 63 achievements.
 
 [? if achievement_third_term and not game_achievement_third_term : **Three in a Row** - win a third general election. ?]
 
+[? if achievement_long_strike and not game_achievement_long_strike : **The Long Strike** - defeat the 1984-85 miners' strike. ?]
+
+[? if achievement_sequestration and not game_achievement_sequestration : **Sequestration** - let the courts seize the NUM's funds. ?]
+
 = Not yet unlocked
 
 [? if not achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -761,6 +777,10 @@ There are 63 achievements.
 [? if not achievement_telecoms : **The Biggest Share Issue** - pass the Telecommunications Act to sell British Telecom. ?]
 
 [? if not achievement_third_term : **Three in a Row** - win a third general election. ?]
+
+[? if not achievement_long_strike : **The Long Strike** - defeat the 1984-85 miners' strike. ?]
+
+[? if not achievement_sequestration : **Sequestration** - let the courts seize the NUM's funds. ?]
 
 @end_game
 game-over: true

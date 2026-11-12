@@ -13,7 +13,7 @@ for (var c of Q.classes) {
 }
 
 // clamp 0-100 opinion meters
-var meters = ['thatcher_rating', 'lab_leader_rating', 'economic_liberalism',
+var meters = ['thatcher_rating', 'lab_leader_rating', 'economic_liberalism', 'union_power',
               'union_backlash', 'labour_credibility', 'heath_hostility',
               'lib_relation', 'snp_relation', 'pc_relation', 'uup_relation'];
 for (var m of meters) {
@@ -400,6 +400,8 @@ this._runActions(this.game.scenes['regional_economy'].onArrival);
 // the union leaders' moods, and Labour fighting itself
 this._runActions(this.game.scenes['union_leaders'].onArrival);
 this._runActions(this.game.scenes['labour_civil_war'].onArrival);
+// the miners' strike, if it has begun
+this._runActions(this.game.scenes['miners_tick'].onArrival);
 
 // recalculate projected votes and seats
 this._runActions(this.game.scenes['election_algorithm'].onArrival);

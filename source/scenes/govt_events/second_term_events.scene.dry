@@ -1,0 +1,389 @@
+title: Labour Chooses Kinnock
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and lab_leader == "Foot" and time - second_term_start >= 3
+max-visits: 1
+new-page: true
+on-arrival: {!
+Q.lab_leader = "Kinnock";
+Q.lab_leader_rating = 52;
+Q.lab_left = 0;
+Q.labour_credibility += 8;
+Q.labour_civil_war -= 10;
+// a lasting recovery: Labour's voters start to come home
+var back = {ab: 1, c1: 2, c2: 3, de: 2};
+for (var c in back) {
+    Q.baseline_support[c + '_lab'] += back[c];
+    Q[c + '_lab'] += back[c];
+}
+!}
+face-image: img/events/foot.jpg
+
+= Labour Chooses Kinnock
+
+Michael Foot has stood down after the election, and Labour has chosen Neil Kinnock, a 41-year-old Welsh left-winger who has never held office, with seven-tenths of the vote in its electoral college. Roy Hattersley, from the party's right, is his deputy, and the papers call it the dream ticket. Kinnock is quick, funny and young, and he wants to make Labour electable again.
+
+#################### 1983-84
+
+@parkinson
+title: The Parkinson Affair
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and parkinson_seen = 0 and time - second_term_start >= 3
+max-visits: 1
+new-page: true
+on-arrival: parkinson_seen = 1
+face-image: img/cards/parkinson.jpg
+
+= The Parkinson Affair
+
+Cecil Parkinson, who ran the election campaign and now runs Trade and Industry, has admitted that his former secretary is expecting his child. Now, in the middle of the party conference, she has given her own account to The Times, and the story is on every front page.
+
+- @parkinson_go: Accept his resignation.
+- @parkinson_stay: Stand by him.
+
+@parkinson_go
+subtitle: The story dies quickly. You lose a loyal ally.
+on-arrival: parkinson_resigned = 1; thatcher_rating -= 1; loyalist_dissent += 2
+
+Parkinson resigns before the conference ends. You make it clear that you hope to bring him back one day. Norman Tebbit takes over at Trade and Industry.
+
+@parkinson_stay
+subtitle: Loyalty, at a price: the story runs and runs.
+on-arrival: thatcher_rating -= 4; loyalist_dissent -= 2; right_dissent += 3; rebellion += 1
+
+Parkinson stays. The story runs for weeks, the moralists on the backbenches grumble, and every interview you give comes back to it.
+
+@gchq
+title: GCHQ
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and gchq_seen = 0 and time >= 73
+max-visits: 1
+new-page: true
+on-arrival: gchq_seen = 1
+face-image: img/events/westminster.jpg
+
+= GCHQ
+
+The intelligence agencies want trade unions banned at GCHQ, the listening station in Cheltenham, after strikes there during the civil service dispute of 1981. Staff would be offered £1,000 each to give up their membership.
+
+- @ban_unions: Ban the unions at GCHQ.
+- @leave_unions: Leave them alone.
+
+@ban_unions
+subtitle: The right approves. The TUC is outraged.
+on-arrival: gchq_ban = 1; tuc_mood += 10; union_power -= 1; right_dissent -= 2; wet_dissent += 2; lib_relation -= 2
+
+The ban is announced. The TUC calls it an attack on a basic freedom and holds a day of protest, and a few hundred staff refuse to give up their cards.
+
+@leave_unions
+subtitle: The TUC notices. The security services grumble.
+on-arrival: tuc_mood -= 4; right_dissent += 2
+
+The unions stay. The agencies get a no-strike agreement instead, after months of argument.
+
+@brighton
+title: Brighton
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and brighton_seen = 0 and time >= 82 and month = 10
+max-visits: 1
+new-page: true
+on-arrival: brighton_seen = 1; thatcher_rating += 5; right_dissent -= 3; wet_dissent -= 3; uup_relation += 5; c1_con += 0.5; c2_con += 0.5; de_con += 0.5
+face-image: img/events/thatcher_1980.jpg
+
+= Brighton
+
+At ten to three in the morning, an IRA bomb hidden in the Grand Hotel in Brighton explodes during the party conference. Five people are killed, and Norman Tebbit and many others are pulled from the rubble. You were working on your speech in a room that survived.
+
+At half past nine that morning the conference opens on time. You tell it that the bomb was an attempt to cripple the government, and that the fact that we are gathered here, shocked but composed and determined, is a sign that the attack has failed.
+
+@hong_kong_declaration
+title: The Future of Hong Kong
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and hong_kong_declaration = 0 and time >= 83
+max-visits: 1
+new-page: true
+on-arrival: hong_kong_declaration = 1
+face-image: img/events/westminster.jpg
+
+= The Future of Hong Kong
+
+[? if hong_kong_firm = 1 : Two years of hard bargaining since your visit to Beijing have got us as far as they can. ?][? if hong_kong_firm = 0 : Two years of talks since your visit to Beijing have produced a draft agreement. ?] The lease on the New Territories runs out in 1997, and without them Hong Kong is not viable. China will take sovereignty back; in return it promises that Hong Kong's way of life will continue for fifty years: "one country, two systems".
+
+- @sign_declaration: Sign the Joint Declaration in Beijing.
+- @hold_out: Hold out for continued British administration.
+
+@sign_declaration
+subtitle: The Americans approve. The right grumbles about a sell-out.
+on-arrival: us_relation += 3; europe_relation += 2; right_dissent += 2; wet_dissent -= 2
+
+You sign the Joint Declaration in the Great Hall of the People. The people of Hong Kong were not asked, and many of them begin to look for passports elsewhere.
+
+@hold_out
+subtitle: The right cheers. Beijing threatens to act alone.
+on-arrival: right_dissent -= 3; us_relation -= 2; thatcher_rating -= 1; economic_growth -= 0.1
+
+The talks stall. Beijing announces that it will settle Hong Kong's future by itself if need be, and the Hang Seng index falls by a quarter.
+
+#################### 1985
+
+@sterling_1985
+title: The Pound at a Dollar
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and sterling_1985_seen = 0 and time >= 85
+max-visits: 1
+new-page: true
+on-arrival: sterling_1985_seen = 1; sterling -= 6
+face-image: img/events/bank_1983.jpg
+
+= The Pound at a Dollar
+
+A strong dollar and a falling oil price have sent sterling down to $1.10, and the markets think it is going to parity. A remark from your press office, that the government won't defend any particular rate, has made it worse.
+
+- @defend_pound: Raise Bank Rate to defend the pound.
+- @let_it_fall: Let the pound find its level.
+
+@defend_pound
+subtitle: Mortgage holders pay. The pound recovers.
+on-arrival: interest_rate += 3; inflation -= 0.3; sterling += 6; c1_con -= 1; c2_con -= 1; dry_dissent -= 1
+
+Bank Rate goes up by three points in a week, to 14%. The pound steadies, and mortgage rates follow Bank Rate up.
+
+@let_it_fall
+subtitle: Exporters cheer. Prices rise, and the papers talk of a humiliation.
+on-arrival: inflation += 1; sterling -= 4; economic_growth += 0.2; thatcher_rating -= 2; dry_dissent += 2
+
+The pound touches $1.05. Exporters in the Midlands find their order books filling, and the Treasury finds the price of imports rising.
+
+@bournemouth
+title: Bournemouth
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and lab_leader == "Kinnock" and bournemouth_seen = 0 and time >= 94
+max-visits: 1
+new-page: true
+on-arrival: bournemouth_seen = 1; labour_credibility += 6; labour_civil_war -= 10; lab_leader_rating += 4; c1_lab += 1; c2_lab += 1
+face-image: img/events/foot.jpg
+
+= Bournemouth
+
+At Labour's conference in Bournemouth, Neil Kinnock turns on Militant and its Liverpool council, which has set an illegal budget and handed out redundancy notices to its own workers to make a point. Derek Hatton heckles from the floor; Eric Heffer walks off the platform. The rest of the hall gives Kinnock a standing ovation. Labour has started to look like a party that wants to win.
+
+@riots_1985
+title: The Riots Return
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and riots_1985_seen = 0 and time >= 93 and unemployment >= 9
+max-visits: 1
+new-page: true
+on-arrival: riots_1985_seen = 1; thatcher_rating -= 2
+face-image: img/events/brixton_1981.jpg
+
+= The Riots Return
+
+There has been rioting again: in Handsworth in Birmingham, in Brixton, and on the Broadwater Farm estate in Tottenham, where a policeman has been killed. The inner cities are angrier than they were in 1981.
+
+- @riot_police: Back the police, and promise more of them.
+- @inner_cities: Put money into the inner cities.
+
+@riot_police
+subtitle: The right approves.
+on-arrival: right_dissent -= 3; wet_dissent += 3; c1_con += 0.5*(1-dissent); de_lab += 1
+
+The Home Secretary promises more police, better equipment and a review of public order law. The estates are quieter, for now.
+
+@inner_cities
+subtitle: -1 budget. The wets approve.
+on-arrival: budget -= 1; wet_dissent -= 3; dry_dissent += 2; de_con += 0.5*(1-dissent); ru_london -= 0.2; ru_westmids -= 0.2
+
+Task forces go into the worst estates with money for jobs, training and youth projects. The money is real; whether it is enough is another question.
+
+@anglo_irish
+title: Hillsborough
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and anglo_irish_seen = 0 and time >= 95
+max-visits: 1
+new-page: true
+on-arrival: anglo_irish_seen = 1
+face-image: img/events/westminster.jpg
+
+= Hillsborough
+
+After a year of secret talks, Garret FitzGerald and the Irish government are ready to sign an agreement at Hillsborough Castle. Dublin would get a say in how Northern Ireland is run, through a joint conference with British ministers; in return it would recognise that Northern Ireland stays British as long as a majority wants it to.
+
+- @sign_agreement: Sign the Anglo-Irish Agreement.
+- @refuse_agreement: Refuse to give Dublin a role.
+
+@sign_agreement
+subtitle: Washington and Dublin are delighted. The Unionists feel betrayed.
+on-arrival: anglo_irish = 1; uup_relation -= 25; right_dissent += 6; us_relation += 5; europe_relation += 3; partner_dissent += 4 if govt_type = 2
+
+The Agreement is signed, and Ulster says no. Within weeks every Unionist MP has resigned his seat in protest, and a hundred thousand people rally outside Belfast City Hall. Ian Gow, your friend and former aide, resigns as a Treasury minister.
+
+@refuse_agreement
+subtitle: The Unionists are relieved. Washington is not.
+on-arrival: uup_relation += 5; us_relation -= 5; right_dissent -= 2; wet_dissent += 2
+
+The talks are shelved. Dublin is bitter, the State Department is disappointed, and the Unionists cannot quite believe their luck.
+
+#################### 1986
+
+@westland
+title: Westland
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and westland_seen = 0 and time >= 96 and (defence_secretary == "Heseltine" or environment_secretary == "Heseltine")
+max-visits: 1
+new-page: true
+on-arrival: westland_seen = 1
+face-image: img/events/cabinet.jpg
+
+= Westland
+
+Westland, Britain's last helicopter maker, is going bust. Its board wants to be rescued by Sikorsky of America; Michael Heseltine is campaigning, inside and outside the Cabinet, for a European consortium instead. He has ignored collective responsibility for weeks, and now a letter from the Solicitor-General that undermines him has been leaked to the press from Leon Brittan's department.
+
+- @back_board: Back the Westland board, and bring Heseltine into line.
+- @back_heseltine: Let Heseltine have his European rescue.
+
+@back_board
+subtitle: Heseltine walks out. Brittan may have to go too.
+on-arrival: {!
+Q.heseltine_out = 1;
+Q.thatcher_rating -= 6;
+Q.rebellion += 2;
+Q.wet_dissent += 6;
+Q.dry_dissent -= 2;
+// Heseltine's department goes to someone else
+if (Q.defence_secretary == 'Heseltine') {
+    Q.defence_secretary = 'Younger';
+    Q.defence_dry = 0;
+}
+if (Q.environment_secretary == 'Heseltine') {
+    Q.environment_secretary = 'Baker';
+    Q.environment_dry = 0;
+}
+// the leak is traced to Brittan's department
+if (Q.home_secretary == 'Brittan') {
+    Q.home_secretary = 'Hurd';
+    Q.home_dry = 0;
+}
+!}
+call: cabinet_recalc
+
+At Cabinet, Heseltine gathers his papers, says he can no longer serve, and walks out into Downing Street to announce his resignation to the cameras. Within a fortnight Leon Brittan has resigned too, over the leaked letter. You tell a friend that you may not be Prime Minister by six o'clock, but you survive the debate, and Heseltine is free to plot on the backbenches.
+
+@back_heseltine
+subtitle: Heseltine stays. The dries and the Americans are not pleased.
+on-arrival: dry_dissent += 5; us_relation -= 3; thatcher_rating -= 1; wet_dissent -= 2
+
+The government leans on Westland's board to take the European offer. Heseltine is triumphant, the Americans are cross, and the dries ask who is running the government.
+
+@libya
+title: The Libyan Raid
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and libya_seen = 0 and time >= 100
+max-visits: 1
+new-page: true
+on-arrival: libya_seen = 1
+face-image: img/cards/reagan_thatcher.jpg
+
+= The Libyan Raid
+
+After a bomb in a Berlin nightclub killed American servicemen, President Reagan wants to strike back at Colonel Gaddafi, using F-111 bombers based in Britain. He needs your permission tonight.
+
+- @allow_raid: Let the Americans use the British bases.
+- @refuse_raid: Refuse.
+
+@allow_raid
+subtitle: Washington will not forget it. Most voters disapprove.
+on-arrival: us_relation += 8; thatcher_rating -= 3; wet_dissent += 2; europe_relation -= 2
+
+The bombers take off from Lakenheath and Upper Heyford. Two-thirds of the public tell the pollsters they disapprove, but in Washington you have a debt that will be repaid.
+
+@refuse_raid
+subtitle: The public approves. Washington is angry.
+on-arrival: us_relation -= 8; thatcher_rating += 1; right_dissent += 3
+
+The raid goes ahead from the carriers in the Mediterranean, without British help. The White House lets it be known that it noticed.
+
+@wapping
+title: Wapping
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and wapping_seen = 0 and time >= 97
+max-visits: 1
+new-page: true
+on-arrival: wapping_seen = 1
+face-image: img/events/steel_strike.jpg
+
+= Wapping
+
+Rupert Murdoch has moved The Times, The Sun and the News of the World overnight to a new plant at Wapping, behind razor wire, with electricians in place of the print unions. Five thousand printers have been sacked, and every Saturday night there are pickets and police at the gates.
+
+- @law_course: Let the law take its course.
+- @urge_settlement: Urge a settlement.
+
+@law_course
+subtitle: The print unions are beaten. The papers are grateful.
+on-arrival: union_power -= 3; c1_con += 0.5*(1-dissent); tuc_mood += 3; wet_dissent += 1
+
+The courts restrain the pickets, and the papers come out every night. Within a year the print unions give up, and Fleet Street moves to new plants with new technology.
+
+@urge_settlement
+subtitle: The unions are grateful. The papers are not.
+on-arrival: tuc_mood -= 3; dry_dissent += 2
+
+The Employment Secretary calls for a settlement. Nobody at Wapping listens.
+
+@teachers
+title: The Teachers' Dispute
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and teachers_seen = 0 and time >= 90
+max-visits: 1
+new-page: true
+on-arrival: teachers_seen = 1
+face-image: img/cards/school.jpg
+
+= The Teachers' Dispute
+
+The teachers' unions have been refusing to cover lessons and run after-school activities for months over pay. Parents are angry with both sides.
+
+- @hold_teachers: Hold the line on pay.
+- @settle_teachers: Settle, with new contracts.
+
+@hold_teachers
+subtitle: +0.5 budget. The dispute drags on.
+on-arrival: budget += 0.5; c1_con -= 1; wet_dissent += 2; dry_dissent -= 1
+
+The dispute rumbles on into another school year. Parents blame the unions first, and the government second.
+
+@settle_teachers
+subtitle: -1 budget. Peace in the classroom.
+on-arrival: budget -= 1; c1_con += 1*(1-dissent); wet_dissent -= 2; dry_dissent += 2
+
+The teachers get a pay rise and new contracts that set out their duties for the first time. The schools are back to normal by the spring.
+
+#################### 1987
+
+@labour_1987
+title: Labour's Campaign
+tags: event
+view-if: con_in_government = 1 and second_term = 1 and in_campaign = 1 and lab_leader == "Kinnock" and labour_1987_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: labour_1987_seen = 1; lab_leader_rating += 6; c2_lab += 1; c1_lab += 1
+face-image: img/events/foot.jpg
+
+= Labour's Campaign
+
+Labour has a new symbol, a red rose, and a campaign that looks better than ours. Its first broadcast is a film about Kinnock and his wife Glenys, made by the director of Chariots of Fire, and Kinnock's own ratings jump overnight. A rogue poll shows our lead collapsing, and there is panic at Central Office.
+
+- @more_ads: Spend whatever it takes on advertising.
+- @hold_nerve: Hold your nerve.
+
+@more_ads
+subtitle: -1 resource. The panic subsides.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; c1_con += 1*(1-dissent); c2_con += 1*(1-dissent)
+
+The agencies are told to take every page they can get. The last week of the campaign is ours.
+
+@hold_nerve
+on-arrival: loyalist_dissent -= 1
+
+The polls settle. Most of them never showed what the rogue poll showed.
