@@ -55,11 +55,11 @@ Like the original, each month you play one card from your hand. Historical and c
 
 **Events, 1979–84:**
 
-- **1979:** Howe's first Budget, the Clegg awards, Lancaster House, the Dublin summit, 17% Bank Rate.
-- **1980:** the steel strike, the Iranian Embassy, two million unemployed, "the lady's not for turning" (or a U-turn), Foot.
-- **1981:** the Gang of Four and the Alliance, the pit closures, the 1981 Budget, the hunger strike, Brixton and Toxteth, the Cabinet revolt and the September purge, Crosby.
-- **1982:** three million unemployed, Hillhead, the health service dispute, the Think Tank leak, the Falklands (deterred, negotiated, won or lost).
-- **1983:** recovery, the "longest suicide note", and by-elections and defections throughout.
+- **1979:** Howe's first Budget, the Clegg awards, Lancaster House, the Dublin summit, 17% Bank Rate, Mountbatten and Warrenpoint.
+- **1980:** the steel strike, the Iranian Embassy, two million unemployed, "the lady's not for turning" (or a U-turn), Foot, the Moscow Olympics, the Lords' rebellion over school buses.
+- **1981:** the Gang of Four and the Alliance, the pit closures, the 1981 Budget, the hunger strike, Brixton and Toxteth, the Cabinet revolt and the September purge, Crosby, the civil service strike, Warrington, the Royal Wedding, Benn's bid for the deputy leadership, Scargill.
+- **1982:** three million unemployed, Hillhead, the health service dispute, the Think Tank leak, the Falklands (deterred, negotiated, won or lost), the rail strike, the Siberian pipeline row, Hong Kong, Greenham Common.
+- **1983:** recovery, Bermondsey, the "longest suicide note", and by-elections and defections throughout.
 
 **The end.** The game ends at the second general election (by 1984 at the latest), or earlier if you are ousted. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the NHS, pensions, education, the rates, the Falklands, Europe, and whether you turned. There are 57 achievements, listed on the start menu with the ones you have and haven't unlocked.
 
@@ -132,8 +132,8 @@ From automated playthroughs of the full game on normal difficulty (400 games per
 
 | Strategy | Re-elected | Ousted in government | Lost the second election | Lost in 1979 |
 | --- | --- | --- | --- | --- |
-| Thatcher's historical choices | 81% | 11% | 6% | 2% |
-| Random choices | 64% | 17% | 6% | 13% |
+| Thatcher's historical choices | 84% | 11% | 4% | 1% |
+| Random choices | 64% | 18% | 6% | 12% |
 
 On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
 
