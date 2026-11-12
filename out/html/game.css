@@ -598,6 +598,59 @@ table {
     border-spacing: 0.5em;
 }
 
+/* the front page on the main screen */
+.front_page {
+    display: block;
+    margin: 0 0 1em 0;
+    padding: 0.4em 0 0.5em 0;
+    border-top: 3px double var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+.front_page .masthead {
+    display: block;
+    font-size: 0.75em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+.front_page .headline {
+    display: block;
+    margin: 0.15em 0;
+    font-size: 1.35em;
+    font-weight: bold;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+.front_page .standfirst {
+    display: block;
+    font-size: 0.8em;
+    font-style: italic;
+    opacity: 0.85;
+}
+@media (max-width: 560px) {
+    .front_page .headline {
+        font-size: 1.1em;
+    }
+}
+
+/* the chronicle in the Library */
+.chron_month {
+    margin: 1em 0 0.2em 0;
+    font-size: 1em;
+}
+.chron_headline {
+    margin: 0.2em 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.03em;
+}
+.chron_list {
+    margin: 0.2em 0 0.5em 0;
+    padding-left: 1.2em;
+}
+
 /* election night: seats region by region */
 table.regions {
     width: 100%;

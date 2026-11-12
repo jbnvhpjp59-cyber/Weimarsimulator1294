@@ -1,0 +1,165 @@
+title: The Front Page
+on-arrival: {!
+// Once a month, write the front page: the biggest story of the month just
+// gone. It compares the state now with a snapshot taken last month and
+// picks the most important change, from elections and wars down to a move
+// in Bank Rate. With nothing new, it runs the latest figures.
+if (Q.news_last_tick == Q.time) {
+    return;
+}
+var first = !Q.news_last_tick;
+Q.news_last_tick = Q.time;
+var WATCH = ['con_in_government', 'n_elections', 'ousted', 'autumn_election_1978', 'lib_lab_pact',
+             'no_confidence_won', 'lab_leader', 'alliance_formed', 'falklands', 'u_turn', 'miners_win',
+             'miners_beaten', 'scargill', 'riots', 'embassy_seen', 'mountbatten_seen', 'royal_wedding_seen',
+             'hunger_strike_seen', 'unemployment_2m', 'unemployment_3m', 'crosby_lost', 'hillhead_lost',
+             'bermondsey_seen', 'by_election_timer', 'leadership_challenge_time', 'resignations',
+             'dry_walkout_seen', 'wets_purged', 'acts_n', 'bills_defeated', 'sdp_lab_mps', 'day_of_action_seen',
+             'steel_strike_seen', 'health_dispute', 'eec_rebate', 'erm', 'interest_rate', 'inflation',
+             'unemployment', 'con_votes', 'lab_votes', 'lib_votes', 'strike_wave', 'thatcher_rating',
+             'wash_up_pending'];
+var prev = Q.news_prev || {};
+var now = {};
+for (var w of WATCH) {
+    now[w] = Q[w];
+}
+Q.news_prev = now;
+if (first) {
+    return;
+}
+var was = function (k) { return prev[k] === undefined ? now[k] : prev[k]; };
+var rose = function (k) { return (now[k] || 0) > (was(k) || 0); };
+var became = function (k, v) { return now[k] == v && was(k) != v; };
+var crossedUp = function (k, line) { return was(k) < line && now[k] >= line; };
+var crossedDown = function (k, line) { return was(k) >= line && now[k] < line; };
+var pct = function (x) { return (Math.round(x * 10) / 10).toFixed(1) + '%'; };
+var lib = Q.alliance_formed ? 'Alliance' : 'Liberals';
+var polls = !Q.historical_mode;
+
+var stories = [];
+var add = function (p, h) { stories.push({p: p, h: h}); };
+
+// governments and elections
+if (became('con_in_government', 1)) {
+    add(10, Q.govt_type == 1 ? 'Thatcher wins: a Conservative majority of ' + Q.con_majority :
+                               'Hung Parliament: Thatcher forms a government');
+}
+if (rose('n_elections') && Q.con_in_government && was('con_in_government')) {
+    add(10, 'Thatcher wins a second term');
+}
+if (became('con_in_government', 0) && Q.ousted) {
+    add(10, 'Thatcher is out: Tories choose a new leader');
+} else if (became('con_in_government', 0)) {
+    add(10, 'Labour wins: Thatcher back in opposition');
+}
+if (became('autumn_election_1978', 1)) add(9, 'Callaghan goes to the country');
+if (became('lib_lab_pact', 0)) add(7, 'Steel ends the Lib-Lab Pact');
+if (became('no_confidence_won', 1)) add(10, 'Government falls by one vote');
+if (now.lab_leader != was('lab_leader')) add(9, 'Labour chooses ' + Q.lab_leader);
+if (became('alliance_formed', 1)) add(9, 'The Gang of Four launch the SDP');
+if (rose('leadership_challenge_time')) add(9, 'Tory leadership challenge');
+if (became('wash_up_pending', 1)) add(4, 'Bills fall as Parliament is dissolved');
+
+// the Falklands
+if (became('falklands', 1)) add(10, 'Argentina invades the Falklands');
+if (became('falklands', 2)) add(10, 'The task force sails');
+if (became('falklands', 3)) add(10, 'Argentines surrender at Port Stanley');
+if (became('falklands', 4)) add(10, 'Task force turned back from the Falklands');
+if (became('falklands', 5)) add(9, 'Falklands: a deal with Buenos Aires');
+if (became('falklands', 6)) add(5, 'Argentina backs down over the Falklands');
+
+// the economy and the government's course
+if (became('u_turn', 1)) add(8, '"The lady\'s not for turning"');
+if (became('u_turn', -1)) add(9, 'The great U-turn');
+if (became('unemployment_2m', 1)) add(8, 'Two million out of work');
+if (became('unemployment_3m', 1)) add(9, 'Three million out of work');
+if (rose('eec_rebate')) add(7, 'Thatcher gets her money back from Brussels');
+if (became('erm', 1)) add(6, 'The pound joins the ERM');
+var rate_change = (now.interest_rate || 0) - (was('interest_rate') || 0);
+if (rate_change >= 1) add(5, 'Bank Rate up to ' + Math.round(now.interest_rate) + '%');
+if (rate_change <= -1) add(4, 'Bank Rate cut to ' + Math.round(now.interest_rate) + '%');
+if (crossedDown('inflation', 10)) add(6, 'Inflation back in single figures');
+if (crossedDown('inflation', 5)) add(6, 'Inflation falls below 5%');
+if (crossedUp('inflation', 15)) add(5, 'Inflation tops 15%');
+for (var u = 8; u <= 16; u++) {
+    if (crossedUp('unemployment', u)) {
+        add(3, 'Jobless rate passes ' + u + '%');
+    }
+}
+
+// unions and disputes
+if (became('steel_strike_seen', 1)) add(7, 'Steelworkers walk out');
+if (became('day_of_action_seen', 1)) add(Q.day_of_action_big ? 7 : 6, Q.day_of_action_big ? 'TUC Day of Action brings the country to a halt' : 'TUC Day of Action flops');
+if (became('miners_win', 1)) add(9, 'Miners win as the lights go out');
+if (became('miners_beaten', 1)) add(8, 'Miners\' strike crumbles');
+if (became('scargill', 1)) add(6, 'Scargill to lead the miners');
+if (became('health_dispute', 1)) add(7, 'Hospitals hit by strikes');
+if (crossedUp('strike_wave', 6)) add(5, 'Strikes spread across the country');
+
+// events
+if (became('mountbatten_seen', 1)) add(9, 'Mountbatten murdered');
+if (became('embassy_seen', 1)) add(8, 'SAS end the embassy siege');
+if (became('riots', 1)) add(8, 'Riots in Brixton');
+if (became('riots', 2)) add(8, 'Riots spread to Toxteth');
+if (became('royal_wedding_seen', 1)) add(6, 'Charles and Diana marry');
+if (became('hunger_strike_seen', 1)) add(7, 'Hunger strike in the Maze');
+
+// Parliament and the parties
+if (rose('acts_n')) {
+    var acts = (Q.acts_list || '').split(', ');
+    add(6, acts[acts.length - 1] + ' becomes law');
+}
+if (rose('bills_defeated')) add(9, 'Government defeated in the Commons');
+if (rose('resignations')) add(7, Q.resign_name + ' resigns from the Cabinet');
+if (became('dry_walkout_seen', 1)) add(7, Q.resign_name + ' quits over the U-turn');
+if (became('wets_purged', 1)) add(8, 'Thatcher sacks the wets');
+if (became('crosby_lost', 1)) add(8, 'Shirley Williams wins Crosby');
+if (became('hillhead_lost', 1)) add(8, 'Jenkins wins Hillhead');
+if (became('bermondsey_seen', 1)) add(7, 'Liberal landslide in Bermondsey');
+if (rose('by_election_timer')) {
+    add(Q.by_election_loss ? 7 : 3, Q.by_election_loss ? 'Tories lose by-election to the ' + Q.by_election_winner + ' candidate' : 'Tories hold on in by-election');
+}
+var defected = (now.sdp_lab_mps || 0) - (was('sdp_lab_mps') || 0);
+if (defected > 0 && !became('alliance_formed', 1)) {
+    var words = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+    add(5, defected == 1 ? 'Another Labour MP joins the SDP' : (words[defected] || defected) + ' more Labour MPs join the SDP');
+}
+if (polls) {
+    var lead = now.con_votes - now.lab_votes;
+    var lead_was = was('con_votes') - was('lab_votes');
+    if (lead >= 10 && lead_was < 10) add(4, 'Poll: Tories ten points ahead');
+    if (lead <= -10 && lead_was > -10) add(4, 'Poll: Labour ten points ahead');
+    var lib_top = now.lib_votes > now.con_votes && now.lib_votes > now.lab_votes;
+    var lib_top_was = was('lib_votes') > was('con_votes') && was('lib_votes') > was('lab_votes');
+    if (lib_top && !lib_top_was) add(7, 'Poll: the ' + lib + ' lead for the first time');
+}
+if (crossedDown('thatcher_rating', 25)) add(5, 'Thatcher\'s rating at a record low');
+
+// the lead story; ties go to whichever came first above
+var top = null;
+for (var s of stories) {
+    if (!top || s.p > top.p) {
+        top = s;
+    }
+}
+if (!top) {
+    // a quiet month: the figures
+    if (polls && Q.time % 2 == 0) {
+        top = {p: 0, h: 'Poll: Conservatives ' + Math.round(Q.con_votes) + '%, Labour ' + Math.round(Q.lab_votes) + '%, ' + lib + ' ' + Math.round(Q.lib_votes) + '%'};
+    } else {
+        top = {p: 0, h: 'Prices up ' + pct(Q.inflation) + ' on a year ago; ' + pct(Q.unemployment) + ' out of work'};
+    }
+}
+Q.headline = top.h;
+Q.headline_n = 1;
+// the month the news is about, for the chronicle
+var t = Q.time - 1;
+Q.headline_date = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                   'October', 'November', 'December'][(t - 1) % 12] + ' ' + (1978 + Math.floor((t - 1) / 12));
+Q.headlines = Q.headlines || [];
+if (top.p > 0) {
+    Q.headlines.push({t: t, h: top.h});
+}
+!}
+
+# Run by post_event after every action; writes a new front page once a month.

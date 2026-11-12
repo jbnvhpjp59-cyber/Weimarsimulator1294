@@ -635,6 +635,18 @@ Q.sdp_month_defections = 0;
 Q.militant_seen = 0;
 Q.sdp_twenty_seen = 0;
 
+// ---------------------------------------------------------------
+// The front page (newsroom.scene.dry) and the chronicle of decisions
+// (recorded by game.js, shown in the Library).
+// ---------------------------------------------------------------
+Q.headline = 'Callaghan and Steel keep the Lib-Lab Pact alive';
+Q.headline_date = 'January 1978';
+Q.headline_n = 1;
+Q.headlines = [];
+Q.news_last_tick = 0;
+Q.news_prev = {};
+Q.chronicle = [];
+
 // project the starting polls
 this._runActions(this.game.scenes['election_algorithm'].onArrival);
 !}
@@ -694,7 +706,7 @@ new-page: true
 set-bg: img/map.jpg
 go-to: main if hand_size == 3; main.main_easy if hand_size == 4
 face-image: img/events/thatcher_1976.jpg
-audio: shuffle music/pomp_and_circumstance_4.mp3 music/rule_britannia.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3
+audio: shuffle music/pomp_and_circumstance_4.mp3 music/rule_britannia.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3 music/second_suite_march.mp3
 
 = January 1978
 
