@@ -244,9 +244,44 @@
     }
   };
 
+  // On phones the status panel folds into a one-line summary above the game.
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+  window.updateStatusSummary = function() {
+      var el = document.getElementById('status_summary');
+      if (!el) {
+          return;
+      }
+      var Q = dendryUI.dendryEngine.state.qualities;
+      if (!Q.started) {
+          el.textContent = 'Status';
+          return;
+      }
+      var parts = [MONTHS[(Q.month || 1) - 1] + ' ' + Q.year, 'Resources ' + Q.resources];
+      if (!Q.historical_mode && Q.con_votes !== undefined) {
+          parts.push('Con ' + Number(Q.con_votes).toFixed(1) + '% · Lab ' + Number(Q.lab_votes).toFixed(1) + '%');
+      }
+      el.textContent = parts.join(' · ');
+  };
+  window.setStatusOpen = function(open) {
+      document.body.classList.toggle('status-open', open);
+      var button = document.getElementById('status_toggle');
+      if (button) {
+          button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+  };
+  window.toggleStatus = function() {
+      var open = !document.body.classList.contains('status-open');
+      window.setStatusOpen(open);
+      try {
+          window.localStorage.setItem(window.dendryUI.game.title + '_status_open', open ? '1' : '0');
+      } catch (e) {}
+  };
+
   // Tabbed sidebar: each tab renders a section of status.scene.dry.
   window.updateSidebar = function() {
       $('#qualities').empty();
+      window.updateStatusSummary();
       // nothing to show until a game has started (e.g. on the title screen)
       if (!dendryUI.dendryEngine.state.qualities.started) {
           $('#qualities').append($('<p>').text('Start a game to see the state of the nation.'));
@@ -313,6 +348,8 @@
     if (window.dendryUI.dark_mode) {
         document.body.classList.add('dark-mode');
     }
+    // phones: reopen the status panel if the player left it open
+    window.setStatusOpen(readStorage(window.dendryUI.game.title + '_status_open') === '1');
     if (window.dendryUI.font_size != 1.1) {
         var fs = window.dendryUI.font_size;
         var sidebar_fs = fs - 0.1;

@@ -538,6 +538,50 @@ img {
     margin-right: 1em;
     vertical-align: top;
   }
+
+  /* the status panel folds into a one-line summary so the game comes first */
+  .status_toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    box-sizing: border-box;
+    width: calc(100% - 0.8em);
+    margin: 0.4em;
+    padding: 0.7em 0.9em;
+    border: 1px solid var(--border-color);
+    background-color: var(--content-bg-color);
+    color: var(--text-color);
+    font: inherit;
+    font-size: 0.95em;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+  .status_chevron {
+    flex: none;
+    transition: transform 0.15s;
+  }
+  body.status-open .status_chevron {
+    transform: rotate(180deg);
+  }
+  body:not(.status-open) #stats_sidebar {
+    display: none;
+  }
+  /* keep the title compact on small screens */
+  #game-title {
+    font-size: 1.15em;
+  }
+  #game-author {
+    font-size: 0.85em;
+  }
+}
+
+/* the toggle only exists on small screens */
+@media screen and (min-width: 561px) {
+  .status_toggle {
+    display: none;
+  }
 }
 
 
