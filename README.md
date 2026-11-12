@@ -154,14 +154,14 @@ The regional baselines are approximations and are worth refining against real co
 
 ## Balance
 
-From automated playthroughs of the full game on normal difficulty (1,200 games per strategy). "Lost in 1979" includes games that then continued in opposition.
+From automated playthroughs of the full game, January 1978 to the third general election, on normal difficulty (1,200 games per strategy). Each column after the first is a share of the games that reached that point.
 
-| Strategy | Re-elected | Ousted in government | Lost the second election | Lost in 1979 |
+| Strategy | Won in 1979 | Won the second election | Won a third | Third term, of all games |
 | --- | --- | --- | --- | --- |
-| Thatcher's historical choices | 89% | 9% | 2% | 1% |
-| Random choices | 65% | 17% | 4% | 13% |
+| Thatcher's historical choices | 99% | 90% | 91% | 81% |
+| Random choices | 85% | 72% | 67% | 41% |
 
-On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. That path passes about four bills a game, and loses about one Second Reading in a hundred, usually Tebbit's Employment Bill or the GLC bill when the wets are at their angriest. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
+On the historical path, the first term ends with inflation near 4% and unemployment above 11%, close to the real 1983 figures, and by 1987 inflation is near 4%, unemployment near 11% and Bank Rate near 9%, close to the real ones. From 1982 Bank Rate eases as inflation falls, and rises in unemployment above 12% are damped as the discouraged stop registering. The first term passes about four bills a game, and loses about one Second Reading in a hundred, usually Tebbit's Employment Bill or the GLC bill when the wets are at their angriest. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts. The second term is easy to win for now, because its own events and Labour's recovery under Kinnock are still to come.
 
 ## Adding content
 
