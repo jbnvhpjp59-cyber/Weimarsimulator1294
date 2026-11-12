@@ -490,7 +490,7 @@ Q.timers = ['advisor_action',
             'nhs', 'education', 'social_security', 'europe', 'immigration',
             'energy', 'local_government', 'regions', 'union_leaders', 'coal_dispute',
             // events
-            'by_election', 'gilt_crisis'];
+            'by_election', 'gilt_crisis', 'opp_byelection'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -693,6 +693,12 @@ Q.fowler_reform = 0;
 Q.poll_tax = 0;
 Q.big_sales = 0;
 Q.oil_collapse = 0;
+// a second Labour term, if we lose in 1979 (events/labour_government.scene.dry)
+Q.sterling_labour_seen = 0;
+Q.labour_left_revolt_seen = 0;
+Q.falklands_labour_seen = 0;
+Q.falklands_labour_won = 0;
+Q.opp_byelection_gain = 0;
 
 // ---------------------------------------------------------------
 // The front page (newsroom.scene.dry) and the chronicle of decisions

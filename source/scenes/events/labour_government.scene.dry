@@ -1,0 +1,139 @@
+title: The Recession Under Labour
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and time >= 26 and time <= 36 and unemployment >= 6.5
+max-visits: 1
+new-page: true
+on-arrival: labour_credibility -= 4; lab_leader_rating -= 3
+face-image: img/events/two_million.jpg
+
+= The Recession Under Labour
+
+The second oil shock and the world recession have reached Britain, and they have reached it on Labour's watch. Unemployment is rising towards two million, factories are closing in the Midlands, and the government's answer is another round of pay talks with the TUC.
+
+- @attack_record: Labour still isn't working.
+- @recovery_plan: Offer a plan for recovery.
+
+@attack_record
+subtitle: Skilled workers listen. The wets think we sound heartless.
+on-arrival: c2_con += 2*(1-dissent); labour_credibility -= 3; wet_dissent += 2
+
+The posters go back up: the dole queue, longer this time, and the same three words. Saatchi's men say the line has never had more truth in it.
+
+@recovery_plan
+subtitle: -1 resource. The middle classes are reassured.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; c1_con += 2*(1-dissent); ab_con += 1*(1-dissent); wet_dissent -= 2; dry_dissent += 1
+
+Sir Geoffrey Howe launches the Conservatives' recovery plan: lower taxes, sound money, and an end to the subsidies for industries that can't pay their way.
+
+@sterling_labour
+title: The Pound Under Pressure
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and time >= 30 and time <= 48 and inflation >= 12 and sterling_labour_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: sterling_labour_seen = 1; labour_credibility -= 8; lab_leader_rating -= 4; c1_con += 1; ab_con += 1
+face-image: img/events/bank_1983.jpg
+
+= The Pound Under Pressure
+
+With inflation back in double figures, the pound is falling and the Bank of England is spending its reserves to hold it. The Treasury talks of another approach to the International Monetary Fund. [+ prime_minister +] insists the country is not in crisis, which nobody has said since 1979 without regretting it.
+
+- @demand_election: Demand a general election.
+- @cross_party: Offer cross-party talks on the economy.
+
+@demand_election
+subtitle: The party loves it. The country is not sure.
+on-arrival: thatcher_rating += 1; right_dissent -= 2; loyalist_dissent -= 2
+
+You tell the Commons that a government that has lost control of the currency has lost the right to govern. The headlines are good; the government doesn't fall.
+
+@cross_party
+subtitle: The wets approve. The dries call it consensus politics.
+on-arrival: wet_dissent -= 4; dry_dissent += 4; c1_con += 1*(1-dissent); economic_liberalism -= 1
+
+You offer to talk. [+ prime_minister +] declines, but the offer makes you look like a Prime Minister in waiting.
+
+@labour_left_revolt
+title: Labour's Left Revolts
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and time >= 38 and time <= 54 and labour_left_revolt_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: labour_left_revolt_seen = 1; labour_credibility -= 5; lab_leader_rating -= 4; c1_lab -= 1; c2_lab -= 1
+face-image: img/events/foot.jpg
+
+= Labour's Left Revolts
+
+Tony Benn and the left have won control of Labour's National Executive and its conference. They have voted to leave the Common Market, to scrap nuclear weapons and to let the party, not the Cabinet, write the next manifesto. [+ prime_minister +] says the government will ignore them. Labour's moderates say privately that it cannot.
+
+- @court_moderates: Court Labour's moderates.
+- @let_them_fight: Let Labour fight itself.
+
+@court_moderates
+subtitle: The Liberals notice. So do Labour's voters.
+on-arrival: c1_con += 1*(1-dissent); c2_con += 1*(1-dissent); lib_relation -= 2; wet_dissent -= 1
+
+You tell Labour's voters that their party has been taken from them, and that the Conservatives are the only party left that believes in a strong Britain.
+
+@let_them_fight
+on-arrival: labour_credibility -= 2
+
+You say nothing, and let Labour's conference speak for itself.
+
+@falklands_labour
+title: The Falklands Under Labour
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and time >= 52 and time <= 56 and falklands_labour_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: {!
+Q.falklands_labour_seen = 1;
+// Labour sends a task force; whether it succeeds is a matter of luck and preparation
+Q.falklands_labour_won = (Math.random() < 0.6) ? 1 : 0;
+!}
+face-image: img/events/hermes_1982.jpg
+
+= The Falklands Under Labour
+
+Argentina has invaded the Falkland Islands. [+ prime_minister +] has sent a task force to the South Atlantic and promises that the islands will be British again. As Leader of the Opposition, you must decide what to say.
+
+- @back_task_force: Back the task force without reservation.
+- @demand_inquiry: Back the task force, and demand to know how it happened.
+
+@back_task_force
+subtitle: Patriotic and generous. The credit goes to the government.
+on-arrival: thatcher_rating += 3; right_dissent -= 3; lab_leader_rating += 4 if falklands_labour_won = 1; lab_leader_rating -= 6 if falklands_labour_won = 0
+
+[? if falklands_labour_won = 1 : The islands are retaken in June. The government gets the credit, and you get the respect of having stood beside it. ?][? if falklands_labour_won = 0 : The task force is turned back with heavy losses. The country is grief-stricken and furious, and you were right not to play politics with it. ?]
+
+@demand_inquiry
+subtitle: Partisan, and risky. It pays only if things go wrong.
+on-arrival: thatcher_rating += 3 if falklands_labour_won = 0; thatcher_rating -= 3 if falklands_labour_won = 1; labour_credibility -= 6 if falklands_labour_won = 0; right_dissent += 2
+
+[? if falklands_labour_won = 1 : The islands are retaken in June, and your demands for an inquiry sound petty in the hour of victory. ?][? if falklands_labour_won = 0 : The task force is turned back, and your questions about the defence cuts that invited the invasion are now the country's questions. ?]
+
+@opposition_byelection
+title: A By-Election
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and in_campaign = 0 and months_since_election >= 6 and random_roll < 0.07 and opp_byelection_timer <= 0
+new-page: true
+on-arrival: {!
+Q.opp_byelection_timer = 8;
+// a Labour seat falls vacant; we take it if we are well ahead
+Q.opp_byelection_gain = (Q.con_votes >= Q.lab_votes + 3 + Math.random() * 4) ? 1 : 0;
+if (Q.opp_byelection_gain) {
+    Q.con_mps += 1;
+    Q.lab_mps -= 1;
+    Q.thatcher_rating += 2;
+    Q.loyalist_dissent -= 3;
+} else {
+    Q.thatcher_rating -= 1;
+}
+!}
+face-image: img/events/polling_station.jpg
+
+= A By-Election
+
+A Labour MP has died, and there is a by-election in a marginal seat. [? if opp_byelection_gain = 1 : We take it from Labour on a big swing. The government's majority shrinks again, and the papers say you are the next Prime Minister. ?][? if opp_byelection_gain = 0 : Labour holds on. Our candidate does well, but not well enough, and the knives come out again at Westminster. ?]
