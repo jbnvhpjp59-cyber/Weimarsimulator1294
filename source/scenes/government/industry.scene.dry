@@ -20,7 +20,7 @@ on-arrival: industry_timer = 4; month_actions += 1
 
 @bail_out
 subtitle: -2 budget. Saves jobs for now.
-on-arrival: budget -= 2; industry_subsidy += 1; unemployment -= 0.5; c2_con += 1*(1-dissent); wet_dissent -= 4; dry_dissent += 6; economic_liberalism -= 2
+on-arrival: budget -= 2; industry_subsidy += 1; unemployment -= 0.5; ru_westmids -= 0.5; ru_wales -= 0.3; ru_north -= 0.3; ru_scotland -= 0.3; c2_con += 1*(1-dissent); wet_dissent -= 4; dry_dissent += 6; economic_liberalism -= 2
 
 The money is found, again. Sir Michael Edwardes keeps BL going on condition that he can close plants and face down the shop stewards.
 
@@ -28,7 +28,7 @@ The money is found, again. Sir Michael Edwardes keeps BL going on condition that
 subtitle: +2 budget. Closures and redundancies. Requires a dry Industry Secretary.
 choose-if: industry_dry = 1
 unavailable-subtitle: [+ industry_secretary +] won't let the lame ducks die.
-on-arrival: budget += 2; unemployment += 0.7; strike_wave += 1; union_power -= 3; c2_con -= 2; de_con -= 1; dry_dissent -= 4; wet_dissent += 4
+on-arrival: budget += 2; unemployment += 0.7; ru_north += 0.8; ru_wales += 0.8; ru_scotland += 0.6; ru_westmids += 0.6; ru_yorkshire += 0.4; ru_eastmids += 0.3; strike_wave += 1; union_power -= 3; c2_con -= 2; de_con -= 1; dry_dissent -= 4; wet_dissent += 4
 
 Steelworks at Consett and Corby close, along with car plants and shipyards. Whole towns lose their main employer.
 

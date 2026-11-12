@@ -350,6 +350,14 @@ go-to: eg_menu
 
 On the Isle of Dogs, where the West India Docks once employed thousands, the developers are moving in. A light railway is planned, and an American consortium talks of a vast office development at Canary Wharf.
 
+@regions_ending
+title: Two nations.
+view-if: governed = 1 and unemployment >= 9
+tags: endings
+go-to: eg_menu
+
+Unemployment stands at [+ worst_region_u +]% in [+ worst_region +], and [+ u_southeast_disp +]% in the South East. Whatever the national figures say, the country is two economies now, and the map of the next election will show it: the Conservatives ever stronger in the South, Labour and its rivals left to fight over the North, Scotland and Wales.
+
 @telecoms_ending
 title: British Telecom.
 view-if: telecoms_sold = 1

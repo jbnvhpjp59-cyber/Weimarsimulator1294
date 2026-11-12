@@ -482,7 +482,7 @@ Q.timers = ['advisor_action',
             'industry', 'housing', 'law_order', 'foreign_affairs',
             'defence', 'northern_ireland', 'public_pay', 'reshuffle',
             'nhs', 'education', 'social_security', 'europe', 'immigration',
-            'energy', 'local_government',
+            'energy', 'local_government', 'regions',
             // events
             'by_election', 'gilt_crisis'];
 for (var t of Q.timers) {
@@ -568,6 +568,45 @@ Q.wash_up_fell = '';
 Q.wash_up_fell_n = 0;
 Q.wash_up_passed = '';
 Q.wash_up_passed_n = 0;
+
+// ---------------------------------------------------------------
+// The regions. ru_<region> is a policy-driven shift in a region's
+// unemployment (see regional_economy). prev_regions is the seat
+// model's October 1974 result in each region, the baseline for the
+// changes shown on election night.
+// ---------------------------------------------------------------
+Q.no_regional_swing = 0;
+Q.regions_last_tick = 0;
+Q.ru_north = 0;
+Q.ru_northwest = 0;
+Q.ru_yorkshire = 0;
+Q.ru_eastmids = 0;
+Q.ru_westmids = 0;
+Q.ru_eastanglia = 0;
+Q.ru_london = 0;
+Q.ru_southeast = 0;
+Q.ru_southwest = 0;
+Q.ru_wales = 0;
+Q.ru_scotland = 0;
+Q.regional_aid = 0;
+Q.nissan = 0;
+Q.worst_region = '';
+Q.worst_region_u = 0;
+Q.prev_regions = [
+    {id:  'north',  con:  10,  lab:  27,  lib:  1,  nat:  0},
+    {id:  'northwest',  con:  31,  lab:  42,  lib:  1,  nat:  0},
+    {id:  'yorkshire',  con:  16,  lab:  37,  lib:  1,  nat:  0},
+    {id:  'eastmids',  con:  18,  lab:  23,  lib:  1,  nat:  0},
+    {id:  'westmids',  con:  24,  lab:  33,  lib:  1,  nat:  0},
+    {id:  'eastanglia',  con:  12,  lab:  7,  lib:  0,  nat:  0},
+    {id:  'london',  con:  39,  lab:  51,  lib:  2,  nat:  0},
+    {id:  'southeast',  con:  70,  lab:  22,  lib:  4,  nat:  0},
+    {id:  'southwest',  con:  30,  lab:  11,  lib:  2,  nat:  0},
+    {id:  'wales',  con:  6,  lab:  25,  lib:  1,  nat:  4},
+    {id:  'scotland',  con:  20,  lab:  38,  lib:  1,  nat:  12}
+];
+Q.election_regions = [];
+this._runActions(this.game.scenes['regional_economy'].onArrival);
 
 // project the starting polls
 this._runActions(this.game.scenes['election_algorithm'].onArrival);

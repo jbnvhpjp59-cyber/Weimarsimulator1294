@@ -598,6 +598,34 @@ table {
     border-spacing: 0.5em;
 }
 
+/* election night: seats region by region */
+table.regions {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 0.9em;
+}
+table.regions th, table.regions td {
+    padding: 0.2em 0.35em;
+    text-align: right;
+    border-bottom: 1px solid var(--border-color);
+}
+table.regions th:first-child, table.regions td:first-child {
+    text-align: left;
+}
+table.regions .change {
+    font-size: 0.8em;
+    opacity: 0.75;
+}
+@media (max-width: 560px) {
+    table.regions {
+        font-size: 0.78em;
+    }
+    table.regions th, table.regions td {
+        padding: 0.2em 0.2em;
+    }
+}
+
 /* Styles for parties (House of Commons chart) */
 .seat.con {
     fill: #0087DC;

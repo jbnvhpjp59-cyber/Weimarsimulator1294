@@ -384,6 +384,9 @@ if (Q.month_actions >= 1) {
     }
 }
 
+// unemployment region by region, which the seat model uses
+this._runActions(this.game.scenes['regional_economy'].onArrival);
+
 // recalculate projected votes and seats
 this._runActions(this.game.scenes['election_algorithm'].onArrival);
 

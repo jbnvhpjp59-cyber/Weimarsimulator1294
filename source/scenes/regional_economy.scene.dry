@@ -1,0 +1,82 @@
+title: The Regions
+on-arrival: {!
+// Unemployment in each of the seat model's eleven regions.
+//
+// Each region's rate is the national rate times a ratio. The ratio slides
+// from the 1978 pattern (coalfields, shipyards and the North far above the
+// South) towards the 1983 one, as the recession closed factories across the
+// West Midlands and the North West, the more national unemployment rises.
+// Policy adds offsets (ru_<region>): closures and the strong pound push a
+// region's rate up, bail-outs and regional aid pull it down. The rates are
+// then scaled so that their average is the national rate.
+//
+// u_diff_<region> is how far the region's gap from the national rate has
+// moved since 1978. The seat model swings a region against the governing
+// party by 0.4 points for every point of that.
+// id, name in a sentence, weight (seats, standing in for the workforce),
+// ratio to the national rate in 1978 (lo) and at the depth of the recession (hi)
+var REG = [
+    {id: 'north',      name: 'the North of England',  w: 38, lo: 1.55, hi: 1.30},
+    {id: 'northwest',  name: 'the North West',        w: 74, lo: 1.25, hi: 1.20},
+    {id: 'yorkshire',  name: 'Yorkshire',             w: 54, lo: 1.00, hi: 1.10},
+    {id: 'eastmids',   name: 'the East Midlands',     w: 42, lo: 0.88, hi: 0.92},
+    {id: 'westmids',   name: 'the West Midlands',     w: 58, lo: 0.95, hi: 1.15},
+    {id: 'eastanglia', name: 'East Anglia',           w: 19, lo: 0.85, hi: 0.82},
+    {id: 'london',     name: 'London',                w: 92, lo: 0.78, hi: 0.82},
+    {id: 'southeast',  name: 'the South East',        w: 96, lo: 0.68, hi: 0.74},
+    {id: 'southwest',  name: 'the South West',        w: 43, lo: 1.00, hi: 0.90},
+    {id: 'wales',      name: 'Wales',                 w: 36, lo: 1.40, hi: 1.25},
+    {id: 'scotland',   name: 'Scotland',              w: 71, lo: 1.40, hi: 1.20}
+];
+var U0 = 5.8;
+var U = Q.unemployment;
+var s = Math.max(0, Math.min(1, (U - U0) / (12.4 - U0)));
+var monthly = (Q.regions_last_tick != Q.time);
+Q.regions_last_tick = Q.time;
+
+// the strong pound hits manufacturing, month after month
+var manufacturing = {westmids: 0.04, northwest: 0.03, north: 0.02, yorkshire: 0.02,
+                     eastmids: 0.02, wales: 0.02, scotland: 0.02};
+var raw = {};
+var wsum = 0;
+var avg = 0;
+var avg0 = 0;
+for (var r of REG) {
+    var key = 'ru_' + r.id;
+    if (Q[key] === undefined) {
+        Q[key] = 0;
+    }
+    if (monthly && (Q.con_in_government || Q.n_elections >= 1)) {
+        if (Q.sterling >= 65 && manufacturing[r.id]) {
+            Q[key] += manufacturing[r.id];
+        }
+        // offsets fade slowly as new jobs replace old ones
+        Q[key] *= 0.98;
+    }
+    Q[key] = Math.max(-3, Math.min(5, Q[key]));
+    raw[r.id] = Math.max(1, U * (r.lo + (r.hi - r.lo) * s) + Q[key]);
+    wsum += r.w;
+    avg += r.w * raw[r.id];
+    avg0 += r.w * r.lo;
+}
+avg /= wsum;
+avg0 /= wsum;
+for (var r of REG) {
+    var u = raw[r.id] * U / avg;
+    var gap0 = U0 * (r.lo / avg0 - 1);
+    Q['u_' + r.id] = Math.round(u * 10) / 10;
+    Q['u_' + r.id + '_disp'] = u.toFixed(1);
+    Q['u_diff_' + r.id] = (u - U) - gap0;
+}
+// the worst-hit region, for the Industry tab and the news
+var worst = REG[0];
+for (var r of REG) {
+    if (Q['u_' + r.id] > Q['u_' + worst.id]) {
+        worst = r;
+    }
+}
+Q.worst_region = worst.name;
+Q.worst_region_u = Q['u_' + worst.id + '_disp'];
+!}
+
+# Run by post_event after every action.

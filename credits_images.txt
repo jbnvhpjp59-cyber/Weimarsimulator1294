@@ -236,7 +236,7 @@ img/*/brittan.jpg
   Licence: CC BY 4.0
   Source: https://commons.wikimedia.org/wiki/File%3ALeon_Brittan_%281996%29.jpg
 
-img/map.jpg
+img/map.jpg, img/cards/regions.jpg (a crop)
   Ordnance Survey Great Britain Sheet 2, Published 1933.jpg
   Author: Director-General of the Ordnance Survey, UK
   Licence: Public domain, CC BY 4.0
