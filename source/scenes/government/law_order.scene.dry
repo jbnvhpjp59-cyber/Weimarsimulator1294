@@ -8,7 +8,7 @@ on-arrival: law_order_timer = 6; month_actions += 1
 
 = Law and Order
 
-Willie Whitelaw at the Home Office has a full in-tray.
+[+ home_secretary +] at the Home Office has a full in-tray.
 
 - @police_pay: Implement the Edmund-Davies police pay award in full.
 - @short_sharp_shock: A "short, sharp shock" for young offenders.

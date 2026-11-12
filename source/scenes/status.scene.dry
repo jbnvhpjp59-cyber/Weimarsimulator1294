@@ -74,6 +74,27 @@ Growth: [+ economic_growth_2 +]%
 
 @politics
 
+[? if con_in_government : **The Cabinet** ([+ cabinet_dry +]% dry) ?]
+
+[? if con_in_government : Chancellor: [+ chancellor +] ([+ chancellor_dry : drywet +]) ?]
+
+[? if con_in_government : Employment: [+ employment_secretary +] ([+ employment_dry : drywet +]) ?]
+
+[? if con_in_government : Industry: [+ industry_secretary +] ([+ industry_dry : drywet +]) ?]
+
+[? if con_in_government : Home Office: [+ home_secretary +] ([+ home_dry : drywet +]) ?]
+
+[? if con_in_government : Foreign Office: [+ foreign_secretary +] ([+ foreign_dry : drywet +]) ?]
+
+[? if con_in_government : Environment: [+ environment_secretary +] ([+ environment_dry : drywet +]) ?]
+
+[? if con_in_government : Defence: [+ defence_secretary +] ([+ defence_dry : drywet +]) ?]
+
+[? if con_in_government : Education: [+ education_secretary +] ([+ education_dry : drywet +]) ?]
+
+[? if con_in_government : Health and Social Security: [+ health_secretary +] ([+ health_dry : drywet +]) ?]
+
+
 = Other Parties
 
 {!<span class="tooltip-text" title="David Steel's Liberals (and the SDP, once the Alliance forms)">!}[+ lib_name +]s{!</span>!}: [+ lib_relation : relationships +]

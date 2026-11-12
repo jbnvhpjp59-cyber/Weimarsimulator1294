@@ -40,10 +40,24 @@ In an emergency Saturday sitting of the Commons, members on every side demand ac
 - @refuse_resignation: Refuse it.
 
 @accept_resignation
-on-arrival: foreign_secretary = "Pym"; right_dissent -= 4
+on-arrival: {!
+Q.right_dissent -= 4;
+// Pym takes the Foreign Office, unless he is running the Treasury
+if (Q.chancellor == "Pym") {
+    Q.foreign_secretary = "Howe";
+} else {
+    Q.foreign_secretary = "Pym";
+    if (Q.defence_secretary == "Pym") {
+        Q.defence_secretary = "Nott";
+        Q.defence_dry = 1;
+    }
+}
+Q.foreign_dry = (Q.foreign_secretary == "Howe") ? 1 : 0;
+!}
+call: cabinet_recalc
 go-to: task_force
 
-Carrington goes, taking responsibility for the Foreign Office's failure. Francis Pym replaces him.
+Carrington goes, taking responsibility for the Foreign Office's failure. [+ foreign_secretary +] replaces him.
 
 @refuse_resignation
 on-arrival: thatcher_rating -= 2; right_dissent += 4

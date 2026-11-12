@@ -7,7 +7,7 @@ new-page: true
 
 = Sir Geoffrey Howe
 
-[? if con_in_government = 0 : Shadow Chancellor. ?][? if con_in_government = 1 and chancellor = "Howe" : Chancellor of the Exchequer. ?][? if con_in_government = 1 and chancellor != "Howe" : Leader of the House, kept out of the Treasury. ?] Mild in manner and relentless on detail. Denis Healey said being attacked by him was "like being savaged by a dead sheep", but Howe usually wins on the substance.
+[? if con_in_government = 0 : Shadow Chancellor. ?][? if con_in_government = 1 and chancellor = "Howe" : Chancellor of the Exchequer. ?][? if con_in_government = 1 and foreign_secretary == "Howe" : Foreign Secretary. ?][? if con_in_government = 1 and chancellor != "Howe" and foreign_secretary != "Howe" : Leader of the House, kept out of the Treasury. ?] Mild in manner and relentless on detail. Denis Healey said being attacked by him was "like being savaged by a dead sheep", but Howe usually wins on the substance.
 
 - @alternative_budget
 - @emergency_package

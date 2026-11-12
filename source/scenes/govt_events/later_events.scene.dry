@@ -1,6 +1,6 @@
 title: The September Reshuffle
 tags: event
-view-if: con_in_government = 1 and time >= 44 and time <= 46 and wets_purged = 0 and cabinet_dry < 70 and u_turn != -1 and september_seen = 0
+view-if: con_in_government = 1 and time >= 44 and time <= 46 and wets_purged = 0 and (employment_dry = 0 or education_dry = 0) and u_turn != -1 and september_seen = 0
 max-visits: 1
 new-page: true
 on-arrival: september_seen = 1
@@ -10,7 +10,7 @@ face-image: img/events/cabinet.jpg
 
 The summer has been brutal: riots, a Cabinet revolt over spending and the worst polls of any government since polling began. The wets assume you will have to compromise with them. Your closest advisers say the opposite: now is the moment to take control of your own Cabinet.
 
-- @reshuffle.purge: Sack the wets.
+- @ministers.purge_start: Sack the wets, one department at a time.
 - @keep: Keep the Cabinet as it is.
 
 @keep

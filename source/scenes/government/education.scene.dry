@@ -8,7 +8,7 @@ on-arrival: education_timer = 5; month_actions += 1
 
 = Education and Training
 
-[? if time < 45 : Mark Carlisle at Education ?][? if time >= 45 : Sir Keith Joseph, now at Education, ?] has a list of reforms and a shrinking budget. Comprehensive schools now teach most children, and two school-leavers in five can't find work.
+[+ education_secretary +] at Education has a list of reforms and a shrinking budget. Comprehensive schools now teach most children, and two school-leavers in five can't find work.
 
 - @assisted_places: Create the Assisted Places Scheme.
 - @parental_choice: Give parents the right to choose their school.
@@ -45,9 +45,9 @@ The University Grants Committee is told to cut spending by 15% over three years.
 
 @vouchers
 view-if: school_vouchers = 0
-subtitle: The dries are excited. Requires a dry Cabinet.
-choose-if: cabinet_dry >= 50
-unavailable-subtitle: The Cabinet won't hear of it.
+subtitle: The dries are excited. Requires a dry Education Secretary.
+choose-if: education_dry = 1
+unavailable-subtitle: [+ education_secretary +] won't hear of it.
 on-arrival: school_vouchers = 1; economic_liberalism += 2; dry_dissent -= 4; wet_dissent += 3
 
 Officials are asked to study a voucher that parents could spend at any school, state or private. The Department of Education is horrified, and says so in a series of long memoranda.

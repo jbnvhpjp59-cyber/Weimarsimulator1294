@@ -1,0 +1,12 @@
+title: Recalculate the Cabinet
+on-arrival: {!
+// How far the Cabinet backs the radical programme, 0-100. The economic
+// departments count most; every other dry minister adds a little.
+var others = Q.home_dry + Q.foreign_dry + Q.environment_dry + Q.defence_dry + Q.education_dry + Q.health_dry;
+Q.cabinet_dry = Math.min(100, 15 + 30 * Q.chancellor_dry + 25 * Q.employment_dry + 20 * Q.industry_dry + 4 * others);
+Q.cabinet_dries = Q.chancellor_dry + Q.employment_dry + Q.industry_dry + others;
+!}
+
+= The Cabinet
+
+This scene only recalculates the Cabinet's balance.

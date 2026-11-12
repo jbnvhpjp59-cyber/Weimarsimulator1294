@@ -7,7 +7,7 @@ new-page: true
 
 = Sir Keith Joseph
 
-[? if con_in_government = 1 and industry_secretary == "Joseph" : Secretary of State for Industry. ?][? if con_in_government = 1 and industry_secretary != "Joseph" : A Cabinet minister without a department to run. ?][? if con_in_government = 0 : In charge of policy and research. ?] Co-founder of the Centre for Policy Studies, and the intellectual engine of the new Conservatism. He might have been leader himself, had his speeches been better judged.
+[? if con_in_government = 1 and industry_secretary == "Joseph" : Secretary of State for Industry. ?][? if con_in_government = 1 and education_secretary == "Joseph" : Secretary of State for Education. ?][? if con_in_government = 1 and industry_secretary != "Joseph" and education_secretary != "Joseph" : A Cabinet minister without a department to run. ?][? if con_in_government = 0 : In charge of policy and research. ?] Co-founder of the Centre for Policy Studies, and the intellectual engine of the new Conservatism. He might have been leader himself, had his speeches been better judged.
 
 - @lecture_tour
 - @stepping_stones

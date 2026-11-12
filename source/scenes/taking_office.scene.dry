@@ -82,24 +82,73 @@ title: Industry
 
 @joseph
 on-arrival: industry_secretary = "Joseph"; industry_dry = 1; dry_dissent -= 4; wet_dissent += 3
-go-to: summary
+go-to: others
 
 Sir Keith hands his civil servants a reading list of free-market economists.
 
 @walker
 on-arrival: industry_secretary = "Walker"; industry_dry = 0; wet_dissent -= 6; dry_dissent += 5
-go-to: summary
+go-to: others
 
 Walker will keep British Leyland and British Steel afloat while trying to make them efficient. The dries consider this a betrayal before it has begun.
 
-@summary
+@others
+title: The rest of the Cabinet
+
+**The other departments.** The Home Office, the Foreign Office, Environment, Defence, Education and Health and Social Security matter less to the economic programme, but every one of them will be fighting the Treasury for money.
+
+- @historical_cabinet
+- @balanced_cabinet
+- @believers_cabinet
+
+@historical_cabinet
+title: Reward the senior men.
+subtitle: Whitelaw at the Home Office, Carrington at the Foreign Office, Heseltine at Environment, Pym at Defence, Carlisle at Education, Jenkin at Health. The wets are reassured.
 on-arrival: {!
-Q.cabinet_dry = 15 + 30 * Q.chancellor_dry + 25 * Q.employment_dry + 20 * Q.industry_dry;
+Q.home_secretary = "Whitelaw"; Q.home_dry = 0;
+Q.foreign_secretary = "Carrington"; Q.foreign_dry = 0;
+Q.environment_secretary = "Heseltine"; Q.environment_dry = 0;
+if (Q.chancellor == "Pym") { Q.defence_secretary = "Nott"; Q.defence_dry = 1; } else { Q.defence_secretary = "Pym"; Q.defence_dry = 0; }
+Q.education_secretary = "Carlisle"; Q.education_dry = 0;
+Q.health_secretary = "Jenkin"; Q.health_dry = 1;
+Q.wet_dissent -= 5; Q.loyalist_dissent -= 3;
 !}
+go-to: summary
+
+@balanced_cabinet
+title: Balance the Cabinet.
+subtitle: Whitelaw, Carrington and Heseltine keep their posts, but John Nott goes to Defence and Rhodes Boyson to Education.
+on-arrival: {!
+Q.home_secretary = "Whitelaw"; Q.home_dry = 0;
+Q.foreign_secretary = "Carrington"; Q.foreign_dry = 0;
+Q.environment_secretary = "Heseltine"; Q.environment_dry = 0;
+Q.defence_secretary = "Nott"; Q.defence_dry = 1;
+Q.education_secretary = "Boyson"; Q.education_dry = 1;
+Q.health_secretary = "Jenkin"; Q.health_dry = 1;
+Q.wet_dissent += 2; Q.dry_dissent -= 2;
+!}
+go-to: summary
+
+@believers_cabinet
+title: Believers everywhere.
+subtitle: Only Carrington survives. Brittan at the Home Office, Ridley at Environment, Nott at Defence, Boyson at Education, Fowler at Health. The wets will be outraged.
+on-arrival: {!
+Q.home_secretary = "Brittan"; Q.home_dry = 1;
+Q.foreign_secretary = "Carrington"; Q.foreign_dry = 0;
+Q.environment_secretary = "Ridley"; Q.environment_dry = 1;
+Q.defence_secretary = "Nott"; Q.defence_dry = 1;
+Q.education_secretary = "Boyson"; Q.education_dry = 1;
+Q.health_secretary = "Fowler"; Q.health_dry = 1;
+Q.wet_dissent += 10; Q.dry_dissent -= 5; Q.rebellion += 1; Q.cabinet_revolt += 1;
+!}
+go-to: summary
+
+@summary
+call: cabinet_recalc
 
 = The Cabinet
 
-Chancellor: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. Home Secretary: Whitelaw. Foreign Secretary: Lord Carrington.
+Chancellor: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. Home Secretary: [+ home_secretary +]. Foreign Secretary: [+ foreign_secretary +]. Environment: [+ environment_secretary +]. Defence: [+ defence_secretary +]. Education: [+ education_secretary +]. Health and Social Security: [+ health_secretary +].
 
 [? if cabinet_dry >= 70 : This is a Cabinet built to break with the past. The wets have been kept out of the economic departments, and they know it. ?][? if cabinet_dry >= 40 and cabinet_dry < 70 : The Cabinet is a balance of believers and doubters. That will make for long meetings. ?][? if cabinet_dry < 40 : The Cabinet is dominated by the wets. Radical policies will be hard to get past it. ?]
 

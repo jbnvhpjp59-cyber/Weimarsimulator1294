@@ -1,0 +1,463 @@
+title: Move a minister
+new-page: true
+
+= Move a minister
+
+Choose a department, then its new minister. Each change pleases one wing of the party and annoys the other. A minister who already holds a post must be replaced there before moving. The Cabinet is now [+ cabinet_dry +]% dry.
+
+- @move_treasury
+- @move_employment
+- @move_industry
+- @move_home
+- @move_foreign
+- @move_environment
+- @move_defence
+- @move_education
+- @move_health
+- @done: Finish the reshuffle.
+
+@done
+call: cabinet_recalc
+go-to: root
+
+@move_treasury
+title: The Treasury
+subtitle: Now: [+ chancellor +] ([+ chancellor_dry : drywet +]).
+
+**Chancellor of the Exchequer.** The Budget, taxes, spending and, with the Bank of England, interest rates. At present the post is held by [+ chancellor +].
+
+- @appoint_treasury_howe
+- @appoint_treasury_lawson
+- @appoint_treasury_pym
+- @ministers: Choose another department.
+
+@appoint_treasury_howe
+title: Sir Geoffrey Howe
+subtitle: Dry. The architect of our economic policy.
+view-if: chancellor != "Howe" and employment_secretary != "Howe" and industry_secretary != "Howe" and home_secretary != "Howe" and foreign_secretary != "Howe" and environment_secretary != "Howe" and defence_secretary != "Howe" and education_secretary != "Howe" and health_secretary != "Howe"
+on-arrival: wet_dissent += 4 if chancellor_dry = 0; dry_dissent -= 3 if chancellor_dry = 0; cabinet_revolt -= 1 if chancellor_dry = 0; loyalist_dissent -= 1 if chancellor_dry = 1; chancellor = "Howe"; chancellor_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Sir Geoffrey Howe becomes Chancellor of the Exchequer.
+
+@appoint_treasury_lawson
+title: Nigel Lawson
+subtitle: Dry. A combative monetarist who thinks he could run the Treasury better than anyone.
+view-if: chancellor != "Lawson" and employment_secretary != "Lawson" and industry_secretary != "Lawson" and home_secretary != "Lawson" and foreign_secretary != "Lawson" and environment_secretary != "Lawson" and defence_secretary != "Lawson" and education_secretary != "Lawson" and health_secretary != "Lawson"
+on-arrival: wet_dissent += 4 if chancellor_dry = 0; dry_dissent -= 3 if chancellor_dry = 0; cabinet_revolt -= 1 if chancellor_dry = 0; loyalist_dissent -= 1 if chancellor_dry = 1; chancellor = "Lawson"; chancellor_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Nigel Lawson becomes Chancellor of the Exchequer.
+
+@appoint_treasury_pym
+title: Francis Pym
+subtitle: Wet. A patrician pessimist and a safe pair of hands.
+view-if: chancellor != "Pym" and employment_secretary != "Pym" and industry_secretary != "Pym" and home_secretary != "Pym" and foreign_secretary != "Pym" and environment_secretary != "Pym" and defence_secretary != "Pym" and education_secretary != "Pym" and health_secretary != "Pym"
+on-arrival: dry_dissent += 4 if chancellor_dry = 1; wet_dissent -= 3 if chancellor_dry = 1; cabinet_revolt -= 1 if chancellor_dry = 1; loyalist_dissent -= 1 if chancellor_dry = 0; chancellor = "Pym"; chancellor_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Francis Pym becomes Chancellor of the Exchequer.
+
+@move_employment
+title: Employment
+subtitle: Now: [+ employment_secretary +] ([+ employment_dry : drywet +]).
+
+**Secretary of State for Employment.** Trade union law, the TUC and the job schemes. At present the post is held by [+ employment_secretary +].
+
+- @appoint_employment_prior
+- @appoint_employment_tebbit
+- @ministers: Choose another department.
+
+@appoint_employment_prior
+title: Jim Prior
+subtitle: Wet. Step by step, without provoking a general strike.
+view-if: chancellor != "Prior" and employment_secretary != "Prior" and industry_secretary != "Prior" and home_secretary != "Prior" and foreign_secretary != "Prior" and environment_secretary != "Prior" and defence_secretary != "Prior" and education_secretary != "Prior" and health_secretary != "Prior"
+on-arrival: dry_dissent += 4 if employment_dry = 1; wet_dissent -= 3 if employment_dry = 1; cabinet_revolt -= 1 if employment_dry = 1; loyalist_dissent -= 1 if employment_dry = 0; employment_secretary = "Prior"; employment_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Jim Prior becomes Secretary of State for Employment.
+
+@appoint_employment_tebbit
+title: Norman Tebbit
+subtitle: Dry. The unions need to be confronted, not soothed.
+view-if: chancellor != "Tebbit" and employment_secretary != "Tebbit" and industry_secretary != "Tebbit" and home_secretary != "Tebbit" and foreign_secretary != "Tebbit" and environment_secretary != "Tebbit" and defence_secretary != "Tebbit" and education_secretary != "Tebbit" and health_secretary != "Tebbit"
+on-arrival: wet_dissent += 4 if employment_dry = 0; dry_dissent -= 3 if employment_dry = 0; cabinet_revolt -= 1 if employment_dry = 0; loyalist_dissent -= 1 if employment_dry = 1; employment_secretary = "Tebbit"; employment_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Norman Tebbit becomes Secretary of State for Employment.
+
+@move_industry
+title: Industry
+subtitle: Now: [+ industry_secretary +] ([+ industry_dry : drywet +]).
+
+**Secretary of State for Industry.** British Steel, British Leyland and the other nationalised giants. At present the post is held by [+ industry_secretary +].
+
+- @appoint_industry_joseph
+- @appoint_industry_jenkin
+- @appoint_industry_walker
+- @ministers: Choose another department.
+
+@appoint_industry_joseph
+title: Sir Keith Joseph
+subtitle: Dry. The intellectual engine of the new Conservatism.
+view-if: chancellor != "Joseph" and employment_secretary != "Joseph" and industry_secretary != "Joseph" and home_secretary != "Joseph" and foreign_secretary != "Joseph" and environment_secretary != "Joseph" and defence_secretary != "Joseph" and education_secretary != "Joseph" and health_secretary != "Joseph"
+on-arrival: wet_dissent += 4 if industry_dry = 0; dry_dissent -= 3 if industry_dry = 0; cabinet_revolt -= 1 if industry_dry = 0; loyalist_dissent -= 1 if industry_dry = 1; industry_secretary = "Joseph"; industry_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Sir Keith Joseph becomes Secretary of State for Industry.
+
+@appoint_industry_jenkin
+title: Patrick Jenkin
+subtitle: Dry. A loyal, hard-working believer in the programme.
+view-if: chancellor != "Jenkin" and employment_secretary != "Jenkin" and industry_secretary != "Jenkin" and home_secretary != "Jenkin" and foreign_secretary != "Jenkin" and environment_secretary != "Jenkin" and defence_secretary != "Jenkin" and education_secretary != "Jenkin" and health_secretary != "Jenkin"
+on-arrival: wet_dissent += 4 if industry_dry = 0; dry_dissent -= 3 if industry_dry = 0; cabinet_revolt -= 1 if industry_dry = 0; loyalist_dissent -= 1 if industry_dry = 1; industry_secretary = "Jenkin"; industry_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Patrick Jenkin becomes Secretary of State for Industry.
+
+@appoint_industry_walker
+title: Peter Walker
+subtitle: Wet. A Heathite interventionist who knows industry.
+view-if: chancellor != "Walker" and employment_secretary != "Walker" and industry_secretary != "Walker" and home_secretary != "Walker" and foreign_secretary != "Walker" and environment_secretary != "Walker" and defence_secretary != "Walker" and education_secretary != "Walker" and health_secretary != "Walker"
+on-arrival: dry_dissent += 4 if industry_dry = 1; wet_dissent -= 3 if industry_dry = 1; cabinet_revolt -= 1 if industry_dry = 1; loyalist_dissent -= 1 if industry_dry = 0; industry_secretary = "Walker"; industry_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Peter Walker becomes Secretary of State for Industry.
+
+@move_home
+title: The Home Office
+subtitle: Now: [+ home_secretary +] ([+ home_dry : drywet +]).
+
+**Home Secretary.** The police, prisons, immigration and nationality. At present the post is held by [+ home_secretary +].
+
+- @appoint_home_whitelaw
+- @appoint_home_brittan
+- @ministers: Choose another department.
+
+@appoint_home_whitelaw
+title: Willie Whitelaw
+subtitle: Wet. The party's great conciliator, and your deputy.
+view-if: chancellor != "Whitelaw" and employment_secretary != "Whitelaw" and industry_secretary != "Whitelaw" and home_secretary != "Whitelaw" and foreign_secretary != "Whitelaw" and environment_secretary != "Whitelaw" and defence_secretary != "Whitelaw" and education_secretary != "Whitelaw" and health_secretary != "Whitelaw"
+on-arrival: dry_dissent += 4 if home_dry = 1; wet_dissent -= 3 if home_dry = 1; cabinet_revolt -= 1 if home_dry = 1; loyalist_dissent -= 1 if home_dry = 0; home_secretary = "Whitelaw"; home_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Willie Whitelaw becomes Home Secretary.
+
+@appoint_home_brittan
+title: Leon Brittan
+subtitle: Dry. A clever, careful barrister and a convinced dry.
+view-if: chancellor != "Brittan" and employment_secretary != "Brittan" and industry_secretary != "Brittan" and home_secretary != "Brittan" and foreign_secretary != "Brittan" and environment_secretary != "Brittan" and defence_secretary != "Brittan" and education_secretary != "Brittan" and health_secretary != "Brittan"
+on-arrival: wet_dissent += 4 if home_dry = 0; dry_dissent -= 3 if home_dry = 0; cabinet_revolt -= 1 if home_dry = 0; loyalist_dissent -= 1 if home_dry = 1; home_secretary = "Brittan"; home_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Leon Brittan becomes Home Secretary.
+
+@move_foreign
+title: The Foreign Office
+subtitle: Now: [+ foreign_secretary +] ([+ foreign_dry : drywet +]).
+
+**Foreign Secretary.** Europe, the Americans, the Commonwealth and the Falklands. At present the post is held by [+ foreign_secretary +].
+
+- @appoint_foreign_carrington
+- @appoint_foreign_pym
+- @appoint_foreign_howe
+- @ministers: Choose another department.
+
+@appoint_foreign_carrington
+title: Lord Carrington
+subtitle: Wet. The grandest of the grandees, and a superb diplomat.
+view-if: chancellor != "Carrington" and employment_secretary != "Carrington" and industry_secretary != "Carrington" and home_secretary != "Carrington" and foreign_secretary != "Carrington" and environment_secretary != "Carrington" and defence_secretary != "Carrington" and education_secretary != "Carrington" and health_secretary != "Carrington"
+on-arrival: dry_dissent += 4 if foreign_dry = 1; wet_dissent -= 3 if foreign_dry = 1; cabinet_revolt -= 1 if foreign_dry = 1; loyalist_dissent -= 1 if foreign_dry = 0; foreign_secretary = "Carrington"; foreign_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Lord Carrington becomes Foreign Secretary.
+
+@appoint_foreign_pym
+title: Francis Pym
+subtitle: Wet. A patrician pessimist and a safe pair of hands.
+view-if: chancellor != "Pym" and employment_secretary != "Pym" and industry_secretary != "Pym" and home_secretary != "Pym" and foreign_secretary != "Pym" and environment_secretary != "Pym" and defence_secretary != "Pym" and education_secretary != "Pym" and health_secretary != "Pym"
+on-arrival: dry_dissent += 4 if foreign_dry = 1; wet_dissent -= 3 if foreign_dry = 1; cabinet_revolt -= 1 if foreign_dry = 1; loyalist_dissent -= 1 if foreign_dry = 0; foreign_secretary = "Pym"; foreign_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Francis Pym becomes Foreign Secretary.
+
+@appoint_foreign_howe
+title: Sir Geoffrey Howe
+subtitle: Dry. The architect of our economic policy.
+view-if: chancellor != "Howe" and employment_secretary != "Howe" and industry_secretary != "Howe" and home_secretary != "Howe" and foreign_secretary != "Howe" and environment_secretary != "Howe" and defence_secretary != "Howe" and education_secretary != "Howe" and health_secretary != "Howe"
+on-arrival: wet_dissent += 4 if foreign_dry = 0; dry_dissent -= 3 if foreign_dry = 0; cabinet_revolt -= 1 if foreign_dry = 0; loyalist_dissent -= 1 if foreign_dry = 1; foreign_secretary = "Howe"; foreign_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Sir Geoffrey Howe becomes Foreign Secretary.
+
+@move_environment
+title: Environment
+subtitle: Now: [+ environment_secretary +] ([+ environment_dry : drywet +]).
+
+**Secretary of State for the Environment.** Housing, local government and the rates. At present the post is held by [+ environment_secretary +].
+
+- @appoint_environment_heseltine
+- @appoint_environment_ridley
+- @ministers: Choose another department.
+
+@appoint_environment_heseltine
+title: Michael Heseltine
+subtitle: Wet. Ambitious, flamboyant, and an interventionist at heart.
+view-if: chancellor != "Heseltine" and employment_secretary != "Heseltine" and industry_secretary != "Heseltine" and home_secretary != "Heseltine" and foreign_secretary != "Heseltine" and environment_secretary != "Heseltine" and defence_secretary != "Heseltine" and education_secretary != "Heseltine" and health_secretary != "Heseltine"
+on-arrival: dry_dissent += 4 if environment_dry = 1; wet_dissent -= 3 if environment_dry = 1; cabinet_revolt -= 1 if environment_dry = 1; loyalist_dissent -= 1 if environment_dry = 0; environment_secretary = "Heseltine"; environment_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Michael Heseltine becomes Secretary of State for the Environment.
+
+@appoint_environment_ridley
+title: Nicholas Ridley
+subtitle: Dry. A chain-smoking free-marketeer with no time for local government.
+view-if: chancellor != "Ridley" and employment_secretary != "Ridley" and industry_secretary != "Ridley" and home_secretary != "Ridley" and foreign_secretary != "Ridley" and environment_secretary != "Ridley" and defence_secretary != "Ridley" and education_secretary != "Ridley" and health_secretary != "Ridley"
+on-arrival: wet_dissent += 4 if environment_dry = 0; dry_dissent -= 3 if environment_dry = 0; cabinet_revolt -= 1 if environment_dry = 0; loyalist_dissent -= 1 if environment_dry = 1; environment_secretary = "Ridley"; environment_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Nicholas Ridley becomes Secretary of State for the Environment.
+
+@move_defence
+title: Defence
+subtitle: Now: [+ defence_secretary +] ([+ defence_dry : drywet +]).
+
+**Secretary of State for Defence.** The armed forces, the Navy's surface fleet and the nuclear deterrent. At present the post is held by [+ defence_secretary +].
+
+- @appoint_defence_pym
+- @appoint_defence_nott
+- @appoint_defence_heseltine
+- @ministers: Choose another department.
+
+@appoint_defence_pym
+title: Francis Pym
+subtitle: Wet. A patrician pessimist and a safe pair of hands.
+view-if: chancellor != "Pym" and employment_secretary != "Pym" and industry_secretary != "Pym" and home_secretary != "Pym" and foreign_secretary != "Pym" and environment_secretary != "Pym" and defence_secretary != "Pym" and education_secretary != "Pym" and health_secretary != "Pym"
+on-arrival: dry_dissent += 4 if defence_dry = 1; wet_dissent -= 3 if defence_dry = 1; cabinet_revolt -= 1 if defence_dry = 1; loyalist_dissent -= 1 if defence_dry = 0; defence_secretary = "Pym"; defence_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Francis Pym becomes Secretary of State for Defence.
+
+@appoint_defence_nott
+title: John Nott
+subtitle: Dry. A merchant banker with no sentiment about the Navy.
+view-if: chancellor != "Nott" and employment_secretary != "Nott" and industry_secretary != "Nott" and home_secretary != "Nott" and foreign_secretary != "Nott" and environment_secretary != "Nott" and defence_secretary != "Nott" and education_secretary != "Nott" and health_secretary != "Nott"
+on-arrival: wet_dissent += 4 if defence_dry = 0; dry_dissent -= 3 if defence_dry = 0; cabinet_revolt -= 1 if defence_dry = 0; loyalist_dissent -= 1 if defence_dry = 1; defence_secretary = "Nott"; defence_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+John Nott becomes Secretary of State for Defence.
+
+@appoint_defence_heseltine
+title: Michael Heseltine
+subtitle: Wet. Ambitious, flamboyant, and an interventionist at heart.
+view-if: chancellor != "Heseltine" and employment_secretary != "Heseltine" and industry_secretary != "Heseltine" and home_secretary != "Heseltine" and foreign_secretary != "Heseltine" and environment_secretary != "Heseltine" and defence_secretary != "Heseltine" and education_secretary != "Heseltine" and health_secretary != "Heseltine"
+on-arrival: dry_dissent += 4 if defence_dry = 1; wet_dissent -= 3 if defence_dry = 1; cabinet_revolt -= 1 if defence_dry = 1; loyalist_dissent -= 1 if defence_dry = 0; defence_secretary = "Heseltine"; defence_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Michael Heseltine becomes Secretary of State for Defence.
+
+@move_education
+title: Education
+subtitle: Now: [+ education_secretary +] ([+ education_dry : drywet +]).
+
+**Secretary of State for Education and Science.** Schools, the universities and training. At present the post is held by [+ education_secretary +].
+
+- @appoint_education_carlisle
+- @appoint_education_joseph
+- @appoint_education_boyson
+- @ministers: Choose another department.
+
+@appoint_education_carlisle
+title: Mark Carlisle
+subtitle: Wet. A decent, cautious lawyer from the One Nation wing.
+view-if: chancellor != "Carlisle" and employment_secretary != "Carlisle" and industry_secretary != "Carlisle" and home_secretary != "Carlisle" and foreign_secretary != "Carlisle" and environment_secretary != "Carlisle" and defence_secretary != "Carlisle" and education_secretary != "Carlisle" and health_secretary != "Carlisle"
+on-arrival: dry_dissent += 4 if education_dry = 1; wet_dissent -= 3 if education_dry = 1; cabinet_revolt -= 1 if education_dry = 1; loyalist_dissent -= 1 if education_dry = 0; education_secretary = "Carlisle"; education_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Mark Carlisle becomes Secretary of State for Education and Science.
+
+@appoint_education_joseph
+title: Sir Keith Joseph
+subtitle: Dry. The intellectual engine of the new Conservatism.
+view-if: chancellor != "Joseph" and employment_secretary != "Joseph" and industry_secretary != "Joseph" and home_secretary != "Joseph" and foreign_secretary != "Joseph" and environment_secretary != "Joseph" and defence_secretary != "Joseph" and education_secretary != "Joseph" and health_secretary != "Joseph"
+on-arrival: wet_dissent += 4 if education_dry = 0; dry_dissent -= 3 if education_dry = 0; cabinet_revolt -= 1 if education_dry = 0; loyalist_dissent -= 1 if education_dry = 1; education_secretary = "Joseph"; education_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Sir Keith Joseph becomes Secretary of State for Education and Science.
+
+@appoint_education_boyson
+title: Rhodes Boyson
+subtitle: Dry. A former headmaster and author of the Black Papers on education.
+view-if: chancellor != "Boyson" and employment_secretary != "Boyson" and industry_secretary != "Boyson" and home_secretary != "Boyson" and foreign_secretary != "Boyson" and environment_secretary != "Boyson" and defence_secretary != "Boyson" and education_secretary != "Boyson" and health_secretary != "Boyson"
+on-arrival: wet_dissent += 4 if education_dry = 0; dry_dissent -= 3 if education_dry = 0; cabinet_revolt -= 1 if education_dry = 0; loyalist_dissent -= 1 if education_dry = 1; education_secretary = "Boyson"; education_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Rhodes Boyson becomes Secretary of State for Education and Science.
+
+@move_health
+title: Health and Social Security
+subtitle: Now: [+ health_secretary +] ([+ health_dry : drywet +]).
+
+**Secretary of State for Social Services.** The NHS, pensions and benefits: the biggest budget in Whitehall. At present the post is held by [+ health_secretary +].
+
+- @appoint_health_jenkin
+- @appoint_health_fowler
+- @appoint_health_young
+- @ministers: Choose another department.
+
+@appoint_health_jenkin
+title: Patrick Jenkin
+subtitle: Dry. A loyal, hard-working believer in the programme.
+view-if: chancellor != "Jenkin" and employment_secretary != "Jenkin" and industry_secretary != "Jenkin" and home_secretary != "Jenkin" and foreign_secretary != "Jenkin" and environment_secretary != "Jenkin" and defence_secretary != "Jenkin" and education_secretary != "Jenkin" and health_secretary != "Jenkin"
+on-arrival: wet_dissent += 4 if health_dry = 0; dry_dissent -= 3 if health_dry = 0; cabinet_revolt -= 1 if health_dry = 0; loyalist_dissent -= 1 if health_dry = 1; health_secretary = "Jenkin"; health_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Patrick Jenkin becomes Secretary of State for Social Services.
+
+@appoint_health_fowler
+title: Norman Fowler
+subtitle: Dry. A methodical former journalist who does what the Treasury asks.
+view-if: chancellor != "Fowler" and employment_secretary != "Fowler" and industry_secretary != "Fowler" and home_secretary != "Fowler" and foreign_secretary != "Fowler" and environment_secretary != "Fowler" and defence_secretary != "Fowler" and education_secretary != "Fowler" and health_secretary != "Fowler"
+on-arrival: wet_dissent += 4 if health_dry = 0; dry_dissent -= 3 if health_dry = 0; cabinet_revolt -= 1 if health_dry = 0; loyalist_dissent -= 1 if health_dry = 1; health_secretary = "Fowler"; health_dry = 1
+call: cabinet_recalc
+go-to: ministers
+
+Norman Fowler becomes Secretary of State for Social Services.
+
+@appoint_health_young
+title: Sir George Young
+subtitle: Wet. A cycling baronet, liberal on social policy and wet on the economy.
+view-if: chancellor != "Young" and employment_secretary != "Young" and industry_secretary != "Young" and home_secretary != "Young" and foreign_secretary != "Young" and environment_secretary != "Young" and defence_secretary != "Young" and education_secretary != "Young" and health_secretary != "Young"
+on-arrival: dry_dissent += 4 if health_dry = 1; wet_dissent -= 3 if health_dry = 1; cabinet_revolt -= 1 if health_dry = 1; loyalist_dissent -= 1 if health_dry = 0; health_secretary = "Young"; health_dry = 0
+call: cabinet_recalc
+go-to: ministers
+
+Sir George Young becomes Secretary of State for Social Services.
+
+#################### The purge, one department at a time
+
+@purge_start
+title: Sack the wets
+subtitle: Take control of the Cabinet, one department at a time.
+view-if: wets_purged = 0
+on-arrival: purge_count = 0
+go-to: purge_employment
+
+@purge_employment
+title: Employment
+go-to: purge_education if employment_dry = 1 or tebbit_elsewhere = 1
+on-arrival: {!
+Q.tebbit_elsewhere = 0;
+for (var v of ['chancellor', 'industry_secretary', 'home_secretary', 'foreign_secretary', 'environment_secretary', 'defence_secretary', 'education_secretary', 'health_secretary']) {
+    if (Q[v] == 'Tebbit') {
+        Q.tebbit_elsewhere = 1;
+    }
+}
+!}
+
+**Employment.** [+ employment_secretary +] has resisted every attempt to strip the unions of their legal immunities.
+
+- @purge_prior
+- @purge_keep_employment
+
+@purge_prior
+title: Move the Employment Secretary to Northern Ireland, and give Employment to Norman Tebbit.
+subtitle: The unions lose their friend in Cabinet. The wets lose their leader.
+on-arrival: purge_count += 1; employment_secretary = "Tebbit"; employment_dry = 1; wet_dissent += 5; dry_dissent -= 3; union_power -= 2
+go-to: purge_education
+
+The Employment Secretary protests, threatens to resign, and goes to Belfast anyway. Norman Tebbit takes over at Employment.
+
+@purge_keep_employment
+title: Leave Employment as it is.
+go-to: purge_education
+
+@purge_education
+title: Education
+go-to: purge_grandees if education_dry = 1
+
+**Education.** [+ education_secretary +] has fought every cut to the schools budget.
+
+- @purge_carlisle_joseph
+- @purge_carlisle_boyson
+- @purge_keep_education
+
+@purge_carlisle_joseph
+title: Sack the Education Secretary, and send Sir Keith Joseph to Education.
+subtitle: Patrick Jenkin takes over at Industry, and Norman Fowler at Health and Social Security.
+view-if: industry_secretary == "Joseph"
+on-arrival: purge_count += 1; education_secretary = "Joseph"; education_dry = 1; industry_secretary = "Jenkin"; industry_dry = 1; health_dry = 1 if health_secretary == "Jenkin"; health_secretary = "Fowler" if health_secretary == "Jenkin"; wet_dissent += 4; dry_dissent -= 2
+go-to: purge_grandees
+
+Sir Keith moves to Education, where he hopes to bring choice to the schools. Patrick Jenkin goes to Industry and Norman Fowler to the DHSS.
+
+@purge_carlisle_boyson
+title: Sack the Education Secretary, and promote Rhodes Boyson.
+view-if: industry_secretary != "Joseph" and chancellor != "Boyson" and home_secretary != "Boyson" and foreign_secretary != "Boyson" and environment_secretary != "Boyson" and defence_secretary != "Boyson" and health_secretary != "Boyson"
+on-arrival: purge_count += 1; education_secretary = "Boyson"; education_dry = 1; wet_dissent += 4; dry_dissent -= 2
+go-to: purge_grandees
+
+Rhodes Boyson, a former headmaster and the scourge of progressive education, takes over at Education.
+
+@purge_keep_education
+title: Leave Education as it is.
+go-to: purge_grandees
+
+@purge_grandees
+title: The grandees
+
+**The grandees.** Sir Ian Gilmour, the Lord Privy Seal, and Lord Soames, the Leader of the Lords, speak for the wets in every Cabinet argument. Neither runs a big department, so sacking them is a matter of authority, not policy.
+
+- @purge_gilmour_soames
+- @purge_keep_grandees
+
+@purge_gilmour_soames
+title: Sack Sir Ian Gilmour and Lord Soames.
+subtitle: A signal to the whole party. The wets will not forgive it.
+on-arrival: purge_count += 1; wet_dissent += 6; wet_strength -= 3; rebellion += 1; n_advisors -= 1 if gilmour_advisor = 1; gilmour_advisor = 0
+achievement: full_speed_ahead
+go-to: purge_done
+
+Soames is furious and says so to your face. Gilmour tells the cameras outside Number 10: "It does no harm to throw the occasional man overboard, but it does not do much good if you are steering full speed ahead for the rocks."
+
+@purge_keep_grandees
+title: Leave them in place.
+go-to: purge_done
+
+@purge_done
+title: The new Cabinet
+on-arrival: {!
+if (Q.purge_count >= 2) {
+    Q.wets_purged = 1;
+    this.achieve('purge');
+}
+Q.cabinet_revolt = Math.max(0, Q.cabinet_revolt - 3 * Q.purge_count);
+Q.dry_dissent -= 2 * Q.purge_count;
+!}
+call: cabinet_recalc
+
+[? if purge_count >= 2 : The Cabinet is yours now. The newspapers call it the night of the long knives, and the wets on the backbenches start to talk to each other in corridors. ?][? if purge_count = 1 : A limited reshuffle: the wets are warned, not routed. ?][? if purge_count = 0 : In the end you change nothing. The wets conclude that you didn't dare. ?] The Cabinet is now [+ cabinet_dry +]% dry.
+
+- @root: Continue.

@@ -28,7 +28,9 @@ Until now the state pension has risen each year with prices or earnings, whichev
 
 @benefit_cuts
 view-if: benefits_cut = 0
-subtitle: +1 budget, and benefit costs a fifth less from now on.
+subtitle: +1 budget, and benefit costs a fifth less from now on. Requires a dry Social Services Secretary.
+choose-if: health_dry = 1
+unavailable-subtitle: [+ health_secretary +] won't cut benefits in a recession.
 on-arrival: benefits_cut = 1; budget += 1; de_con -= 2; de_lab += 1; c2_con -= 1; wet_dissent += 3; dry_dissent -= 2
 
 Unemployment and sickness benefit become taxable, and the earnings-related supplement paid in the first six months out of work is abolished. Someone who loses a skilled job now falls straight onto the basic rate.
