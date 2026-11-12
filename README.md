@@ -2,6 +2,8 @@
 
 A total-conversion mod of [Social Democracy: An Alternate History](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen. Instead of the SPD in Weimar Germany, you lead Margaret Thatcher's Conservative Party from **January 1978**. You start in opposition, win power, then govern Britain through the recession, the unions, the SDP and the South Atlantic, and finally fight for re-election.
 
+**Play it in your browser: https://political-hist-sim.github.io/conservatism/**
+
 *Conservatism: An Alternate History* is a working title. Change it in `source/info.dry` and `out/html/index.html`.
 
 ## How the game plays
