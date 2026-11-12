@@ -16,13 +16,16 @@ The miners brought down Heath in 1974. Can we take them on now?
 - @confront: Stand firm and let them strike.
 
 @back_down
-on-arrival: budget -= 2; union_power += 4; coal_stocks += 1; dry_dissent += 5; thatcher_rating -= 1
+on-arrival: budget -= 2; union_power += 4; coal_stocks += 1; dry_dissent += 5; thatcher_rating -= 1; num_mood -= 15
 
 Within a week, the closures are withdrawn and the Coal Board gets more money. The miners celebrate. Privately, the Energy Department is told to prepare for next time: bigger coal stocks, oil-fired power stations, and police coordination.
 
 @confront
 on-arrival: {!
 var odds = 20 + 30 * Q.coal_stocks + (Q.union_power < 50 ? 10 : 0) + (Q.nuclear_programme ? 10 : 0);
+// an angry NUM fights harder; a contented one may not fight at all
+odds -= 0.4 * (Q.num_mood - 50);
+Q.num_mood += 20;
 Q.miners_win = (Math.random() * 100 < odds) ? 0 : 1;
 !}
 go-to: miners_win if miners_win = 1; miners_lose if miners_win = 0

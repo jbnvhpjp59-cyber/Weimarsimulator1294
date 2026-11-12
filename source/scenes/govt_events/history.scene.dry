@@ -151,8 +151,12 @@ if (Q.benn_won) {
     Q.c2_lab -= 2;
     Q.lab_mps -= 5;
     Q.lib_mps += 5;
+    Q.sdp_lab_mps += 5;
+    Q.labour_civil_war += 20;
 } else {
     Q.labour_credibility -= 2;
+    // the soft left breaks with Benn, and the fever starts to break
+    Q.labour_civil_war -= 5;
 }
 !}
 face-image: img/events/healey.jpg
@@ -183,7 +187,7 @@ tags: event
 view-if: con_in_government = 1 and time >= 48 and time <= 49 and scargill_seen = 0
 max-visits: 1
 new-page: true
-on-arrival: scargill_seen = 1; scargill = 1; union_power += 3
+on-arrival: scargill_seen = 1; scargill = 1; union_power += 3; num_leader = "Arthur Scargill"; num_mood += 20
 face-image: img/events/pit_rally.jpg
 
 = Scargill
@@ -319,7 +323,7 @@ tags: event
 view-if: con_in_government = 1 and alliance_formed = 1 and time >= 62 and time <= 63 and bermondsey_seen = 0
 max-visits: 1
 new-page: true
-on-arrival: bermondsey_seen = 1; lab_mps -= 1; lib_mps += 1; labour_credibility -= 3; c1_lib += 1; c2_lib += 1; lab_leader_rating -= 2
+on-arrival: bermondsey_seen = 1; lab_mps -= 1; lib_mps += 1; labour_civil_war += 5; labour_credibility -= 3; c1_lib += 1; c2_lib += 1; lab_leader_rating -= 2
 
 = Bermondsey
 

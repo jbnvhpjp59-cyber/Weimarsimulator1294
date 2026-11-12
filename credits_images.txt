@@ -327,7 +327,7 @@ img/events/winter_of_discontent.jpg
 img/events/iranian_embassy.jpg
   The end of the Iranian Embassy siege, May 1980.
 
-img/events/steel_strike.jpg
+img/events/steel_strike.jpg, img/cards/union_leaders.jpg (a crop)
   A march against steel and pit closures (the steel strike event).
 
 img/events/hunger_strike.jpg

@@ -1,0 +1,41 @@
+title: Labour's Civil War
+on-arrival: {!
+// labour_civil_war (0-100) measures how far the Labour Party is fighting
+// itself. In opposition after 1979 the left organises; Foot's election, the
+// SDP breakaway, Benn's deputy leadership bid and Militant all inflame it.
+// It costs Labour credibility each month and, once the SDP exists, Labour
+// MPs leave for it one by one, up to the twenty-eight who went in reality.
+if (Q.civil_war_last_tick == Q.time || !Q.con_in_government) {
+    return;
+}
+Q.civil_war_last_tick = Q.time;
+// the left's long march through the constituencies, 1979-81
+if (Q.time <= 36 && !Q.lab_left) {
+    Q.labour_civil_war += 0.8;
+}
+// from 1982, exhaustion: the truce at Bishop's Stortford, a weary party
+if (Q.time >= 49) {
+    Q.labour_civil_war *= 0.98;
+}
+Q.labour_civil_war = Math.max(0, Math.min(100, Q.labour_civil_war));
+Q.labour_credibility -= 0.004 * Q.labour_civil_war;
+Q.lab_leader_rating -= 0.003 * Q.labour_civil_war;
+
+// the slow drain to the SDP
+var cap = Q.benn_won ? 33 : 28;
+if (Q.alliance_formed && Q.sdp_lab_mps < cap && Q.lab_mps > 0) {
+    var n = Math.floor(Math.random() * 2 * Q.labour_civil_war / 40);
+    n = Math.min(n, cap - Q.sdp_lab_mps);
+    if (n > 0) {
+        Q.sdp_lab_mps += n;
+        Q.lab_mps -= n;
+        Q.lib_mps += n;
+        Q.sdp_month_defections = n;
+        Q.c1_lib += 0.1 * n;
+    } else {
+        Q.sdp_month_defections = 0;
+    }
+}
+!}
+
+# Run by post_event after every action.

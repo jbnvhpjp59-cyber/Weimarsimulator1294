@@ -1,0 +1,7 @@
+# a union leader's attitude to the government (0 to 100)
+
+(..25) friendly
+(25..45) wary
+(45..65) hostile
+(65..85) militant
+(85..) at war

@@ -1,0 +1,40 @@
+title: The Militant Tendency
+tags: event
+view-if: con_in_government = 1 and lab_left = 1 and time >= 50 and time <= 54 and militant_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: militant_seen = 1; labour_civil_war += 5
+face-image: img/events/foot.jpg
+
+= The Militant Tendency
+
+Labour's National Executive has voted to set up a register of the groups that work inside the party, aimed at the Militant Tendency, a Trotskyist organisation with its own newspaper, its own full-time organisers and, its critics say, its own membership. Militant is strong in the Liverpool Labour Party, and its supporters have been selected to fight a few safe Labour seats. The leadership backs the register; the left says a witch-hunt has begun.
+
+- @militant_campaign: Make Militant the face of Labour.
+- @stay_out: Leave Labour to its quarrel.
+
+@militant_campaign
+subtitle: -1 resource. Labour's moderates suffer along with the rest.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; labour_credibility -= 4; c2_lab -= 1; de_lab -= 0.5; labour_civil_war += 5; wet_dissent += 1
+
+Central Office prints the names of the Militant candidates, quotes from their newspaper and a simple question: is this the party you want to govern Britain?
+
+@stay_out
+on-arrival: labour_civil_war += 2
+
+You say nothing. Labour's quarrel needs no help from you, and it gets none.
+
+@sdp_twenty
+title: The Exodus
+tags: event
+view-if: con_in_government = 1 and sdp_lab_mps >= 20 and sdp_twenty_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: sdp_twenty_seen = 1
+face-image: img/events/jenkins.jpg
+
+= The Exodus
+
+Another Labour MP has crossed the floor to the Social Democrats. That makes [+ sdp_lab_mps +] since the Gang of Four broke away. Some have been threatened with deselection by their local parties; others say they no longer recognise the party they joined. Labour's whips have stopped counting.

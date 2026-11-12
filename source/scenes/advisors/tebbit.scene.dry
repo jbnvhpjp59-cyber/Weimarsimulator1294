@@ -29,7 +29,7 @@ view-if: con_in_government = 1 and bill_employment2 = 0 and (bill_employment1 = 
 subtitle: Strips the unions of their immunities. A month in committee, a month in the Lords.
 choose-if: advisor_action_timer = 0 and bill_room = 1
 unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next Cabinet action. ?][? if advisor_action_timer = 0 : [+ bill_room_text +] ?]
-on-arrival: advisor_action_timer = 6; last_advisor_action = 1; wet_dissent += 4; dry_dissent -= 3; bill_new = "employment2"; bill_new_fast = 1
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; wet_dissent += 4; dry_dissent -= 3; tuc_mood += 15; tgwu_mood += 12; num_mood += 8; moderates_mood += 8; bill_new = "employment2"; bill_new_fast = 1
 call: bill_introduce
 
 Tebbit drafts much of the bill himself. It narrows the definition of a lawful trade dispute, exposes union funds to damages, and outlaws the closed shop unless a large majority of workers vote for it. The whips find time for it at the front of the queue.

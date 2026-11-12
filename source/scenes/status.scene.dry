@@ -121,6 +121,8 @@ Growth: [+ economic_growth_2 +]%
 
 {!<span class="tooltip-text" title="Plaid Cymru">Plaid Cymru</span>!}: [+ pc_relation : relationships +]
 
+{!<span class="tooltip-text" title="How far Labour is fighting itself: the left against the right, Benn against Healey, Militant against the leadership">The Labour Party</span>!}: [+ labour_civil_war : civilwar +][? if sdp_lab_mps >= 1 : . [+ sdp_lab_mps +] of its MPs have left for the SDP. ?]
+
 {!<span class="tooltip-text" title="The Ulster Unionists and their allies">Ulster Unionists</span>!}: [+ uup_relation : relationships +]
 
 = Factions of the Conservative Party
@@ -157,6 +159,20 @@ Public who say the unions have too much power: [+ union_backlash_disp +]%
 Government pay norm: [+ pay_norm +]%
 
 Our position on pay: [? if pay_stance = 0 : undecided ?][? if pay_stance = 1 : back the pay norm ?][? if pay_stance = 2 : free collective bargaining ?][? if pay_stance = 3 : statutory wage controls ?]
+
+= The Union Leaders
+
+Len Murray (TUC): [+ tuc_mood : unionmood +]
+
+Moss Evans (transport workers): [+ tgwu_mood : unionmood +]
+
+[+ num_leader +] (miners): [+ num_mood : unionmood +]
+
+Bill Sirs (steelworkers): [+ istc_mood : unionmood +]
+
+[+ nupe_leader +] (public employees): [+ nupe_mood : unionmood +]
+
+Chapple and Duffy (electricians and engineers): [+ moderates_mood : unionmood +]
 
 = Unemployment by Region
 

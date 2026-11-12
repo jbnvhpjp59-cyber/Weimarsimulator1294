@@ -36,6 +36,7 @@ Like the original, each month you play one card from your hand. Historical and c
 | The Common Market | The Exchange Rate Mechanism, farm policy reform, the "lamb war", fisheries, the single market |
 | Immigration and Nationality | The British Nationality Bill, immigration rules, the Vietnamese boat people, inner-city projects |
 | Energy and North Sea Oil | Oil taxes, selling BP shares, a nuclear programme (which weakens the miners), market energy prices |
+| The Union Leaders | Invite Len Murray to Downing Street, freeze the TUC out, court the moderate union leaders, keep Joe Gormley sweet or let Scargill do the talking |
 | Regional Policy | Cutting or restoring regional aid, the Scottish and Welsh Development Agencies, a Japanese car plant for the North East |
 | Local Government | Rate Support Grant cuts, bills for rate-capping and for abolishing the GLC, abolishing the rates, the Docklands, tendering |
 | Reshuffle | Move any minister, purge the wets department by department, bring them back, promote loyalists |
@@ -50,6 +51,8 @@ Like the original, each month you play one card from your hand. Historical and c
 5. **Royal Assent.** The Act's effects apply, and it joins the statute book in the Politics tab and the Library.
 
 The Commons has time for three major bills at once. The Government Business card can guillotine debate in committee. When Parliament is dissolved, bills that have reached the Lords are rushed through in the wash-up, and the rest fall, as the Police and Criminal Evidence Bill and the Telecommunications Bill did in 1983.
+
+**The unions and Labour.** Six union leaders have moods, from friendly to at war, shown in the Industry tab: Len Murray (TUC), Moss Evans (transport workers), Joe Gormley and then Arthur Scargill (miners), Bill Sirs (steelworkers), Alan Fisher and then Rodney Bickerstaffe (public employees), and the moderates Frank Chapple and Terry Duffy. Union laws, cash limits and disputes won by the government anger them; talks and settlements calm them. Militant leaders keep strikes simmering, an angry NUM is likelier to win a fight over pit closures, the public employees can provoke the 1982 health dispute, and friendly moderates win union elections. Labour's civil war, in the Politics tab, grows with the left's advance after 1979, Foot, the SDP, Benn's deputy leadership bid and Militant. It costs Labour credibility, and once the SDP exists Labour MPs leave for it month by month, up to the 28 who went in reality.
 
 **Advisers.** As with the original's party leadership, you keep three advisers at a time as pinned cards, starting with Whitelaw, Joseph and Howe. Each has special actions, with one action every six months. The "Your Inner Circle" card swaps them for any of thirteen others: Reece, Prior, Pym, Heseltine, Carrington, Tebbit, Lawson, Gilmour, Parkinson, Biffen, Brittan, Nott and St John-Stevas. Each has three or four actions, some only in opposition and some only in government. Dropping an adviser angers their faction; bringing one in strengthens theirs. In government, the pinned Number 10 card can call a snap election after three years.
 
@@ -69,9 +72,9 @@ The Commons has time for three major bills at once. The Government Business card
 **Events, 1979–84:**
 
 - **1979:** Howe's first Budget, the Clegg awards, Lancaster House, the Dublin summit, 17% Bank Rate, Mountbatten and Warrenpoint.
-- **1980:** the steel strike, the Iranian Embassy, two million unemployed, "the lady's not for turning" (or a U-turn), Foot, the Moscow Olympics.
+- **1980:** the steel strike, the TUC Day of Action, the Iranian Embassy, two million unemployed, "the lady's not for turning" (or a U-turn), Foot, the Moscow Olympics.
 - **1981:** the Gang of Four and the Alliance, the pit closures, the 1981 Budget, the hunger strike, Brixton and Toxteth, the Cabinet revolt and the September purge, Crosby, the civil service strike, Warrington, the Royal Wedding, Benn's bid for the deputy leadership, Scargill.
-- **1982:** three million unemployed, Hillhead, the health service dispute, the Think Tank leak, the Falklands (deterred, negotiated, won or lost), the rail strike, the Siberian pipeline row, Hong Kong, Greenham Common.
+- **1982:** three million unemployed, the exodus of Labour MPs to the SDP, Militant, Hillhead, the health service dispute, the Think Tank leak, the Falklands (deterred, negotiated, won or lost), the rail strike, the Siberian pipeline row, Hong Kong, Greenham Common.
 - **1983:** recovery, Bermondsey, the "longest suicide note", and by-elections and defections throughout.
 
 **The end.** The game ends at the second general election (by 1984 at the latest), or earlier if you are ousted. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the NHS, pensions, education, the rates, the Falklands, Europe, and whether you turned. There are 62 achievements, listed on the start menu with the ones you have and haven't unlocked.
@@ -115,6 +118,7 @@ Pushing to `main` runs `.github/workflows/build.yaml`, which builds the game and
 | `source/scenes/root.scene.dry` | The starting state (January 1978): every variable, including the government ones |
 | `source/scenes/post_event.scene.dry` | The monthly tick: dates, timers, dissent, the opposition-era drift, the government economy, opinion, threat meters, then routing |
 | `source/scenes/election_algorithm.scene.dry` | Vote shares and the regional seat model (with the 1983 boundaries and the Alliance) |
+| `source/scenes/union_leaders.scene.dry`, `labour_civil_war.scene.dry` | The union leaders' moods, and Labour's civil war and the drain of its MPs to the SDP |
 | `source/scenes/regional_economy.scene.dry` | Unemployment in each region, and how far it has moved against the national rate |
 | `source/scenes/taking_office.scene.dry` | Forming the government and the Cabinet |
 | `source/scenes/main.scene.dry` | The hand and the decks |
@@ -148,8 +152,8 @@ From automated playthroughs of the full game on normal difficulty (1,200 games p
 
 | Strategy | Re-elected | Ousted in government | Lost the second election | Lost in 1979 |
 | --- | --- | --- | --- | --- |
-| Thatcher's historical choices | 88% | 8% | 4% | 1% |
-| Random choices | 63% | 17% | 6% | 13% |
+| Thatcher's historical choices | 89% | 9% | 2% | 1% |
+| Random choices | 65% | 17% | 4% | 13% |
 
 On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. That path passes about four bills a game, and loses about one Second Reading in a hundred, usually Tebbit's Employment Bill or the GLC bill when the wets are at their angriest. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
 

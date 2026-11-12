@@ -1,0 +1,37 @@
+title: The TUC Day of Action
+tags: event
+view-if: con_in_government = 1 and time >= 28 and time <= 30 and day_of_action_seen = 0 and tuc_mood >= 45 and (bill_employment1 >= 1 or employment_acts >= 1)
+max-visits: 1
+new-page: true
+on-arrival: {!
+Q.day_of_action_seen = 1;
+// turnout: how angry the TUC is, and how many people are out of work
+var pull = (Q.tuc_mood - 45) * 1.5 + (Q.unemployment - 6) * 4 + (Q.tgwu_mood - 50);
+Q.day_of_action_big = (Math.random() * 100 < 25 + pull) ? 1 : 0;
+!}
+face-image: img/events/steel_strike.jpg
+
+= The TUC Day of Action
+
+Len Murray and the TUC have called a national Day of Action against the Employment Bill and the government's economic policy, with a one-day stoppage and marches in every major city. [? if day_of_action_big = 1 : The early reports say the docks, the car plants and the newspapers are shut. ?][? if day_of_action_big = 0 : The early reports suggest that most people have gone to work as usual. ?]
+
+- @ignore_doa: Carry on as normal.
+- @meet_murray: Offer Len Murray a meeting.
+- @political_strike: Call it a political strike.
+
+@ignore_doa
+on-arrival: union_power -= 3 if day_of_action_big = 0; union_power += 2 if day_of_action_big = 1; strike_wave += 1 if day_of_action_big = 1; tuc_mood += 3
+
+[? if day_of_action_big = 0 : Ministers go about their business. By the evening the newspapers are calling the day a flop, and Murray's authority over his own movement looks thinner than it did. ?][? if day_of_action_big = 1 : Ministers go about their business, but the pictures from the marches lead every bulletin. The TUC has shown that it can still stop the country, for a day. ?]
+
+@meet_murray
+subtitle: The TUC softens. The dries are unimpressed.
+on-arrival: tuc_mood -= 10; dry_dissent += 3; union_power += 1 if day_of_action_big = 1; union_power -= 2 if day_of_action_big = 0
+
+You let it be known that the TUC's General Secretary will be welcome at Downing Street once the day is over. Murray accepts, and the two of you agree on very little.
+
+@political_strike
+subtitle: The right approves. The TUC hardens.
+on-arrival: tuc_mood += 10; tgwu_mood += 5; right_dissent -= 2; dry_dissent -= 2; c2_con += 1*(1-dissent) if day_of_action_big = 0; union_backlash += 3 if day_of_action_big = 1; thatcher_rating -= 1 if day_of_action_big = 1
+
+You tell the Commons that a strike against an Act of Parliament is a strike against democracy. [? if day_of_action_big = 0 : With most people at work, the line goes down well. ?][? if day_of_action_big = 1 : With half the country out, the line sounds defiant to some and out of touch to others. ?]
