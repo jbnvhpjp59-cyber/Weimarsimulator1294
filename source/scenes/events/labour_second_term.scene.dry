@@ -4,6 +4,7 @@ priority: 3
 view-if: con_in_government = 0 and defeated_once = 1 and in_campaign = 0 and time - leadership_challenge_time >= 12 and (thatcher_rating < 35 or dissent >= 0.3)
 new-page: true
 on-arrival: leadership_challenge_time = time
+face-image: img/events/heath_thatcher.jpg
 
 = The Knives Come Out
 
@@ -85,6 +86,7 @@ max-visits: 1
 new-page: true
 on-arrival: time_to_election = 2
 call: set_election
+face-image: img/events/westminster.jpg
 
 = Labour Calls an Election
 

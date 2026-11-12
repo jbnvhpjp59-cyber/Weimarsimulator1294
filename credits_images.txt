@@ -333,8 +333,32 @@ img/events/steel_strike.jpg
 img/events/hunger_strike.jpg
   A republican mural (the hunger strike event).
 
-img/events/vote_conservative.jpg, img/cards/campaign_trail.jpg
-  The Conservatives' 1979 poster "Don't just hope for a better life. Vote for one." (the Sun endorsement event and the Campaign Trail card).
+img/events/vote_conservative.jpg
+  The Conservatives' 1979 poster "Don't just hope for a better life. Vote for one." (the Sun endorsement event).
+
+img/cards/campaign_trail.jpg
+  A press conference on the campaign trail (the Campaign Trail card).
+
+img/cards/fundraising.jpg
+  A party dinner (the Fundraising card).
+
+img/cards/media.jpg
+  A television interview (the Media card).
+
+img/cards/other_parties.jpg
+  David Steel (the Other Parties card).
+
+img/cards/shadow_cabinet.jpg
+  A Shadow Cabinet group photograph (the Shadow Cabinet card).
+
+img/cards/party_disunity.jpg, img/events/heath_thatcher.jpg
+  Margaret Thatcher and Edward Heath (the Party Disunity card and the leadership challenge after a 1979 defeat).
+
+img/events/saatchi.jpg
+  The Saatchi brothers (the advertising agency event).
+
+img/events/callaghan_downing_street.jpg
+  James Callaghan in Downing Street (the scene after a 1979 defeat).
 
 img/events/world_in_action.jpg, img/cards/tv_debate.jpg
   A still from World in Action, 1978 (the "swamped" event and the TV Debate card).
