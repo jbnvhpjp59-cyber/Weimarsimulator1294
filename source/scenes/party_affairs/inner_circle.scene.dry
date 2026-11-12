@@ -140,7 +140,7 @@ go-to: add_advisors
 title: Sir Geoffrey Howe
 subtitle: Dry. Relentless on economic detail. {!<br><br>!}Actions: alternative budget or emergency package, reassure the City.
 is-card: true
-card-image: img/advisor_dry.svg
+card-image: img/cards/howe.jpg
 tags: add_advisor
 view-if: howe_advisor = 0 and n_advisors < 3
 on-arrival: howe_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
@@ -170,7 +170,7 @@ go-to: add_advisors
 title: Francis Pym
 subtitle: Wet. A patrician pessimist and a safe pair of hands. {!<br><br>!}Actions: reassure the shires, foreign affairs.
 is-card: true
-card-image: img/advisor_wet.svg
+card-image: img/cards/pym.jpg
 tags: add_advisor
 view-if: pym_advisor = 0 and n_advisors < 3
 on-arrival: pym_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
@@ -180,7 +180,7 @@ go-to: add_advisors
 title: Michael Heseltine
 subtitle: Wet. Ambitious, flamboyant, the darling of the conference. {!<br><br>!}Actions: a conference speech, urban regeneration.
 is-card: true
-card-image: img/advisor_wet.svg
+card-image: img/cards/heseltine.jpg
 tags: add_advisor
 view-if: heseltine_advisor = 0 and n_advisors < 3
 on-arrival: heseltine_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
@@ -190,7 +190,7 @@ go-to: add_advisors
 title: Lord Carrington
 subtitle: Loyalist. The grandest of the grandees. {!<br><br>!}Actions: diplomacy, steady the Lords.
 is-card: true
-card-image: img/advisor_loyalist.svg
+card-image: img/cards/carrington.jpg
 tags: add_advisor
 view-if: carrington_advisor = 0 and n_advisors < 3 and foreign_secretary == "Carrington"
 on-arrival: carrington_advisor = 1; n_advisors += 1; loyalist_strength += 5; loyalist_dissent -= 3
@@ -200,7 +200,7 @@ go-to: add_advisors
 title: Norman Tebbit
 subtitle: Right. A street fighter who enjoys the fight. {!<br><br>!}Actions: savage Labour or a new Employment Act, "On your bike".
 is-card: true
-card-image: img/advisor_right.svg
+card-image: img/cards/tebbit.jpg
 tags: add_advisor
 view-if: tebbit_advisor = 0 and n_advisors < 3
 on-arrival: tebbit_advisor = 1; n_advisors += 1; right_strength += 5; right_dissent -= 5

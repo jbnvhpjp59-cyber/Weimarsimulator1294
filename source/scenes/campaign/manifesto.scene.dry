@@ -1,7 +1,7 @@
 title: The Manifesto Launch
 new-page: true
 is-card: true
-card-image: img/campaign.svg
+card-image: img/cards/polling_station.jpg
 tags: campaign
 view-if: manifesto_launched = 0
 on-arrival: manifesto_launched = 1; month_actions += 1

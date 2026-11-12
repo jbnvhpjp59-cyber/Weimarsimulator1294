@@ -22,6 +22,7 @@ if (Q.new_boundaries) {
 !}
 on-departure: month_actions += 1
 set-jump: results
+face-image: img/events/polling_station.jpg
 
 # Low priority: this event only appears after every other event this month is resolved.
 

@@ -59,7 +59,16 @@ These mirror the original:
 - **Difficulty:** easy (a four-card hand, more resources, and the Inner Circle and Cabinet Room pinned cards), normal, hard, historical (no fundraising, polls or saves), and custom, where every setting is adjustable.
 - **Election simulation:** runs February 1974, October 1974, 1979 and 1983 through the seat model and compares the result with the real one.
 - **Library:** background pages, the current government, demographics, public opinion, and figures and charts (the Commons, seats won, opinion polls, and inflation and unemployment over time).
-- **Options:** save/load, dark mode (it follows your system theme until you choose), font size, and animations.
+- **Options:** save/load, dark mode (it follows your system theme until you choose), font size, animations, music on/off and volume, and event pictures on/off.
+
+## Pictures and music
+
+Like the original, the game has period photographs and a classical soundtrack.
+
+- **Pictures.** Cabinet ministers' cards carry their portraits, and the decks and Government Affairs cards carry photographs (the Commons chamber, Downing Street, the Bank of England, British Leyland, the TUC, HMS *Endurance*, and others). Major events show a picture above the text: Callaghan, Foot, Jenkins, Healey, Steel, Heath and Neave, Brixton, the pit closures, Lancaster House, the Falklands, and Thatcher herself at three points in her career. Cabinet members without a suitable free photograph (Whitelaw, Joseph, Prior, Reece) keep drawn card art, as do the faction cards.
+- **Music.** Elgar's *Pomp and Circumstance* Marches Nos. 1 and 4, "Nimrod", *Land of Hope and Glory* and the *March of the Mogul Emperors*; Holst's "Jupiter"; "Rule, Britannia!"; and "God Save the Queen" at the end. Opposition, government, defeat and the ending each have their own playlist.
+
+Everything comes from Wikimedia Commons under a public domain or Creative Commons licence. `credits_images.txt` and `credits_music.txt` list the author, licence and source page of each file, and the in-game **Credits** page (start menu) shows the same.
 
 ## Building
 
@@ -150,10 +159,10 @@ For opposition-era cards, use `tags: party_affairs` or `commons` (add `con_in_go
 ## Limits
 
 - Scope: the game covers January 1978 to the second general election, and no further. `Q.final_election` in `root.scene.dry` sets where it ends.
-- Music and portraits. Cards use simple generated art (`out/html/img/`); events have no images.
+- Pictures are resized copies (cards 240×300, events up to 400 px wide) and music is re-encoded at 96 kbps to keep the download small.
 
 ## Credits and licence
 
 Based on *Social Democracy: An Alternate History* © 2024 Autumn Chen, used under the MIT License. Built with [dendrynexus](https://github.com/aucchen/dendrynexus). Uses jQuery, d3.js and d3-parliament.
 
-MIT License; see `LICENSE`.
+The code is under the MIT License; see `LICENSE`. The photographs and recordings in `out/html/img/cards/`, `out/html/img/events/` and `out/html/music/` keep their own licences, listed in `credits_images.txt` and `credits_music.txt`. Several are CC BY-SA, which requires attribution and that adaptations be shared under the same licence.

@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 23 and time <= 25 and interest_rate <
 max-visits: 1
 new-page: true
 on-arrival: mlr17_seen = 1
+face-image: img/events/bank_1983.jpg
 
 = Seventeen Per Cent
 

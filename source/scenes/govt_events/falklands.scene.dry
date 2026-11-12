@@ -20,6 +20,7 @@ go-to: invasion if invaded = 1; deterred if invaded = 0
 @deterred
 on-arrival: falklands = 6; thatcher_rating += 1
 achievement: deterrence
+face-image: img/events/endurance.jpg
 
 = Tension in the South Atlantic
 
@@ -27,6 +28,7 @@ Argentine scrap-metal workers have landed on South Georgia and raised their flag
 
 @invasion
 on-arrival: falklands = 1; thatcher_rating -= 4; right_dissent += 10
+face-image: img/events/stanley_1982.jpg
 
 = Invasion
 
@@ -58,6 +60,7 @@ The First Sea Lord, Sir Henry Leach, says the Navy can assemble a task force wit
 
 @send
 on-arrival: falklands = 2; budget -= 2; thatcher_rating += 4; right_dissent -= 10
+face-image: img/events/hermes_1982.jpg
 
 Within three days, the carriers Hermes and Invincible sail from Portsmouth to cheering crowds. Liners are requisitioned as troopships. Al Haig, the American Secretary of State, begins shuttling between London and Buenos Aires.
 
@@ -72,6 +75,7 @@ tags: event
 view-if: falklands = 2 and time >= 53
 max-visits: 1
 new-page: true
+face-image: img/events/belgrano.jpg
 
 = The South Atlantic War
 
@@ -117,6 +121,7 @@ Q.cabinet_revolt = 0;
 Q.us_relation += 5;
 !}
 achievement: rejoice
+face-image: img/events/hermes_return.jpg
 
 = Victory
 

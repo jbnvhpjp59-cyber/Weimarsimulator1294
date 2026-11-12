@@ -276,7 +276,7 @@
   };
 
   window.onload = function() {
-    window.dendryUI.loadSettings({show_portraits: false});
+    window.dendryUI.loadSettings({show_portraits: true});
     // With no saved choice, follow the viewer's light or dark theme.
     if (readStorage(window.dendryUI.game.title + '_dark_mode') === null) {
       var theme = document.documentElement.getAttribute('data-theme');

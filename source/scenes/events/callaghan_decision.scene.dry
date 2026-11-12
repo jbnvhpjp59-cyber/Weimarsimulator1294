@@ -9,6 +9,7 @@ var labour_lead = Q.lab_votes - Q.con_votes;
 Q.callaghan_calls = (labour_lead >= 1 || (labour_lead > -1 && Math.random() < 0.5)) ? 1 : 0;
 !}
 go-to: election if callaghan_calls = 1; no_election if callaghan_calls = 0
+face-image: img/events/callaghan.jpg
 
 = Callaghan Decides
 

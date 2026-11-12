@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 40 and time <= 42 and riots = 0 and u
 max-visits: 1
 new-page: true
 on-arrival: riots = 1; thatcher_rating -= 2
+face-image: img/events/brixton_1981.jpg
 
 = Brixton
 

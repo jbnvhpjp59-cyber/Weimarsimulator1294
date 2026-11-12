@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 34 and time <= 36 and u_turn = 0 and 
 max-visits: 1
 new-page: true
 on-arrival: conference_1980_seen = 1
+face-image: img/events/thatcher_1980.jpg
 
 = The Party Conference
 

@@ -4,6 +4,7 @@ view-if: time >= 15 and time <= 16 and neave_dead = 0
 max-visits: 1
 new-page: true
 on-arrival: neave_dead = 1; right_strength += 3; uup_relation += 5; thatcher_rating += 1
+face-image: img/events/neave.jpg
 
 = Airey Neave
 

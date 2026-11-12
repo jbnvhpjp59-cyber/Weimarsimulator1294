@@ -1,0 +1,50 @@
+Music used in Conservatism: An Alternate History
+All from Wikimedia Commons, converted to MP3; each is used under the licence shown.
+
+music/pomp_and_circumstance_1.mp3
+  ELGAR Pomp and Circumstance in D, Opus 39, No. 1 - United States Marine Band.mp3
+  Performed by: United States Marine Band
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AELGAR_Pomp_and_Circumstance_in_D%2C_Opus_39%2C_No._1_-_United_States_Marine_Band.mp3
+
+music/pomp_and_circumstance_4.mp3
+  Pomp and Circumstance, Op. 39 - No. 4 - United States Army Band.mp3
+  Performed by: United States Army Band
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3APomp_and_Circumstance%2C_Op._39_-_No._4_-_United_States_Army_Band.mp3
+
+music/rule_britannia.mp3
+  'Rule, Britannia!' (United States Army Strings).oga
+  Performed by: United States Army Strings
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3A%27Rule%2C_Britannia%21%27_%28United_States_Army_Strings%29.oga
+
+music/nimrod.mp3
+  Elgar; Enigma variations, Theme IX. Nimrod.ogg
+  Performed by: Hallé Orchestra, conducted by John Barbirolli (1947)
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AElgar%3B_Enigma_variations%2C_Theme_IX._Nimrod.ogg
+
+music/jupiter.mp3
+  Gustav Holst - the planets, op. 32 - iv. jupiter, the bringer of jollity.ogg
+  Recording from: Musopen
+  Licence: Free use with attribution (Musopen)
+  Source: https://commons.wikimedia.org/wiki/File%3AGustav_Holst_-_the_planets%2C_op._32_-_iv._jupiter%2C_the_bringer_of_jollity.ogg
+
+music/march_of_the_mogul_emperors.mp3
+  The Crown of India Suite, 5. March of the Mogul Emperors - U.S. Marine Band.ogg
+  Performed by: United States Marine Band
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AThe_Crown_of_India_Suite%2C_5._March_of_the_Mogul_Emperors_-_U.S._Marine_Band.ogg
+
+music/land_of_hope_and_glory.mp3
+  Clara Butt - Land Of Hope And Glory.ogg
+  Performed by: Clara Butt (1911)
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AClara_Butt_-_Land_Of_Hope_And_Glory.ogg
+
+music/god_save_the_queen.mp3
+  United States Navy Band - God Save the Queen.oga
+  Performed by: United States Navy Band
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AUnited_States_Navy_Band_-_God_Save_the_Queen.oga

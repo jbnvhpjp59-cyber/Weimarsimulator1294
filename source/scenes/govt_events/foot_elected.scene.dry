@@ -18,6 +18,7 @@ Q.c2_lab -= 2;
 Q.de_lab -= 1;
 Q.labour_credibility -= 5;
 !}
+face-image: img/events/foot.jpg
 
 = Labour Chooses Michael Foot
 

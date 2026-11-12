@@ -1,7 +1,7 @@
 title: Foreign Affairs
 new-page: true
 is-card: true
-card-image: img/government.svg
+card-image: img/cards/reagan_thatcher.jpg
 tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and foreign_affairs_timer <= 0
 on-arrival: foreign_affairs_timer = 5; month_actions += 1

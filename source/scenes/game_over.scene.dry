@@ -56,6 +56,8 @@ if (Q.autumn_election_1978 && Q.governed) {
     this.achieve('waiting_at_the_church');
 }
 !}
+face-image: img/events/thatcher_1980.jpg
+audio: music/god_save_the_queen.mp3
 
 = The Verdict of History
 

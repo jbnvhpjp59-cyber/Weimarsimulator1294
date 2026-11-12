@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 38 and time <= 40 and pit_closures_se
 max-visits: 1
 new-page: true
 on-arrival: pit_closures_seen = 1
+face-image: img/events/pit_rally.jpg
 
 = The Pit Closures
 

@@ -58,6 +58,7 @@ view-if: con_in_government = 0 and defeated_once = 1 and time >= 35 and lab_lead
 max-visits: 1
 new-page: true
 on-arrival: lab_leader = "Healey"; prime_minister = "Healey"; lab_leader_rating = 46
+face-image: img/events/healey.jpg
 
 = Callaghan Retires
 

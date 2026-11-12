@@ -5,6 +5,7 @@ max-visits: 1
 new-page: true
 on-arrival: lab_leader_rating -= 8; labour_credibility -= 4
 achievement: crisis_what_crisis
+face-image: img/events/callaghan.jpg
 
 = Crisis? What Crisis?
 

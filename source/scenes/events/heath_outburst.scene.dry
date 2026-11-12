@@ -4,6 +4,7 @@ view-if: heath_hostility >= 70 and random_roll < 0.2 and time - last_heath_outbu
 max-visits: 3
 new-page: true
 on-arrival: last_heath_outburst = time; wet_dissent += 5; thatcher_rating -= 2
+face-image: img/events/heath.jpg
 
 = Heath Speaks Out
 

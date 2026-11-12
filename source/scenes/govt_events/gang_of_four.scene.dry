@@ -25,6 +25,7 @@ Q.c1_con -= 2;
 Q.ab_con -= 2;
 Q.lib_relation += 5;
 !}
+face-image: img/events/jenkins.jpg
 
 = The Gang of Four
 

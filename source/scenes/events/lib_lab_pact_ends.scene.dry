@@ -4,6 +4,7 @@ view-if: time >= 7 and lib_lab_pact = 1
 max-visits: 1
 new-page: true
 on-arrival: lib_lab_pact = 0; lib_relation += 5; c1_lib += 1; ab_lib += 1
+face-image: img/events/steel.jpg
 
 = The End of the Lib-Lab Pact
 

@@ -24,6 +24,7 @@ view-if: con_in_government = 1 and alliance_formed = 1 and time >= 51 and time <
 max-visits: 1
 new-page: true
 on-arrival: hillhead_seen = 1; hillhead_lost = 1 if lib_votes >= con_votes - 10; con_mps -= 1 if hillhead_lost = 1; lib_mps += 1 if hillhead_lost = 1; con_majority = 2 * con_mps - total_seats
+face-image: img/events/jenkins.jpg
 
 = Glasgow Hillhead
 
@@ -38,6 +39,7 @@ view-if: con_in_government = 1 and in_campaign = 1 and lab_left = 1 and suicide_
 max-visits: 1
 new-page: true
 on-arrival: suicide_note_seen = 1; c1_lab -= 3; c2_lab -= 3; de_lab -= 2; lab_leader_rating -= 3
+face-image: img/events/foot.jpg
 
 = Labour's Manifesto
 

@@ -1,7 +1,7 @@
 title: Francis Pym
 is-pinned-card: true
 tags: advisor
-card-image: img/advisor_wet.svg
+card-image: img/cards/pym.jpg
 view-if: pym_advisor = 1
 new-page: true
 

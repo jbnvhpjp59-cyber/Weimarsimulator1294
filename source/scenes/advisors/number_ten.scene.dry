@@ -1,6 +1,6 @@
 title: Number 10
 is-pinned-card: true
-card-image: img/number_ten.svg
+card-image: img/cards/downing_1979.jpg
 tags: advisor
 view-if: con_in_government = 1
 new-page: true

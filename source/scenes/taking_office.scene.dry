@@ -20,6 +20,8 @@ for (var c of Q.classes) {
 Q.lab_leader_rating -= 5;
 !}
 go-to: treasury
+face-image: img/events/thatcher.jpg
+audio: clear shuffle music/nimrod.mp3 music/pomp_and_circumstance_1.mp3 music/land_of_hope_and_glory.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3 music/rule_britannia.mp3
 
 = Prime Minister
 

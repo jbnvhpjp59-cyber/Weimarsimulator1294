@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 20 and time <= 24 and rhodesia_seen =
 max-visits: 1
 new-page: true
 on-arrival: rhodesia_seen = 1
+face-image: img/events/lancaster_house.jpg
 
 = Rhodesia
 

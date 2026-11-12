@@ -464,6 +464,8 @@ go-to: custom_difficulty
 @1978_main
 new-page: true
 go-to: main if hand_size == 3; main.main_easy if hand_size == 4
+face-image: img/events/thatcher_1976.jpg
+audio: shuffle music/pomp_and_circumstance_4.mp3 music/rule_britannia.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3
 
 = January 1978
 

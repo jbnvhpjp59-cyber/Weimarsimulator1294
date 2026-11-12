@@ -1,7 +1,7 @@
 title: Norman Tebbit
 is-pinned-card: true
 tags: advisor
-card-image: img/advisor_right.svg
+card-image: img/cards/tebbit.jpg
 view-if: tebbit_advisor = 1
 new-page: true
 
