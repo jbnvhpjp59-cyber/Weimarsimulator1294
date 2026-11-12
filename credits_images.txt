@@ -301,7 +301,34 @@ img/events/labour_isnt_working.jpg
   The "Labour Isn't Working" poster, by Saatchi & Saatchi for the Conservative Party (1978).
   It is not covered by the game's licence.
 
+Other supplied images
+
+The following images were supplied for the game. Their rights remain with their owners;
+they are not covered by the game's licence and may not be reused without permission.
+
+img/events/winter_of_discontent.jpg
+  Rubbish in the streets during the Winter of Discontent (the Winter of Discontent events).
+
+img/events/iranian_embassy.jpg
+  The end of the Iranian Embassy siege, May 1980.
+
+img/events/steel_strike.jpg
+  A march against steel and pit closures (the steel strike event).
+
+img/events/hunger_strike.jpg
+  A republican mural (the hunger strike event).
+
+img/events/vote_conservative.jpg, img/cards/campaign_trail.jpg
+  The Conservatives' 1979 poster "Don't just hope for a better life. Vote for one." (the Sun endorsement event and the Campaign Trail card).
+
+img/events/world_in_action.jpg, img/cards/tv_debate.jpg
+  A still from World in Action, 1978 (the "swamped" event and the TV Debate card).
+
+img/events/crosby.jpg
+  The Crosby by-election event.
+
+img/events/devolution.jpg
+  Campaign posters for the 1979 Scottish devolution referendum.
+
 All photographs were cropped and resized for the game. Adaptations of CC BY-SA images are
 shared under the same licence as the original.
-
-Card art in img/*.svg was drawn for this game.

@@ -31,6 +31,7 @@ if (Q.devolution_failed) {
     Q.snp_share += 2;
 }
 !}
+face-image: img/events/devolution.jpg
 
 = The Devolution Referendums
 

@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 25 and time <= 27 and steel_strike_se
 max-visits: 1
 new-page: true
 on-arrival: steel_strike_seen = 1; strike_wave += 3
+face-image: img/events/steel_strike.jpg
 
 = The Steel Strike
 

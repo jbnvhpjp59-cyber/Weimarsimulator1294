@@ -3,6 +3,7 @@ tags: event
 view-if: in_campaign = 1 and tabloid_support >= 1 and months_to_election <= 1 and sun_endorsed = 0
 new-page: true
 on-arrival: sun_endorsed = 1; c2_con += 3*(1-dissent); de_con += 2*(1-dissent)
+face-image: img/events/vote_conservative.jpg
 
 = The Sun Says
 
