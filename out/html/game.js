@@ -308,8 +308,91 @@
       window.updateSidebar();
   };
 
+  // Music by era: the opposition years, the hard years of 1979-81 in
+  // government, and the recovery from 1982. When the era changes, the new
+  // playlist takes over once the current piece ends.
+  var ERAS = {
+      opposition: ['pomp_and_circumstance_4', 'rule_britannia', 'jupiter', 'march_of_the_mogul_emperors',
+                   'second_suite_march'],
+      hard_years: ['nimrod', 'saturn', 'venus', 'i_vow_to_thee', 'pomp_and_circumstance_1',
+                   'march_of_the_mogul_emperors'],
+      recovery: ['land_of_hope_and_glory', 'rule_britannia', 'pomp_and_circumstance_1', 'pomp_and_circumstance_2',
+                 'jupiter', 'i_was_glad', 'second_suite_march']
+  };
+  window.musicEra = function(Q) {
+      if (!Q.con_in_government) {
+          return 'opposition';
+      }
+      return Q.time < 49 ? 'hard_years' : 'recovery';
+  };
+  window.updateEraMusic = function() {
+      var ui = window.dendryUI;
+      var Q = ui.dendryEngine.state.qualities;
+      if (!Q.started) {
+          window.currentEra = undefined;
+          return;
+      }
+      var era = window.musicEra(Q);
+      if (era === window.currentEra) {
+          return;
+      }
+      var first = (window.currentEra === undefined);
+      window.currentEra = era;
+      // a new or loaded game starts with the playlist its scenes set
+      if (first || ui.disable_audio || !ui.currentAudio) {
+          return;
+      }
+      ui.audio('clear shuffle ' + ERAS[era].map(function (n) { return 'music/' + n + '.mp3'; }).join(' '));
+  };
+
   window.onDisplayContent = function() {
+      window.recordChoices(window.dendryUI.dendryEngine);
       window.updateSidebar();
+      window.updateEraMusic();
+  };
+
+  // The chronicle: every decision taken on a card, a Cabinet card or an
+  // event, with the month it was taken. The Library shows it.
+  var flatText = function(x) {
+      if (x === undefined || x === null) {
+          return '';
+      }
+      if (typeof x === 'string') {
+          return x;
+      }
+      if (Array.isArray(x)) {
+          return x.map(flatText).join('');
+      }
+      return flatText(x.content);
+  };
+  window.recordChoices = function(engine) {
+      if (engine._chronicleHooked) {
+          return;
+      }
+      engine._chronicleHooked = true;
+      var choose = engine.choose;
+      engine.choose = function(i) {
+          try {
+              var Q = this.state.qualities;
+              var c = this.choiceCache && this.choiceCache[i];
+              var scene = this.getCurrentScene();
+              var tags = (scene && scene.tags) || [];
+              if (Q.started && c && c.canChoose && scene &&
+                  (scene.isCard || scene.isPinnedCard || tags.indexOf('event') >= 0)) {
+                  var what = flatText(c.title).trim();
+                  if (what && !/^(Return card to hand|Cancel action|Continue)/.test(what)) {
+                      Q.chronicle = Q.chronicle || [];
+                      Q.chronicle.push({t: Q.time, s: flatText(scene.title).trim(), c: what});
+                      if (Q.chronicle.length > 600) {
+                          Q.chronicle.shift();
+                      }
+                  }
+              }
+          } catch (e) {
+              console.log('chronicle', e);
+          }
+          return choose.apply(this, arguments);
+      };
   };
 
   window.justLoaded = true;
@@ -350,6 +433,7 @@
     }
     // phones: reopen the status panel if the player left it open
     window.setStatusOpen(readStorage(window.dendryUI.game.title + '_status_open') === '1');
+    window.recordChoices(window.dendryUI.dendryEngine);
     if (window.dendryUI.font_size != 1.1) {
         var fs = window.dendryUI.font_size;
         var sidebar_fs = fs - 0.1;

@@ -15,6 +15,8 @@ max-cards: 3
 
 # The main deck is displayed here. Clicking a deck draws a card into your hand; clicking a card plays it.
 
+{!<span class="front_page"><span class="masthead">!}Front page · [+ headline_date +]{!</span><span class="headline">!}[+ headline +]{!</span><span class="standfirst">!}Inflation [+ inflation_2 +]% · Unemployment [+ unemployment_2 +]% [? if historical_mode = 0 : · Poll: Con [+ con_votes +]%, Lab [+ lab_votes +]% ?]{!</span></span>!}
+
 [? if in_campaign : **The general election campaign is under way.** Polling day is [+ next_election_month : month +] [+ next_election_year +]. ?]
 
 - @party
@@ -38,6 +40,8 @@ if (Q.advisor_action_timer <= 0) {
 }
 !}
 max-cards: 4
+
+{!<span class="front_page"><span class="masthead">!}Front page · [+ headline_date +]{!</span><span class="headline">!}[+ headline +]{!</span><span class="standfirst">!}Inflation [+ inflation_2 +]% · Unemployment [+ unemployment_2 +]% [? if historical_mode = 0 : · Poll: Con [+ con_votes +]%, Lab [+ lab_votes +]% ?]{!</span></span>!}
 
 [? if in_campaign : **The general election campaign is under way.** Polling day is [+ next_election_month : month +] [+ next_election_year +]. ?]
 

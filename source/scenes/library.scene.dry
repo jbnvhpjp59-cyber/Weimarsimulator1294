@@ -12,6 +12,7 @@ Background on British politics in 1978.
 - @system: How Britain is governed
 - @timeline: How we got here: 1970-1978
 - @curr_gov: The current government
+- @chronicle: The chronicle
 - @demographics: Demographics
 - @parties: The parties
 - @public_opinion: Public opinion
@@ -140,6 +141,55 @@ Prime Minister: [+ prime_minister +] ([+ pm_party +]). [? if lib_lab_pact : The 
 [? if acts_n >= 1 : **The statute book.** Acts passed by this government: [+ acts_list +]. ?][? if bills_defeated >= 1 : The Commons has defeated [+ bills_defeated +] of our bills at Second Reading. ?]
 
 The next general election must be held by [+ next_election_month : month +] [+ next_election_year +].
+
+@chronicle
+title: The chronicle
+go-to: menu
+on-display: {!
+var el = (typeof document !== 'undefined') ? document.getElementById('chronicle_list') : null;
+if (!el) {
+    return;
+}
+var esc = function (t) {
+    return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+};
+var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+              'October', 'November', 'December'];
+var months = {};
+for (var h of (Q.headlines || [])) {
+    (months[h.t] = months[h.t] || {h: null, c: []}).h = h.h;
+}
+for (var c of (Q.chronicle || [])) {
+    (months[c.t] = months[c.t] || {h: null, c: []}).c.push(c);
+}
+var keys = Object.keys(months).map(Number).sort(function (a, b) { return a - b; });
+if (!keys.length) {
+    el.innerHTML = '<p>Nothing has happened yet. Play a card and come back.</p>';
+    return;
+}
+var html = '';
+for (var t of keys) {
+    var m = months[t];
+    html += '<h3 class="chron_month">' + MONTHS[(t - 1) % 12] + ' ' + (1978 + Math.floor((t - 1) / 12)) + '</h3>';
+    if (m.h) {
+        html += '<p class="chron_headline">' + esc(m.h) + '</p>';
+    }
+    if (m.c.length) {
+        html += '<ul class="chron_list">';
+        for (var d of m.c) {
+            html += '<li><b>' + esc(d.s) + ':</b> ' + esc(d.c) + '</li>';
+        }
+        html += '</ul>';
+    }
+}
+el.innerHTML = html;
+!}
+
+= The chronicle
+
+The decisions you have taken, month by month, with the story that led the papers.
+
+{!<div id="chronicle_list"></div>!}
 
 @demographics
 title: Demographics

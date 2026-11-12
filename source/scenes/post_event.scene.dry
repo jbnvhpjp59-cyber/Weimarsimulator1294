@@ -418,6 +418,9 @@ this._runActions(this.game.scenes['cabinet_recalc'].onArrival);
 // bills move through Parliament
 this._runActions(this.game.scenes['bill_tick'].onArrival);
 
+// once a month, the front page reports the month just gone
+this._runActions(this.game.scenes['newsroom'].onArrival);
+
 // "Broad Church": a wet, a dry and a loyalist in the inner circle at once
 var circle_wets = Q.prior_advisor + Q.pym_advisor + Q.heseltine_advisor + Q.gilmour_advisor + Q.stevas_advisor;
 var circle_dries = Q.joseph_advisor + Q.howe_advisor + Q.lawson_advisor + Q.biffen_advisor + Q.brittan_advisor + Q.nott_advisor;

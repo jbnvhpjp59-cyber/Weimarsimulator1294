@@ -96,3 +96,21 @@ music/funeral_march.mp3
   Performed by: Erinaceus (Wikimedia Commons)
   Licence: CC BY-SA 3.0, GFDL
   Source: https://commons.wikimedia.org/wiki/File%3AH._Purcell_-_March_from_Music_for_the_funeral_of_Queen_Mary.oga
+
+music/i_was_glad.mp3
+  Parry - I was Glad (No Vivats).oga
+  Performed by: Choir of the Basilica of the Sacred Heart, Notre Dame, Indiana
+  Licence: CC BY-SA 3.0, CC BY 3.0
+  Source: https://commons.wikimedia.org/wiki/File%3AParry_-_I_was_Glad_%28No_Vivats%29.oga
+
+music/venus.mp3
+  Holst- venus.ogg
+  Performed by: United States Air Force Band
+  Licence: Public domain, PDM
+  Source: https://commons.wikimedia.org/wiki/File%3AHolst-_venus.ogg
+
+music/second_suite_march.mp3
+  Second Suite in F for Military Band - I. March, Morris dance, Swansea Town, Claudy Banks - United States Air National Guard Band of the Northeast.mp3
+  Performed by: United States Air National Guard Band of the Northeast
+  Licence: Public domain, PDM
+  Source: https://commons.wikimedia.org/wiki/File%3ASecond_Suite_in_F_for_Military_Band_-_I._March%2C_Morris_dance%2C_Swansea_Town%2C_Claudy_Banks_-_United_States_Air_National_Guard_Band_of_the_Northeast.mp3

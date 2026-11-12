@@ -14,7 +14,7 @@ Q.heath_hostility += 10;
 Q.defeated_once = 1;
 !}
 face-image: img/events/callaghan_downing_street.jpg
-audio: clear shuffle music/nimrod.mp3 music/pomp_and_circumstance_4.mp3 music/jupiter.mp3
+audio: clear shuffle music/pomp_and_circumstance_4.mp3 music/rule_britannia.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3 music/second_suite_march.mp3
 
 = Defeat
 
