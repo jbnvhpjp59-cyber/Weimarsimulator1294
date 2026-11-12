@@ -1,0 +1,356 @@
+title: Mountbatten and Warrenpoint
+tags: event
+view-if: con_in_government = 1 and time >= 20 and time <= 23 and mountbatten_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: mountbatten_seen = 1; right_dissent += 3; thatcher_rating += 1
+
+= Mountbatten and Warrenpoint
+
+On a single August bank holiday, the IRA kills Lord Mountbatten, the Queen's cousin, with a bomb on his fishing boat off the coast of County Sligo. Two teenage boys and an elderly woman die with him. Hours later, two bombs at Warrenpoint, near Newry, kill eighteen soldiers. It is the Army's worst single loss in Northern Ireland.
+
+Two days later you fly to Crossmaglen, in the heart of South Armagh. The right wants a crackdown. The Irish government and the Americans want a political initiative.
+
+- @security: Appoint a security co-ordinator and send more troops.
+- @initiative: Launch a political initiative with Dublin.
+
+@security
+subtitle: -0.5 budget. The right and the Unionists approve.
+on-arrival: budget -= 0.5; right_dissent -= 4; uup_relation += 4; us_relation -= 1
+
+Sir Maurice Oldfield, the former head of MI6, is brought out of retirement to co-ordinate the Army and the police. Another battalion goes to the border.
+
+@initiative
+subtitle: Washington and Dublin approve. The Unionists and the right do not.
+on-arrival: us_relation += 4; europe_relation += 2; uup_relation -= 6; right_dissent += 4; wet_dissent -= 2
+
+The Northern Ireland Secretary invites the province's parties to a constitutional conference. The Unionists refuse to attend.
+
+@olympics
+title: The Moscow Olympics
+tags: event
+view-if: con_in_government = 1 and time >= 25 and time <= 27 and olympics_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: olympics_seen = 1
+
+= The Moscow Olympics
+
+The Soviet Union invaded Afghanistan over Christmas. President Carter wants the West to boycott the Moscow Olympics in protest. The British Olympic Association is independent of the government, and most of the athletes want to go.
+
+- @boycott: Press the athletes to stay at home.
+- @leave_it: Leave it to the sporting bodies.
+
+@boycott
+subtitle: The Americans are grateful. The athletes are not.
+on-arrival: olympic_boycott = 1; us_relation += 6; right_dissent -= 2; thatcher_rating -= 1; c1_lib += 1
+
+The government writes to every athlete urging them to stay away. The British Olympic Association refuses, and the team goes to Moscow anyway under the Olympic flag. Sebastian Coe and Steve Ovett win gold, and the government looks both heavy-handed and ignored.
+
+@leave_it
+subtitle: Washington notices.
+on-arrival: us_relation -= 4; right_dissent += 2
+
+The government condemns the invasion and leaves the Olympics to the sportsmen. The Americans conclude that their closest ally is not so close after all.
+
+@lords_defeat
+title: The Lords Rebel
+tags: event
+view-if: con_in_government = 1 and time >= 27 and time <= 29 and lords_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: lords_seen = 1
+face-image: img/events/westminster.jpg
+
+= The Lords Rebel
+
+The Education Bill would let councils charge for school buses. In the House of Lords, the Duke of Norfolk leads Conservative peers, many of them from rural counties with Catholic schools miles from home, in a rebellion. The clause is defeated by a large majority.
+
+- @drop_charges: Accept the defeat and drop the charges.
+- @overturn: Overturn the Lords in the Commons.
+
+@drop_charges
+subtitle: -0.3 budget. The shires are relieved.
+on-arrival: budget -= 0.3; wet_dissent -= 2; dry_dissent += 1; loyalist_dissent -= 1
+
+The charges are dropped. The Lords have shown that they can still embarrass a government with a large majority.
+
+@overturn
+subtitle: +0.5 budget. Backbenchers from rural seats will rebel.
+on-arrival: budget += 0.5; rebellion += 1; wet_dissent += 3; c2_con -= 1
+
+The whips force the clause back through the Commons. A dozen county members vote against, and the newspapers run stories about children walking to school in the rain.
+
+@civil_service_strike
+title: The Civil Service Strike
+tags: event
+view-if: con_in_government = 1 and time >= 39 and time <= 41 and civil_service_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: civil_service_seen = 1; strike_wave += 1
+
+= The Civil Service Strike
+
+The civil service unions have rejected a 7% pay offer. Instead of a general walkout, they are striking at the computer centres and tax offices that keep the money coming in. Billions of pounds of tax are going uncollected, and the court system is grinding to a halt.
+
+- @hold_line: Stand firm on the offer.
+- @settle_cs: Settle quickly at a higher figure.
+
+@hold_line
+subtitle: -1 budget in lost revenue. Union power falls if we win.
+on-arrival: budget -= 1; union_power -= 4; strike_wave += 1; dry_dissent -= 2; wet_dissent += 1
+
+The dispute lasts twenty-one weeks. The unions accept 7.5% in the end, and the Treasury counts the cost of the uncollected tax.
+
+@settle_cs
+subtitle: -0.5 budget. The dries call it surrender.
+on-arrival: budget -= 0.5; union_power += 2; strike_wave -= 1; dry_dissent += 3
+
+A better offer ends the dispute within the month. Every other public-sector union takes note.
+
+@warrington
+title: The Warrington By-election
+tags: event
+view-if: con_in_government = 1 and alliance_formed = 1 and time >= 43 and time <= 44 and warrington_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: warrington_seen = 1; c1_lib += 1; c2_lib += 1; lab_leader_rating -= 1
+face-image: img/events/jenkins.jpg
+
+= The Warrington By-election
+
+Roy Jenkins, standing for the new Social Democratic Party, is fighting Warrington, one of the safest Labour seats in the North West. Our own candidate is struggling to be heard.
+
+- @campaign_hard: Fight hard for our candidate.
+- @save_effort: Save our effort for seats we can win.
+
+@campaign_hard
+subtitle: -1 resources.
+on-arrival: resources -= 1; c1_con += 1*(1-dissent)
+
+Labour holds the seat by fewer than two thousand votes. Jenkins calls it his first defeat in thirty years of politics and by far the greatest victory he has ever taken part in. We come a distant third.
+
+@save_effort
+subtitle: The Alliance gets a clearer run at Labour.
+on-arrival: c1_lib += 1; lab_leader_rating -= 1
+
+Labour holds the seat by fewer than two thousand votes. Our vote collapses and our candidate loses his deposit. The papers say the SDP is now the real opposition in the North.
+
+@royal_wedding
+title: The Royal Wedding
+tags: event
+view-if: time >= 43 and time <= 44 and royal_wedding_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: royal_wedding_seen = 1
+
+= The Royal Wedding
+
+The Prince of Wales is to marry Lady Diana Spencer at St Paul's Cathedral. Three-quarters of a billion people around the world will watch on television. After a summer of riots, the country seems glad of something to celebrate.
+
+- @holiday: Declare a national holiday.
+- @no_holiday: Keep the country at work.
+
+@holiday
+subtitle: A small cost to the economy, and a lift in the national mood.
+on-arrival: budget -= 0.3; c2_con += 1*(1-dissent); de_con += 1*(1-dissent); thatcher_rating += 1 if con_in_government = 1
+
+The wedding day is a bank holiday. Street parties fill the country, and for a day nobody talks about unemployment.
+
+@no_holiday
+subtitle: Business approves. Nobody else does.
+on-arrival: ab_con += 1*(1-dissent); c2_con -= 1; thatcher_rating -= 1 if con_in_government = 1
+
+Most people take the day off anyway. The papers call the government joyless.
+
+@benn_deputy
+title: Benn for Deputy
+tags: event
+view-if: con_in_government = 1 and lab_left = 1 and time >= 45 and time <= 46 and benn_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: {!
+Q.benn_seen = 1;
+// Healey held on by less than one per cent of the electoral college
+Q.benn_won = (Math.random() < 0.25) ? 1 : 0;
+if (Q.benn_won) {
+    Q.labour_credibility -= 6;
+    Q.c1_lab -= 2;
+    Q.c2_lab -= 2;
+    Q.lab_mps -= 5;
+    Q.lib_mps += 5;
+} else {
+    Q.labour_credibility -= 2;
+}
+!}
+face-image: img/events/healey.jpg
+
+= Benn for Deputy
+
+At Labour's conference in Brighton, Tony Benn challenges Denis Healey for the deputy leadership, with the votes of the trade unions, the constituency parties and the MPs counted in Labour's new electoral college. The campaign has been bitter, and Labour has spent the summer fighting itself.
+
+[? if benn_won = 0 : Healey holds on with 50.4% of the vote, a margin of less than one per cent. The left is furious and the right of the party exhausted. ?][? if benn_won = 1 : Benn wins. Five more Labour MPs leave for the Social Democrats within a month, and the moderates who remain talk openly about the end of their party. ?]
+
+- @say_nothing: Say nothing, and let Labour fight.
+- @attack_left: Make Labour's left the issue.
+
+@say_nothing
+on-arrival: loyalist_dissent -= 1
+
+You let Labour's divisions speak for themselves.
+
+@attack_left
+subtitle: Skilled workers listen. The wets think it is beneath us.
+on-arrival: c2_con += 1*(1-dissent); lab_leader_rating -= 2; wet_dissent += 1
+
+Every Conservative speech that autumn asks the same question: who really runs the Labour Party?
+
+@scargill
+title: Scargill
+tags: event
+view-if: con_in_government = 1 and time >= 48 and time <= 49 and scargill_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: scargill_seen = 1; scargill = 1; union_power += 3
+face-image: img/events/pit_rally.jpg
+
+= Scargill
+
+Arthur Scargill, the Yorkshire miners' leader who organised the flying pickets at Saltley Gate in 1972, has been elected President of the National Union of Mineworkers with seventy per cent of the vote. He has promised to fight every pit closure, by strike action if necessary.
+
+- @prepare_miners: Prepare for a fight: more coal stocks, more oil-fired power.
+- @keep_peace: Give the Coal Board money to keep the peace.
+
+@prepare_miners
+subtitle: -0.5 budget. Prepares for a miners' strike.
+on-arrival: coal_stocks += 1 if coal_stocks < 3; budget -= 0.5; dry_dissent -= 2
+
+The Energy Department quietly orders the power stations to build up their stocks and to burn more oil.
+
+@keep_peace
+subtitle: -1 budget. Industrial peace, for now.
+on-arrival: budget -= 1; union_power += 2; strike_wave -= 1; dry_dissent += 3
+
+The Coal Board's investment budget is raised, and closures are postponed. Scargill says the government has blinked.
+
+@aslef
+title: The Rail Strike
+tags: event
+view-if: con_in_government = 1 and time >= 49 and time <= 50 and aslef_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: aslef_seen = 1; strike_wave += 1
+
+= The Rail Strike
+
+The train drivers' union, ASLEF, is staging a series of strikes against British Rail's plan for flexible rostering, which would end the eight-hour day the drivers have worked since 1919. Commuters are stranded, and British Rail wants to know whether the government will back it.
+
+- @back_br: Back British Rail: no deal without flexible rosters.
+- @press_settle: Lean on British Rail to settle.
+
+@back_br
+subtitle: Union power falls. Commuters suffer for a while.
+on-arrival: union_power -= 3; strike_wave += 1; c2_con += 1*(1-dissent); economic_growth -= 0.1
+
+British Rail threatens to sack every striking driver. The TUC refuses to back ASLEF, and the union gives in.
+
+@press_settle
+subtitle: -0.5 budget. The trains run; the dries despair.
+on-arrival: union_power += 2; strike_wave -= 1; dry_dissent += 3; budget -= 0.5
+
+British Rail drops the plan for now, and the drivers go back to work.
+
+@pipeline
+title: The Siberian Pipeline
+tags: event
+view-if: con_in_government = 1 and time >= 54 and time <= 56 and pipeline_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: pipeline_seen = 1
+
+= The Siberian Pipeline
+
+President Reagan has banned American companies, and foreign companies using American technology, from supplying equipment for the Soviet gas pipeline to Western Europe. John Brown Engineering on the Clyde has a contract to build turbines for it. If it pulls out, hundreds of jobs go, and Washington will have told British firms whom they may trade with.
+
+- @defy_us: Order British firms to honour their contracts.
+- @comply: Go along with the Americans.
+
+@defy_us
+subtitle: Europe and the Clyde approve. Washington is not pleased.
+on-arrival: pipeline_defied = 1; us_relation -= 6; europe_relation += 5; c2_con += 1*(1-dissent); scotland_con_bonus += 0.2
+
+The Trade Secretary uses the Protection of Trading Interests Act to direct the firms to fulfil their contracts. You tell the Americans that a friend can disagree.
+
+@comply
+subtitle: Washington approves. The Clyde does not.
+on-arrival: us_relation += 6; europe_relation -= 5; unemployment += 0.1; scotland_con_bonus -= 0.3
+
+John Brown pulls out of the contract. Our European partners accuse us of doing Washington's bidding.
+
+@hong_kong
+title: Hong Kong
+tags: event
+view-if: con_in_government = 1 and time >= 57 and time <= 58 and hong_kong_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: hong_kong_seen = 1
+
+= Hong Kong
+
+You are in Peking to discuss the future of Hong Kong, whose New Territories return to China when the lease runs out in 1997. Fresh from the Falklands, you want British administration to continue. Deng Xiaoping tells you that China could walk in and take the whole colony that afternoon. Leaving the Great Hall of the People, you stumble on the steps, in front of the cameras.
+
+- @insist: Insist the treaties stand: British administration must continue.
+- @flexible: Signal that Britain could accept Chinese sovereignty, with guarantees.
+
+@insist
+subtitle: The right approves. Confidence in Hong Kong falls.
+on-arrival: hong_kong_firm = 1; right_dissent -= 3; us_relation -= 1
+
+Talks stall. The Hang Seng index falls by a quarter in a month, and the Hong Kong dollar slides.
+
+@flexible
+subtitle: The talks can begin. The right calls it another Munich.
+on-arrival: right_dissent += 3; us_relation += 1; europe_relation += 1
+
+Formal negotiations begin. The Foreign Office believes a deal guaranteeing Hong Kong's way of life for fifty years is possible.
+
+@greenham
+title: Greenham Common
+tags: event
+view-if: con_in_government = 1 and time >= 60 and time <= 61 and greenham_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: greenham_seen = 1
+
+= Greenham Common
+
+Thirty thousand women link hands around the nine-mile perimeter fence of RAF Greenham Common, where American cruise missiles are due to arrive next year. The peace camp outside the main gate has been there for more than a year. CND's membership has passed a quarter of a million.
+
+- @deploy: Cruise will be deployed on schedule.
+- @delay: Signal a delay while the arms talks continue in Geneva.
+
+@deploy
+subtitle: Washington and the right approve. The peace movement is outraged.
+on-arrival: cruise_deployed = 1; us_relation += 5; right_dissent -= 3; c1_lib += 1; de_lab += 1; wet_dissent += 1
+
+The government says the missiles will arrive as planned. Ministers dismiss the peace camp as naive, and the camp grows.
+
+@delay
+subtitle: The Americans are furious. Moderate voters are relieved.
+on-arrival: us_relation -= 8; right_dissent += 5; c1_con += 1*(1-dissent); lib_relation += 2
+
+You tell the Commons that deployment depends on progress at Geneva. In Washington, the Pentagon briefs against you.
+
+@bermondsey
+title: Bermondsey
+tags: event
+view-if: con_in_government = 1 and alliance_formed = 1 and time >= 62 and time <= 63 and bermondsey_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: bermondsey_seen = 1; lab_mps -= 1; lib_mps += 1; labour_credibility -= 3; c1_lib += 1; c2_lib += 1; lab_leader_rating -= 2
+
+= Bermondsey
+
+In the by-election for Bermondsey, one of the safest Labour seats in London, the Liberal Simon Hughes defeats Labour's Peter Tatchell with a swing of 44 per cent, the largest in by-election history. Tatchell, a left-winger at first disowned by his own leader and then reinstated, faced one of the ugliest campaigns in modern British politics.
+
+The lesson for us is simple: Labour's divisions can lose it even its safest seats.
