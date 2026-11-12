@@ -1,6 +1,6 @@
 title: Nigel Lawson
 is-pinned-card: true
-card-image: img/advisor_dry.svg
+card-image: img/cards/lawson.jpg
 tags: advisor
 view-if: lawson_advisor = 1
 new-page: true

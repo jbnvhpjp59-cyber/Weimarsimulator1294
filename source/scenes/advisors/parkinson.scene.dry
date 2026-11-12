@@ -1,6 +1,6 @@
 title: Cecil Parkinson
 is-pinned-card: true
-card-image: img/advisor_loyalist.svg
+card-image: img/cards/parkinson.jpg
 tags: advisor
 view-if: parkinson_advisor = 1
 new-page: true

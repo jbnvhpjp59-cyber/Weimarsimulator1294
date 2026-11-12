@@ -1,6 +1,6 @@
 title: Sir Ian Gilmour
 is-pinned-card: true
-card-image: img/advisor_wet.svg
+card-image: img/cards/gilmour.jpg
 tags: advisor
 view-if: gilmour_advisor = 1
 new-page: true

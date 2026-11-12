@@ -1,5 +1,6 @@
 Images used in Conservatism: An Alternate History
-All from Wikimedia Commons; each is used under the licence shown.
+Images from Wikimedia Commons are used under the licence shown.
+The adviser portraits listed at the end are used with permission.
 
 img/*/thatcher.jpg
   Margaret Thatcher stock portrait (cropped).jpg
@@ -246,6 +247,39 @@ img/map.jpg
   Author: Director-General of the Ordnance Survey, UK
   Licence: Public domain, CC BY 4.0
   Source: https://commons.wikimedia.org/wiki/File%3AOrdnance_Survey_Great_Britain_Sheet_2%2C_Published_1933.jpg
+
+Portraits used with permission
+
+The following card portraits are used with the permission of their rights holders.
+They are not covered by the game's licence or by any Creative Commons licence,
+and may not be reused without permission.
+
+img/cards/whitelaw.jpg
+  Willie Whitelaw. Used with permission.
+
+img/cards/joseph.jpg
+  Sir Keith Joseph. Used with permission.
+
+img/cards/prior.jpg
+  Jim Prior. Used with permission.
+
+img/cards/reece.jpg
+  Gordon Reece. Used with permission.
+
+img/cards/lawson.jpg
+  Nigel Lawson. Used with permission.
+
+img/cards/gilmour.jpg
+  Sir Ian Gilmour. Used with permission.
+
+img/cards/parkinson.jpg
+  Cecil Parkinson. Used with permission.
+
+img/cards/biffen.jpg
+  John Biffen. Used with permission.
+
+img/cards/stevas.jpg
+  Norman St John-Stevas. Used with permission.
 
 All photographs were cropped and resized for the game. Adaptations of CC BY-SA images are
 shared under the same licence as the original.

@@ -1,6 +1,6 @@
 title: John Biffen
 is-pinned-card: true
-card-image: img/advisor_dry.svg
+card-image: img/cards/biffen.jpg
 tags: advisor
 view-if: biffen_advisor = 1
 new-page: true

@@ -1,7 +1,7 @@
 title: Jim Prior
 is-pinned-card: true
 tags: advisor
-card-image: img/advisor_wet.svg
+card-image: img/cards/prior.jpg
 view-if: prior_advisor = 1
 new-page: true
 

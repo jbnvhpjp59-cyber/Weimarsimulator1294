@@ -1,6 +1,6 @@
 title: Willie Whitelaw
 is-pinned-card: true
-card-image: img/advisor_loyalist.svg
+card-image: img/cards/whitelaw.jpg
 tags: advisor
 view-if: whitelaw_advisor = 1
 new-page: true

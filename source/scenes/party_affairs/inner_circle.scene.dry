@@ -188,9 +188,9 @@ St John-Stevas is the first of the wets to go, and he goes with a quip about the
 
 @add_whitelaw
 title: Willie Whitelaw
-subtitle: Loyalist. The party's great conciliator. {!<br><br>!}Actions: calm the wets, party discipline.
+subtitle: Loyalist. The party's great conciliator. {!<br><br>!}Actions: calm the wets, party discipline, law and order.
 is-card: true
-card-image: img/advisor_loyalist.svg
+card-image: img/cards/whitelaw.jpg
 tags: add_advisor
 view-if: whitelaw_advisor = 0 and n_advisors < 3
 on-arrival: whitelaw_advisor = 1; n_advisors += 1; loyalist_strength += 5; loyalist_dissent -= 3
@@ -200,7 +200,7 @@ go-to: add_advisors
 title: Sir Keith Joseph
 subtitle: Dry. The intellectual engine of the new Conservatism. {!<br><br>!}Actions: lecture tour, Stepping Stones, back management.
 is-card: true
-card-image: img/advisor_dry.svg
+card-image: img/cards/joseph.jpg
 tags: add_advisor
 view-if: joseph_advisor = 0 and n_advisors < 3
 on-arrival: joseph_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
@@ -218,9 +218,9 @@ go-to: add_advisors
 
 @add_reece
 title: Gordon Reece
-subtitle: No faction. A television producer turned image-maker. {!<br><br>!}Actions: the makeover, the popular press.
+subtitle: No faction. A television producer turned image-maker. {!<br><br>!}Actions: the makeover, the popular press, voice lessons.
 is-card: true
-card-image: img/advisor_none.svg
+card-image: img/cards/reece.jpg
 tags: add_advisor
 view-if: reece_advisor = 0 and n_advisors < 3
 on-arrival: reece_advisor = 1; n_advisors += 1
@@ -228,9 +228,9 @@ go-to: add_advisors
 
 @add_prior
 title: Jim Prior
-subtitle: Wet. A farmer with friends in the unions. {!<br><br>!}Actions: talk to the moderates, step-by-step union reform.
+subtitle: Wet. A farmer with friends in the unions. {!<br><br>!}Actions: talk to the moderates, step-by-step union reform, special employment measures.
 is-card: true
-card-image: img/advisor_wet.svg
+card-image: img/cards/prior.jpg
 tags: add_advisor
 view-if: prior_advisor = 0 and n_advisors < 3
 on-arrival: prior_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
@@ -238,7 +238,7 @@ go-to: add_advisors
 
 @add_pym
 title: Francis Pym
-subtitle: Wet. A patrician pessimist and a safe pair of hands. {!<br><br>!}Actions: reassure the shires, foreign affairs.
+subtitle: Wet. A patrician pessimist and a safe pair of hands. {!<br><br>!}Actions: reassure the shires, foreign affairs, count the votes.
 is-card: true
 card-image: img/cards/pym.jpg
 tags: add_advisor
@@ -248,7 +248,7 @@ go-to: add_advisors
 
 @add_heseltine
 title: Michael Heseltine
-subtitle: Wet. Ambitious, flamboyant, the darling of the conference. {!<br><br>!}Actions: a conference speech, urban regeneration.
+subtitle: Wet. Ambitious, flamboyant, the darling of the conference. {!<br><br>!}Actions: a conference speech, urban regeneration, cut the civil service.
 is-card: true
 card-image: img/cards/heseltine.jpg
 tags: add_advisor
@@ -258,7 +258,7 @@ go-to: add_advisors
 
 @add_carrington
 title: Lord Carrington
-subtitle: Loyalist. The grandest of the grandees. {!<br><br>!}Actions: diplomacy, steady the Lords.
+subtitle: Loyalist. The grandest of the grandees. {!<br><br>!}Actions: diplomacy, steady the Lords, mediate in Cabinet.
 is-card: true
 card-image: img/cards/carrington.jpg
 tags: add_advisor
@@ -280,7 +280,7 @@ go-to: add_advisors
 title: Nigel Lawson
 subtitle: Dry. A combative former financial journalist. {!<br><br>!}Actions: a tax reform plan or the Medium-Term Financial Strategy, prepare for the miners, brief the City.
 is-card: true
-card-image: img/advisor_dry.svg
+card-image: img/cards/lawson.jpg
 tags: add_advisor
 view-if: lawson_advisor = 0 and n_advisors < 3
 on-arrival: lawson_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
@@ -290,7 +290,7 @@ go-to: add_advisors
 title: Sir Ian Gilmour
 subtitle: Wet. The most articulate critic of monetarism. {!<br><br>!}Actions: One Nation, the armed forces or Europe, temper the monetarists.
 is-card: true
-card-image: img/advisor_wet.svg
+card-image: img/cards/gilmour.jpg
 tags: add_advisor
 view-if: gilmour_advisor = 0 and n_advisors < 3
 on-arrival: gilmour_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
@@ -300,7 +300,7 @@ go-to: add_advisors
 title: Cecil Parkinson
 subtitle: Loyalist. A smooth organiser and fundraiser. {!<br><br>!}Actions: business dinners, small business, plan the campaign, run the party machine.
 is-card: true
-card-image: img/advisor_loyalist.svg
+card-image: img/cards/parkinson.jpg
 tags: add_advisor
 view-if: parkinson_advisor = 0 and n_advisors < 3
 on-arrival: parkinson_advisor = 1; n_advisors += 1; loyalist_strength += 5; loyalist_dissent -= 3
@@ -310,7 +310,7 @@ go-to: add_advisors
 title: John Biffen
 subtitle: Dry, but a consolidator. {!<br><br>!}Actions: the free-market case, cash limits, manage the Commons, counsel consolidation.
 is-card: true
-card-image: img/advisor_dry.svg
+card-image: img/cards/biffen.jpg
 tags: add_advisor
 view-if: biffen_advisor = 0 and n_advisors < 3
 on-arrival: biffen_advisor = 1; n_advisors += 1; dry_strength += 4; dry_dissent -= 2; wet_dissent -= 2
@@ -340,7 +340,7 @@ go-to: add_advisors
 title: Norman St John-Stevas
 subtitle: Wet. Witty, theatrical, and a parliamentarian to his fingertips. {!<br><br>!}Actions: parents' rights, charm the House, select committees, the arts.
 is-card: true
-card-image: img/advisor_wet.svg
+card-image: img/cards/stevas.jpg
 tags: add_advisor
 view-if: stevas_advisor = 0 and n_advisors < 3
 on-arrival: stevas_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
