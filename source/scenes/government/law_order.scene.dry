@@ -14,6 +14,7 @@ on-arrival: law_order_timer = 6; month_actions += 1
 - @short_sharp_shock: A "short, sharp shock" for young offenders.
 - @hanging: Allow a free vote on restoring the death penalty.
 - @scarman: Implement the Scarman Report.
+- @sunday_trading: Introduce a bill to free Sunday trading.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -44,3 +45,13 @@ on-arrival: scarman_done = 1; wet_dissent -= 4; right_dissent += 3; c1_con += 1*
 achievement: scarman
 
 Lord Scarman's report on Brixton calls for community policing, better recruitment from ethnic minorities, and an end to stop-and-search under the "sus" law.
+
+@sunday_trading
+view-if: second_term = 1 and bill_shops = 0 and sunday_trading = 0 and time >= bill_shops_wait
+subtitle: The shops and the economists approve. The churches and many of our own backbenchers will fight it.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: dry_dissent -= 1; right_dissent += 4; bill_new = "shops"
+call: bill_introduce
+
+The Home Office publishes the Shops Bill. Within a day the Keep Sunday Special campaign has its first thousand letters in the post.

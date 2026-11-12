@@ -151,6 +151,16 @@ if (Q.month_actions >= 1) {
         if (Q.year >= 1982 && Q.economic_growth < 3) {
             Q.economic_growth += 0.15;
         }
+        // early 1986: the oil price halves, taking inflation and the pound with it
+        if (Q.time >= 97 && Q.time <= 100) {
+            Q.oil_collapse = 1;
+            Q.inflation -= 0.4;
+            Q.sterling -= 1.5;
+        }
+        // the Lawson boom: from 1986 the economy takes off, if money is cheap enough
+        if (Q.second_term && Q.year >= 1986 && Q.interest_rate <= 12 && Q.economic_growth < 4.5) {
+            Q.economic_growth += 0.12;
+        }
         // growth drifts back towards its long-run trend
         Q.economic_growth += (1.5 - Q.economic_growth) * 0.04;
         // monetary policy: dear money beats inflation, at the cost of jobs
@@ -282,6 +292,8 @@ if (Q.month_actions >= 1) {
             Q.falklands_factor -= 1;
         }
         Q.thatcher_rating += (7 - Q.unemployment) * 0.05 + (8 - Q.inflation) * 0.03;
+        // the Leader of the Opposition's honeymoon fades too
+        Q.lab_leader_rating += (44 - Q.lab_leader_rating) * 0.03;
 
         // ---- threat meters ----
         // backbench rebellion grows when factions are angry, and fades slowly

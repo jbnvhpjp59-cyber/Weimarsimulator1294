@@ -15,6 +15,7 @@ on-arrival: energy_timer = 5; month_actions += 1
 - @nuclear: Order a programme of nuclear power stations.
 - @gas_prices: Raise gas and electricity prices to market levels.
 - @coal_investment: Fund the Coal Board's investment in new pits.
+- @sell_gas: Introduce a bill to sell British Gas.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -52,3 +53,13 @@ subtitle: -0.5 budget. The miners are calmer; the dries see money poured down a 
 on-arrival: budget -= 0.5; num_mood -= 6; ru_yorkshire -= 0.2; ru_wales -= 0.1; wet_dissent -= 1; dry_dissent += 2
 
 The Coal Board gets another year's investment for new faces at Selby and in the Vale of Belvoir. The NUM takes the money and promises nothing.
+
+@sell_gas
+view-if: second_term = 1 and bill_gas = 0 and gas_sold = 0 and time >= bill_gas_wait
+subtitle: +3 budget and millions of new shareholders, once it becomes law in about five months.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: dry_dissent -= 2; wet_dissent += 1; bill_new = "gas"
+call: bill_introduce
+
+The Energy Secretary announces that British Gas will be sold. The Gas Bill is published within weeks.

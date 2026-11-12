@@ -19,7 +19,7 @@ var WATCH = ['con_in_government', 'n_elections', 'ousted', 'autumn_election_1978
              'unemployment', 'con_votes', 'lab_votes', 'lib_votes', 'strike_wave', 'thatcher_rating',
              'wash_up_pending', 'miners_strike', 'orgreave_seen', 'sequestration_seen', 'nacods_struck',
              'parkinson_resigned', 'gchq_ban', 'brighton_seen', 'hong_kong_declaration', 'anglo_irish', 'heseltine_out',
-             'bournemouth_seen', 'riots_1985_seen', 'libya_seen', 'wapping_seen'];
+             'bournemouth_seen', 'riots_1985_seen', 'libya_seen', 'wapping_seen', 'oil_collapse', 'big_sales'];
 var prev = Q.news_prev || {};
 var now = {};
 for (var w of WATCH) {
@@ -119,6 +119,8 @@ if (became('bournemouth_seen', 1)) add(7, 'Kinnock turns on Militant');
 if (became('riots_1985_seen', 1)) add(8, 'Riots in Handsworth and Tottenham');
 if (became('libya_seen', 1)) add(7, 'US bombers fly from British bases');
 if (became('wapping_seen', 1)) add(6, 'The battle of Wapping');
+if (became('oil_collapse', 1)) add(6, 'The oil price halves');
+if (rose('big_sales')) add(5, ['', 'British Airways floated', 'Rolls-Royce back on the market', 'Heathrow and Gatwick sold'][Q.big_sales] || 'Another state company sold');
 
 // events
 if (became('mountbatten_seen', 1)) add(9, 'Mountbatten murdered');

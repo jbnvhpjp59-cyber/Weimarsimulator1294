@@ -17,7 +17,8 @@ Q.bill_defs = {
   "amend": 0.35,
   "lords_risk": 0.12,
   "lib": "abstain",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
  },
  "employment2": {
   "name": "Employment Bill",
@@ -30,7 +31,8 @@ Q.bill_defs = {
   "amend": 0.4,
   "lords_risk": 0.15,
   "lib": "no",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
  },
  "trade_union": {
   "name": "Trade Union Bill",
@@ -43,7 +45,8 @@ Q.bill_defs = {
   "amend": 0.4,
   "lords_risk": 0.2,
   "lib": "yes",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
  },
  "housing": {
   "name": "Housing Bill",
@@ -56,7 +59,8 @@ Q.bill_defs = {
   "amend": 0.4,
   "lords_risk": 0.5,
   "lib": "abstain",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
  },
  "education": {
   "name": "Education Bill",
@@ -69,7 +73,8 @@ Q.bill_defs = {
   "amend": 0.3,
   "lords_risk": 0.65,
   "lib": "abstain",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
  },
  "nationality": {
   "name": "British Nationality Bill",
@@ -82,7 +87,8 @@ Q.bill_defs = {
   "amend": 0.4,
   "lords_risk": 0.5,
   "lib": "no",
-  "ulster": "yes"
+  "ulster": "yes",
+  "base": 0
  },
  "rates": {
   "name": "Rates Bill",
@@ -95,7 +101,8 @@ Q.bill_defs = {
   "amend": 0.4,
   "lords_risk": 0.35,
   "lib": "no",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
  },
  "glc": {
   "name": "Local Government Bill",
@@ -108,7 +115,8 @@ Q.bill_defs = {
   "amend": 0.4,
   "lords_risk": 0.7,
   "lib": "no",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
  },
  "pace": {
   "name": "Police and Criminal Evidence Bill",
@@ -121,7 +129,8 @@ Q.bill_defs = {
   "amend": 0.5,
   "lords_risk": 0.4,
   "lib": "no",
-  "ulster": "yes"
+  "ulster": "yes",
+  "base": 0
  },
  "telecoms": {
   "name": "Telecommunications Bill",
@@ -134,10 +143,95 @@ Q.bill_defs = {
   "amend": 0.35,
   "lords_risk": 0.2,
   "lib": "abstain",
-  "ulster": "abstain"
+  "ulster": "abstain",
+  "base": 0
+ },
+ "gas": {
+  "name": "Gas Bill",
+  "act": "Gas Act",
+  "faction": "wet",
+  "weight": 0.2,
+  "champion": "dry",
+  "committee": 2,
+  "lords": 1,
+  "amend": 0.35,
+  "lords_risk": 0.25,
+  "lib": "no",
+  "ulster": "abstain",
+  "base": 0
+ },
+ "shops": {
+  "name": "Shops Bill",
+  "act": "Shops Act",
+  "faction": "right",
+  "weight": 1.0,
+  "champion": "dry",
+  "committee": 2,
+  "lords": 1,
+  "amend": 0.3,
+  "lords_risk": 0.2,
+  "lib": "no",
+  "ulster": "no",
+  "base": 55
+ },
+ "buses": {
+  "name": "Transport Bill",
+  "act": "Transport Act",
+  "faction": "wet",
+  "weight": 0.25,
+  "champion": "dry",
+  "committee": 2,
+  "lords": 1,
+  "amend": 0.35,
+  "lords_risk": 0.3,
+  "lib": "no",
+  "ulster": "abstain",
+  "base": 0
+ },
+ "city": {
+  "name": "Financial Services Bill",
+  "act": "Financial Services Act",
+  "faction": "wet",
+  "weight": 0.15,
+  "champion": "dry",
+  "committee": 3,
+  "lords": 2,
+  "amend": 0.3,
+  "lords_risk": 0.2,
+  "lib": "abstain",
+  "ulster": "abstain",
+  "base": 0
+ },
+ "fowler": {
+  "name": "Social Security Bill",
+  "act": "Social Security Act",
+  "faction": "wet",
+  "weight": 0.35,
+  "champion": "dry",
+  "committee": 3,
+  "lords": 2,
+  "amend": 0.4,
+  "lords_risk": 0.4,
+  "lib": "no",
+  "ulster": "abstain",
+  "base": 0
+ },
+ "scot_rates": {
+  "name": "Abolition of Domestic Rates (Scotland) Bill",
+  "act": "Abolition of Domestic Rates (Scotland) Act",
+  "faction": "wet",
+  "weight": 0.4,
+  "champion": "right",
+  "committee": 2,
+  "lords": 1,
+  "amend": 0.35,
+  "lords_risk": 0.3,
+  "lib": "no",
+  "ulster": "abstain",
+  "base": 0
  }
 };
-Q.bill_keys = ["employment1", "employment2", "trade_union", "housing", "education", "nationality", "rates", "glc", "pace", "telecoms"];
+Q.bill_keys = ["employment1", "employment2", "trade_union", "housing", "education", "nationality", "rates", "glc", "pace", "telecoms", "gas", "shops", "buses", "city", "fowler", "scot_rates"];
 for (var k of Q.bill_keys) {
     for (var f of ["", "_due", "_time", "_wait", "_watered", "_tough", "_amend", "_lords", "_fast", "_insisted", "_fell", "_lc", "_lnc"]) {
         if (Q['bill_' + k + f] === undefined) {

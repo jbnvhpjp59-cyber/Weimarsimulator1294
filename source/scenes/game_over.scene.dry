@@ -384,7 +384,7 @@ view-if: achievement_game_completed == 1
 tags: endings
 go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
-There are 65 achievements.
+There are 67 achievements.
 
 = In this playthrough
 
@@ -518,6 +518,10 @@ There are 65 achievements.
 
 [? if game_achievement_sequestration : **Sequestration** - let the courts seize the NUM's funds. ?]
 
+[? if game_achievement_tell_sid : **Tell Sid** - sell British Gas. ?]
+
+[? if game_achievement_big_bang : **Big Bang** - pass the Financial Services Act. ?]
+
 = Unlocked in earlier games
 
 [? if achievement_prime_minister and not game_achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -650,6 +654,10 @@ There are 65 achievements.
 
 [? if achievement_sequestration and not game_achievement_sequestration : **Sequestration** - let the courts seize the NUM's funds. ?]
 
+[? if achievement_tell_sid and not game_achievement_tell_sid : **Tell Sid** - sell British Gas. ?]
+
+[? if achievement_big_bang and not game_achievement_big_bang : **Big Bang** - pass the Financial Services Act. ?]
+
 = Not yet unlocked
 
 [? if not achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -781,6 +789,10 @@ There are 65 achievements.
 [? if not achievement_long_strike : **The Long Strike** - defeat the 1984-85 miners' strike. ?]
 
 [? if not achievement_sequestration : **Sequestration** - let the courts seize the NUM's funds. ?]
+
+[? if not achievement_tell_sid : **Tell Sid** - sell British Gas. ?]
+
+[? if not achievement_big_bang : **Big Bang** - pass the Financial Services Act. ?]
 
 @end_game
 game-over: true

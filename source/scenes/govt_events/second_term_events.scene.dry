@@ -5,12 +5,12 @@ max-visits: 1
 new-page: true
 on-arrival: {!
 Q.lab_leader = "Kinnock";
-Q.lab_leader_rating = 52;
+Q.lab_leader_rating = 46;
 Q.lab_left = 0;
 Q.labour_credibility += 8;
 Q.labour_civil_war -= 10;
 // a lasting recovery: Labour's voters start to come home
-var back = {ab: 1, c1: 2, c2: 3, de: 2};
+var back = {ab: 0.5, c1: 1, c2: 2, de: 1.5};
 for (var c in back) {
     Q.baseline_support[c + '_lab'] += back[c];
     Q[c + '_lab'] += back[c];

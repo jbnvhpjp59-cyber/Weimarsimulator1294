@@ -13,6 +13,10 @@ if (Q.year >= 1980) {
 if (Q.year >= 1982) {
     Q.budget += 0.5;
 }
+// the oil price collapse of 1986 cuts North Sea revenue
+if (Q.year >= 1987) {
+    Q.budget -= 1;
+}
 // growth brings in revenue; recession loses it
 Q.budget += 0.3 * Q.economic_growth;
 // the cost of unemployment benefit
@@ -42,6 +46,6 @@ Q.budget_disp = Q.budget;
 
 = [+ year +]
 
-[? if year = 1980 : The world economy is sliding into recession, and the second oil shock has doubled the price of crude. North Sea oil is now flowing into the Treasury. ?][? if year = 1981 : The recession is the deepest since the 1930s. Manufacturing output has fallen by a sixth. ?][? if year = 1982 : There are signs the recession has bottomed out, though unemployment is still climbing. ?][? if year = 1983 : The recovery is under way. The new parliamentary boundaries, with 650 seats, will apply at the next general election. ?][? if year >= 1984 : Another year in Downing Street. ?]
+[? if year = 1980 : The world economy is sliding into recession, and the second oil shock has doubled the price of crude. North Sea oil is now flowing into the Treasury. ?][? if year = 1981 : The recession is the deepest since the 1930s. Manufacturing output has fallen by a sixth. ?][? if year = 1982 : There are signs the recession has bottomed out, though unemployment is still climbing. ?][? if year = 1983 : The recovery is under way. The new parliamentary boundaries, with 650 seats, will apply at the next general election. ?][? if year = 1984 : The recovery is real, but unemployment is still above three million and the coalfields are restless. ?][? if year = 1985 : The economy is growing at three per cent a year. The pound is weak against the dollar. ?][? if year = 1986 : The price of oil has started to fall, and the Treasury's North Sea revenue will fall with it. ?][? if year = 1987 : The economy is booming, unemployment is falling at last, and an election must come within eighteen months. ?][? if year >= 1988 : Another year in Downing Street. ?]
 
 [? if benefit_cost > 0 : Paying benefit to the unemployed costs the Treasury [+ benefit_cost +] this year. ?] The Treasury's headroom stands at [+ budget_disp +].

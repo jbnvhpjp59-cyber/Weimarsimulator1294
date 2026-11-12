@@ -684,6 +684,15 @@ Q.libya_seen = 0;
 Q.wapping_seen = 0;
 Q.teachers_seen = 0;
 Q.labour_1987_seen = 0;
+// the second term's reforms, sales and economy
+Q.gas_sold = 0;
+Q.sunday_trading = 0;
+Q.buses_deregulated = 0;
+Q.big_bang = 0;
+Q.fowler_reform = 0;
+Q.poll_tax = 0;
+Q.big_sales = 0;
+Q.oil_collapse = 0;
 
 // ---------------------------------------------------------------
 // The front page (newsroom.scene.dry) and the chronicle of decisions

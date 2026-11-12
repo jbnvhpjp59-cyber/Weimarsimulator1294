@@ -1632,3 +1632,977 @@ achievement: telecoms
 = Royal Assent: the Telecommunications Act
 
 The Telecommunications Act [+ year +] receives Royal Assent. British Telecom will be sold. The advertising agencies are already competing to sell the shares to people who have never owned one.
+
+#################### Gas Bill
+
+@second_gas
+title: Second Reading: the Gas Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_gas = 1 and bill_gas_due <= time
+new-page: true
+on-arrival: div_key = "gas"; div_mode = "count"
+call: bill_vote
+face-image: img/events/commons_1970s.jpg
+
+= Second Reading: the Gas Bill
+
+The Gas Bill will sell British Gas whole, as a private company with its own regulator, in the biggest share offer yet. Shares will be set aside for small investors, and the advertising agencies are already working on a campaign built around a man called Sid. Labour promises to take it back; some of our own backbenchers would rather see it broken up first.
+
+**The whips' count.** [? if div_proj_rebels >= 1 : About [+ div_proj_rebels +] Conservatives are expected to vote against, and [+ div_proj_abstain +] more to abstain. ?][? if div_proj_rebels = 0 : The party is solid behind the bill. ?][? if div_partner_n = 1 : [+ div_partner_text +] ?] [? if div_proj_majority > 0 : The whips expect a majority of [+ div_proj_majority +]. ?][? if div_proj_majority <= 0 : The whips expect the government to lose by [+ div_proj_deficit +] votes. ?]
+
+- @divide_gas: Divide the House.
+- @concede_gas: Buy off the rebels with concessions.
+- @confidence_gas: Make it a matter of confidence.
+- @deal_gas: Do a deal with the minor parties.
+- @withdraw_gas: Withdraw the bill.
+
+@divide_gas
+subtitle: Put it to the vote as it stands.
+on-arrival: div_key = "gas"; div_mode = "press"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@concede_gas
+view-if: div_proj_rebels >= 4
+subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
+on-arrival: div_key = "gas"; div_mode = "concede"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@confidence_gas
+view-if: div_proj_majority < 30
+subtitle: Most rebels will fall into line. They won't forget it.
+on-arrival: div_key = "gas"; div_mode = "confidence"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@deal_gas
+view-if: govt_type >= 2
+subtitle: -1 resource. The minor parties vote with us this time.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: div_key = "gas"; div_mode = "deal"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@withdraw_gas
+view-if: div_proj_majority < 20
+subtitle: Avoids a defeat. The bill can come back in six months.
+on-arrival: bill_gas = 0; bill_gas_wait = time + 6; dry_dissent += 3; thatcher_rating -= 1
+
+The bill is withdrawn before the vote. The papers call it a climbdown, and the dries call it worse.
+
+@amend_gas
+title: In Committee: the Gas Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_gas = 2 and bill_gas_amend = 1
+new-page: true
+face-image: img/events/commons_1970s.jpg
+
+= In Committee: the Gas Bill
+
+Backbenchers want British Gas split into regional companies before it is sold, so that they can compete with each other instead of one private monopoly replacing a public one.
+
+- @amend_yes_gas: Break it up first.
+- @amend_no_gas: Sell it whole.
+
+@amend_yes_gas
+subtitle: More competition, a smaller cheque, and a delay in the City.
+on-arrival: dry_dissent -= 2; wet_dissent += 1; bill_gas_watered = 1; bill_gas = 3; bill_gas_amend = 2; bill_gas_due = time + 1
+
+British Gas will be sold as twelve regional companies. The Treasury grumbles about the proceeds; the economists cheer.
+
+@amend_no_gas
+subtitle: The Treasury gets its money; the critics call it a private monopoly.
+on-arrival: dry_dissent += 1; wet_dissent -= 1; bill_gas = 3; bill_gas_amend = 2; bill_gas_due = time + 1
+
+The amendment falls. British Gas will be sold as one company, with a regulator to watch its prices.
+
+@lords_gas
+title: The Lords Amend the Gas Bill
+tags: event
+view-if: con_in_government = 1 and bill_gas = 4 and bill_gas_lords = 1
+new-page: true
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_gas', ['Contents', 'Not-Contents'], [Q.bill_gas_lc, Q.bill_gas_lnc], ['against', 'govt']); } !}
+
+= The Lords Amend the Gas Bill
+
+The House of Lords votes to oblige the new company to supply any household that asks, at published tariffs, and to keep its showrooms and safety service in every region.
+
+{!<span class="division" id="lords_division_gas"></span>!}
+
+The government is defeated by [+ bill_gas_lc +] votes to [+ bill_gas_lnc +].
+
+- @lords_yes_gas: Accept the Lords amendment.
+- @lords_no_gas: Overturn it in the Commons.
+
+@lords_yes_gas
+subtitle: Customers are protected. The City shrugs.
+on-arrival: wet_dissent -= 1; bill_gas_lords = 2; bill_gas_due = time + 1
+
+The duty to supply goes into the bill. Royal Assent should follow within the month.
+
+@lords_no_gas
+subtitle: The Lords may back down, or may not.
+on-arrival: dry_dissent -= 1; wet_dissent += 1; lords_key = "gas"
+call: bill_insist
+
+The whips bring the clause back to the Commons, and the government's majority reverses the Lords. [? if lords_gave_way = 1 : The peers decide not to press the point a second time, and the bill goes through as the government wanted. ?][? if lords_gave_way = 0 : The peers insist. After a month of messages between the two Houses, the government gives way to save the bill, with nothing to show for the delay. ?]
+
+@assent_gas
+title: Royal Assent: the Gas Act
+tags: event
+view-if: bill_gas = 5
+new-page: true
+on-arrival: privatisations += 1; gas_sold = 1; budget += 3; budget -= 1 if bill_gas_watered = 1; economic_liberalism += 3; c1_con += 1*(1-dissent); c2_con += 1*(1-dissent); ab_con += 1*(1-dissent); bill_gas = 6; assent_key = "gas"
+call: bill_assent
+face-image: img/events/lords_throne.jpg
+achievement: tell_sid
+
+= Royal Assent: the Gas Act
+
+The Gas Act [+ year +] receives Royal Assent. The flotation is advertised on every television channel: if you see Sid, tell him. Four and a half million people apply for shares, many of them for the first time.
+
+#################### Shops Bill
+
+@second_shops
+title: Second Reading: the Shops Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_shops = 1 and bill_shops_due <= time
+new-page: true
+on-arrival: div_key = "shops"; div_mode = "count"
+call: bill_vote
+face-image: img/events/commons_1970s.jpg
+
+= Second Reading: the Shops Bill
+
+The Shops Bill would sweep away the old Sunday trading laws, under which a shop may sell a pornographic magazine on a Sunday but not a Bible, and let shops open when they choose. The churches, the shopworkers' union and the Keep Sunday Special campaign have flooded MPs' postbags, and dozens of our own backbenchers, most of them on the party's right, have promised to vote against.
+
+**The whips' count.** [? if div_proj_rebels >= 1 : About [+ div_proj_rebels +] Conservatives are expected to vote against, and [+ div_proj_abstain +] more to abstain. ?][? if div_proj_rebels = 0 : The party is solid behind the bill. ?][? if div_partner_n = 1 : [+ div_partner_text +] ?] [? if div_proj_majority > 0 : The whips expect a majority of [+ div_proj_majority +]. ?][? if div_proj_majority <= 0 : The whips expect the government to lose by [+ div_proj_deficit +] votes. ?]
+
+- @divide_shops: Divide the House.
+- @concede_shops: Buy off the rebels with concessions.
+- @confidence_shops: Make it a matter of confidence.
+- @deal_shops: Do a deal with the minor parties.
+- @withdraw_shops: Withdraw the bill.
+
+@divide_shops
+subtitle: Put it to the vote as it stands.
+on-arrival: div_key = "shops"; div_mode = "press"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@concede_shops
+view-if: div_proj_rebels >= 4
+subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
+on-arrival: div_key = "shops"; div_mode = "concede"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@confidence_shops
+view-if: div_proj_majority < 30
+subtitle: Most rebels will fall into line. They won't forget it.
+on-arrival: div_key = "shops"; div_mode = "confidence"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@deal_shops
+view-if: govt_type >= 2
+subtitle: -1 resource. The minor parties vote with us this time.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: div_key = "shops"; div_mode = "deal"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@withdraw_shops
+view-if: div_proj_majority < 20
+subtitle: Avoids a defeat. The bill can come back in six months.
+on-arrival: bill_shops = 0; bill_shops_wait = time + 6; dry_dissent += 3; thatcher_rating -= 1
+
+The bill is withdrawn before the vote. The papers call it a climbdown, and the dries call it worse.
+
+@amend_shops
+title: In Committee: the Shops Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_shops = 2 and bill_shops_amend = 1
+new-page: true
+face-image: img/events/commons_1970s.jpg
+
+= In Committee: the Shops Bill
+
+Backbenchers want to protect shopworkers who refuse to work on Sundays from being sacked for it.
+
+- @amend_yes_shops: Accept the amendment.
+- @amend_no_shops: Reject it.
+
+@amend_yes_shops
+subtitle: The shopworkers are protected; the opposition softens a little.
+on-arrival: right_dissent -= 3; dry_dissent += 1; bill_shops = 3; bill_shops_amend = 2; bill_shops_due = time + 1
+
+No shopworker will be made to work on a Sunday against their will.
+
+@amend_no_shops
+subtitle: The employers are pleased.
+on-arrival: right_dissent += 3; dry_dissent -= 1; bill_shops = 3; bill_shops_amend = 2; bill_shops_due = time + 1
+
+The amendment falls. The churches say they will remember.
+
+@lords_shops
+title: The Lords Amend the Shops Bill
+tags: event
+view-if: con_in_government = 1 and bill_shops = 4 and bill_shops_lords = 1
+new-page: true
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_shops', ['Contents', 'Not-Contents'], [Q.bill_shops_lc, Q.bill_shops_lnc], ['against', 'govt']); } !}
+
+= The Lords Amend the Shops Bill
+
+The House of Lords votes to keep large stores closed on Easter Sunday and Christmas Day.
+
+{!<span class="division" id="lords_division_shops"></span>!}
+
+The government is defeated by [+ bill_shops_lc +] votes to [+ bill_shops_lnc +].
+
+- @lords_yes_shops: Accept the Lords amendment.
+- @lords_no_shops: Overturn it in the Commons.
+
+@lords_yes_shops
+subtitle: A small concession to the churches.
+on-arrival: right_dissent -= 1; bill_shops_lords = 2; bill_shops_due = time + 1
+
+The great festivals stay free of shopping. Royal Assent should follow within the month.
+
+@lords_no_shops
+subtitle: The Lords may back down, or may not.
+on-arrival: right_dissent += 2; lords_key = "shops"
+call: bill_insist
+
+The whips bring the clause back to the Commons, and the government's majority reverses the Lords. [? if lords_gave_way = 1 : The peers decide not to press the point a second time, and the bill goes through as the government wanted. ?][? if lords_gave_way = 0 : The peers insist. After a month of messages between the two Houses, the government gives way to save the bill, with nothing to show for the delay. ?]
+
+@assent_shops
+title: Royal Assent: the Shops Act
+tags: event
+view-if: bill_shops = 5
+new-page: true
+on-arrival: sunday_trading = 1; economic_growth += 0.2; c1_con += 0.5*(1-dissent); ab_con += 0.5*(1-dissent); right_dissent += 3; bill_shops = 6; assent_key = "shops"
+call: bill_assent
+face-image: img/events/lords_throne.jpg
+
+= Royal Assent: the Shops Act
+
+The Shops Act [+ year +] receives Royal Assent. Shops may open on Sundays. The garden centres and the DIY stores are first, and the high street follows.
+
+#################### Transport Bill
+
+@second_buses
+title: Second Reading: the Transport Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_buses = 1 and bill_buses_due <= time
+new-page: true
+on-arrival: div_key = "buses"; div_mode = "count"
+call: bill_vote
+face-image: img/events/commons_1970s.jpg
+
+= Second Reading: the Transport Bill
+
+The Transport Bill deregulates the buses outside London: any company may run any route, and the National Bus Company will be sold off in pieces. Councils will subsidise only the routes the market won't run. Labour says the countryside will lose its buses; the shire Conservatives are not sure it is wrong.
+
+**The whips' count.** [? if div_proj_rebels >= 1 : About [+ div_proj_rebels +] Conservatives are expected to vote against, and [+ div_proj_abstain +] more to abstain. ?][? if div_proj_rebels = 0 : The party is solid behind the bill. ?][? if div_partner_n = 1 : [+ div_partner_text +] ?] [? if div_proj_majority > 0 : The whips expect a majority of [+ div_proj_majority +]. ?][? if div_proj_majority <= 0 : The whips expect the government to lose by [+ div_proj_deficit +] votes. ?]
+
+- @divide_buses: Divide the House.
+- @concede_buses: Buy off the rebels with concessions.
+- @confidence_buses: Make it a matter of confidence.
+- @deal_buses: Do a deal with the minor parties.
+- @withdraw_buses: Withdraw the bill.
+
+@divide_buses
+subtitle: Put it to the vote as it stands.
+on-arrival: div_key = "buses"; div_mode = "press"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@concede_buses
+view-if: div_proj_rebels >= 4
+subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
+on-arrival: div_key = "buses"; div_mode = "concede"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@confidence_buses
+view-if: div_proj_majority < 30
+subtitle: Most rebels will fall into line. They won't forget it.
+on-arrival: div_key = "buses"; div_mode = "confidence"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@deal_buses
+view-if: govt_type >= 2
+subtitle: -1 resource. The minor parties vote with us this time.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: div_key = "buses"; div_mode = "deal"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@withdraw_buses
+view-if: div_proj_majority < 20
+subtitle: Avoids a defeat. The bill can come back in six months.
+on-arrival: bill_buses = 0; bill_buses_wait = time + 6; dry_dissent += 3; thatcher_rating -= 1
+
+The bill is withdrawn before the vote. The papers call it a climbdown, and the dries call it worse.
+
+@amend_buses
+title: In Committee: the Transport Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_buses = 2 and bill_buses_amend = 1
+new-page: true
+face-image: img/events/commons_1970s.jpg
+
+= In Committee: the Transport Bill
+
+Members for rural seats want councils to have a duty to keep a minimum service to every village.
+
+- @amend_yes_buses: Accept the amendment.
+- @amend_no_buses: Reject it.
+
+@amend_yes_buses
+subtitle: The villages keep a bus, at a cost.
+on-arrival: wet_dissent -= 2; budget -= 0.3; bill_buses_watered = 1; bill_buses = 3; bill_buses_amend = 2; bill_buses_due = time + 1
+
+Every village is promised a bus, if not a frequent one.
+
+@amend_no_buses
+subtitle: The market will decide.
+on-arrival: wet_dissent += 2; dry_dissent -= 1; bill_buses = 3; bill_buses_amend = 2; bill_buses_due = time + 1
+
+The amendment falls. The market will decide where the buses go.
+
+@lords_buses
+title: The Lords Amend the Transport Bill
+tags: event
+view-if: con_in_government = 1 and bill_buses = 4 and bill_buses_lords = 1
+new-page: true
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_buses', ['Contents', 'Not-Contents'], [Q.bill_buses_lc, Q.bill_buses_lnc], ['against', 'govt']); } !}
+
+= The Lords Amend the Transport Bill
+
+The House of Lords votes to delay deregulation for a year to let councils prepare.
+
+{!<span class="division" id="lords_division_buses"></span>!}
+
+The government is defeated by [+ bill_buses_lc +] votes to [+ bill_buses_lnc +].
+
+- @lords_yes_buses: Accept the Lords amendment.
+- @lords_no_buses: Overturn it in the Commons.
+
+@lords_yes_buses
+subtitle: A delay, nothing worse.
+on-arrival: wet_dissent -= 1; bill_buses_lords = 2; bill_buses_due = time + 1
+
+Deregulation will come a year later. Royal Assent should follow within the month.
+
+@lords_no_buses
+subtitle: The Lords may back down, or may not.
+on-arrival: dry_dissent -= 1; wet_dissent += 1; lords_key = "buses"
+call: bill_insist
+
+The whips bring the clause back to the Commons, and the government's majority reverses the Lords. [? if lords_gave_way = 1 : The peers decide not to press the point a second time, and the bill goes through as the government wanted. ?][? if lords_gave_way = 0 : The peers insist. After a month of messages between the two Houses, the government gives way to save the bill, with nothing to show for the delay. ?]
+
+@assent_buses
+title: Royal Assent: the Transport Act
+tags: event
+view-if: bill_buses = 5
+new-page: true
+on-arrival: buses_deregulated = 1; budget += 0.5; budget -= 0.3 if bill_buses_watered = 1; economic_liberalism += 2; de_con -= 0.5; bill_buses = 6; assent_key = "buses"
+call: bill_assent
+face-image: img/events/lords_throne.jpg
+
+= Royal Assent: the Transport Act
+
+The Transport Act [+ year +] receives Royal Assent. The buses outside London are deregulated, and the minibuses of a dozen new companies race each other down the high streets.
+
+#################### Financial Services Bill
+
+@second_city
+title: Second Reading: the Financial Services Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_city = 1 and bill_city_due <= time
+new-page: true
+on-arrival: div_key = "city"; div_mode = "count"
+call: bill_vote
+face-image: img/events/commons_1970s.jpg
+
+= Second Reading: the Financial Services Bill
+
+The Financial Services Bill goes with the Big Bang in the City: the end of fixed commissions on the Stock Exchange, of the old divide between jobbers and brokers, and of the rule that kept foreign banks out. A new regulator, the Securities and Investments Board, will police the investment business with the City's own bodies under it.
+
+**The whips' count.** [? if div_proj_rebels >= 1 : About [+ div_proj_rebels +] Conservatives are expected to vote against, and [+ div_proj_abstain +] more to abstain. ?][? if div_proj_rebels = 0 : The party is solid behind the bill. ?][? if div_partner_n = 1 : [+ div_partner_text +] ?] [? if div_proj_majority > 0 : The whips expect a majority of [+ div_proj_majority +]. ?][? if div_proj_majority <= 0 : The whips expect the government to lose by [+ div_proj_deficit +] votes. ?]
+
+- @divide_city: Divide the House.
+- @concede_city: Buy off the rebels with concessions.
+- @confidence_city: Make it a matter of confidence.
+- @deal_city: Do a deal with the minor parties.
+- @withdraw_city: Withdraw the bill.
+
+@divide_city
+subtitle: Put it to the vote as it stands.
+on-arrival: div_key = "city"; div_mode = "press"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@concede_city
+view-if: div_proj_rebels >= 4
+subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
+on-arrival: div_key = "city"; div_mode = "concede"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@confidence_city
+view-if: div_proj_majority < 30
+subtitle: Most rebels will fall into line. They won't forget it.
+on-arrival: div_key = "city"; div_mode = "confidence"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@deal_city
+view-if: govt_type >= 2
+subtitle: -1 resource. The minor parties vote with us this time.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: div_key = "city"; div_mode = "deal"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@withdraw_city
+view-if: div_proj_majority < 20
+subtitle: Avoids a defeat. The bill can come back in six months.
+on-arrival: bill_city = 0; bill_city_wait = time + 6; dry_dissent += 3; thatcher_rating -= 1
+
+The bill is withdrawn before the vote. The papers call it a climbdown, and the dries call it worse.
+
+@amend_city
+title: In Committee: the Financial Services Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_city = 2 and bill_city_amend = 1
+new-page: true
+face-image: img/events/commons_1970s.jpg
+
+= In Committee: the Financial Services Bill
+
+Backbenchers want the regulator to be a statutory commission, like America's, instead of letting the City regulate itself.
+
+- @amend_yes_city: Give the regulator teeth.
+- @amend_no_city: Leave it to self-regulation.
+
+@amend_yes_city
+subtitle: Investors are better protected. The City grumbles.
+on-arrival: wet_dissent -= 2; dry_dissent += 2; bill_city_watered = 1; bill_city = 3; bill_city_amend = 2; bill_city_due = time + 1
+
+The Securities and Investments Board gets statutory powers and a public chairman.
+
+@amend_no_city
+subtitle: The City is pleased.
+on-arrival: dry_dissent -= 1; ab_con += 0.5; bill_city = 3; bill_city_amend = 2; bill_city_due = time + 1
+
+The City will regulate itself, under the eye of the new board.
+
+@lords_city
+title: The Lords Amend the Financial Services Bill
+tags: event
+view-if: con_in_government = 1 and bill_city = 4 and bill_city_lords = 1
+new-page: true
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_city', ['Contents', 'Not-Contents'], [Q.bill_city_lc, Q.bill_city_lnc], ['against', 'govt']); } !}
+
+= The Lords Amend the Financial Services Bill
+
+The House of Lords votes to bring Lloyd's of London under the new regulator.
+
+{!<span class="division" id="lords_division_city"></span>!}
+
+The government is defeated by [+ bill_city_lc +] votes to [+ bill_city_lnc +].
+
+- @lords_yes_city: Accept the Lords amendment.
+- @lords_no_city: Overturn it in the Commons.
+
+@lords_yes_city
+subtitle: Lloyd's is not pleased.
+on-arrival: wet_dissent -= 1; bill_city_lords = 2; bill_city_due = time + 1
+
+Lloyd's will answer to the regulator. Royal Assent should follow within the month.
+
+@lords_no_city
+subtitle: The Lords may back down, or may not.
+on-arrival: dry_dissent -= 1; lords_key = "city"
+call: bill_insist
+
+The whips bring the clause back to the Commons, and the government's majority reverses the Lords. [? if lords_gave_way = 1 : The peers decide not to press the point a second time, and the bill goes through as the government wanted. ?][? if lords_gave_way = 0 : The peers insist. After a month of messages between the two Houses, the government gives way to save the bill, with nothing to show for the delay. ?]
+
+@assent_city
+title: Royal Assent: the Financial Services Act
+tags: event
+view-if: bill_city = 5
+new-page: true
+on-arrival: big_bang = 1; economic_growth += 0.3; ab_con += 1*(1-dissent); ru_london -= 0.3; ru_southeast -= 0.2; economic_liberalism += 2; bill_city = 6; assent_key = "city"
+call: bill_assent
+face-image: img/events/lords_throne.jpg
+achievement: big_bang
+
+= Royal Assent: the Financial Services Act
+
+The Financial Services Act [+ year +] receives Royal Assent, and on the morning of the Big Bang the Stock Exchange's computers go live. Foreign banks buy up the old firms, salaries in the City double, and the young men in red braces become the symbol of the decade.
+
+#################### Social Security Bill
+
+@second_fowler
+title: Second Reading: the Social Security Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_fowler = 1 and bill_fowler_due <= time
+new-page: true
+on-arrival: div_key = "fowler"; div_mode = "count"
+call: bill_vote
+face-image: img/events/commons_1970s.jpg
+
+= Second Reading: the Social Security Bill
+
+Norman Fowler's Social Security Bill is the biggest reform of the welfare state since Beveridge: supplementary benefit becomes income support, grants for emergencies become loans from a cash-limited Social Fund, and the state earnings-related pension is cut back. The poverty lobby is up in arms, and so are some of our own wets.
+
+**The whips' count.** [? if div_proj_rebels >= 1 : About [+ div_proj_rebels +] Conservatives are expected to vote against, and [+ div_proj_abstain +] more to abstain. ?][? if div_proj_rebels = 0 : The party is solid behind the bill. ?][? if div_partner_n = 1 : [+ div_partner_text +] ?] [? if div_proj_majority > 0 : The whips expect a majority of [+ div_proj_majority +]. ?][? if div_proj_majority <= 0 : The whips expect the government to lose by [+ div_proj_deficit +] votes. ?]
+
+- @divide_fowler: Divide the House.
+- @concede_fowler: Buy off the rebels with concessions.
+- @confidence_fowler: Make it a matter of confidence.
+- @deal_fowler: Do a deal with the minor parties.
+- @withdraw_fowler: Withdraw the bill.
+
+@divide_fowler
+subtitle: Put it to the vote as it stands.
+on-arrival: div_key = "fowler"; div_mode = "press"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@concede_fowler
+view-if: div_proj_rebels >= 4
+subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
+on-arrival: div_key = "fowler"; div_mode = "concede"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@confidence_fowler
+view-if: div_proj_majority < 30
+subtitle: Most rebels will fall into line. They won't forget it.
+on-arrival: div_key = "fowler"; div_mode = "confidence"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@deal_fowler
+view-if: govt_type >= 2
+subtitle: -1 resource. The minor parties vote with us this time.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: div_key = "fowler"; div_mode = "deal"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@withdraw_fowler
+view-if: div_proj_majority < 20
+subtitle: Avoids a defeat. The bill can come back in six months.
+on-arrival: bill_fowler = 0; bill_fowler_wait = time + 6; dry_dissent += 3; thatcher_rating -= 1
+
+The bill is withdrawn before the vote. The papers call it a climbdown, and the dries call it worse.
+
+@amend_fowler
+title: In Committee: the Social Security Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_fowler = 2 and bill_fowler_amend = 1
+new-page: true
+face-image: img/events/commons_1970s.jpg
+
+= In Committee: the Social Security Bill
+
+Wets on the committee want the Social Fund to keep making grants, not just loans, to the poorest families.
+
+- @amend_yes_fowler: Keep some grants.
+- @amend_no_fowler: Loans only.
+
+@amend_yes_fowler
+subtitle: The wets are soothed; the savings shrink.
+on-arrival: wet_dissent -= 3; dry_dissent += 2; bill_fowler_watered = 1; bill_fowler = 3; bill_fowler_amend = 2; bill_fowler_due = time + 1
+
+Community care grants survive alongside the loans.
+
+@amend_no_fowler
+subtitle: The savings stay; the wets dig in.
+on-arrival: wet_dissent += 3; dry_dissent -= 2; rebellion += 0.3; bill_fowler = 3; bill_fowler_amend = 2; bill_fowler_due = time + 1
+
+The amendment falls. The poorest families will borrow from the state and pay it back from their benefit.
+
+@lords_fowler
+title: The Lords Amend the Social Security Bill
+tags: event
+view-if: con_in_government = 1 and bill_fowler = 4 and bill_fowler_lords = 1
+new-page: true
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_fowler', ['Contents', 'Not-Contents'], [Q.bill_fowler_lc, Q.bill_fowler_lnc], ['against', 'govt']); } !}
+
+= The Lords Amend the Social Security Bill
+
+The House of Lords votes to protect the earnings-related pension for women who have already paid in.
+
+{!<span class="division" id="lords_division_fowler"></span>!}
+
+The government is defeated by [+ bill_fowler_lc +] votes to [+ bill_fowler_lnc +].
+
+- @lords_yes_fowler: Accept the Lords amendment.
+- @lords_no_fowler: Overturn it in the Commons.
+
+@lords_yes_fowler
+subtitle: Smaller savings; a happier House.
+on-arrival: wet_dissent -= 2; bill_fowler_watered = 1; bill_fowler_lords = 2; bill_fowler_due = time + 1
+
+The cuts to the state pension will be phased in more slowly. Royal Assent should follow within the month.
+
+@lords_no_fowler
+subtitle: The Lords may back down, or may not.
+on-arrival: wet_dissent += 2; dry_dissent -= 1; lords_key = "fowler"
+call: bill_insist
+
+The whips bring the clause back to the Commons, and the government's majority reverses the Lords. [? if lords_gave_way = 1 : The peers decide not to press the point a second time, and the bill goes through as the government wanted. ?][? if lords_gave_way = 0 : The peers insist. After a month of messages between the two Houses, the government gives way to save the bill, with nothing to show for the delay. ?]
+
+@assent_fowler
+title: Royal Assent: the Social Security Act
+tags: event
+view-if: bill_fowler = 5
+new-page: true
+on-arrival: fowler_reform = 1; budget += 1.5; budget -= 0.5 if bill_fowler_watered = 1; de_con -= 1; wet_dissent += 2; bill_fowler = 6; assent_key = "fowler"
+call: bill_assent
+face-image: img/events/lords_throne.jpg
+
+= Royal Assent: the Social Security Act
+
+The Social Security Act [+ year +] receives Royal Assent. The welfare state is smaller, simpler and meaner, according to taste, and the Treasury will save money for decades.
+
+#################### Abolition of Domestic Rates (Scotland) Bill
+
+@second_scot_rates
+title: Second Reading: the Abolition of Domestic Rates (Scotland) Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_scot_rates = 1 and bill_scot_rates_due <= time
+new-page: true
+on-arrival: div_key = "scot_rates"; div_mode = "count"
+call: bill_vote
+face-image: img/events/commons_1970s.jpg
+
+= Second Reading: the Abolition of Domestic Rates (Scotland) Bill
+
+After the Scottish revaluation sent rate bills soaring, the government will abolish the domestic rates in Scotland and replace them with a flat community charge on every adult: a poll tax, its opponents call it. Scotland will go first, in 1989; England and Wales are to follow. The Scottish Conservatives asked for it; some of them are already wondering whether they should have.
+
+**The whips' count.** [? if div_proj_rebels >= 1 : About [+ div_proj_rebels +] Conservatives are expected to vote against, and [+ div_proj_abstain +] more to abstain. ?][? if div_proj_rebels = 0 : The party is solid behind the bill. ?][? if div_partner_n = 1 : [+ div_partner_text +] ?] [? if div_proj_majority > 0 : The whips expect a majority of [+ div_proj_majority +]. ?][? if div_proj_majority <= 0 : The whips expect the government to lose by [+ div_proj_deficit +] votes. ?]
+
+- @divide_scot_rates: Divide the House.
+- @concede_scot_rates: Buy off the rebels with concessions.
+- @confidence_scot_rates: Make it a matter of confidence.
+- @deal_scot_rates: Do a deal with the minor parties.
+- @withdraw_scot_rates: Withdraw the bill.
+
+@divide_scot_rates
+subtitle: Put it to the vote as it stands.
+on-arrival: div_key = "scot_rates"; div_mode = "press"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@concede_scot_rates
+view-if: div_proj_rebels >= 4
+subtitle: Most rebels come back. The bill is weakened, and the right are annoyed.
+on-arrival: div_key = "scot_rates"; div_mode = "concede"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@confidence_scot_rates
+view-if: div_proj_majority < 30
+subtitle: Most rebels will fall into line. They won't forget it.
+on-arrival: div_key = "scot_rates"; div_mode = "confidence"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@deal_scot_rates
+view-if: govt_type >= 2
+subtitle: -1 resource. The minor parties vote with us this time.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: div_key = "scot_rates"; div_mode = "deal"
+call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
+
+A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+
+[? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]
+
+@withdraw_scot_rates
+view-if: div_proj_majority < 20
+subtitle: Avoids a defeat. The bill can come back in six months.
+on-arrival: bill_scot_rates = 0; bill_scot_rates_wait = time + 6; right_dissent += 3; thatcher_rating -= 1
+
+The bill is withdrawn before the vote. The papers call it a climbdown, and the right call it worse.
+
+@amend_scot_rates
+title: In Committee: the Scottish Rates Bill
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and bill_scot_rates = 2 and bill_scot_rates_amend = 1
+new-page: true
+face-image: img/events/commons_1970s.jpg
+
+= In Committee: the Scottish Rates Bill
+
+Backbenchers want the charge to be related to income, with rebates for students and the low-paid.
+
+- @amend_yes_scot_rates: Add rebates.
+- @amend_no_scot_rates: One charge for all.
+
+@amend_yes_scot_rates
+subtitle: The charge is fairer; the Treasury grumbles.
+on-arrival: wet_dissent -= 2; right_dissent += 1; bill_scot_rates_watered = 1; bill_scot_rates = 3; bill_scot_rates_amend = 2; bill_scot_rates_due = time + 1
+
+Rebates of up to 80% will go to those on low incomes.
+
+@amend_no_scot_rates
+subtitle: Simple, and harsh.
+on-arrival: wet_dissent += 3; right_dissent -= 2; bill_scot_rates = 3; bill_scot_rates_amend = 2; bill_scot_rates_due = time + 1
+
+The amendment falls. The duke and the dustman will pay the same.
+
+@lords_scot_rates
+title: The Lords Amend the Scottish Rates Bill
+tags: event
+view-if: con_in_government = 1 and bill_scot_rates = 4 and bill_scot_rates_lords = 1
+new-page: true
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_scot_rates', ['Contents', 'Not-Contents'], [Q.bill_scot_rates_lc, Q.bill_scot_rates_lnc], ['against', 'govt']); } !}
+
+= The Lords Amend the Scottish Rates Bill
+
+The House of Lords votes to delay the charge until a review of how it works in practice.
+
+{!<span class="division" id="lords_division_scot_rates"></span>!}
+
+The government is defeated by [+ bill_scot_rates_lc +] votes to [+ bill_scot_rates_lnc +].
+
+- @lords_yes_scot_rates: Accept the Lords amendment.
+- @lords_no_scot_rates: Overturn it in the Commons.
+
+@lords_yes_scot_rates
+subtitle: A review, and a delay.
+on-arrival: wet_dissent -= 1; bill_scot_rates_lords = 2; bill_scot_rates_due = time + 1
+
+There will be a review. It will report after the next election. Royal Assent should follow within the month.
+
+@lords_no_scot_rates
+subtitle: The Lords may back down, or may not.
+on-arrival: right_dissent -= 1; wet_dissent += 1; lords_key = "scot_rates"
+call: bill_insist
+
+The whips bring the clause back to the Commons, and the government's majority reverses the Lords. [? if lords_gave_way = 1 : The peers decide not to press the point a second time, and the bill goes through as the government wanted. ?][? if lords_gave_way = 0 : The peers insist. After a month of messages between the two Houses, the government gives way to save the bill, with nothing to show for the delay. ?]
+
+@assent_scot_rates
+title: Royal Assent: the Abolition of Domestic Rates (Scotland) Act
+tags: event
+view-if: bill_scot_rates = 5
+new-page: true
+on-arrival: poll_tax = 1; scotland_con_bonus -= 1.5; scotland_con_bonus += 0.5 if bill_scot_rates_watered = 1; c1_con += 0.5*(1-dissent); right_dissent -= 2; bill_scot_rates = 6; assent_key = "scot_rates"
+call: bill_assent
+face-image: img/events/lords_throne.jpg
+
+= Royal Assent: the Abolition of Domestic Rates (Scotland) Act
+
+The Abolition of Domestic Rates Etc (Scotland) Act [+ year +] receives Royal Assent. The community charge will arrive in Scotland in 1989. In the Scottish towns, people are already calling it the poll tax, and the Scottish Conservatives are already nervous.
