@@ -1,0 +1,15 @@
+title: Set the next election
+on-arrival: {!
+// Call with time_to_election set (in months). Brings the election forward;
+// never pushes it back past the legal deadline.
+var t = Q.time + Q.time_to_election;
+if (t < Q.next_election_time) {
+    Q.next_election_time = t;
+}
+Q.election_called = 1;
+Q.months_to_election = Q.next_election_time - Q.time;
+Q.next_election_month = ((Q.next_election_time - 1) % 12) + 1;
+Q.next_election_year = 1978 + Math.floor((Q.next_election_time - 1) / 12);
+!}
+
+# Subroutine used with "call: set_election".

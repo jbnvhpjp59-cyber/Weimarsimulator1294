@@ -1,0 +1,147 @@
+title: The General Election
+new-page: true
+tags: event
+priority: -1
+view-if: time >= next_election_time and general_election_held = 0
+on-arrival: {!
+// polling error on election night: up to 1.5 points either way on the Con-Lab gap
+Q.apply_poll_error = 1;
+Q.poll_error = (Math.random() - 0.5) * 3;
+Q.final_poll_con = Q.con_votes;
+Q.final_poll_lab = Q.lab_votes;
+!}
+on-departure: month_actions += 1
+set-jump: results
+
+# Low priority: this event only appears after every other event this month is resolved.
+
+= Polling Day, [+ month : month +] [+ year +]
+
+The polls have closed. The last opinion polls had us on [+ final_poll_con +]% and Labour on [+ final_poll_lab +]%. [? if autumn_election_1978 : Callaghan's gamble on an autumn election is about to be judged. ?][? if no_confidence_won : The election our motion forced is about to be decided. ?]
+
+Party workers gather around the television at Central Office as the first results come in.
+
+- @election_algorithm: Watch the results come in.
+
+@results
+on-arrival: {!
+Q.apply_poll_error = 0;
+Q.poll_error = 0;
+Q.general_election_held = 1;
+Q.n_elections += 1;
+// the new House of Commons
+Q.con_mps = Q.con_seats;
+Q.lab_mps = Q.lab_seats;
+Q.lib_mps = Q.lib_seats;
+Q.snp_mps = Q.snp_seats;
+Q.pc_mps = Q.pc_seats;
+Q.ni_mps = Q.ni_seats;
+Q.other_mps = Q.other_seats; // the Speaker is counted in their old party's seat
+// a party needs more than half of the voting members
+Q.con_majority = 2 * Q.con_mps - Q.total_seats;
+Q.con_short = Q.majority_line - Q.con_mps;
+Q.largest_party = (Q.con_mps >= Q.lab_mps) ? 'con' : 'lab';
+Q.con_plus_lib = Q.con_mps + Q.lib_mps;
+Q.con_plus_ni = Q.con_mps + 10;
+Q.election_records.push({'date': new Date(Q.year, Q.month - 1),
+                         'con': Q.con_mps, 'lab': Q.lab_mps, 'lib': Q.lib_mps,
+                         'snp': Q.snp_mps, 'pc': Q.pc_mps, 'ni': Q.ni_mps});
+!}
+on-display: {!
+var data = [
+    {"id": "lab", "legend": "Labour", "name": "Labour", "seats": Q.lab_mps},
+    {"id": "snp", "legend": "SNP", "name": "SNP", "seats": Q.snp_mps},
+    {"id": "pc", "legend": "Plaid Cymru", "name": "Plaid Cymru", "seats": Q.pc_mps},
+    {"id": "lib", "legend": "Liberal", "name": "Liberal", "seats": Q.lib_mps},
+    {"id": "other", "legend": "Other", "name": "Other", "seats": Q.other_mps},
+    {"id": "ni", "legend": "Northern Ireland", "name": "Northern Ireland", "seats": Q.ni_mps},
+    {"id": "con", "legend": "Conservative", "name": "Conservative", "seats": Q.con_mps}
+];
+if (typeof window !== 'undefined' && typeof d3 !== 'undefined' && d3.parliament) {
+    var width = 500;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("commons").style.height = screenWidth / 2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    parliament.exit.toCenter(false).bigToSmall(true);
+    d3.select("#commons").datum(data).call(parliament);
+}
+!}
+go-to: formation
+
+= The New House of Commons
+
+{!<svg id="commons" style="width: 500px; height: 250px;"> </svg>!}
+
+{!<table>!}
+{!<tr><td>Party</td><td>Vote</td><td>Seats</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#0087DC'> </div> !} **Conservative** {!</td><td>!} **[+ con_votes +]%** {!</td><td>!} **[+ con_mps +]** {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#DC241F'> </div> !} Labour {!</td><td>!} [+ lab_votes +]% {!</td><td>!} [+ lab_mps +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#FDBB30'> </div> !} Liberal {!</td><td>!} [+ lib_votes +]% {!</td><td>!} [+ lib_mps +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#FDF38E'> </div> !} SNP {!</td><td>!} [+ snp_votes +]% {!</td><td>!} [+ snp_mps +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#008142'> </div> !} Plaid Cymru {!</td><td>!} [+ pc_votes +]% {!</td><td>!} [+ pc_mps +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#9999FF'> </div> !} Northern Ireland {!</td><td>!} {!</td><td>!} [+ ni_mps +] {!</td></tr>!}
+{!</table>!}
+
+[? if con_mps >= 318 : **A Conservative majority of [+ con_majority +].** ?][? if lab_mps >= 318 : **Labour has won a majority.** ?]
+
+[? if con_mps < 318 and lab_mps < 318 and largest_party == "con" : **A hung parliament.** We are the largest party, [+ con_short +] seats short of a majority. ?][? if con_mps < 318 and lab_mps < 318 and largest_party == "lab" : **A hung parliament.** Labour is the largest party. ?]
+
+@formation
+
+- @majority
+- @unionist_deal
+- @liberal_deal
+- @minority
+- @concede
+
+@majority
+title: Go to the Palace.
+view-if: con_mps >= 318
+on-arrival: con_in_government = 1; prime_minister = "Thatcher"; pm_party = "Conservative"; result_type = 1
+go-to: game_over
+
+@unionist_deal
+title: Govern with the support of the Ulster Unionists.
+subtitle: Conservatives + Unionists: [+ con_plus_ni +] seats.
+unavailable-subtitle: Conservatives + Unionists: [+ con_plus_ni +] seats. Our relations with the Unionists are not good enough.
+view-if: con_mps < 318 and largest_party == "con" and con_plus_ni >= 318
+choose-if: uup_relation >= 50
+on-arrival: con_in_government = 1; prime_minister = "Thatcher"; pm_party = "Conservative"; result_type = 2
+go-to: game_over
+achievement: ulster_deal
+
+@liberal_deal
+title: Open talks with David Steel.
+subtitle: Conservatives + Liberals: [+ con_plus_lib +] seats.
+unavailable-subtitle: Conservatives + Liberals: [+ con_plus_lib +] seats. The Liberals won't deal with us.
+view-if: con_mps < 318 and largest_party == "con" and con_plus_lib >= 318
+choose-if: lib_relation >= 50
+
+Steel will offer support on a vote-by-vote basis in exchange for one thing: a real move towards proportional representation.
+
+- @liberal_deal_accept: Concede a Speaker's Conference on electoral reform.
+- @formation: Refuse, and look for another way.
+
+@liberal_deal_accept
+on-arrival: con_in_government = 1; prime_minister = "Thatcher"; pm_party = "Conservative"; result_type = 3; electoral_reform_promise = 1; right_dissent += 10; dry_dissent += 5
+go-to: game_over
+achievement: lib_con
+
+@minority
+title: Form a minority government and dare the others to bring it down.
+view-if: con_mps < 318 and largest_party == "con"
+on-arrival: con_in_government = 1; prime_minister = "Thatcher"; pm_party = "Conservative"; result_type = 4
+go-to: game_over
+
+@concede
+title: Concede defeat.
+view-if: largest_party == "lab"
+on-arrival: result_type = 5
+go-to: game_over

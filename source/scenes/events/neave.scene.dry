@@ -1,0 +1,14 @@
+title: Airey Neave
+tags: event
+view-if: time >= 15 and time <= 16 and neave_dead = 0
+max-visits: 1
+new-page: true
+on-arrival: neave_dead = 1; right_strength += 3; uup_relation += 5; thatcher_rating += 1
+
+= Airey Neave
+
+Airey Neave, your Northern Ireland spokesman and one of your oldest allies, has been killed by a bomb under his car as he drove out of the Palace of Westminster car park. The Irish National Liberation Army has claimed responsibility.
+
+Neave ran your leadership campaign in 1975 and had escaped from Colditz as a prisoner of war. His loss is personal as well as political.
+
+Westminster is in shock. From now on, senior politicians will travel under much tighter security.

@@ -1,0 +1,30 @@
+title: Callaghan Decides
+tags: event
+view-if: time = 9 and election_called = 0
+max-visits: 1
+new-page: true
+on-arrival: {!
+// Callaghan goes if Labour is ahead; if the polls are level, it's a coin toss.
+var labour_lead = Q.lab_votes - Q.con_votes;
+Q.callaghan_calls = (labour_lead >= 1 || (labour_lead > -1 && Math.random() < 0.5)) ? 1 : 0;
+!}
+go-to: election if callaghan_calls = 1; no_election if callaghan_calls = 0
+
+= Callaghan Decides
+
+All summer, Westminster has assumed Callaghan will go to the country in October, before the 5% pay limit can unravel. At the TUC conference, all he offered was a music-hall song, "There was I, waiting at the church". Tonight he makes a television broadcast to the nation.
+
+@election
+on-arrival: autumn_election_1978 = 1; time_to_election = 1; callaghan_rating += 2
+call: set_election
+
+With the polls running his way, Callaghan seizes his moment. Parliament will be dissolved, and the country votes in [+ next_election_month : month +] [+ next_election_year +].
+
+We have weeks, not months. Whatever we have built so far is what we fight with.
+
+@no_election
+on-arrival: callaghan_rating -= 2; labour_credibility -= 1; wet_dissent -= 2; loyalist_dissent -= 2
+
+Callaghan says there will be no election this autumn. He has decided to see out the winter and go to the country in 1979.
+
+Our candidates, already printing leaflets, are relieved and furious in equal measure. Callaghan has just bet his government on the 5% pay limit holding through the winter.

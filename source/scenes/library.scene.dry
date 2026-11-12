@@ -1,0 +1,80 @@
+title: library
+new-page: true
+is-special: true
+go-to: menu
+
+= The Library
+
+Background on British politics in 1978.
+
+@menu
+
+- @system: How Britain is governed
+- @timeline: How we got here: 1970-1978
+- @parties: The parties
+- @factions: The factions of the Conservative Party
+- @elections: How elections work in this game
+- @backSpecialScene: Leave the library.
+
+@system
+go-to: menu
+
+The United Kingdom is a parliamentary monarchy. Real power lies with the House of Commons: 635 MPs, each elected by first-past-the-post in a single constituency. Whoever commands a majority of the Commons (318 seats) becomes Prime Minister.
+
+A Parliament can last at most five years. The Prime Minister chooses the date of the election within that limit, unless the government loses a vote of confidence in the Commons, in which case it must resign or seek a dissolution.
+
+The Parliament elected in October 1974 must therefore be dissolved by the autumn of 1979.
+
+@timeline
+go-to: menu
+
+**1970**: Edward Heath's Conservatives win a surprise victory, promising to modernise the economy and tame the unions.
+
+**1972**: Heath's "U-turn": faced with rising unemployment, he rescues failing industries and introduces statutory controls on pay and prices.
+
+**1973-74**: The oil shock and a miners' strike. Industry works a three-day week. Heath calls an election in February 1974 on the question "Who governs Britain?" and loses.
+
+**1974**: Harold Wilson forms a minority Labour government and wins a majority of three in October.
+
+**1975**: You defeat Heath for the party leadership. Keith Joseph, the intellectual leader of the free-market right, had decided not to stand.
+
+**1976**: Wilson resigns; James Callaghan becomes Prime Minister. A sterling crisis forces the government to borrow from the International Monetary Fund in exchange for spending cuts.
+
+**1977**: With its majority gone, Labour survives through the Lib-Lab Pact with David Steel's Liberals.
+
+@parties
+go-to: menu
+
+**The Conservative Party**: your party. The party of property, the Union and the shires, divided over how far to break with the post-war consensus.
+
+**The Labour Party**: in government under James Callaghan. Funded by and tied to the trade unions, and split between the moderates in Cabinet and a resurgent left in the constituencies.
+
+**The Liberal Party**: led by David Steel since the fall of Jeremy Thorpe. Strong in the South West and the Celtic fringe, and unfairly treated by first-past-the-post.
+
+**The Scottish National Party**: eleven MPs, won in 1974 on the promise of North Sea oil and home rule. Supports Labour as long as Labour delivers a Scottish Assembly.
+
+**Plaid Cymru**: three Welsh nationalist MPs, concentrated in Welsh-speaking north and west Wales.
+
+**The Ulster Unionists and others**: twelve Northern Irish MPs. The ten Unionists were once Conservative allies, until Heath imposed direct rule. They are now open to offers from either side.
+
+@factions
+go-to: menu
+
+**The dries** believe the post-war settlement has failed. Inflation must be beaten by controlling the money supply, the unions must be brought within the law, and the state must shrink. Keith Joseph and Geoffrey Howe lead them; you are, by conviction, one of them.
+
+**The wets** served in Heath's government and believe in consensus, incomes policy and One Nation. They hold many senior posts in your Shadow Cabinet: Jim Prior, Ian Gilmour, Francis Pym.
+
+**The loyalists** are the party managers, such as Willie Whitelaw, Lord Carrington and the whips. They will back the leader as long as the leader looks like a winner.
+
+**The right** are traditionalists: law and order, immigration, the Union, and suspicion of Europe.
+
+High dissent in any faction weakens every gain in support you make. If the party as a whole becomes too divided, it starts to bleed votes.
+
+@elections
+go-to: menu
+
+Your national vote share comes from your support among four social grades: professional and managerial (AB), white-collar (C1), skilled manual (C2) and semi-skilled, unskilled and pensioners (DE). In the 1970s, the skilled working class was the great battleground.
+
+Seats are projected region by region. Each region starts from its approximate October 1974 result and moves with the national swing. The South swings harder than the North, and Scotland and Wales have their own nationalist parties. Within a region, the leading party takes a share of seats well above its share of votes (a "square law"). The Liberals, whose vote is spread thinly, win very few seats.
+
+Given the real vote shares, the model reproduces the October 1974 result to within a few seats. On election night, actual results can differ from the final polls by a couple of points.

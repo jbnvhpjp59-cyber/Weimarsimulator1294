@@ -1,0 +1,229 @@
+title: Post Event
+new-page: true
+on-arrival: {!
+Q.last_advisor_action = 0;
+// keep support numbers non-negative
+for (var c of Q.classes) {
+    for (var party of Q.parties) {
+        if (Q[c + '_' + party] < 0) {
+            Q[c + '_' + party] = 0;
+        }
+    }
+}
+
+// clamp 0-100 opinion meters
+var meters = ['thatcher_rating', 'callaghan_rating', 'economic_liberalism',
+              'union_backlash', 'labour_credibility', 'heath_hostility',
+              'lib_relation', 'snp_relation', 'pc_relation', 'uup_relation'];
+for (var m of meters) {
+    if (Q[m] < 0) {
+        Q[m] = 0;
+    } else if (Q[m] > 100) {
+        Q[m] = 100;
+    }
+}
+if (Q.strike_wave < 0) {
+    Q.strike_wave = 0;
+} else if (Q.strike_wave > 10) {
+    Q.strike_wave = 10;
+}
+
+// ---- factions and dissent ----
+var total_strength = 0;
+for (var f of Q.factions) {
+    if (Q[f + '_dissent'] < 0) {
+        Q[f + '_dissent'] = 0;
+    } else if (Q[f + '_dissent'] >= 100) {
+        Q[f + '_dissent'] = 99;
+    }
+    if (Q[f + '_strength'] < 1) {
+        Q[f + '_strength'] = 1;
+    }
+    total_strength += Q[f + '_strength'];
+}
+var total_dissent = 0;
+for (var f of Q.factions) {
+    Q[f + '_strength'] = 100 * Q[f + '_strength'] / total_strength;
+    total_dissent += Q[f + '_strength'] * Q[f + '_dissent'];
+}
+Q.dissent = 0.01 * total_dissent / 100;
+if (Q.dissent < 0) {
+    Q.dissent = 0;
+} else if (Q.dissent > 0.95) {
+    Q.dissent = 0.95;
+}
+Q.dissent_percent = Q.dissent * 100;
+
+// count manifesto planks
+Q.manifesto_planks = Q.policy_monetarism + Q.policy_tax_cuts + Q.policy_union_reform +
+    Q.policy_right_to_buy + Q.policy_law_order + Q.policy_defence +
+    Q.policy_privatisation + Q.policy_immigration;
+
+// ---- advance the month ----
+if (Q.month_actions >= 1) {
+    Q.time += 1;
+    Q.month_actions = 0;
+    Q.month += 1;
+    if (Q.month >= 13) {
+        Q.month = 1;
+        Q.year += 1;
+    }
+    for (var timer of Q.timers) {
+        if (Q[timer + '_timer'] && Q[timer + '_timer'] > 0) {
+            Q[timer + '_timer'] -= 1;
+        }
+    }
+    // a fresh roll each month for random events
+    Q.random_roll = Math.random();
+    Q.party_support_records.push({'date': new Date(Q.year, Q.month - 1),
+                                  'con': Q.con_votes, 'lab': Q.lab_votes,
+                                  'lib': Q.lib_votes});
+
+    // ---- the economy and the national mood ----
+    // Spring and summer 1978: inflation falls into single figures and
+    // Labour recovers. From autumn 1978, the 5% pay norm meets the unions.
+    var in_winter_crisis = (Q.year == 1978 && Q.month >= 10) || (Q.year == 1979 && Q.month <= 3);
+    if (Q.year == 1978 && Q.month <= 8) {
+        Q.inflation -= 0.25;
+        Q.unemployment -= 0.03;
+        Q.callaghan_rating += 0.5;
+        Q.labour_credibility += 0.6;
+        Q.c2_lab += 0.25;
+        Q.de_lab += 0.2;
+        Q.snp_share -= 0.3;
+    } else {
+        Q.inflation += 0.15;
+        Q.snp_share -= 0.15;
+    }
+    if (Q.pay_norm <= 5 && in_winter_crisis) {
+        Q.strike_wave += 0.6;
+    }
+    if (Q.strike_wave >= 3) {
+        Q.union_backlash += 0.4 * Q.strike_wave;
+        Q.labour_credibility -= 0.3 * Q.strike_wave;
+        Q.callaghan_rating -= 0.2 * Q.strike_wave;
+    } else {
+        // once the strikes end, tempers cool and Labour slowly recovers
+        if (Q.union_backlash > 55) {
+            Q.union_backlash -= 1.5;
+        }
+        if (Q.labour_credibility < 50) {
+            Q.labour_credibility += 0.5;
+        }
+    }
+    // outside the winter pay round, disputes settle quickly
+    if (!in_winter_crisis && Q.strike_wave > 2) {
+        Q.strike_wave -= 1.5;
+    }
+    if (Q.inflation >= 10) {
+        Q.labour_credibility -= 1;
+    }
+
+    // ---- support drifts back towards its January 1978 level ----
+    // Gains have to be sustained, not banked: each month 8% of the gap
+    // closes, so a one-off boost has a half-life of about eight months.
+    if (Q.baseline_support) {
+        for (var c of Q.classes) {
+            for (var party of Q.parties) {
+                var key = c + '_' + party;
+                if (Q.baseline_support[key] !== undefined) {
+                    Q[key] += (Q.baseline_support[key] - Q[key]) * 0.08;
+                }
+            }
+        }
+    }
+
+    // ---- opinion feeds into party support ----
+    if (Q.union_backlash >= 60) {
+        var ub = (Q.union_backlash - 60) / 20;
+        Q.c2_con += 0.35 * ub * (1 - Q.dissent);
+        Q.c1_con += 0.25 * ub * (1 - Q.dissent);
+        Q.de_con += 0.2 * ub * (1 - Q.dissent);
+        if (Q.policy_union_reform) {
+            Q.c2_con += 0.3 * ub * (1 - Q.dissent);
+            Q.c2_lab -= 0.2 * ub;
+        }
+    }
+    if (Q.labour_credibility < 40) {
+        Q.c2_lab -= 0.3;
+        Q.c1_lab -= 0.2;
+        Q.de_lab -= 0.2;
+    } else if (Q.labour_credibility > 60) {
+        Q.c2_lab += 0.3;
+        Q.c1_lab += 0.2;
+    }
+    var leader_gap = Q.thatcher_rating - Q.callaghan_rating;
+    if (leader_gap <= -20) {
+        Q.c1_con -= 0.3;
+        Q.c1_lib += 0.2;
+        Q.c2_con -= 0.2;
+    } else if (leader_gap <= -10) {
+        Q.c1_con -= 0.15;
+    } else if (leader_gap >= 0) {
+        Q.c1_con += 0.3;
+        Q.c2_con += 0.2;
+    }
+    // a divided party bleeds support
+    if (Q.dissent > 0.3) {
+        for (var c of Q.classes) {
+            Q[c + '_con'] -= 0.6;
+        }
+    } else if (Q.dissent > 0.2) {
+        for (var c of Q.classes) {
+            Q[c + '_con'] -= 0.3;
+        }
+    }
+    // Labour fights back: the bigger our lead, the harder their machine
+    // (and the unions' money) works to win back its voters.
+    var lead = Q.con_votes - Q.lab_votes;
+    if (lead > 2) {
+        Q.c2_lab += 0.12 * (lead - 2);
+        Q.de_lab += 0.1 * (lead - 2);
+        Q.c1_lab += 0.06 * (lead - 2);
+    }
+    // a Heath intervention now and then
+    if (Q.heath_hostility >= 70) {
+        Q.wet_dissent += 1;
+        Q.thatcher_rating -= 0.5;
+    }
+    // ratings drift back towards their baselines
+    if (Q.thatcher_rating > 45) {
+        Q.thatcher_rating -= 0.3;
+    } else if (Q.thatcher_rating < 35) {
+        Q.thatcher_rating += 0.3;
+    }
+    if (Q.snp_share < 12) {
+        Q.snp_share = 12;
+    }
+    if (Q.unemployment < 1) {
+        Q.unemployment = 1;
+    }
+}
+
+// recalculate projected votes and seats
+this._runActions(this.game.scenes['election_algorithm'].onArrival);
+
+// how many months until the election?
+Q.months_to_election = Q.next_election_time - Q.time;
+Q.next_election_month = ((Q.next_election_time - 1) % 12) + 1;
+Q.next_election_year = 1978 + Math.floor((Q.next_election_time - 1) / 12);
+// the last two months before polling day are the campaign
+Q.in_campaign = (Q.months_to_election <= 2) ? 1 : 0;
+
+Q.has_event = 0;
+// check if there are any events this month; if not, go to the main hand.
+var scene = this.game.scenes['post_event.events_choice'];
+var choices = this._compileChoices(scene);
+if (choices && choices[0].title != "Continue...") {
+    Q.has_event = 1;
+}
+!}
+go-to: events_choice if has_event = 1; main if has_event = 0 and hand_size == 3; main.main_easy if has_event = 0 and hand_size == 4
+
+= [+ month : month +] [+ year +]
+
+@events_choice
+
+- #event
+
+# This scene updates numbers after each action, then routes to events or the main hand.

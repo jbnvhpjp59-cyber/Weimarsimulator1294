@@ -1,0 +1,14 @@
+title: Credits
+new-page: true
+
+= Credits
+
+*Conservatism: An Alternate History* is a total-conversion mod of {!<a href="https://github.com/aucchen/social_democracy_alternate_history">Social Democracy: An Alternate History</a>!} by Autumn Chen, used under the MIT License.
+
+Built with {!<a href="https://github.com/aucchen/dendrynexus">dendrynexus</a>!}, Autumn Chen's fork of Ian Millington's Dendry interactive fiction engine.
+
+Libraries: jQuery, d3.js and d3-parliament.
+
+This is a work of alternate-history fiction. The real people who appear in it are portrayed in their public, historical roles.
+
+- @root.start_menu_2: Back

@@ -1,0 +1,50 @@
+title: The Shadow Cabinet
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: shadow_cabinet_timer <= 0
+on-arrival: shadow_cabinet_timer = 4; month_actions += 1
+
+= The Shadow Cabinet
+
+Your front bench is a coalition. Most of its members served under Heath, and a good number of them think the party made a mistake in 1975.
+
+- @dries: Promote the dries.
+- @balance: Keep the wets in the big jobs.
+- @heath_offer: Offer Edward Heath a way back.
+- @heath_freeze: Freeze Heath out.
+- @whips: Let the whips loose.
+- @easy_discard
+
+@dries
+subtitle: Dries strengthen; wets resent it.
+on-arrival: dry_strength += 5; dry_dissent -= 5; wet_dissent += 6; wet_strength -= 2
+
+Young believers in the market get front-bench jobs. Several Heathites read it as a purge in slow motion.
+
+@balance
+subtitle: Calms the wets, frustrates the dries.
+on-arrival: wet_dissent -= 6; dry_dissent += 4
+
+The economic portfolios stay balanced. Keith Joseph complains that you will never change the country with a cabinet that doesn't want to change it.
+
+@heath_offer
+view-if: heath_hostility >= 30
+subtitle: Heath is unlikely to accept, but the gesture matters.
+on-arrival: heath_hostility -= 12; wet_dissent -= 4; dry_dissent += 4; right_dissent += 2; thatcher_rating -= 1
+
+You let it be known that Heath would be welcome in a future government. He doesn't reply, but the wets notice that you asked.
+
+@heath_freeze
+subtitle: The dries cheer; the feud deepens.
+on-arrival: heath_hostility += 10; dry_dissent -= 3; wet_dissent += 3
+
+Heath gets no briefings, no invitations and no role. He makes sure the press hears how he feels about it.
+
+@whips
+subtitle: -1 resource. Lowers dissent in every faction.
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; dry_dissent -= 3; wet_dissent -= 3; loyalist_dissent -= 3; right_dissent -= 3
+
+Humphrey Atkins and his whips remind colleagues, gently and less gently, where their careers come from.

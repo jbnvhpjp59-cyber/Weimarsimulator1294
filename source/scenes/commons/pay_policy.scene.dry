@@ -1,0 +1,30 @@
+title: Pay Policy
+new-page: true
+is-card: true
+tags: commons
+view-if: pay_policy_timer <= 0
+on-arrival: pay_policy_timer = 6; month_actions += 1
+
+= Pay Policy
+
+The government's incomes policy, currently a [+ pay_norm +]% limit on pay rises, is the centre of its fight against inflation. What is our position?
+
+- @back_norm: Responsibly back the pay norm.
+- @free_bargaining: Free collective bargaining: the state should keep out of pay.
+- @statutory: Statutory wage controls with legal force.
+- @easy_discard
+
+@back_norm
+on-arrival: pay_stance = 1; wet_dissent -= 4; dry_dissent += 5; economic_liberalism -= 2; labour_credibility += 2; c2_con -= 1
+
+We back the government's attempt to hold down pay. Responsible, statesmanlike, and of no help to us when the policy fails.
+
+@free_bargaining
+on-arrival: pay_stance = 2; dry_dissent -= 4; wet_dissent += 3; economic_liberalism += 3; c2_con += 2*(1-dissent) if pay_norm <= 5
+
+Pay should be settled between employers and workers, with inflation controlled through the money supply. [? if pay_norm <= 5 : Skilled workers squeezed by the 5% limit like the sound of it. ?] Labour says we are encouraging the strikers.
+
+@statutory
+on-arrival: pay_stance = 3; dry_dissent += 8; wet_dissent -= 2; economic_liberalism -= 4; heath_hostility -= 5
+
+A legal pay freeze, as Heath tried in 1972. Heath is gratified. The dries think you have lost your mind.

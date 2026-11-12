@@ -1,0 +1,8 @@
+
+# industrial unrest (0 to 10)
+
+(..2) quiet
+(2..4) simmering
+(4..6) spreading
+(6..8) severe
+(8..) general breakdown

@@ -1,0 +1,165 @@
+title: Game Over.
+new-page: true
+go-to: eg_menu
+on-arrival: {!
+Q.game_over = 1;
+this.achieve('game_completed');
+if (Q.result_type == 1) {
+    this.achieve('iron_lady');
+    if (Q.con_majority >= 100) {
+        this.achieve('landslide');
+    }
+    if (Q.wet_dissent < 15 && Q.dry_dissent < 15) {
+        this.achieve('one_nation');
+    }
+    if (Q.devolution_stance == 1) {
+        this.achieve('home_rule_tory');
+    }
+}
+if (Q.result_type == 5) {
+    this.achieve('sunny_jim');
+}
+if (Q.autumn_election_1978 && Q.result_type >= 1 && Q.result_type <= 4) {
+    this.achieve('waiting_at_the_church');
+}
+!}
+
+= The End of the Beginning
+
+@eg_menu
+
+- #endings
+- @end_game: End game.
+
+@landslide
+title: A landslide.
+view-if: result_type = 1 and con_majority >= 100
+tags: endings
+go-to: eg_menu
+
+With a majority of [+ con_majority +], you have a mandate few post-war Prime Ministers have enjoyed. On the steps of Downing Street you quote St Francis of Assisi: "Where there is discord, may we bring harmony."
+
+The wets will stay in the Cabinet for now. They won't be able to stop you.
+
+@working_majority
+title: A working majority.
+view-if: result_type = 1 and con_majority >= 20 and con_majority < 100
+tags: endings
+go-to: eg_menu
+
+A majority of [+ con_majority +]: enough to govern, and enough to take on the unions, the money supply and the nationalised industries, if the party holds together. On the steps of Downing Street you quote St Francis of Assisi: "Where there is discord, may we bring harmony."
+
+@slim_majority
+title: A slender majority.
+view-if: result_type = 1 and con_majority < 20
+tags: endings
+go-to: eg_menu
+
+A majority of [+ con_majority +]. It is a victory, but by-elections and rebellions will eat into it, and every controversial vote will depend on the whips. The radical programme may have to wait.
+
+@unionist_government
+title: A government sustained by the Ulster Unionists.
+view-if: result_type = 2
+tags: endings
+go-to: eg_menu
+
+You are Prime Minister, kept in office by the votes of the Ulster Unionists. Their price is more Westminster seats for Northern Ireland and a firm line on security, and they will remind you of it often.
+
+@liberal_arrangement
+title: A Lib-Con arrangement.
+view-if: result_type = 3
+tags: endings
+go-to: eg_menu
+
+You enter Downing Street with David Steel's Liberals promising support vote by vote. A Speaker's Conference on electoral reform will meet within the year, and half your party already regrets it.
+
+@minority_government
+title: A minority government.
+view-if: result_type = 4
+tags: endings
+go-to: eg_menu
+
+You form a minority government and dare the opposition parties to unite against you. Like Harold Wilson in February 1974, you will probably need a second election within months to secure a majority.
+
+@defeat
+title: Defeat.
+view-if: result_type = 5
+tags: endings
+go-to: eg_menu
+
+[? if lab_mps >= 318 : James Callaghan has won a majority of his own. ?][? if lab_mps < 318 : Callaghan carries on, at the head of the largest party in a hung parliament. ?] The 1970s consensus has survived another election.
+
+By the weekend, the Sunday papers are full of leadership speculation. Edward Heath lets it be known that he is available.
+
+@to_be_continued
+title: What comes next.
+view-if: result_type >= 1 and result_type <= 4
+tags: endings
+go-to: eg_menu
+
+This version of the game ends at the first general election. The years in government, with the 1980 Budget, the miners and the Falklands, are not written yet.
+
+@achievements
+title: Achievements
+view-if: achievement_game_completed == 1
+tags: endings
+go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
+
+= Achievements in this playthrough
+
+[? if game_achievement_iron_lady : **The Iron Lady** - win a Conservative majority. ?]
+
+[? if game_achievement_landslide : **Landslide** - win a majority of 100 or more. ?]
+
+[? if game_achievement_one_nation : **One Nation** - win a majority with both the wets and the dries content. ?]
+
+[? if game_achievement_no_confidence : **311 to 310** - bring down the government on a motion of no confidence. ?]
+
+[? if game_achievement_labour_isnt_working : **Labour Isn't Working** - run the poster. ?]
+
+[? if game_achievement_crisis_what_crisis : **Crisis? What Crisis?** - live through the Winter of Discontent. ?]
+
+[? if game_achievement_debate_win : **The Great Debate** - win a televised debate against Callaghan. ?]
+
+[? if game_achievement_ilford_north : **Ilford North** - win the Ilford North by-election. ?]
+
+[? if game_achievement_ulster_deal : **Ulster Says Yes** - govern with Unionist support. ?]
+
+[? if game_achievement_lib_con : **Lib-Con** - govern with Liberal support. ?]
+
+[? if game_achievement_home_rule_tory : **Home Rule Tory** - win a majority after backing a Scottish Assembly. ?]
+
+[? if game_achievement_waiting_at_the_church : **Waiting at the Church** - win Callaghan's autumn 1978 election. ?]
+
+[? if game_achievement_sunny_jim : **Sunny Jim** - lose to Callaghan. ?]
+
+= Achievements not yet unlocked
+
+[? if not achievement_iron_lady : **The Iron Lady** ?]
+
+[? if not achievement_landslide : **Landslide** ?]
+
+[? if not achievement_one_nation : **One Nation** ?]
+
+[? if not achievement_no_confidence : **311 to 310** ?]
+
+[? if not achievement_labour_isnt_working : **Labour Isn't Working** ?]
+
+[? if not achievement_crisis_what_crisis : **Crisis? What Crisis?** ?]
+
+[? if not achievement_debate_win : **The Great Debate** ?]
+
+[? if not achievement_ilford_north : **Ilford North** ?]
+
+[? if not achievement_ulster_deal : **Ulster Says Yes** ?]
+
+[? if not achievement_lib_con : **Lib-Con** ?]
+
+[? if not achievement_home_rule_tory : **Home Rule Tory** ?]
+
+[? if not achievement_waiting_at_the_church : **Waiting at the Church** ?]
+
+[? if not achievement_sunny_jim : **Sunny Jim** ?]
+
+@end_game
+game-over: true

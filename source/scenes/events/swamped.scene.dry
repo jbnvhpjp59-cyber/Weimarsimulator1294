@@ -1,0 +1,27 @@
+title: World in Action
+tags: event
+view-if: time >= 2 and time <= 3
+max-visits: 1
+new-page: true
+on-arrival: swamped_seen = 1
+
+= World in Action
+
+At the end of January you record a long interview for Granada's *World in Action*. Towards the end, the interviewer turns to immigration and the National Front, which has been winning votes in some working-class areas.
+
+How do you answer?
+
+- @blunt: Speak bluntly about people's fears of being "swamped".
+- @measured: Give a careful, measured answer.
+
+@blunt
+on-arrival: c2_con += 4*(1-dissent); de_con += 3*(1-dissent); c2_other -= 1.5; de_other -= 1.5; right_strength += 4; right_dissent -= 5; wet_dissent += 6; c1_lib += 2; ab_lib += 1; lib_relation -= 5; thatcher_rating += 2
+
+You say that people are "really rather afraid that this country might be rather swamped by people with a different culture".
+
+The remarks cause uproar. Labour and the Liberals accuse you of legitimising the National Front, and several members of your own front bench are privately appalled. Within days, the polls move sharply in our favour, and the National Front's vote begins to drain away to us.
+
+@measured
+on-arrival: wet_dissent -= 2; right_dissent += 3; c1_con += 1*(1-dissent)
+
+You talk about fairness, the law and good community relations. The interview makes no headlines. Some on the right of the party think you have missed a chance.

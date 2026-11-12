@@ -1,0 +1,19 @@
+title: The SNP Moves Against Callaghan
+tags: event
+view-if: time >= 15 and time <= 16 and devolution_failed = 1 and no_confidence_won = 0 and months_to_election > 2
+max-visits: 1
+new-page: true
+
+= The SNP Moves Against Callaghan
+
+Callaghan has refused to bring the repeal order to an early vote and is offering talks instead. The SNP has had enough. Its MPs have tabled a motion of no confidence in the government.
+
+The Liberals say they will vote against the government. The Ulster Unionists are divided, and Plaid Cymru is being bought off with compensation for slate quarrymen. Whitelaw thinks a Conservative motion would attract more votes than the SNP's. It could come down to a single vote.
+
+- @no_confidence.vote: Table a Conservative motion of no confidence.
+- @wait: Wait for the autumn and an election on Callaghan's terms.
+
+@wait
+on-arrival: dry_dissent += 5; right_dissent += 5; thatcher_rating -= 2
+
+We let the moment pass. The government limps on, and the election will come in the autumn.

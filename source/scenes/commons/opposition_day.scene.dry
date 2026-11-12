@@ -1,0 +1,36 @@
+title: Opposition Day Debate
+new-page: true
+is-card: true
+tags: commons
+view-if: opposition_day_timer <= 0
+on-arrival: opposition_day_timer = 3; month_actions += 1
+
+= Opposition Day Debate
+
+The Opposition chooses the subject for today's debate. The government will win the vote, but the point is the argument.
+
+- @prices: The cost of living.
+- @unions: The power of the unions.
+- @taxes: The tax burden.
+- @jobs: Unemployment.
+- @easy_discard
+
+@prices
+on-arrival: labour_credibility -= 3 if inflation >= 9; labour_credibility -= 1 if inflation < 9; economic_liberalism += 1; thatcher_rating += 1
+
+[? if inflation >= 9 : Prices are still rising fast, and Denis Healey has a hard afternoon. ?][? if inflation < 9 : Healey points out that inflation has halved under Labour. It's a fair point, and an uncomfortable one. ?]
+
+@unions
+on-arrival: union_backlash += 3 if strike_wave >= 4; union_backlash += 1 if strike_wave < 4; labour_credibility -= 2 if strike_wave >= 4; wet_dissent += 1
+
+[? if strike_wave >= 4 : Ministers squirm. They can't defend the strikes, and they can't attack the unions that fund their party. ?][? if strike_wave < 4 : Ministers accuse us of wanting a confrontation that nobody else is looking for. ?]
+
+@taxes
+on-arrival: c1_con += 2*(1-dissent); ab_con += 1*(1-dissent)
+
+Our speakers contrast British tax rates with West Germany's and ask why a skilled man takes home so little of a pay rise.
+
+@jobs
+on-arrival: labour_credibility -= 2; de_con += 1*(1-dissent); c2_con += 1*(1-dissent); economic_liberalism -= 1
+
+Unemployment has doubled since Labour took office. The attack hurts the government, though the dries grumble that we sound like Keynesians ourselves.

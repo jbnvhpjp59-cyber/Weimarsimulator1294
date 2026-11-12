@@ -1,0 +1,31 @@
+title: Willie Whitelaw
+is-pinned-card: true
+tags: advisor
+view-if: whitelaw_advisor = 1
+new-page: true
+
+= Willie Whitelaw
+
+Deputy Leader and Shadow Home Secretary. He ran against you in 1975 and has been loyal ever since. The wets trust him, which makes him invaluable.
+
+- @soothe_wets
+- @discipline
+- @root: Return
+
+@soothe_wets
+title: Calm the wets
+subtitle: Greatly reduces wet dissent and softens Heath.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; wet_dissent -= 10; heath_hostility -= 5
+
+Over long dinners at the Carlton Club, Willie persuades the doubters that you will listen to them.
+
+@discipline
+title: Party discipline
+subtitle: Reduces dissent across the party.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; dry_dissent -= 6; wet_dissent -= 6; loyalist_dissent -= 6; right_dissent -= 6
+
+Willie works the tea room and the smoking room. Nobody wants to be the one who lets him down.

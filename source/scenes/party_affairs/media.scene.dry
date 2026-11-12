@@ -1,0 +1,42 @@
+title: Media Strategy
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: media_timer <= 0
+on-arrival: media_timer = 4; month_actions += 1
+
+= Media Strategy
+
+Television decides elections now. Our research says voters respect you but don't warm to you, and many still can't picture you as Prime Minister.
+
+- @coaching: Voice and presentation coaching.
+- @tabloids: Court the tabloids.
+- @broadcast: A party political broadcast.
+- @interview: A long, serious television interview.
+- @easy_discard
+
+@coaching
+subtitle: -1 resource
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; thatcher_rating += 4
+
+A lower voice, a softer hairstyle and fewer hats. You resent every minute of it, and it works.
+
+@tabloids
+subtitle: -1 resource
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; c2_con += 3*(1-dissent); de_con += 2*(1-dissent); tabloid_support += 1
+
+Lunches with editors and an interview in the Sun. Its readers are the skilled workers who voted Labour last time, and some of them are listening.
+
+@broadcast
+on-arrival: thatcher_rating += 2 if saatchi_hired; c1_con += 2*(1-dissent) if saatchi_hired; c2_con += 2*(1-dissent) if saatchi_hired; c1_con += 1*(1-dissent) if not saatchi_hired
+
+[? if saatchi_hired : Saatchi & Saatchi make it look more like an advert than a lecture, and people actually watch it. ?][? if not saatchi_hired : It is earnest, worthy and a little dull. ?]
+
+@interview
+on-arrival: economic_liberalism += 2; thatcher_rating += 2 if thatcher_rating >= 40; thatcher_rating -= 1 if thatcher_rating < 40; dry_strength += 1
+
+An hour of hard questions on economics. [? if thatcher_rating >= 40 : You are formidable on detail, and it shows. ?][? if thatcher_rating < 40 : You win the argument and lose the audience; you come across as hectoring. ?]

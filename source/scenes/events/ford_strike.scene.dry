@@ -1,0 +1,33 @@
+title: The Ford Strike
+tags: event
+view-if: time >= 10 and time <= 11 and pay_norm <= 5 and autumn_election_1978 = 0
+max-visits: 1
+new-page: true
+on-arrival: strike_wave += 2; labour_credibility -= 3
+
+= The Ford Strike
+
+Fifty-seven thousand Ford workers have walked out over the company's 5% pay offer. At its conference in Blackpool, the Labour Party votes to reject the government's own pay policy.
+
+Ford, flush with profits, eventually settles for 17%. The government tries to punish the company with sanctions, and the Commons votes the sanctions down. The 5% limit is breached, and every union in the country has noticed.
+
+How do we respond?
+
+- @free_pay: Defend free collective bargaining against government sanctions.
+- @condemn: Condemn the strikers and the unions.
+- @quiet: Say little and let the government flounder.
+
+@free_pay
+on-arrival: economic_liberalism += 2; c2_con += 2*(1-dissent); dry_dissent -= 2; wet_dissent += 2; pay_stance = 2 if pay_stance = 0
+
+We argue that the government has no business blacklisting a company for paying its workers what it can afford. The dries are pleased, and car workers notice.
+
+@condemn
+on-arrival: union_backlash += 3; c2_con -= 1; right_dissent -= 2
+
+We condemn the strike as holding the country to ransom. Some voters agree; some car workers decide we are against them.
+
+@quiet
+on-arrival: wet_dissent -= 1
+
+The government is tearing itself apart. There's no need to help.

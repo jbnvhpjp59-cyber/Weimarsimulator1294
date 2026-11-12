@@ -1,0 +1,25 @@
+title: An Advertising Agency
+tags: event
+view-if: time >= 3 and time <= 6 and saatchi_hired = 0
+max-visits: 1
+new-page: true
+
+= An Advertising Agency
+
+Gordon Reece wants to hire a young advertising agency, Saatchi & Saatchi, to run our campaigns. They would be the first agency to treat a British party like a brand. Some of the old guard think it's vulgar.
+
+- @hire: Hire them.
+- @decline: Stick with the traditional approach.
+
+@hire
+subtitle: -2 resources
+choose-if: resources >= 2
+unavailable-subtitle: Requires 2 resources.
+on-arrival: resources -= 2; saatchi_hired = 1; thatcher_rating += 1
+
+Saatchi & Saatchi take the account. Their first question is what the voters want, not what the party wants to tell them.
+
+@decline
+on-arrival: wet_dissent -= 1
+
+Party political broadcasts will carry on as before: a minister behind a desk, explaining.

@@ -1,0 +1,294 @@
+title: Root Scene
+new-page: true
+go-to: post_event if started = 1; start_menu if started = 0
+
+@start_menu
+new-page: true
+go-to: start_menu_2
+
+= Conservatism: An Alternate History
+
+@start_menu_2
+
+- @start: Start game
+- @credits: Credits
+- @game_over.achievements
+
+@start
+on-arrival: {!
+Q.started = 1;
+// ---------------------------------------------------------------
+// Time. time = 1 is January 1978; each turn is one month.
+// ---------------------------------------------------------------
+Q.time = 1;
+Q.year = 1978;
+Q.month = 1;
+// how many actions have been taken this month?
+Q.month_actions = 0;
+
+// -1 = easy, 0 = normal, 1 = hard
+Q.difficulty = 0;
+Q.historical_mode = 0;
+Q.saves_disabled = 0;
+Q.discard_disabled = 0;
+Q.hand_size = 3;
+
+// ---------------------------------------------------------------
+// The Conservative Party
+// ---------------------------------------------------------------
+// resources: money and political capital, spent on cards.
+Q.resources = 3;
+// donations: income from each fundraising round.
+Q.donations = 2;
+
+// overall dissent (0 to 1) is recalculated each month from the factions.
+// it dampens every gain in support.
+Q.dissent = 0.1;
+Q.dissent_percent = 10;
+
+// factions of the parliamentary party (strengths are normalised to 100)
+// dry: free-market "Thatcherites" (Keith Joseph, Geoffrey Howe)
+// wet: One Nation / Heathite moderates (Jim Prior, Ian Gilmour, Francis Pym)
+// loyalist: the managers who back whoever leads (Willie Whitelaw, Lord Carrington)
+// right: traditionalists, law-and-order and Unionist Tories
+Q.factions = ['dry', 'wet', 'loyalist', 'right'];
+Q.dry_strength = 25;
+Q.dry_dissent = 5;
+Q.wet_strength = 35;
+Q.wet_dissent = 20;
+Q.loyalist_strength = 30;
+Q.loyalist_dissent = 5;
+Q.right_strength = 10;
+Q.right_dissent = 10;
+
+// Edward Heath sulks on the backbenches. 0 = reconciled, 100 = open war.
+Q.heath_hostility = 60;
+
+// ---------------------------------------------------------------
+// Leaders and public opinion
+// ---------------------------------------------------------------
+// net-ish satisfaction ratings, 0 to 100
+Q.thatcher_rating = 40;
+Q.callaghan_rating = 55;
+// public appetite for free-market economics, 0 to 100
+Q.economic_liberalism = 40;
+// share of the public who think the unions have too much power, 0 to 100
+Q.union_backlash = 55;
+// how far the public trusts Labour to run the economy, 0 to 100
+Q.labour_credibility = 55;
+
+// ---------------------------------------------------------------
+// The economy (the Labour government controls it, for now)
+// ---------------------------------------------------------------
+Q.inflation = 9.9;
+Q.unemployment = 5.8;
+Q.economic_growth = 3.0;
+// the government's pay norm, in % (Phase 3 = 10%, Phase 4 = 5%)
+Q.pay_norm = 10;
+// industrial unrest, 0 to 10
+Q.strike_wave = 2;
+
+// ---------------------------------------------------------------
+// Policy: planks of the next Conservative manifesto (0 = not adopted)
+// ---------------------------------------------------------------
+Q.policy_monetarism = 0;
+Q.policy_tax_cuts = 0;
+Q.policy_union_reform = 0;
+Q.policy_right_to_buy = 0;
+Q.policy_law_order = 0;
+Q.policy_defence = 0;
+Q.policy_privatisation = 0;
+Q.policy_immigration = 0;
+Q.manifesto_planks = 0;
+// devolution: 0 = oppose the Scotland and Wales Acts,
+// 1 = support them, 2 = "vote No for a better Bill"
+Q.devolution_stance = 0;
+// the government's incomes policy: 0 = no position, 1 = back the pay norm,
+// 2 = free collective bargaining, 3 = statutory wage controls
+Q.pay_stance = 0;
+
+// ---------------------------------------------------------------
+// Other parties
+// ---------------------------------------------------------------
+Q.lib_relation = 30;
+Q.snp_relation = 25;
+Q.pc_relation = 15;
+Q.uup_relation = 50;
+// is the Lib-Lab Pact still propping up the government?
+Q.lib_lab_pact = 1;
+
+// ---------------------------------------------------------------
+// Social grades (share of the electorate)
+// ab: professional & managerial, c1: white-collar,
+// c2: skilled manual, de: semi/unskilled manual & state pensioners
+// ---------------------------------------------------------------
+Q.ab = 17;
+Q.c1 = 23;
+Q.c2 = 32;
+Q.de = 28;
+Q.classes = ['ab', 'c1', 'c2', 'de'];
+// the class model covers Great Britain outside the nationalist vote.
+// The SNP and Plaid Cymru are handled by the regional seat model.
+Q.parties = ['con', 'lab', 'lib', 'other'];
+
+// Support for each party by social grade. These need not sum to 100;
+// they are normalised. Tuned to give roughly level pegging in Jan 1978.
+Q.ab_con = 64;
+Q.ab_lab = 17;
+Q.ab_lib = 15;
+Q.ab_other = 2;
+
+Q.c1_con = 54;
+Q.c1_lab = 30;
+Q.c1_lib = 12;
+Q.c1_other = 3;
+
+Q.c2_con = 41;
+Q.c2_lab = 48;
+Q.c2_lib = 7;
+Q.c2_other = 3;
+
+Q.de_con = 29;
+Q.de_lab = 61;
+Q.de_lib = 6;
+Q.de_other = 3;
+
+// remember the starting support: post_event pulls support back towards it
+Q.baseline_support = {};
+for (var bc of Q.classes) {
+    for (var bp of Q.parties) {
+        Q.baseline_support[bc + '_' + bp] = Q[bc + '_' + bp];
+    }
+}
+
+// nationalist vote within Scotland and Wales, in %
+Q.snp_share = 25;
+Q.pc_share = 9;
+
+// ---------------------------------------------------------------
+// The House of Commons (approximate, January 1978)
+// 635 seats; 318 needed for a majority.
+// "other" covers the Speaker and the breakaway Scottish Labour Party.
+// ---------------------------------------------------------------
+Q.total_seats = 635;
+Q.majority_line = 318;
+Q.con_mps = 281;
+Q.lab_mps = 310;
+Q.lib_mps = 13;
+Q.snp_mps = 11;
+Q.pc_mps = 3;
+Q.ni_mps = 12;
+Q.other_mps = 5;
+
+Q.prime_minister = "Callaghan";
+Q.pm_party = "Labour";
+Q.con_in_government = 0;
+
+// ---------------------------------------------------------------
+// Elections. The Parliament elected in October 1974 must be
+// dissolved by autumn 1979 (time 22 = October 1979).
+// ---------------------------------------------------------------
+Q.next_election_time = 22;
+Q.election_deadline_time = 22;
+Q.next_election_month = 10;
+Q.next_election_year = 1979;
+Q.months_to_election = 21;
+Q.in_campaign = 0;
+Q.election_called = 0;
+Q.n_elections = 0;
+Q.apply_poll_error = 0;
+Q.poll_error = 0;
+// set by the no-confidence vote
+Q.no_confidence_won = 0;
+Q.no_confidence_lost = 0;
+
+// records for charts
+Q.party_support_records = [];
+Q.election_records = [];
+
+// ---------------------------------------------------------------
+// Events seen
+// ---------------------------------------------------------------
+Q.saatchi_hired = 0;
+Q.swamped_seen = 0;
+Q.autumn_election_1978 = 0;
+Q.winter_of_discontent = 0;
+// 0 = not yet held, 1 = Yes cleared the 40% rule, 2 = it failed
+Q.devolution_referendum_result = 0;
+Q.devolution_failed = 0;
+Q.neave_dead = 0;
+Q.tabloid_support = 0;
+Q.electoral_reform_promise = 0;
+// regional campaign bonuses (percentage points, Con over Lab)
+Q.scotland_con_bonus = 0;
+Q.midlands_con_bonus = 0;
+// campaign
+Q.campaign_started = 0;
+Q.manifesto_launched = 0;
+Q.tv_debate_decided = 0;
+Q.general_election_held = 0;
+// 1 = majority, 2 = Unionist deal, 3 = Liberal deal, 4 = minority, 5 = defeat
+Q.result_type = 0;
+// random events
+Q.random_roll = 1;
+Q.last_heath_outburst = 0;
+Q.last_advisor_action = 0;
+Q.pmq_success = 0;
+Q.debate_win = 0;
+Q.callaghan_calls = 0;
+
+// ---------------------------------------------------------------
+// Timers. Each card sets its own timer; post_event counts them down.
+// ---------------------------------------------------------------
+Q.timers = ['advisor_action',
+            // party affairs
+            'fundraising', 'speaking_tour', 'media', 'policy_group',
+            'shadow_cabinet', 'target_voters', 'other_parties',
+            // commons
+            'opposition_day', 'pmqs', 'devolution', 'pay_policy',
+            'no_confidence'];
+for (var t of Q.timers) {
+    Q[t + '_timer'] = 0;
+}
+// shadow cabinet members with pinned advisor cards
+Q.whitelaw_advisor = 1;
+Q.joseph_advisor = 1;
+Q.howe_advisor = 1;
+Q.reece_advisor = 1;
+
+// project the starting polls
+this._runActions(this.game.scenes['election_algorithm'].onArrival);
+!}
+new-page: true
+
+> *"We used to think that you could spend your way out of a recession and increase employment by cutting taxes and boosting government spending. I tell you in all candour that that option no longer exists."*
+
+ - James Callaghan, Labour Party Conference, 1976
+
+This is a game of alternate history. It tries to be faithful to the period, but any game that lets you change history has to make things up. If you spot a glaring mistake, please report it.
+
+For background on British politics in 1978, see the "Library" link at the top of the page.
+
+- @1978_easy: Begin (easy difficulty)
+- @1978_main: Begin (normal difficulty)
+- @1978_hard: Begin (hard difficulty)
+
+@1978_easy
+on-arrival: difficulty = -1; resources = 5; donations = 3; hand_size = 4; wet_dissent = 10; lib_relation = 36; thatcher_rating = 44
+go-to: 1978_main
+
+@1978_hard
+on-arrival: difficulty = 1; resources = 1; donations = 1; discard_disabled = 1; wet_dissent = 30; right_dissent = 20; heath_hostility = 75; lib_relation = 25; thatcher_rating = 36
+go-to: 1978_main
+
+@1978_main
+new-page: true
+go-to: main if hand_size == 3; main.main_easy if hand_size == 4
+
+= January 1978
+
+You have led the Conservative Party for nearly three years, and most of your own front bench still isn't sure you should. Many of them served Edward Heath, and Heath himself hasn't forgiven you for taking his job.
+
+Across the dispatch box, James Callaghan runs a minority Labour government that has lost its majority through by-elections and defections. It survives on the Lib-Lab Pact with David Steel's Liberals. The IMF crisis of 1976 is fading, inflation has fallen from 26% to under 10%, and North Sea oil is starting to flow. "Sunny Jim" is more popular than you are.
+
+Parliament must be dissolved by the autumn of 1979. Callaghan can call an election before then, or the Commons can bring him down sooner. Your job is to make sure that when the country votes, it votes for you.

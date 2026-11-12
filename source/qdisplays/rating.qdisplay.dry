@@ -1,0 +1,9 @@
+
+# leader satisfaction and public opinion meters (0 to 100)
+
+(..20) dire
+(20..35) poor
+(35..45) mediocre
+(45..55) fair
+(55..65) good
+(65..) excellent

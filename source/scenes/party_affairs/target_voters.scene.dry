@@ -1,0 +1,45 @@
+title: Target Voters
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: target_voters_timer <= 0
+on-arrival: target_voters_timer = 3; month_actions += 1
+
+= Target Voters
+
+Elections are won in marginal seats, among people who could go either way. Where should our organisers and money go this season?
+
+- @midlands: Skilled workers in the Midlands marginals.
+- @suburbs: White-collar commuters in the suburbs.
+- @scotland: Scotland.
+- @pensioners: Pensioners and the low-paid.
+- @liberal_seats: Liberal-leaning seats in the South and West.
+- @easy_discard
+
+@midlands
+subtitle: -1 resource
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; midlands_con_bonus += 0.75 if midlands_con_bonus < 3; c2_con += 2*(1-dissent)
+
+Car workers in Coventry and Birmingham are fed up with strikes they never voted for. Our canvassers find more doors open than they expected.
+
+@suburbs
+on-arrival: c1_con += 3*(1-dissent); c1_lib -= 1
+
+Bank clerks, teachers and sales reps worry about the mortgage, taxes and prices. They are our natural voters, if we can keep them.
+
+@scotland
+on-arrival: scotland_con_bonus += 0.75 if scotland_con_bonus < 4; scotland_con_bonus += 0.5 if devolution_stance >= 1 and scotland_con_bonus < 4; snp_share -= 0.5
+
+Teddy Taylor and the Scottish party take the fight to the SNP in the rural seats and to Labour in the cities.
+
+@pensioners
+on-arrival: de_con += 3*(1-dissent) if policy_law_order or policy_right_to_buy; de_con += 1.5*(1-dissent) if not policy_law_order and not policy_right_to_buy
+
+[? if policy_law_order or policy_right_to_buy : Our promises on crime and home ownership give the canvassers something concrete to offer. ?][? if not policy_law_order and not policy_right_to_buy : Without a concrete offer, our canvassers struggle to get past "you're all the same". ?]
+
+@liberal_seats
+on-arrival: ab_lib -= 2; c1_lib -= 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent); lib_relation -= 3
+
+A vote for the Liberals, our leaflets say, is a vote to keep Callaghan in Downing Street. David Steel doesn't appreciate it.

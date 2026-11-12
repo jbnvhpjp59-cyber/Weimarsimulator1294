@@ -1,0 +1,41 @@
+title: Prime Minister's Questions
+new-page: true
+is-card: true
+tags: commons
+view-if: pmqs_timer <= 0
+on-arrival: pmqs_timer = 2; month_actions += 1
+
+= Prime Minister's Questions
+
+Tuesday and Thursday, 3.15pm. Callaghan is an old hand at the dispatch box, and he enjoys patronising you.
+
+- @attack: Go for the jugular.
+- @careful: A careful, detailed question.
+- @easy_discard
+
+@attack
+on-arrival: {!
+var chance = 45 + (Q.thatcher_rating - Q.callaghan_rating) + 3 * Q.strike_wave;
+if (chance < 10) {
+    chance = 10;
+} else if (chance > 90) {
+    chance = 90;
+}
+Q.pmq_success = (Math.random() * 100 < chance) ? 1 : 0;
+!}
+go-to: attack_win if pmq_success = 1; attack_lose if pmq_success = 0
+
+@attack_win
+on-arrival: thatcher_rating += 3; callaghan_rating -= 2
+
+You land the blow. Callaghan's avuncular manner slips, and the sketch-writers notice.
+
+@attack_lose
+on-arrival: thatcher_rating -= 2; callaghan_rating += 1
+
+Callaghan swats the question aside with a joke at your expense. Labour's benches roar.
+
+@careful
+on-arrival: thatcher_rating += 1
+
+A precise question on the money supply figures. The Prime Minister bluffs, and the people who matter notice.

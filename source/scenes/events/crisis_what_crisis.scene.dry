@@ -1,0 +1,13 @@
+title: Crisis? What Crisis?
+tags: event
+view-if: time >= 13 and time <= 14 and winter_of_discontent = 1
+max-visits: 1
+new-page: true
+on-arrival: callaghan_rating -= 8; labour_credibility -= 4
+achievement: crisis_what_crisis
+
+= Crisis? What Crisis?
+
+Callaghan flies back, suntanned, from a summit in Guadeloupe. At Heathrow, a reporter asks about the mounting chaos. He replies that he doesn't think other people in the world would share the view that there is "mounting chaos".
+
+The next morning's Sun headline reads: **"Crisis? What Crisis?"** He never said those words, but nobody will remember that.

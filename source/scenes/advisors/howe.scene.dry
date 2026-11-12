@@ -1,0 +1,31 @@
+title: Sir Geoffrey Howe
+is-pinned-card: true
+tags: advisor
+view-if: howe_advisor = 1
+new-page: true
+
+= Sir Geoffrey Howe
+
+Shadow Chancellor. Mild in manner and relentless on detail. Denis Healey said being attacked by him was "like being savaged by a dead sheep", but Howe usually wins on the substance.
+
+- @alternative_budget
+- @city
+- @root: Return
+
+@alternative_budget
+title: Publish an alternative budget
+subtitle: Undermines Labour's economic credibility.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; labour_credibility -= 4; economic_liberalism += 3; c1_con += 2*(1-dissent)
+
+Howe's alternative budget is costed down to the last million. Even the Financial Times concedes it adds up.
+
+@city
+title: Reassure the City
+subtitle: Gain [+ donations + 2 +] resources.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; resources += donations + 2
+
+A round of lunches in the Square Mile. The City has decided we are the better bet, and it puts its money where its mouth is.

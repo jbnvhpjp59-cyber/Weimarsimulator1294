@@ -1,0 +1,44 @@
+title: The Other Parties
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: other_parties_timer <= 0
+on-arrival: other_parties_timer = 4; month_actions += 1
+
+= The Other Parties
+
+Labour has no majority. Every vote in the Commons depends on the Liberals, the nationalists and the Ulster Unionists. If we want to bring the government down, or govern in a hung parliament, we will need some of them.
+
+- @liberals: Talk to David Steel's Liberals.
+- @unionists: Cultivate the Ulster Unionists.
+- @snp: Open a channel to the SNP.
+- @plaid: Talk to Plaid Cymru.
+- @electoral_reform: Promise the Liberals a Speaker's Conference on electoral reform.
+- @easy_discard
+
+@liberals
+on-arrival: lib_relation += 8 if lib_lab_pact = 0; lib_relation += 4 if lib_lab_pact = 1; wet_dissent -= 2; dry_dissent += 2
+
+[? if lib_lab_pact : While the Pact lasts, Steel is polite but committed to Callaghan. ?][? if not lib_lab_pact : With the Pact over, Steel is free to listen. ?]
+
+@unionists
+on-arrival: uup_relation += 8; uup_relation += 4 if neave_dead = 0; right_dissent -= 2
+
+[? if neave_dead = 0 : Airey Neave, who knows the Unionist MPs well, carries our messages. ?][? if neave_dead = 1 : Without Airey Neave, the conversations are harder going. ?] The Unionists want more Northern Irish seats at Westminster and a firm line on security.
+
+@snp
+on-arrival: snp_relation += 8 if devolution_stance >= 1; snp_relation += 4 if devolution_stance = 0; right_dissent += 3
+
+The SNP's eleven MPs have no love for us, but they have even less for a Labour government that fails to deliver devolution.
+
+@plaid
+on-arrival: pc_relation += 6
+
+Plaid's three MPs are mostly interested in Welsh questions, slate quarrymen's compensation in particular. We listen politely.
+
+@electoral_reform
+view-if: electoral_reform_promise = 0
+subtitle: The Liberals would be delighted. Almost everyone in our own party would be furious.
+on-arrival: electoral_reform_promise = 1; lib_relation += 15; right_dissent += 8; dry_dissent += 5; loyalist_dissent += 5
+
+You promise that a Conservative government would at least look at proportional representation. In private, the party that has done well out of first-past-the-post for a century is aghast.

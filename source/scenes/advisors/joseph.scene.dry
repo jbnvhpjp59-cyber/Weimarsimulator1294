@@ -1,0 +1,32 @@
+title: Sir Keith Joseph
+is-pinned-card: true
+tags: advisor
+view-if: joseph_advisor = 1
+new-page: true
+
+= Sir Keith Joseph
+
+In charge of policy and research, co-founder of the Centre for Policy Studies, and the intellectual engine of the new Conservatism. He might have been leader himself, had his speeches been better judged.
+
+- @lecture_tour
+- @stepping_stones
+- @root: Return
+
+@lecture_tour
+title: University lecture tour
+subtitle: Raises public support for free-market economics; the dries grow stronger.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; economic_liberalism += 5; dry_strength += 4; wet_dissent += 3
+
+Sir Keith lectures on campuses across the country, sometimes over the shouting of left-wing students. The arguments get reported, and some of them stick.
+
+@stepping_stones
+title: "Stepping Stones"
+view-if: policy_union_reform = 0
+subtitle: Adopts trade union reform at once, with a strategy to sell it.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; policy_union_reform = 1; dry_strength += 3; wet_dissent += 6; union_backlash += 2
+
+Sir Keith champions the confidential "Stepping Stones" report: the unions are the obstacle to recovery, and a Conservative government has to say so openly. Jim Prior is appalled.

@@ -1,0 +1,21 @@
+title: The Ilford North By-election
+tags: event
+view-if: time >= 3 and time <= 4
+max-visits: 1
+new-page: true
+go-to: win if con_votes >= lab_votes - 2; lose if con_votes < lab_votes - 2
+
+= The Ilford North By-election
+
+The death of the Labour MP for Ilford North has caused a by-election in a classic outer-London marginal. Labour won it by under 800 votes in 1974.
+
+@win
+on-arrival: con_mps += 1; lab_mps -= 1; thatcher_rating += 2; loyalist_dissent -= 3
+achievement: ilford_north
+
+Vivian Bendall takes the seat for the Conservatives on a swing of nearly 7%. Callaghan's majority grows thinner still.
+
+@lose
+on-arrival: thatcher_rating -= 2; loyalist_dissent += 3; wet_dissent += 2
+
+Labour holds the seat. It's a bad night, and some backbenchers start asking whether you can win the big one.
