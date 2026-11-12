@@ -351,6 +351,25 @@
       window.updateEraMusic();
   };
 
+  // A division in either House, drawn as two bars: the winners' bar is full
+  // width and the losers' is in proportion. Called from the scenes'
+  // on-display code with the id of an empty element.
+  window.drawDivision = function(elId, labels, values, classes) {
+      var el = document.getElementById(elId);
+      if (!el) {
+          return;
+      }
+      var max = Math.max(values[0], values[1], 1);
+      var html = '';
+      for (var i = 0; i < 2; i++) {
+          var pct = Math.round(100 * values[i] / max);
+          html += '<span class="division_row"><span class="division_label">' + labels[i] + '</span>' +
+                  '<span class="division_track"><span class="division_bar ' + classes[i] + '" style="width:' + pct + '%"></span></span>' +
+                  '<span class="division_count">' + values[i] + '</span></span>';
+      }
+      el.innerHTML = html;
+  };
+
   // The chronicle: every decision taken on a card, a Cabinet card or an
   // event, with the month it was taken. The Library shows it.
   var flatText = function(x) {

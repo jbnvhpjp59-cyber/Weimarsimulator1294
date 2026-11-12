@@ -639,6 +639,21 @@ Q.sdp_twenty_seen = 0;
 // The front page (newsroom.scene.dry) and the chronicle of decisions
 // (recorded by game.js, shown in the Library).
 // ---------------------------------------------------------------
+// ---------------------------------------------------------------
+// The House of Lords, approximately: official figures by party begin
+// only in 1984-85. About 1,170 members, some 300 of them hereditary
+// peers who take no whip and rarely attend. The SDP takes peers from
+// Labour and the crossbenches when it is founded.
+// ---------------------------------------------------------------
+Q.lords_con = 410;
+Q.lords_lab = 150;
+Q.lords_lib = 40;
+Q.lords_sdp = 0;
+Q.lords_cross = 230;
+Q.lords_bishops = 26;
+Q.lords_other = 310;
+Q.lords_total = 1166;
+
 Q.headline = 'Callaghan and Steel keep the Lib-Lab Pact alive';
 Q.headline_date = 'January 1978';
 Q.headline_n = 1;

@@ -36,8 +36,11 @@ face-image: img/events/commons_1970s.jpg
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "employment1"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -48,8 +51,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
 on-arrival: div_key = "employment1"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -60,8 +66,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "employment1"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -74,8 +83,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "employment1"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -119,11 +131,16 @@ title: The Lords Amend the Employment Bill
 tags: event
 view-if: con_in_government = 1 and bill_employment1 = 4 and bill_employment1_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_employment1', ['Contents', 'Not-Contents'], [Q.bill_employment1_lc, Q.bill_employment1_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the Employment Bill
 
 The House of Lords votes to widen the conscience clause, so that anyone with a deeply held personal objection to joining a union is protected from dismissal from a closed shop.
+
+{!<span class="division" id="lords_division_employment1"></span>!}
+
+The government is defeated by [+ bill_employment1_lc +] votes to [+ bill_employment1_lnc +].
 
 - @lords_yes_employment1: Accept the Lords amendment.
 - @lords_no_employment1: Overturn it in the Commons.
@@ -148,7 +165,7 @@ view-if: bill_employment1 = 5
 new-page: true
 on-arrival: union_power -= 10; union_power -= 4 if bill_employment1_tough = 1; employment_acts += 1; strike_wave += 0.5; c2_con += 1*(1-dissent) if union_backlash >= 60; bill_employment1 = 6; assent_key = "employment1"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 
 = Royal Assent: the Employment Act
 
@@ -181,8 +198,11 @@ The second Employment Bill removes the blanket immunity that has protected union
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "employment2"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -193,8 +213,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
 on-arrival: div_key = "employment2"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -205,8 +228,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "employment2"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -219,8 +245,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "employment2"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -264,11 +293,16 @@ title: The Lords Amend the Employment Bill
 tags: event
 view-if: con_in_government = 1 and bill_employment2 = 4 and bill_employment2_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_employment2', ['Contents', 'Not-Contents'], [Q.bill_employment2_lc, Q.bill_employment2_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the Employment Bill
 
 The House of Lords votes to hold closed-shop ballots every ten years instead of every five, which would leave most existing closed shops undisturbed for a decade.
+
+{!<span class="division" id="lords_division_employment2"></span>!}
+
+The government is defeated by [+ bill_employment2_lc +] votes to [+ bill_employment2_lnc +].
 
 - @lords_yes_employment2: Accept the Lords amendment.
 - @lords_no_employment2: Overturn it in the Commons.
@@ -293,7 +327,7 @@ view-if: bill_employment2 = 5
 new-page: true
 on-arrival: union_power -= 20; union_power += 7 if bill_employment2_watered = 1; employment_acts += 1; strike_wave += 1.5; c2_con += 2*(1-dissent) if union_backlash >= 60; c2_lab += 1 if union_backlash < 60; bill_employment2 = 6; assent_key = "employment2"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 
 = Royal Assent: the Employment Act
 
@@ -326,8 +360,11 @@ The Trade Union Bill gives members the final say. A strike called without a secr
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "trade_union"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -338,8 +375,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
 on-arrival: div_key = "trade_union"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -350,8 +390,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "trade_union"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -364,8 +407,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "trade_union"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -409,11 +455,16 @@ title: The Lords Amend the Trade Union Bill
 tags: event
 view-if: con_in_government = 1 and bill_trade_union = 4 and bill_trade_union_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_trade_union', ['Contents', 'Not-Contents'], [Q.bill_trade_union_lc, Q.bill_trade_union_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the Trade Union Bill
 
 Peers led by former Labour ministers vote to let unions hold strike ballots at the workplace, by a show of hands in a secret booth if need be, rather than by post.
+
+{!<span class="division" id="lords_division_trade_union"></span>!}
+
+The government is defeated by [+ bill_trade_union_lc +] votes to [+ bill_trade_union_lnc +].
 
 - @lords_yes_trade_union: Accept the Lords amendment.
 - @lords_no_trade_union: Overturn it in the Commons.
@@ -438,7 +489,7 @@ view-if: bill_trade_union = 5
 new-page: true
 on-arrival: union_power -= 10; union_power += 3 if bill_trade_union_watered = 1; strike_wave -= 1; c2_con += 1*(1-dissent); labour_credibility -= 4 if bill_trade_union_tough = 1; lab_leader_rating -= 2 if bill_trade_union_tough = 1; bill_trade_union = 6; assent_key = "trade_union"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 
 = Royal Assent: the Trade Union Act
 
@@ -471,8 +522,11 @@ The Housing Bill gives every council tenant of three years' standing the right t
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "housing"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -483,8 +537,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
 on-arrival: div_key = "housing"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -495,8 +552,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "housing"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -509,8 +569,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "housing"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -554,11 +617,16 @@ title: The Lords Amend the Housing Bill
 tags: event
 view-if: con_in_government = 1 and bill_housing = 4 and bill_housing_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_housing', ['Contents', 'Not-Contents'], [Q.bill_housing_lc, Q.bill_housing_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the Housing Bill
 
 The House of Lords votes to exempt sheltered housing built for the elderly from the right to buy. Peers on all sides say councils that sell their old people's bungalows will never be able to replace them.
+
+{!<span class="division" id="lords_division_housing"></span>!}
+
+The government is defeated by [+ bill_housing_lc +] votes to [+ bill_housing_lnc +].
 
 - @lords_yes_housing: Accept the Lords amendment.
 - @lords_no_housing: Overturn it in the Commons.
@@ -583,7 +651,7 @@ view-if: bill_housing = 5
 new-page: true
 on-arrival: right_to_buy_progress += 1; budget += 1; budget -= 0.5 if bill_housing_watered = 1; c2_con += 2*(1-dissent); de_con += 2*(1-dissent); policy_right_to_buy = 1; bill_housing = 6; assent_key = "housing"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 
 = Royal Assent: the Housing Act
 
@@ -616,8 +684,11 @@ The Education Bill gives parents the right to state a preference for their child
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "education"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -628,8 +699,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
 on-arrival: div_key = "education"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -640,8 +714,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "education"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -654,8 +731,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "education"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -699,11 +779,16 @@ title: The Lords Rebel
 tags: event
 view-if: con_in_government = 1 and bill_education = 4 and bill_education_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_education', ['Contents', 'Not-Contents'], [Q.bill_education_lc, Q.bill_education_lnc], ['against', 'govt']); } !}
 
 = The Lords Rebel
 
 The bill would let councils charge for school buses. In the House of Lords, the Duke of Norfolk leads Conservative peers, many of them from rural counties with Catholic schools miles from home, in a rebellion. The clause is defeated by a large majority.
+
+{!<span class="division" id="lords_division_education"></span>!}
+
+The government is defeated by [+ bill_education_lc +] votes to [+ bill_education_lnc +].
 
 - @lords_yes_education: Accept the defeat and drop the charges.
 - @lords_no_education: Overturn the Lords in the Commons.
@@ -728,7 +813,7 @@ view-if: bill_education = 5
 new-page: true
 on-arrival: parental_choice = 1; c1_con += 2*(1-dissent); c1_con -= 1 if bill_education_watered = 1; c2_con += 1*(1-dissent); budget += 0.5 if bill_education_insisted = 1; bill_education = 6; assent_key = "education"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 
 = Royal Assent: the Education Act
 
@@ -761,8 +846,11 @@ The British Nationality Bill replaces citizenship of the United Kingdom and Colo
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "nationality"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -773,8 +861,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the right are annoyed.
 on-arrival: div_key = "nationality"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -785,8 +876,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "nationality"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -799,8 +893,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "nationality"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -844,11 +941,16 @@ title: The Lords Amend the British Nationality Bill
 tags: event
 view-if: con_in_government = 1 and bill_nationality = 4 and bill_nationality_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_nationality', ['Contents', 'Not-Contents'], [Q.bill_nationality_lc, Q.bill_nationality_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the British Nationality Bill
 
 The House of Lords votes to give the people of Gibraltar full British citizenship, against the government's advice. The Foreign Office warns that Spain is watching, and that Hong Kong will ask why the Rock deserves what it does not.
+
+{!<span class="division" id="lords_division_nationality"></span>!}
+
+The government is defeated by [+ bill_nationality_lc +] votes to [+ bill_nationality_lnc +].
 
 - @lords_yes_nationality: Accept the Lords amendment.
 - @lords_no_nationality: Overturn it in the Commons.
@@ -873,7 +975,7 @@ view-if: bill_nationality = 5
 new-page: true
 on-arrival: nationality_act = 1; right_strength += 2; right_dissent += 3 if bill_nationality_watered = 1; c2_con += 1*(1-dissent); lib_relation -= 2; bill_nationality = 6; assent_key = "nationality"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 achievement: nationality
 
 = Royal Assent: the British Nationality Act
@@ -907,8 +1009,11 @@ The Rates Bill gives [+ environment_secretary +] the power to set a maximum rate
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "rates"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -919,8 +1024,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the right are annoyed.
 on-arrival: div_key = "rates"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -931,8 +1039,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "rates"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -945,8 +1056,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "rates"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -990,11 +1104,16 @@ title: The Lords Amend the Rates Bill
 tags: event
 view-if: con_in_government = 1 and bill_rates = 4 and bill_rates_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_rates', ['Contents', 'Not-Contents'], [Q.bill_rates_lc, Q.bill_rates_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the Rates Bill
 
 The House of Lords votes to make the Environment Secretary consult each council before capping its rate, and to let councils appeal.
+
+{!<span class="division" id="lords_division_rates"></span>!}
+
+The government is defeated by [+ bill_rates_lc +] votes to [+ bill_rates_lnc +].
 
 - @lords_yes_rates: Accept the Lords amendment.
 - @lords_no_rates: Overturn it in the Commons.
@@ -1019,7 +1138,7 @@ view-if: bill_rates = 5
 new-page: true
 on-arrival: rate_capping = 1; c1_con += 2*(1-dissent); c1_con -= 1 if bill_rates_watered = 1; ab_con += 1*(1-dissent); right_dissent -= 2; bill_rates = 6; assent_key = "rates"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 
 = Royal Assent: the Rates Act
 
@@ -1052,8 +1171,11 @@ The Local Government Bill abolishes the Greater London Council and the six metro
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "glc"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1064,8 +1186,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the right are annoyed.
 on-arrival: div_key = "glc"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1076,8 +1201,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "glc"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1090,8 +1218,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "glc"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1135,11 +1266,16 @@ title: The Lords Defeat the Local Government Bill
 tags: event
 view-if: con_in_government = 1 and bill_glc = 4 and bill_glc_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_glc', ['Contents', 'Not-Contents'], [Q.bill_glc_lc, Q.bill_glc_lnc], ['against', 'govt']); } !}
 
 = The Lords Defeat the Local Government Bill
 
 The House of Lords votes down the plan to cancel next year's elections and replace the councillors with nominees. Peers of every party say it is wrong to abolish an election before Parliament has abolished the council.
+
+{!<span class="division" id="lords_division_glc"></span>!}
+
+The government is defeated by [+ bill_glc_lc +] votes to [+ bill_glc_lnc +].
 
 - @lords_yes_glc: Let the councillors serve on until abolition.
 - @lords_no_glc: Overturn the Lords in the Commons.
@@ -1164,7 +1300,7 @@ view-if: bill_glc = 5
 new-page: true
 on-arrival: glc_abolition = 1; c1_con += 1*(1-dissent); right_dissent -= 2; right_dissent += 3 if bill_glc_watered = 1; bill_glc = 6; assent_key = "glc"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 achievement: glc
 
 = Royal Assent: the Local Government Act
@@ -1198,8 +1334,11 @@ The Police and Criminal Evidence Bill puts the powers of stop, search, arrest an
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "pace"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1210,8 +1349,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the right are annoyed.
 on-arrival: div_key = "pace"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1222,8 +1364,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "pace"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1236,8 +1381,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "pace"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1281,11 +1429,16 @@ title: The Lords Amend the Police and Criminal Evidence Bill
 tags: event
 view-if: con_in_government = 1 and bill_pace = 4 and bill_pace_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_pace', ['Contents', 'Not-Contents'], [Q.bill_pace_lc, Q.bill_pace_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the Police and Criminal Evidence Bill
 
 The House of Lords votes to protect confidential records held by doctors, clergy and journalists from police search warrants, unless a judge agrees.
+
+{!<span class="division" id="lords_division_pace"></span>!}
+
+The government is defeated by [+ bill_pace_lc +] votes to [+ bill_pace_lnc +].
 
 - @lords_yes_pace: Accept the Lords amendment.
 - @lords_no_pace: Overturn it in the Commons.
@@ -1310,7 +1463,7 @@ view-if: bill_pace = 5
 new-page: true
 on-arrival: pace_act = 1; c2_con += 1*(1-dissent); right_dissent -= 2; right_dissent += 2 if bill_pace_watered = 1; bill_pace = 6; assent_key = "pace"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 achievement: pace
 
 = Royal Assent: the Police and Criminal Evidence Act
@@ -1344,8 +1497,11 @@ The Telecommunications Bill ends British Telecom's monopoly, creates a regulator
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "telecoms"; div_mode = "press"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The division bells ring across Westminster, and the members file through the lobbies.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1356,8 +1512,11 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and the dries are annoyed.
 on-arrival: div_key = "telecoms"; div_mode = "concede"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1368,8 +1527,11 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "telecoms"; div_mode = "confidence"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1382,8 +1544,11 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "telecoms"; div_mode = "deal"
 call: bill_vote
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); } !}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
+
+{!<span class="division" id="commons_division"></span>!}
 
 [? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
@@ -1427,11 +1592,16 @@ title: The Lords Amend the Telecommunications Bill
 tags: event
 view-if: con_in_government = 1 and bill_telecoms = 4 and bill_telecoms_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {! if (typeof window !== 'undefined' && window.drawDivision) { window.drawDivision('lords_division_telecoms', ['Contents', 'Not-Contents'], [Q.bill_telecoms_lc, Q.bill_telecoms_lnc], ['against', 'govt']); } !}
 
 = The Lords Amend the Telecommunications Bill
 
 The House of Lords votes to give the new regulator power to cap British Telecom's prices for ordinary customers.
+
+{!<span class="division" id="lords_division_telecoms"></span>!}
+
+The government is defeated by [+ bill_telecoms_lc +] votes to [+ bill_telecoms_lnc +].
 
 - @lords_yes_telecoms: Accept the Lords amendment.
 - @lords_no_telecoms: Overturn it in the Commons.
@@ -1456,7 +1626,7 @@ view-if: bill_telecoms = 5
 new-page: true
 on-arrival: privatisations += 1; telecoms_sold = 1; budget += 3; budget -= 0.5 if bill_telecoms_watered = 1; economic_liberalism += 3; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent); bill_telecoms = 6; assent_key = "telecoms"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 achievement: telecoms
 
 = Royal Assent: the Telecommunications Act

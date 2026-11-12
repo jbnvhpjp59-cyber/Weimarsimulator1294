@@ -252,6 +252,24 @@ if (typeof window !== 'undefined' && typeof d3 !== 'undefined' && d3.parliament 
     parliament.enter.fromCenter(true).smallToBig(true);
     d3.select("#lib_commons").datum(data).call(parliament);
 
+    // the House of Lords: the government's side on the right, as in the chamber
+    var lords = [
+        {"id": "lab", "legend": "Labour", "name": "Labour", "seats": Q.lords_lab},
+        {"id": "lib", "legend": "Liberal", "name": "Liberal", "seats": Q.lords_lib},
+        {"id": "sdp", "legend": "SDP", "name": "SDP", "seats": Q.lords_sdp},
+        {"id": "unaffiliated", "legend": "No party", "name": "No party", "seats": Q.lords_other},
+        {"id": "cross", "legend": "Crossbench", "name": "Crossbench", "seats": Q.lords_cross},
+        {"id": "bishops", "legend": "Bishops", "name": "Bishops", "seats": Q.lords_bishops},
+        {"id": "con", "legend": "Conservative", "name": "Conservative", "seats": Q.lords_con}
+    ];
+    if (screenWidth < width + 50) {
+        document.getElementById("lib_lords").style.height = Math.min(250, screenWidth / 2) + "px";
+    }
+    var lords_chart = d3.parliament();
+    lords_chart.width(width).height(height).innerRadiusCoef(0.3);
+    lords_chart.enter.fromCenter(true).smallToBig(true);
+    d3.select("#lib_lords").datum(lords).call(lords_chart);
+
     var colors = {'con': '#0087DC', 'lab': '#DC241F', 'lib': '#FDBB30', 'snp': '#E5D300', 'pc': '#008142', 'ni': '#9999FF'};
     var names = {'con': 'Conservative', 'lab': 'Labour', 'lib': Q.lib_name, 'snp': 'SNP', 'pc': 'Plaid Cymru', 'ni': 'N. Ireland'};
     if (Q.election_records.length > 0) {
@@ -281,6 +299,14 @@ if (typeof window !== 'undefined' && typeof d3 !== 'undefined' && d3.parliament 
 {!<svg id="lib_commons" style="width: 500px; height: 250px;"> </svg>!}
 
 Conservative [+ con_mps +], Labour [+ lab_mps +], [+ lib_name +] [+ lib_mps +], SNP [+ snp_mps +], Plaid Cymru [+ pc_mps +], Northern Ireland [+ ni_mps +].
+
+= The House of Lords
+
+{!<svg id="lib_lords" style="width: 500px; height: 250px;"> </svg>!}
+
+Conservative [+ lords_con +], Labour [+ lords_lab +], Liberal [+ lords_lib +], [? if lords_sdp > 0 : SDP [+ lords_sdp +], ?] crossbench [+ lords_cross +], bishops [+ lords_bishops +], and [+ lords_other +] with no party: about [+ lords_total +] in all.
+
+These are estimates: official figures by party begin only in 1984. Most of the peers with no party are hereditary peers who rarely attend, and on a busy day two or three hundred peers vote. The Conservatives are the largest party, but they can't win alone if Labour, the Liberals and the crossbenchers combine, so the Lords can still amend or defeat the government's bills.
 
 = Seats won at general elections
 
