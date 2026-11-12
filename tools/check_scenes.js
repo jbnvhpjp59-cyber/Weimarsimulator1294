@@ -200,6 +200,15 @@ for (const s of Object.values(scenes)) {
     if (opensC !== closesC) {
       err(`${s.file}:${line}`, `unbalanced [? ?] (${opensC} vs ${closesC})`);
     }
+    // Dendry ends a conditional at the first "?]", so [? ... [? ... ?] ... ?] breaks
+    let depth = 0;
+    for (const tok of t.match(/\[\?|\?\]/g) || []) {
+      depth += tok === '[?' ? 1 : -1;
+      if (depth > 1) {
+        err(`${s.file}:${line}`, 'nested [? ?] conditional; write separate conditionals instead');
+        break;
+      }
+    }
     if (opensI !== closesI) {
       err(`${s.file}:${line}`, `unbalanced [+ +] (${opensI} vs ${closesI})`);
     }

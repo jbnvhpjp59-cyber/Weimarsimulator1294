@@ -114,6 +114,76 @@ go-to: rm_main
 
 The right feels it has lost its voice in Number 10.
 
+@remove_lawson
+title: Drop Nigel Lawson
+view-if: lawson_advisor = 1
+tags: remove_advisor
+on-arrival: lawson_advisor = 0; dry_dissent += 4; n_advisors -= 1
+go-to: rm_main
+
+Lawson goes back to his department, convinced that he could do your job better than you.
+
+@remove_gilmour
+title: Drop Sir Ian Gilmour
+view-if: gilmour_advisor = 1
+tags: remove_advisor
+on-arrival: {!
+Q.gilmour_advisor = 0;
+Q.wet_dissent += 6;
+Q.n_advisors -= 1;
+if (Q.con_in_government) {
+    this.achieve('full_speed_ahead');
+}
+!}
+go-to: rm_main
+
+[? if con_in_government = 1 : Gilmour leaves Downing Street and tells the waiting cameras: "It does no harm to throw the occasional man overboard, but it does not do much good if you are steering full speed ahead for the rocks." ?][? if con_in_government = 0 : Gilmour takes it with aristocratic indifference. The wets take it less well. ?]
+
+@remove_parkinson
+title: Drop Cecil Parkinson
+view-if: parkinson_advisor = 1
+tags: remove_advisor
+on-arrival: parkinson_advisor = 0; loyalist_dissent += 4; n_advisors -= 1
+go-to: rm_main
+
+Parkinson takes it with a smile. Central Office is less cheerful.
+
+@remove_biffen
+title: Drop John Biffen
+view-if: biffen_advisor = 1
+tags: remove_advisor
+on-arrival: biffen_advisor = 0; dry_dissent += 3; wet_dissent += 2; n_advisors -= 1
+go-to: rm_main
+
+Biffen retreats to his farm in Shropshire and his weekly column, wryly.
+
+@remove_brittan
+title: Drop Leon Brittan
+view-if: brittan_advisor = 1
+tags: remove_advisor
+on-arrival: brittan_advisor = 0; dry_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Brittan returns to his brief without complaint.
+
+@remove_nott
+title: Drop John Nott
+view-if: nott_advisor = 1
+tags: remove_advisor
+on-arrival: nott_advisor = 0; dry_dissent += 3; n_advisors -= 1
+go-to: rm_main
+
+Nott mentions, not for the first time, that he'd rather be in the City.
+
+@remove_stevas
+title: Drop Norman St John-Stevas
+view-if: stevas_advisor = 1
+tags: remove_advisor
+on-arrival: stevas_advisor = 0; wet_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+St John-Stevas is the first of the wets to go, and he goes with a quip about the Blessed Margaret that is all over Westminster by teatime.
+
 #################### bringing in
 
 @add_whitelaw
@@ -204,4 +274,74 @@ card-image: img/cards/tebbit.jpg
 tags: add_advisor
 view-if: tebbit_advisor = 0 and n_advisors < 3
 on-arrival: tebbit_advisor = 1; n_advisors += 1; right_strength += 5; right_dissent -= 5
+go-to: add_advisors
+
+@add_lawson
+title: Nigel Lawson
+subtitle: Dry. A combative former financial journalist. {!<br><br>!}Actions: a tax reform plan or the Medium-Term Financial Strategy, prepare for the miners, brief the City.
+is-card: true
+card-image: img/advisor_dry.svg
+tags: add_advisor
+view-if: lawson_advisor = 0 and n_advisors < 3
+on-arrival: lawson_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
+go-to: add_advisors
+
+@add_gilmour
+title: Sir Ian Gilmour
+subtitle: Wet. The most articulate critic of monetarism. {!<br><br>!}Actions: One Nation, the armed forces or Europe, temper the monetarists.
+is-card: true
+card-image: img/advisor_wet.svg
+tags: add_advisor
+view-if: gilmour_advisor = 0 and n_advisors < 3
+on-arrival: gilmour_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
+go-to: add_advisors
+
+@add_parkinson
+title: Cecil Parkinson
+subtitle: Loyalist. A smooth organiser and fundraiser. {!<br><br>!}Actions: business dinners, small business, plan the campaign, run the party machine.
+is-card: true
+card-image: img/advisor_loyalist.svg
+tags: add_advisor
+view-if: parkinson_advisor = 0 and n_advisors < 3
+on-arrival: parkinson_advisor = 1; n_advisors += 1; loyalist_strength += 5; loyalist_dissent -= 3
+go-to: add_advisors
+
+@add_biffen
+title: John Biffen
+subtitle: Dry, but a consolidator. {!<br><br>!}Actions: the free-market case, cash limits, manage the Commons, counsel consolidation.
+is-card: true
+card-image: img/advisor_dry.svg
+tags: add_advisor
+view-if: biffen_advisor = 0 and n_advisors < 3
+on-arrival: biffen_advisor = 1; n_advisors += 1; dry_strength += 4; dry_dissent -= 2; wet_dissent -= 2
+go-to: add_advisors
+
+@add_brittan
+title: Leon Brittan
+subtitle: Dry. A barrister with a formidable grasp of detail. {!<br><br>!}Actions: attack the Scotland Bill, Question Time briefings, a spending review, the police bill.
+is-card: true
+card-image: img/cards/brittan.jpg
+tags: add_advisor
+view-if: brittan_advisor = 0 and n_advisors < 3
+on-arrival: brittan_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
+go-to: add_advisors
+
+@add_nott
+title: John Nott
+subtitle: Dry. A merchant banker with no sentiment about the Navy. {!<br><br>!}Actions: free trade, the Price Commission, the defence review, the task force.
+is-card: true
+card-image: img/cards/nott.jpg
+tags: add_advisor
+view-if: nott_advisor = 0 and n_advisors < 3
+on-arrival: nott_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
+go-to: add_advisors
+
+@add_stevas
+title: Norman St John-Stevas
+subtitle: Wet. Witty, theatrical, and a parliamentarian to his fingertips. {!<br><br>!}Actions: parents' rights, charm the House, select committees, the arts.
+is-card: true
+card-image: img/advisor_wet.svg
+tags: add_advisor
+view-if: stevas_advisor = 0 and n_advisors < 3
+on-arrival: stevas_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
 go-to: add_advisors

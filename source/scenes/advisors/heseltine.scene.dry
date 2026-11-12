@@ -11,6 +11,7 @@ Self-made publishing millionaire, conference star and, in his own view, a future
 
 - @conference
 - @regeneration
+- @minis
 - @root: Return
 
 @conference
@@ -30,4 +31,14 @@ choose-if: advisor_action_timer = 0
 unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1; budget -= 1; de_con += 2*(1-dissent); wet_dissent -= 5; dry_dissent += 3
 
-Enterprise zones and urban development corporations for the docklands of London and Liverpool.
+Heseltine sends task forces of civil servants and businessmen into the worst inner-city estates, and promises a garden festival for Liverpool.
+
+@minis
+title: Cut the civil service
+view-if: con_in_government = 1 and minis = 0
+subtitle: +1 budget. The dries are impressed despite themselves.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; minis = 1; budget += 1; dry_dissent -= 3; union_power -= 1
+
+Heseltine installs a management information system at the Department of the Environment and cuts its staff by more than a quarter. He suggests every department should do the same. Most ministers hope you won't ask them.

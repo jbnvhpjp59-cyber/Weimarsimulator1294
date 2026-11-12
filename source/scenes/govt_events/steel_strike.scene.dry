@@ -14,6 +14,7 @@ The steelworkers are on national strike for the first time since 1926. British S
 
 @hold_firm
 on-arrival: union_power -= 6; budget -= 1; economic_growth -= 0.3; dry_dissent -= 4; wet_dissent += 3; c2_con += 1*(1-dissent) if union_backlash >= 60
+achievement: steel
 
 After thirteen weeks the strikers settle for about 16%, paid for through productivity deals and closures. Neither side wins outright, but the government didn't write a cheque.
 

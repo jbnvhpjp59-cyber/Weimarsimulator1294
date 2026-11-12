@@ -193,6 +193,60 @@ img/*/tuc.jpg
   Licence: CC BY-SA 2.0
   Source: https://commons.wikimedia.org/wiki/File%3ATrades_Union_Congress%2C_Old_Castle_Street_-_geograph.org.uk_-_7417475.jpg
 
+img/*/nhs.jpg
+  Guy's Hospital - geograph.org.uk - 4343739.jpg
+  Author: N Chadwick
+  Licence: CC BY-SA 2.0
+  Source: https://commons.wikimedia.org/wiki/File%3AGuy%27s_Hospital_-_geograph.org.uk_-_4343739.jpg
+
+img/*/school.jpg
+  The Hewett School, Hall Road, Norwich - geograph.org.uk - 677619.jpg
+  Author: Paul Shreeve
+  Licence: CC BY-SA 2.0
+  Source: https://commons.wikimedia.org/wiki/File%3AThe_Hewett_School%2C_Hall_Road%2C_Norwich_-_geograph.org.uk_-_677619.jpg
+
+img/*/dhss.jpg
+  DHSS Offices - Leeds Road - geograph.org.uk - 361703.jpg
+  Author: Betty Longbottom
+  Licence: CC BY-SA 2.0
+  Source: https://commons.wikimedia.org/wiki/File%3ADHSS_Offices_-_Leeds_Road_-_geograph.org.uk_-_361703.jpg
+
+img/*/heathrow.jpg
+  G-BDPZ British Airways Boeing 747-148 seen at London Heathrow being prepared for repaint back to Aer Lingus livery.jpg
+  Author: Chris (Heathrow Junkie)
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AG-BDPZ_British_Airways_Boeing_747-148_seen_at_London_Heathrow_being_prepared_for_repaint_back_to_Aer_Lingus_livery.jpg
+
+img/*/power_station.jpg
+  Didcot Power Station - geograph.org.uk - 5498482.jpg
+  Author: Christopher Hilton
+  Licence: CC BY-SA 2.0
+  Source: https://commons.wikimedia.org/wiki/File%3ADidcot_Power_Station_-_geograph.org.uk_-_5498482.jpg
+
+img/*/county_hall.jpg
+  County Hall, London - geograph.org.uk - 479330.jpg
+  Author: Stephen Sweeney
+  Licence: CC BY-SA 2.0
+  Source: https://commons.wikimedia.org/wiki/File%3ACounty_Hall%2C_London_-_geograph.org.uk_-_479330.jpg
+
+img/*/nott.jpg
+  John Nott (4x5 cropped).jpg
+  Author: Unknown photographer
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AJohn_Nott_%284x5_cropped%29.jpg
+
+img/*/brittan.jpg
+  Leon Brittan (1996).jpg
+  Author: Christian Lambiotte
+  Licence: CC BY 4.0
+  Source: https://commons.wikimedia.org/wiki/File%3ALeon_Brittan_%281996%29.jpg
+
+img/map.jpg
+  Ordnance Survey Great Britain Sheet 2, Published 1933.jpg
+  Author: Director-General of the Ordnance Survey, UK
+  Licence: Public domain, CC BY 4.0
+  Source: https://commons.wikimedia.org/wiki/File%3AOrdnance_Survey_Great_Britain_Sheet_2%2C_Published_1933.jpg
+
 All photographs were cropped and resized for the game. Adaptations of CC BY-SA images are
 shared under the same licence as the original.
 

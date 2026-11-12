@@ -406,6 +406,14 @@ Q.next_election_year = 1978 + Math.floor((Q.next_election_time - 1) / 12);
 // the last two months before polling day are the campaign
 Q.in_campaign = (Q.months_to_election <= 2) ? 1 : 0;
 
+// "Broad Church": a wet, a dry and a loyalist in the inner circle at once
+var circle_wets = Q.prior_advisor + Q.pym_advisor + Q.heseltine_advisor + Q.gilmour_advisor + Q.stevas_advisor;
+var circle_dries = Q.joseph_advisor + Q.howe_advisor + Q.lawson_advisor + Q.biffen_advisor + Q.brittan_advisor + Q.nott_advisor;
+var circle_loyalists = Q.whitelaw_advisor + Q.carrington_advisor + Q.parkinson_advisor;
+if (circle_wets > 0 && circle_dries > 0 && circle_loyalists > 0 && !Q.game_achievement_broad_church) {
+    this.achieve('broad_church');
+}
+
 Q.has_event = 0;
 // check if there are any events this month; if not, go to the main hand.
 var scene = this.game.scenes['post_event.events_choice'];

@@ -48,3 +48,51 @@ music/god_save_the_queen.mp3
   Performed by: United States Navy Band
   Licence: Public domain
   Source: https://commons.wikimedia.org/wiki/File%3AUnited_States_Navy_Band_-_God_Save_the_Queen.oga
+
+music/pomp_and_circumstance_2.mp3
+  Pomp and Circumstance, Op. 39 - No. 2 - United States Army Band.mp3
+  Performed by: United States Army Band
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3APomp_and_Circumstance%2C_Op._39_-_No._2_-_United_States_Army_Band.mp3
+
+music/mars.mp3
+  Holst- mars.ogg
+  Performed by: United States Air Force Band
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AHolst-_mars.ogg
+
+music/saturn.mp3
+  HOLST "The Planets, Op. 32 5. Saturn, the Bringer of Old Age" - "The President's Own" U.S. Marine Band.opus
+  Performed by: United States Marine Band
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3AHOLST_%22The_Planets%2C_Op._32_5._Saturn%2C_the_Bringer_of_Old_Age%22_-_%22The_President%27s_Own%22_U.S._Marine_Band.opus
+
+music/i_vow_to_thee.mp3
+  HWW I Vow to Thee.ogg
+  Performed by: Richard MS Irwin (Hymns Without Words)
+  Licence: GFDL, CC BY-SA 4.0
+  Source: https://commons.wikimedia.org/wiki/File%3AHWW_I_Vow_to_Thee.ogg
+
+music/last_post.mp3
+  Last Post bugle call.ogg
+  Performed by: Sgt. Codie Lynn Williams, U.S. Marine Corps
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3ALast_Post_bugle_call.ogg
+
+music/danny_boy.mp3
+  Schumann-Heink - Danny Boy (Londonderry air) (1917).ogg
+  Performed by: Ernestine Schumann-Heink (1917)
+  Licence: Public domain
+  Source: https://commons.wikimedia.org/wiki/File%3ASchumann-Heink_-_Danny_Boy_%28Londonderry_air%29_%281917%29.ogg
+
+music/zadok_the_priest.mp3
+  Handel - Zadok the Priest, HWV 258 (St Matthew's Concert Choir, Giromella).oga
+  Performed by: St Matthew's Concert Choir, directed by Damien Giromella
+  Licence: CC BY 3.0 (the recording; the composition is in the public domain)
+  Source: https://commons.wikimedia.org/wiki/File%3AHandel_-_Zadok_the_Priest%2C_HWV_258_%28St_Matthew%27s_Concert_Choir%2C_Giromella%29.oga
+
+music/funeral_march.mp3
+  H. Purcell - March from Music for the funeral of Queen Mary.oga
+  Performed by: Erinaceus (Wikimedia Commons)
+  Licence: CC BY-SA 3.0, GFDL
+  Source: https://commons.wikimedia.org/wiki/File%3AH._Purcell_-_March_from_Music_for_the_funeral_of_Queen_Mary.oga

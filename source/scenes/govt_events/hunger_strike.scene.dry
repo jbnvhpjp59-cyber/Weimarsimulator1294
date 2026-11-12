@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 39 and time <= 42 and hunger_strike_s
 max-visits: 1
 new-page: true
 on-arrival: hunger_strike_seen = 1
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/danny_boy.mp3'); } !}
 
 = The Hunger Strike
 
@@ -14,6 +15,7 @@ Republican prisoners in the Maze are refusing food. They want to be treated as p
 
 @refuse
 on-arrival: uup_relation += 5; right_dissent -= 3; thatcher_rating += 1; europe_relation -= 5; us_relation -= 5; partner_dissent -= 1 if govt_type = 2
+achievement: hunger_strike
 
 Sands dies after 66 days, and nine more hunger strikers follow him before the protest ends. Over 100,000 people attend his funeral. The IRA recruits as never before, but the government doesn't give way.
 

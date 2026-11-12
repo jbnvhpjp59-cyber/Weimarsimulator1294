@@ -11,6 +11,7 @@ Deputy Leader and Shadow Home Secretary. He ran against you in 1975 and has been
 
 - @soothe_wets
 - @discipline
+- @law_and_order
 - @root: Return
 
 @soothe_wets
@@ -30,3 +31,12 @@ unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow C
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1; dry_dissent -= 6; wet_dissent -= 6; loyalist_dissent -= 6; right_dissent -= 6
 
 Willie works the tea room and the smoking room. Nobody wants to be the one who lets him down.
+
+@law_and_order
+title: Make law and order our issue
+subtitle: Working-class voters and the right respond.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; c2_con += 2*(1-dissent); de_con += 1*(1-dissent); right_dissent -= 4; wet_dissent += 1
+
+[? if con_in_government = 0 : Whitelaw promises more police, better paid, and tougher sentences. Labour, which has frozen police pay, has no answer. ?][? if con_in_government = 1 : The Home Secretary visits police stations up and down the country. He is booed at the Police Federation conference and cheered at the party conference, which he considers about right. ?]

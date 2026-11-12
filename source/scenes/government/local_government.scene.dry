@@ -1,0 +1,65 @@
+title: Local Government
+new-page: true
+is-card: true
+card-image: img/cards/county_hall.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and local_government_timer <= 0
+on-arrival: local_government_timer = 5; month_actions += 1
+
+= Local Government
+
+Councils spend a quarter of public money, and many of the biggest are run by Labour. [? if time >= 40 : Ken Livingstone's Greater London Council has cut London Transport fares by a third and flies a red flag over County Hall. ?] Every pound they overspend undoes a pound of the Treasury's cuts.
+
+- @rsg_cut: Cut the Rate Support Grant.
+- @rate_capping: Cap the rates of overspending councils.
+- @abolish_rates: Promise to abolish the domestic rates.
+- @abolish_glc: Abolish the GLC and the metropolitan counties.
+- @docklands: Create urban development corporations for the docklands.
+- @tendering: Make councils put their services out to tender.
+- @easy_discard
+- @cancel_advisor_action
+
+@rsg_cut
+view-if: rsg_cuts < 3
+subtitle: +0.5 budget. The rates go up instead.
+on-arrival: rsg_cuts += 1; budget += 0.5; c1_con -= 1; de_con -= 1; wet_dissent += 2; dry_dissent -= 1
+
+The grant from central government is cut again. Councils raise the rates to make up the difference, and the ratepayers blame whoever they voted for last.
+
+@rate_capping
+view-if: rate_capping = 0 and rsg_cuts >= 1
+subtitle: Ratepayers approve. The wets fear for local democracy.
+on-arrival: rate_capping = 1; c1_con += 2*(1-dissent); ab_con += 1*(1-dissent); right_dissent -= 2; wet_dissent += 3; rebellion += 1
+
+The Environment Secretary takes the power to cap the rates of councils that overspend. Ted Heath calls it "the most deplorable legislation" he has seen in years. Labour councils in Liverpool and Lambeth threaten to defy the law.
+
+@abolish_rates
+view-if: rates_pledge = 0
+subtitle: Popular now. The Treasury asks what will replace them.
+on-arrival: rates_pledge = 1; c1_con += 2*(1-dissent); c2_con += 1*(1-dissent); thatcher_rating += 1; dry_dissent += 2
+achievement: rates
+
+You made this promise in 1974, and you meant it. A Green Paper sets out the alternatives: a local sales tax, a local income tax, or a flat charge on every adult. Nobody likes any of them, and the flat charge, which the civil servants call a poll tax, least of all.
+
+@abolish_glc
+view-if: glc_abolition = 0 and time >= 50
+subtitle: The right is delighted. The wets and the Lords will resist.
+on-arrival: glc_abolition = 1; right_dissent -= 4; c1_con += 1*(1-dissent); wet_dissent += 4; lib_relation -= 2; rebellion += 1
+achievement: glc
+
+The Greater London Council and the six metropolitan county councils are to be abolished. Ken Livingstone hangs the London unemployment figures from the roof of County Hall, across the river from Parliament.
+
+@docklands
+view-if: docklands = 0
+subtitle: -0.5 budget. New jobs, and a showcase for enterprise.
+on-arrival: docklands = 1; budget -= 0.5; economic_growth += 0.2; unemployment -= 0.1; c2_con += 1*(1-dissent); wet_dissent -= 2
+achievement: docklands
+
+Michael Heseltine creates development corporations for the London and Merseyside docklands, and Sir Geoffrey Howe declares the first enterprise zones, free of rates and planning controls. Eight square miles of derelict wharves on the Isle of Dogs wait for the developers.
+
+@tendering
+view-if: council_tendering = 0
+subtitle: +0.5 budget. The council unions lose ground.
+on-arrival: council_tendering = 1; budget += 0.5; union_power -= 2; dry_dissent -= 2; wet_dissent += 1
+
+Council building and maintenance departments must now win their work in competition with private firms. In some towns the direct labour organisation wins; in many it doesn't.

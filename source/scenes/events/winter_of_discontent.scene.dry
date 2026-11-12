@@ -4,6 +4,7 @@ view-if: time >= 13 and time <= 14 and strike_wave >= 4 and autumn_election_1978
 max-visits: 1
 new-page: true
 on-arrival: winter_of_discontent = 1; strike_wave = 8 if strike_wave < 8; union_backlash += 10; labour_credibility -= 10; lab_leader_rating -= 8
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/saturn.mp3'); } !}
 
 = The Winter of Discontent
 

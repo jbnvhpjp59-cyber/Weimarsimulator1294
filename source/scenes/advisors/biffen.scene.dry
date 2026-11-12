@@ -1,0 +1,55 @@
+title: John Biffen
+is-pinned-card: true
+card-image: img/advisor_dry.svg
+tags: advisor
+view-if: biffen_advisor = 1
+new-page: true
+
+= John Biffen
+
+[? if con_in_government = 0 : A free-market economist on the backbenches. He was a monetarist before it was fashionable. ?][? if con_in_government = 1 and time < 45 : Chief Secretary to the Treasury. ?][? if con_in_government = 1 and time >= 45 : Leader of the House of Commons. ?] Gentle, ironic and popular in the tea room, he believes in sound money and is less sure about everything else.
+
+- @free_market
+- @cash_limits
+- @house
+- @consolidation
+- @root: Return
+
+@free_market
+title: Make the free-market case
+view-if: con_in_government = 0
+subtitle: Builds support for our economics.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; economic_liberalism += 3; labour_credibility -= 1; wet_dissent += 1
+
+Biffen writes for the weekend papers and speaks to every university Conservative association that asks. He makes monetarism sound like common sense.
+
+@cash_limits
+title: Impose cash limits
+view-if: con_in_government = 1
+subtitle: +1 budget. The spending departments and the wets object.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; budget += 1; spending -= 1 if spending > -5; wet_dissent += 4; cabinet_revolt += 1 if cabinet_dry < 60
+
+Departments get a fixed cash sum for the year. If pay and prices rise faster than planned, they must find the money themselves.
+
+@house
+title: Manage the Commons
+view-if: con_in_government = 1
+subtitle: Calms the backbenches.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; rebellion -= 2; partner_dissent -= 1 if govt_type >= 2; loyalist_dissent -= 2
+
+Biffen arranges the business of the House so that awkward votes come late on Thursdays, and spends his evenings in the smoking room listening to complaints.
+
+@consolidation
+title: Counsel consolidation
+subtitle: Calms both wings of the party, at some cost to radicalism.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; dry_dissent -= 3; wet_dissent -= 4; economic_liberalism -= 1; rebellion -= 1 if con_in_government
+
+Biffen suggests that the party has had enough upheaval for one Parliament, and should consolidate what it has done. Downing Street calls him semi-detached; the backbenches call him sensible.

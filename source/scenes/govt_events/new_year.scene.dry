@@ -18,8 +18,17 @@ Q.budget += 0.3 * Q.economic_growth;
 // the cost of unemployment benefit
 Q.benefit_cost = 0;
 if (Q.unemployment > 6) {
-    Q.benefit_cost = Math.round((Q.unemployment - 6) * 0.25 * 10) / 10;
+    Q.benefit_cost = (Q.unemployment - 6) * 0.25;
+    // taxing benefits and ending the earnings-related supplement
+    if (Q.benefits_cut) {
+        Q.benefit_cost *= 0.8;
+    }
+    Q.benefit_cost = Math.round(Q.benefit_cost * 10) / 10;
     Q.budget -= Q.benefit_cost;
+}
+// pensions linked to prices rather than earnings: the saving grows each year
+if (Q.pension_link_broken) {
+    Q.budget += 0.3;
 }
 // the 1983 boundary review applies from the next election
 if (Q.year >= 1983) {

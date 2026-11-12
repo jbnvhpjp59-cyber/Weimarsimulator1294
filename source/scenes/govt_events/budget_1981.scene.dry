@@ -17,6 +17,7 @@ The recession is deep, and borrowing has overshot because of it. Alan Walters, y
 choose-if: chancellor_dry = 1
 unavailable-subtitle: [+ chancellor +] won't do it.
 on-arrival: budget += 3; inflation -= 1.5; unemployment += 0.4; interest_rate -= 2 if interest_rate > 10; ab_con -= 2; c1_con -= 3; c2_con -= 3; de_con -= 2; wet_dissent += 8; dry_dissent -= 5; rebellion += 1
+achievement: economists
 
 Allowances are frozen and duties raised: about £4 billion taken out of the economy. 364 economists write to The Times to say there is "no basis in economic theory or supporting evidence" for the policy. Bank Rate comes down to [+ interest_rate +]%.
 

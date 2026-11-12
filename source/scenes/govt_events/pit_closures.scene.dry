@@ -22,7 +22,7 @@ Within a week, the closures are withdrawn and the Coal Board gets more money. Th
 
 @confront
 on-arrival: {!
-var odds = 20 + 30 * Q.coal_stocks + (Q.union_power < 50 ? 10 : 0);
+var odds = 20 + 30 * Q.coal_stocks + (Q.union_power < 50 ? 10 : 0) + (Q.nuclear_programme ? 10 : 0);
 Q.miners_win = (Math.random() * 100 < odds) ? 0 : 1;
 !}
 go-to: miners_win if miners_win = 1; miners_lose if miners_win = 0

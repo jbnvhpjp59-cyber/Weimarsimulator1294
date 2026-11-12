@@ -11,6 +11,7 @@ new-page: true
 
 - @diplomacy
 - @lords
+- @mediate
 - @root: Return
 
 @diplomacy
@@ -30,3 +31,13 @@ unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1; loyalist_dissent -= 6; wet_dissent -= 3; rebellion -= 2 if con_in_government
 
 A word in the right ears at White's and the Carlton. The grandees agree to give you the benefit of the doubt.
+
+@mediate
+title: Mediate in Cabinet
+view-if: con_in_government = 1
+subtitle: Cabinet tension and wet dissent fall.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; cabinet_revolt -= 2; wet_dissent -= 2; dry_dissent += 2
+
+Carrington takes the leading wets aside, one by one, and tells them that resigning would only help Labour. He tells you, separately, to let them win an argument now and then.

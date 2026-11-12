@@ -12,7 +12,7 @@ Willie Whitelaw at the Home Office has a full in-tray.
 
 - @police_pay: Implement the Edmund-Davies police pay award in full.
 - @short_sharp_shock: A "short, sharp shock" for young offenders.
-- @nationality: A new British Nationality Act.
+- @hanging: Allow a free vote on restoring the death penalty.
 - @scarman: Implement the Scarman Report.
 - @easy_discard
 - @cancel_advisor_action
@@ -29,16 +29,18 @@ on-arrival: right_dissent -= 3; c1_lib += 1; c2_con += 1*(1-dissent)
 
 Military-style detention centres for young offenders. The party conference cheers; criminologists doubt it will work.
 
-@nationality
-view-if: nationality_act = 0
-subtitle: The right is pleased; the wets and the Liberals are not.
-on-arrival: nationality_act = 1; right_dissent -= 5; right_strength += 2; wet_dissent += 4; lib_relation -= 4; c2_con += 1*(1-dissent)
+@hanging
+view-if: hanging_vote = 0
+subtitle: Popular in the country and on the right. The House will almost certainly vote it down.
+on-arrival: hanging_vote = 1; right_dissent -= 4; c2_con += 1*(1-dissent); de_con += 1*(1-dissent); wet_dissent += 2; lib_relation -= 3
+achievement: hanging
 
-The Act replaces citizenship of the UK and Colonies with three new categories. Critics say it was designed to keep people out.
+You have always believed in capital punishment for the worst murders, and you say so. In a free vote, the Commons rejects restoring the death penalty by 362 votes to 243, with Whitelaw and most of the Cabinet in the majority. The polls say three-quarters of the public wanted it back.
 
 @scarman
 view-if: riots >= 1 and scarman_done = 0
 subtitle: The wets approve; the right says it rewards rioters.
 on-arrival: scarman_done = 1; wet_dissent -= 4; right_dissent += 3; c1_con += 1*(1-dissent); budget -= 1
+achievement: scarman
 
 Lord Scarman's report on Brixton calls for community policing, better recruitment from ethnic minorities, and an end to stop-and-search under the "sus" law.

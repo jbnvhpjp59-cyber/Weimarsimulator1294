@@ -39,5 +39,6 @@ subtitle: A conference speech on unemployment.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [+ advisor_action_timer +] months before the next Cabinet action.
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1; right_dissent -= 5; dry_dissent -= 3; wet_dissent += 3; c2_con += 1*(1-dissent) if unemployment < 10; c2_con -= 1 if unemployment >= 10
+achievement: on_your_bike
 
 Tebbit tells the conference that his unemployed father didn't riot in the 1930s: "He got on his bike and looked for work." [? if unemployment >= 10 : With unemployment at [+ unemployment_2 +]%, many people take it as an insult. ?]

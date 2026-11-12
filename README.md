@@ -22,14 +22,21 @@ Like the original, each month you play one card from your hand. Historical and c
 | Trade Union Law | A cautious Employment Act, stripping immunities (dry Employment Secretary only), ballots, talks with the TUC |
 | Nationalised Industries | Bail-outs, cutting subsidies, privatisation, building coal stocks |
 | Housing | Right to buy, discounts, council building, mortgage relief |
-| Law and Order | Police pay, the "short sharp shock", the Nationality Act, the Scarman reforms |
+| Law and Order | Police pay, the "short sharp shock", a free vote on hanging, the Scarman reforms |
 | Foreign Affairs | The EEC rebate, compromise with Europe, the special relationship |
 | Defence | The Nott review (which invites the Falklands), Trident, HMS Endurance, NATO spending |
 | Northern Ireland, Public Sector Pay | Security vs. talks, cash limits vs. peace |
+| The Health Service | Funding above inflation, prescription charges, contracting out, private insurance, the Griffiths managers |
+| Education and Training | Assisted places, parental choice, university cuts, education vouchers, the Youth Training Scheme |
+| Social Security | Breaking the pensions-earnings link, taxing benefits, statutory sick pay, child benefit, fraud drives |
+| The Common Market | The Exchange Rate Mechanism, farm policy reform, the "lamb war", fisheries, the single market |
+| Immigration and Nationality | The British Nationality Act, immigration rules, the Vietnamese boat people, inner-city projects |
+| Energy and North Sea Oil | Oil taxes, selling BP shares, a nuclear programme (which weakens the miners), market energy prices |
+| Local Government | Rate Support Grant cuts, rate-capping, abolishing the rates, abolishing the GLC, the Docklands, tendering |
 | Reshuffle | Purge the wets, bring them back, promote loyalists |
 | Government Business (Commons) | Whip the rebels, keep partners on side |
 
-**Advisers.** As with the original's party leadership, you keep three advisers at a time as pinned cards, starting with Whitelaw, Joseph and Howe. Each has special actions, with one action every six months. The "Your Inner Circle" card swaps them for others from a pool of nine (Reece, Prior, Pym, Heseltine, Carrington and Tebbit). Dropping an adviser angers their faction; bringing one in strengthens theirs. In government, the pinned Number 10 card can call a snap election after three years.
+**Advisers.** As with the original's party leadership, you keep three advisers at a time as pinned cards, starting with Whitelaw, Joseph and Howe. Each has special actions, with one action every six months. The "Your Inner Circle" card swaps them for any of thirteen others: Reece, Prior, Pym, Heseltine, Carrington, Tebbit, Lawson, Gilmour, Parkinson, Biffen, Brittan, Nott and St John-Stevas. Each has three or four actions, some only in opposition and some only in government. Dropping an adviser angers their faction; bringing one in strengthens theirs. In government, the pinned Number 10 card can call a snap election after three years.
 
 **Losing.** As in the original, defeat doesn't end the game. Lose in 1979 and Labour governs on, the recession hits them instead, and you fight on as Leader of the Opposition, facing a leadership challenge, until the final election.
 
@@ -47,10 +54,10 @@ Like the original, each month you play one card from your hand. Historical and c
 - **1979:** Howe's first Budget, the Clegg awards, Lancaster House, the Dublin summit, 17% Bank Rate.
 - **1980:** the steel strike, the Iranian Embassy, two million unemployed, "the lady's not for turning" (or a U-turn), Foot.
 - **1981:** the Gang of Four and the Alliance, the pit closures, the 1981 Budget, the hunger strike, Brixton and Toxteth, the Cabinet revolt and the September purge, Crosby.
-- **1982:** three million unemployed, Hillhead, the Falklands (deterred, negotiated, won or lost).
+- **1982:** three million unemployed, Hillhead, the health service dispute, the Think Tank leak, the Falklands (deterred, negotiated, won or lost).
 - **1983:** recovery, the "longest suicide note", and by-elections and defections throughout.
 
-**The end.** The game ends at the second general election (by 1984 at the latest), or earlier if you are ousted. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the Falklands, Europe, and whether you turned. There are 24 achievements.
+**The end.** The game ends at the second general election (by 1984 at the latest), or earlier if you are ousted. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the NHS, pensions, education, the rates, the Falklands, Europe, and whether you turned. There are 57 achievements, listed on the start menu with the ones you have and haven't unlocked.
 
 ## Menus and options
 
@@ -59,14 +66,14 @@ These mirror the original:
 - **Difficulty:** easy (a four-card hand, more resources, and the Inner Circle and Cabinet Room pinned cards), normal, hard, historical (no fundraising, polls or saves), and custom, where every setting is adjustable.
 - **Election simulation:** runs February 1974, October 1974, 1979 and 1983 through the seat model and compares the result with the real one.
 - **Library:** background pages, the current government, demographics, public opinion, and figures and charts (the Commons, seats won, opinion polls, and inflation and unemployment over time).
-- **Options:** save/load, dark mode (it follows your system theme until you choose), font size, animations, music on/off and volume, and event pictures on/off.
+- **Options:** save/load, dark mode (it follows your system theme until you choose), font size, animations, the background map on/off, music on/off and volume, and event pictures on/off.
 
 ## Pictures and music
 
 Like the original, the game has period photographs and a classical soundtrack.
 
-- **Pictures.** Cabinet ministers' cards carry their portraits, and the decks and Government Affairs cards carry photographs (the Commons chamber, Downing Street, the Bank of England, British Leyland, the TUC, HMS *Endurance*, and others). Major events show a picture above the text: Callaghan, Foot, Jenkins, Healey, Steel, Heath and Neave, Brixton, the pit closures, Lancaster House, the Falklands, and Thatcher herself at three points in her career. Cabinet members without a suitable free photograph (Whitelaw, Joseph, Prior, Reece) keep drawn card art, as do the faction cards.
-- **Music.** Elgar's *Pomp and Circumstance* Marches Nos. 1 and 4, "Nimrod", *Land of Hope and Glory* and the *March of the Mogul Emperors*; Holst's "Jupiter"; "Rule, Britannia!"; and "God Save the Queen" at the end. Opposition, government, defeat and the ending each have their own playlist.
+- **Pictures.** Advisers' cards carry their portraits, and the decks and Government Affairs cards carry photographs (the Commons chamber, Downing Street, the Bank of England, British Leyland, the TUC, Guy's Hospital, County Hall, a DHSS office, Didcot power station, HMS *Endurance*, and others). A 1933 Ordnance Survey map of Great Britain sits behind the main screen, as the original has its map of Germany. Major events show a picture above the text: Callaghan, Foot, Jenkins, Healey, Steel, Heath and Neave, Brixton, the pit closures, Lancaster House, the Falklands, and Thatcher herself at three points in her career. Advisers without a suitable free photograph (Whitelaw, Joseph, Prior, Reece, Lawson, Gilmour, Parkinson, Biffen, St John-Stevas) keep drawn card art, as do the faction cards.
+- **Music.** Sixteen recordings. Opposition, government and defeat each have their own playlist: Elgar's *Pomp and Circumstance* Marches Nos. 1, 2 and 4, "Nimrod", *Land of Hope and Glory* and the *March of the Mogul Emperors*; Holst's "Jupiter"; and "Rule, Britannia!". As in the original, big moments get their own music, which plays at once and then hands back to the playlist: "Zadok the Priest" as you take office, "The Last Post" for Airey Neave, Holst's "Saturn" for the Winter of Discontent, "Danny Boy" for the hunger strike, "Rule, Britannia!" as the task force sails, "Mars" for the war, "I Vow to Thee, My Country" for victory, and Purcell's funeral march for defeat or downfall. The game ends with "God Save the Queen".
 
 Everything comes from Wikimedia Commons under a public domain or Creative Commons licence. `credits_images.txt` and `credits_music.txt` list the author, licence and source page of each file, and the in-game **Credits** page (start menu) shows the same.
 
@@ -121,8 +128,8 @@ From automated playthroughs of the full game on normal difficulty (400 games per
 
 | Strategy | Re-elected | Ousted in government | Lost the second election | Lost in 1979 |
 | --- | --- | --- | --- | --- |
-| Thatcher's historical choices | 84% | 12% | 3% | 2% |
-| Random choices | 65% | 16% | 5% | 14% |
+| Thatcher's historical choices | 80% | 12% | 6% | 2% |
+| Random choices | 66% | 12% | 7% | 15% |
 
 On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
 

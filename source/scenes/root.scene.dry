@@ -373,6 +373,53 @@ Q.defeated_once = 0;
 Q.labour_winter_seen = 0;
 Q.late_victory = 0;
 Q.last_cabinet_action = 0;
+Q.hanging_vote = 0;
+
+// Health: nhs_funding counts the years we funded the NHS above inflation
+Q.nhs_funding = 0;
+Q.prescription_charges = 0;
+Q.nhs_contracting = 0;
+Q.nhs_reorganised = 0;
+Q.private_health = 0;
+Q.nhs_griffiths = 0;
+Q.cprs_leak = 0;
+Q.cprs_defended = 0;
+Q.health_dispute = 0;
+// Education and training (school_vouchers: 1 = studied, 2 = piloted, -1 = dropped)
+Q.assisted_places = 0;
+Q.parental_choice = 0;
+Q.university_cuts = 0;
+Q.school_vouchers = 0;
+Q.yts = 0;
+Q.school_spending = 0;
+// Social security
+Q.pension_link_broken = 0;
+Q.benefits_cut = 0;
+Q.sick_pay_reform = 0;
+Q.child_benefit = 0;
+Q.fraud_drive = 0;
+// The Common Market
+Q.erm = 0;
+Q.cap_reform = 0;
+Q.lamb_war = 0;
+Q.fisheries_deal = 0;
+Q.single_market = 0;
+// Immigration (boat_people: 1 = took them in, -1 = refused)
+Q.immigration_rules = 0;
+Q.boat_people = 0;
+Q.race_relations = 0;
+// Energy
+Q.oil_tax = 0;
+Q.bp_sold = 0;
+Q.nuclear_programme = 0;
+Q.gas_prices = 0;
+// Local government
+Q.rsg_cuts = 0;
+Q.rate_capping = 0;
+Q.rates_pledge = 0;
+Q.glc_abolition = 0;
+Q.docklands = 0;
+Q.council_tendering = 0;
 
 // ---------------------------------------------------------------
 // Timers. Each card sets its own timer; post_event counts them down.
@@ -389,6 +436,8 @@ Q.timers = ['advisor_action',
             'budget', 'monetary_policy', 'public_spending', 'union_law',
             'industry', 'housing', 'law_order', 'foreign_affairs',
             'defence', 'northern_ireland', 'public_pay', 'reshuffle',
+            'nhs', 'education', 'social_security', 'europe', 'immigration',
+            'energy', 'local_government',
             // events
             'by_election', 'gilt_crisis'];
 for (var t of Q.timers) {
@@ -406,6 +455,21 @@ Q.pym_advisor = 0;
 Q.heseltine_advisor = 0;
 Q.carrington_advisor = 0;
 Q.tebbit_advisor = 0;
+Q.lawson_advisor = 0;
+Q.gilmour_advisor = 0;
+Q.parkinson_advisor = 0;
+Q.biffen_advisor = 0;
+Q.brittan_advisor = 0;
+Q.nott_advisor = 0;
+Q.stevas_advisor = 0;
+// one-off advisor actions
+Q.pace_bill = 0;
+Q.price_commission = 0;
+Q.select_committees = 0;
+Q.voice_coached = 0;
+Q.minis = 0;
+// extra odds for the task force (Nott's action)
+Q.falklands_bonus = 0;
 
 // project the starting polls
 this._runActions(this.game.scenes['election_algorithm'].onArrival);
@@ -463,6 +527,7 @@ go-to: custom_difficulty
 
 @1978_main
 new-page: true
+set-bg: img/map.jpg
 go-to: main if hand_size == 3; main.main_easy if hand_size == 4
 face-image: img/events/thatcher_1976.jpg
 audio: shuffle music/pomp_and_circumstance_4.mp3 music/rule_britannia.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3

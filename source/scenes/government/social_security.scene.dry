@@ -1,0 +1,54 @@
+title: Social Security
+new-page: true
+is-card: true
+card-image: img/cards/dhss.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and social_security_timer <= 0
+on-arrival: social_security_timer = 5; month_actions += 1
+
+= Social Security
+
+The Department of Health and Social Security spends a quarter of all public money, most of it on pensions. With unemployment [? if unemployment < 8 : rising ?][? if unemployment >= 8 : at [+ unemployment_2 +]% ?], the bill for benefits grows every month.
+
+- @pension_link: Break the link between pensions and earnings.
+- @benefit_cuts: Tax benefits and abolish the earnings-related supplement.
+- @sick_pay: Make employers pay sick pay.
+- @child_benefit: Raise child benefit.
+- @fraud: Crack down on benefit fraud.
+- @easy_discard
+- @cancel_advisor_action
+
+@pension_link
+view-if: pension_link_broken = 0
+subtitle: +1 budget now, and a growing saving every year. Pensioners will notice in time.
+on-arrival: pension_link_broken = 1; budget += 1; de_con -= 2; c1_con -= 1; wet_dissent += 4; dry_dissent -= 3
+achievement: pension_link
+
+Until now the state pension has risen each year with prices or earnings, whichever was higher. From now on it rises with prices alone. The saving is small this year and enormous in twenty. Barbara Castle, who created the link, calls it theft from the old.
+
+@benefit_cuts
+view-if: benefits_cut = 0
+subtitle: +1 budget, and benefit costs a fifth less from now on.
+on-arrival: benefits_cut = 1; budget += 1; de_con -= 2; de_lab += 1; c2_con -= 1; wet_dissent += 3; dry_dissent -= 2
+
+Unemployment and sickness benefit become taxable, and the earnings-related supplement paid in the first six months out of work is abolished. Someone who loses a skilled job now falls straight onto the basic rate.
+
+@sick_pay
+view-if: sick_pay_reform = 0
+subtitle: +0.5 budget. Small businesses grumble.
+on-arrival: sick_pay_reform = 1; budget += 0.5; ab_con -= 1; dry_dissent -= 1
+
+Employers will pay the first eight weeks of sick pay and reclaim it from their National Insurance contributions. The DHSS saves money and staff; the Federation of Small Businesses complains about paperwork.
+
+@child_benefit
+subtitle: -1 budget. Families and the wets approve.
+on-arrival: child_benefit += 1; budget -= 1; c2_con += 2*(1-dissent); de_con += 1*(1-dissent); wet_dissent -= 3; dry_dissent += 2
+
+Child benefit rises faster than prices. It goes to the mother, and most mothers notice.
+
+@fraud
+view-if: fraud_drive < 2
+subtitle: +0.5 budget. Popular with the tabloids; the Liberals object to the methods.
+on-arrival: fraud_drive += 1; budget += 0.5; right_dissent -= 2; c2_con += 1*(1-dissent); de_con -= 1; lib_relation -= 2
+
+Specialist claims teams descend on benefit offices in search of "scroungers". In Oxford, a raid arrests 283 people at a fake benefit office the police set up to catch them. The Sun is delighted.

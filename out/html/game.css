@@ -583,3 +583,8 @@ table {
     text-decoration: underline;
     text-decoration-style: dotted;
 }
+
+/* the background map is drawn for the light theme; dim it in dark mode */
+body.dark-mode #bg1 {
+    filter: brightness(0.32) saturate(0.6);
+}

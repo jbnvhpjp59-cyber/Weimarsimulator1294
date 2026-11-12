@@ -11,6 +11,7 @@ A former Chief Whip from an old Cambridgeshire family, Pym is the voice of the s
 
 - @shires
 - @diplomacy
+- @count_votes
 - @root: Return
 
 @shires
@@ -30,3 +31,12 @@ unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1; europe_relation += 8; us_relation += 4; right_dissent += 2
 
 Pym's patient diplomacy repairs some of the damage done at the last European summit.
+
+@count_votes
+title: Count the votes
+subtitle: The former Chief Whip calms the backbenches.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; loyalist_dissent -= 3; right_dissent -= 2; rebellion -= 2 if con_in_government
+
+Pym still knows every member's price and every member's grievance. A few quiet words, and the rebels decide to wait.

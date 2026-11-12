@@ -5,6 +5,7 @@ max-visits: 1
 new-page: true
 on-arrival: neave_dead = 1; right_strength += 3; uup_relation += 5; thatcher_rating += 1
 face-image: img/events/neave.jpg
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/last_post.mp3'); } !}
 
 = Airey Neave
 

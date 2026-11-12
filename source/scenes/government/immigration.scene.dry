@@ -1,0 +1,56 @@
+title: Immigration and Nationality
+new-page: true
+is-card: true
+card-image: img/cards/heathrow.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and immigration_timer <= 0
+on-arrival: immigration_timer = 6; month_actions += 1
+
+= Immigration and Nationality
+
+[? if swamped_seen = 1 : Your remark about people being afraid of being "swamped" won us votes in 1978. Now the government has to decide what it means in practice. ?][? if swamped_seen = 0 : The manifesto promised firm immigration control. Now the government has to decide what that means in practice. ?] [? if riots >= 1 : Since the riots, the inner cities have been watching too. ?]
+
+- @nationality: A new British Nationality Act.
+- @tighten_rules: Tighten the immigration rules.
+- @boat_people: Take in Vietnamese boat people.
+- @refuse_boat_people: Refuse to take more boat people.
+- @race_relations: Fund community projects in the inner cities.
+- @easy_discard
+- @cancel_advisor_action
+
+@nationality
+view-if: nationality_act = 0
+subtitle: The right is pleased; the wets and the Liberals are not.
+on-arrival: nationality_act = 1; right_dissent -= 5; right_strength += 2; wet_dissent += 4; lib_relation -= 4; c2_con += 1*(1-dissent)
+achievement: nationality
+
+The Act replaces citizenship of the United Kingdom and Colonies with three new categories. Only British citizens will have the automatic right to live here. Critics say it was designed to keep people out, and Hong Kong notices.
+
+@tighten_rules
+view-if: immigration_rules < 2
+subtitle: The right approves; the Liberals and the wets object.
+on-arrival: immigration_rules += 1; right_dissent -= 3; c2_con += 1*(1-dissent); wet_dissent += 2; lib_relation -= 2
+
+[? if immigration_rules = 1 : Women settled here lose the automatic right to bring in husbands from abroad, under a new "primary purpose" rule. ?][? if immigration_rules = 2 : Entry clearance checks are tightened and appeals restricted. The queues at the High Commission in Dhaka grow longer. ?]
+
+@boat_people
+view-if: boat_people = 0 and time <= 30
+subtitle: Our allies are grateful. The right is not.
+on-arrival: boat_people = 1; us_relation += 4; europe_relation += 2; lib_relation += 2; wet_dissent -= 2; right_dissent += 3
+achievement: boat_people
+
+At the Geneva conference, Britain agrees to take ten thousand refugees from the camps in Hong Kong. Willie Whitelaw insists it is the decent thing to do, and you let him win the argument.
+
+@refuse_boat_people
+view-if: boat_people = 0 and time <= 30
+subtitle: The right approves. The Americans and the wets do not.
+on-arrival: boat_people = -1; right_dissent -= 2; us_relation -= 4; lib_relation -= 2; wet_dissent += 3
+
+We tell the Geneva conference that Britain has already done enough by keeping the camps in Hong Kong open. The Americans and the Australians are unimpressed.
+
+@race_relations
+view-if: race_relations = 0
+subtitle: -0.5 budget. The wets approve; the right calls it a waste.
+on-arrival: race_relations = 1; budget -= 0.5; wet_dissent -= 3; right_dissent += 2; de_con += 1*(1-dissent); c1_lib -= 1
+
+Money from the Urban Programme goes to community centres, youth projects and the Commission for Racial Equality. [? if riots >= 1 : It is the least that Lord Scarman will expect. ?]

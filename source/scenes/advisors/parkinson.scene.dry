@@ -1,0 +1,54 @@
+title: Cecil Parkinson
+is-pinned-card: true
+card-image: img/advisor_loyalist.svg
+tags: advisor
+view-if: parkinson_advisor = 1
+new-page: true
+
+= Cecil Parkinson
+
+[? if con_in_government = 0 : A trade spokesman, and one of your most loyal supporters. ?][? if con_in_government = 1 and time < 45 : Minister for Trade. ?][? if con_in_government = 1 and time >= 45 : Chairman of the Conservative Party. ?] A grammar-school boy from Lancashire who made a fortune in accountancy. Smooth on television and popular in the constituencies.
+
+- @dinners
+- @small_business
+- @campaign_plan
+- @machine
+- @root: Return
+
+@dinners
+title: Work the business dinners
+subtitle: Gain [+ donations + 1 +] resources.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; resources += donations + 1
+
+Parkinson spends a month of evenings in the hotels of the Home Counties. The cheques arrive by the next post.
+
+@small_business
+title: Champion small business
+view-if: con_in_government = 0
+subtitle: The self-employed and white-collar voters warm to us.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; c1_con += 2*(1-dissent); ab_con += 1*(1-dissent); economic_liberalism += 1
+
+Parkinson tours the trading estates promising less paperwork, lower taxes and an end to Labour's price controls.
+
+@campaign_plan
+title: Plan the next campaign
+subtitle: A broad lift in support, and more during a campaign.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; c1_con += 1*(1-dissent); c2_con += 1*(1-dissent); thatcher_rating += 1; c1_con += 2*(1-dissent) if in_campaign = 1; c2_con += 2*(1-dissent) if in_campaign = 1
+
+Parkinson draws up the target seats, the poster sites and the leader's tour, and runs the whole operation from Central Office with a computer.
+
+@machine
+title: Run the party machine
+view-if: con_in_government = 1
+subtitle: Calms the party and raises a little money.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; loyalist_dissent -= 5; rebellion -= 1; resources += 1
+
+The Party Chairman visits every area office and reassures the agents that the government knows what it's doing. They want to believe him.

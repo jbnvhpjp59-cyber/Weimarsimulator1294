@@ -11,6 +11,7 @@ new-page: true
 
 - @moderates
 - @step_by_step
+- @job_schemes
 - @root: Return
 
 @moderates
@@ -31,3 +32,13 @@ unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1; union_power -= 6; wet_dissent -= 4; dry_dissent += 3
 
 A modest change to the law, carefully consulted on. The TUC can't call it an assault, and doesn't.
+
+@job_schemes
+title: Special employment measures
+view-if: con_in_government = 1
+subtitle: -1 budget. Cuts unemployment. The dries call it a waste.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; budget -= 1; unemployment -= 0.3; wet_dissent -= 3; dry_dissent += 3; c2_con += 1*(1-dissent)
+
+Prior expands the Youth Opportunities Programme and the temporary short-time working subsidy. The unemployment figures stop rising quite so fast.

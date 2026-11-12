@@ -16,6 +16,7 @@ subtitle: -2 resources
 choose-if: resources >= 2
 unavailable-subtitle: Requires 2 resources.
 on-arrival: resources -= 2; saatchi_hired = 1; thatcher_rating += 1
+achievement: saatchi
 
 Saatchi & Saatchi take the account. Their first question is what the voters want, not what the party wants to tell them.
 

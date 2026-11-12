@@ -1,0 +1,57 @@
+title: John Nott
+is-pinned-card: true
+card-image: img/cards/nott.jpg
+tags: advisor
+view-if: nott_advisor = 1
+new-page: true
+
+= John Nott
+
+[? if con_in_government = 0 : Shadow Trade Secretary. ?][? if con_in_government = 1 and time < 45 : Secretary of State for Trade. ?][? if con_in_government = 1 and time >= 45 : Secretary of State for Defence. ?] A former Gurkha officer and merchant banker. He is an economic dry with no sentimentality about institutions, the Navy included.
+
+- @free_trade
+- @price_commission
+- @defence_review
+- @task_force
+- @root: Return
+
+@free_trade
+title: Champion free trade
+view-if: con_in_government = 0
+subtitle: Business and the City approve.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; economic_liberalism += 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent)
+
+Nott promises to abolish the Price Commission, dismantle Labour's industrial strategy and let British firms sink or swim.
+
+@price_commission
+title: Abolish the Price Commission
+view-if: con_in_government = 1 and price_commission = 0
+subtitle: Business is freed. Prices tick up for a while.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; price_commission = 1; economic_liberalism += 2; inflation += 0.3; ab_con += 1*(1-dissent); dry_dissent -= 3
+
+Labour's Price Commission is wound up. Firms no longer need permission to raise their prices, and many of them do.
+
+@defence_review
+title: The Way Forward
+view-if: con_in_government = 1 and defence_cuts = 0
+subtitle: +2 budget. The Navy and the right will be furious, and the South Atlantic will notice.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; defence_cuts = 1; endurance_withdrawn = 1; budget += 2; right_dissent += 6; us_relation -= 3
+achievement: the_way_forward
+
+Nott's defence review cuts the surface fleet to pay for the Atlantic submarines and the nuclear deterrent. The Navy Minister resigns in protest. HMS Endurance is to be withdrawn from the South Atlantic.
+
+@task_force
+title: Organise the task force
+view-if: con_in_government = 1 and falklands = 2
+subtitle: Improves the task force's chances.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; falklands_bonus += 6; right_dissent -= 3
+
+Nott requisitions the liners Canberra and QE2, and the Navy refits them as troopships in days. Whatever his review said, the Ministry of Defence works around the clock.

@@ -40,6 +40,7 @@ subtitle: Publishes falling targets for money supply and borrowing for years ahe
 choose-if: chancellor_dry = 1
 unavailable-subtitle: [+ chancellor +] doesn't believe in it.
 on-arrival: mtfs = 1; inflation -= 1; economic_liberalism += 3; dry_dissent -= 5; wet_dissent += 4
+achievement: medium_term
 
 The Medium-Term Financial Strategy commits the government to steadily lower monetary growth and borrowing. Nigel Lawson wrote most of it. Its purpose is to convince wage bargainers that the government won't print money to bail them out.
 

@@ -1,0 +1,82 @@
+title: Education and Training
+new-page: true
+is-card: true
+card-image: img/cards/school.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and education_timer <= 0
+on-arrival: education_timer = 5; month_actions += 1
+
+= Education and Training
+
+[? if time < 45 : Mark Carlisle at Education ?][? if time >= 45 : Sir Keith Joseph, now at Education, ?] has a list of reforms and a shrinking budget. Comprehensive schools now teach most children, and two school-leavers in five can't find work.
+
+- @assisted_places: Create the Assisted Places Scheme.
+- @parental_choice: Give parents the right to choose their school.
+- @university_cuts: Cut university funding.
+- @vouchers: Study education vouchers.
+- @vouchers_pilot: Pilot education vouchers.
+- @drop_vouchers: Drop the voucher idea.
+- @yts: Launch the Youth Training Scheme.
+- @schools: Protect school budgets.
+- @easy_discard
+- @cancel_advisor_action
+
+@assisted_places
+view-if: assisted_places = 0
+subtitle: -0.5 budget. The right approves; Labour promises to abolish it.
+on-arrival: assisted_places = 1; budget -= 0.5; c1_con += 2*(1-dissent); ab_con += 1*(1-dissent); right_dissent -= 3; wet_dissent += 1; de_lab += 1
+achievement: assisted_places
+
+The state will pay the fees for bright children from poorer homes to attend independent schools. Labour calls it a subsidy for private schools and promises to abolish it.
+
+@parental_choice
+view-if: parental_choice = 0
+subtitle: Popular with parents.
+on-arrival: parental_choice = 1; c1_con += 2*(1-dissent); c2_con += 1*(1-dissent); lib_relation += 2; wet_dissent -= 1
+
+The Education Act gives parents the right to state a preference for their child's school and a place on every governing body. Councils must publish exam results.
+
+@university_cuts
+view-if: university_cuts = 0
+subtitle: +1 budget. The universities will not forgive it.
+on-arrival: university_cuts = 1; budget += 1; ab_con -= 2; c1_con -= 1; c1_lib += 1; wet_dissent += 3; dry_dissent -= 2
+
+The University Grants Committee is told to cut spending by 15% over three years. Salford, Aston and Keele lose more than a third of their funding, and the vice-chancellors speak of vandalism.
+
+@vouchers
+view-if: school_vouchers = 0
+subtitle: The dries are excited. Requires a dry Cabinet.
+choose-if: cabinet_dry >= 50
+unavailable-subtitle: The Cabinet won't hear of it.
+on-arrival: school_vouchers = 1; economic_liberalism += 2; dry_dissent -= 4; wet_dissent += 3
+
+Officials are asked to study a voucher that parents could spend at any school, state or private. The Department of Education is horrified, and says so in a series of long memoranda.
+
+@vouchers_pilot
+view-if: school_vouchers = 1
+subtitle: -0.5 budget. The teaching unions and the wets will fight it.
+on-arrival: school_vouchers = 2; budget -= 0.5; dry_dissent -= 4; wet_dissent += 5; c1_con -= 1; c2_con -= 1; ab_con += 1*(1-dissent)
+achievement: vouchers
+
+Kent County Council will pilot education vouchers in Ashford. The National Union of Teachers threatens industrial action.
+
+@drop_vouchers
+view-if: school_vouchers = 1
+subtitle: The wets are relieved; the dries are disappointed.
+on-arrival: school_vouchers = -1; dry_dissent += 3; wet_dissent -= 3
+
+The Education Secretary tells the party conference that "the voucher, at least in the foreseeable future, is dead."
+
+@yts
+view-if: yts = 0 and time >= 45
+subtitle: -1 budget. Cuts youth unemployment.
+on-arrival: yts = 1; budget -= 1; unemployment -= 0.4; c2_con += 1*(1-dissent); de_con += 1*(1-dissent); wet_dissent -= 3; dry_dissent += 1
+achievement: yts
+
+The Manpower Services Commission will offer every unemployed sixteen-year-old a year of training with an allowance. Critics call it cheap labour that hides the unemployment figures. Parents are grateful all the same.
+
+@schools
+subtitle: -1 budget.
+on-arrival: school_spending += 1; budget -= 1; c1_con += 1*(1-dissent); de_con += 1*(1-dissent); wet_dissent -= 2; dry_dissent += 2
+
+The school budget is protected from this year's cuts. Teachers' pay and the cost of books still outrun it, but the headlines are kind.

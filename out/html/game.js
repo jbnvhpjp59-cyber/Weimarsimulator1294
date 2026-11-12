@@ -67,6 +67,33 @@
       }
   };
 
+  // Play a track for a big moment straight away, then go back to shuffling
+  // the current playlist. The track itself is not added to the playlist.
+  window.playMoment = function(file) {
+      var ui = window.dendryUI;
+      if (!ui || ui.disable_audio) {
+          return;
+      }
+      var playlist = ui.audioPlaylist.slice();
+      ui.audio(file);
+      ui.audioPlaylist = playlist;
+      var audio = ui.currentAudio;
+      if (!audio) {
+          return;
+      }
+      audio.onended = function() {
+          var pool = ui.audioPlaylist;
+          if (!pool.length) {
+              return;
+          }
+          var next = pool[Math.floor(Math.random() * pool.length)];
+          audio.src = next;
+          ui.currentAudioURL = next;
+          audio.play();
+          window.updateAudio(next);
+      };
+  };
+
   // go to the next song - this just sets the time to 9999.
   window.shuffle = function() {
       if (window.dendryUI.currentAudio) {

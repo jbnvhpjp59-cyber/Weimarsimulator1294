@@ -15,6 +15,7 @@ The money supply is growing far faster than our target, and inflation is [+ infl
 
 @raise
 on-arrival: interest_rate = 17; inflation -= 1; sterling += 4; c1_con -= 2; c2_con -= 1; dry_dissent -= 4; wet_dissent += 4
+achievement: seventeen
 
 Bank Rate goes to 17%, the highest in its history. Mortgage rates follow, and industry howls.
 
