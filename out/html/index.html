@@ -345,6 +345,10 @@
                 </div>
             </header>
             <div id="tools_wrapper">
+                <button id="status_toggle" class="status_toggle" type="button" aria-expanded="false" aria-controls="stats_sidebar" onclick="window.toggleStatus();">
+                    <span id="status_summary">Status</span>
+                    <span class="status_chevron" aria-hidden="true">&#9662;</span>
+                </button>
                 <div id='stats_sidebar' class='tools left'>
                     <div class="tab_container">
                         <button class="tab_button active" id="main_tab" onclick="window.changeTab('status', 'main_tab');">Main</button>
