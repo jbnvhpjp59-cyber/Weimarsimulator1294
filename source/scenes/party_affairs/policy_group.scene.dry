@@ -1,6 +1,7 @@
 title: Policy Group
 new-page: true
 is-card: true
+card-image: img/party.svg
 tags: party_affairs
 view-if: policy_group_timer <= 0 and manifesto_planks < 8
 on-arrival: policy_group_timer = 4; month_actions += 1

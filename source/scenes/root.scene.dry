@@ -11,6 +11,7 @@ go-to: start_menu_2
 @start_menu_2
 
 - @start: Start game
+- @election_simulation: Election simulation
 - @credits: Credits
 - @game_over.achievements
 
@@ -32,6 +33,16 @@ Q.historical_mode = 0;
 Q.saves_disabled = 0;
 Q.discard_disabled = 0;
 Q.hand_size = 3;
+// party income every January (historical mode replaces fundraising with this)
+Q.annual_income = 0;
+Q.fundraising_disabled = 0;
+// the Treasury's headroom when we take office
+Q.starting_budget = 1;
+// pinned cards offered on easy difficulty (or in custom settings)
+Q.shuffle_leadership_enabled = 0;
+Q.cabinet_enabled = 0;
+Q.starting_dissent = 1;
+Q.starting_relations = 1;
 
 // ---------------------------------------------------------------
 // The Conservative Party
@@ -213,6 +224,7 @@ Q.no_confidence_lost = 0;
 // records for charts
 Q.party_support_records = [];
 Q.election_records = [];
+Q.economic_records = [];
 
 // ---------------------------------------------------------------
 // Events seen
@@ -357,6 +369,10 @@ Q.by_election_winner = "";
 Q.crosby_lost = 0;
 Q.hillhead_lost = 0;
 Q.last_defection_time = 0;
+Q.defeated_once = 0;
+Q.labour_winter_seen = 0;
+Q.late_victory = 0;
+Q.last_cabinet_action = 0;
 
 // ---------------------------------------------------------------
 // Timers. Each card sets its own timer; post_event counts them down.
@@ -365,7 +381,7 @@ Q.timers = ['advisor_action',
             // party affairs
             'fundraising', 'speaking_tour', 'media', 'policy_group',
             'shadow_cabinet', 'target_voters', 'other_parties',
-            'party_disunity',
+            'party_disunity', 'inner_circle',
             // commons
             'opposition_day', 'pmqs', 'devolution', 'pay_policy',
             'no_confidence', 'whips',
@@ -379,10 +395,16 @@ for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
 // shadow cabinet members with pinned advisor cards
+// the inner circle: three advisers at a time, as in the original game
+Q.n_advisors = 3;
 Q.whitelaw_advisor = 1;
 Q.joseph_advisor = 1;
 Q.howe_advisor = 1;
-Q.reece_advisor = 1;
+Q.reece_advisor = 0;
+Q.prior_advisor = 0;
+Q.pym_advisor = 0;
+Q.heseltine_advisor = 0;
+Q.carrington_advisor = 0;
 Q.tebbit_advisor = 0;
 
 // project the starting polls
@@ -401,14 +423,43 @@ For background on British politics in 1978, see the "Library" link at the top of
 - @1978_easy: Begin (easy difficulty)
 - @1978_main: Begin (normal difficulty)
 - @1978_hard: Begin (hard difficulty)
+- @1978_historical: Begin (historical mode)
+- @1978_custom: Customise difficulty settings
 
 @1978_easy
 on-arrival: difficulty = -1; resources = 5; donations = 3; hand_size = 4; wet_dissent = 10; lib_relation = 36; thatcher_rating = 44
 go-to: 1978_main
 
 @1978_hard
-on-arrival: difficulty = 1; resources = 1; donations = 1; discard_disabled = 1; wet_dissent = 30; right_dissent = 20; heath_hostility = 75; lib_relation = 25; thatcher_rating = 36
+on-arrival: difficulty = 1; resources = 1; donations = 1; discard_disabled = 1; wet_dissent = 30; right_dissent = 20; heath_hostility = 75; lib_relation = 25; thatcher_rating = 36; starting_budget = 0; starting_dissent = 2; starting_relations = 2
 go-to: 1978_main
+
+@1978_historical
+subtitle: Saving, loading and polls are disabled. [? if not achievement_game_completed : Not recommended for a first playthrough. ?]
+on-arrival: {!
+Q.hand_size = 3;
+Q.difficulty = 2;
+Q.discard_disabled = 1;
+Q.historical_mode = 1;
+Q.annual_income = 2;
+Q.fundraising_disabled = 1;
+Q.resources = 2;
+Q.donations = 1;
+Q.wet_dissent = 30;
+Q.right_dissent = 20;
+Q.heath_hostility = 75;
+Q.lib_relation = 25;
+Q.thatcher_rating = 36;
+Q.starting_budget = 0;
+Q.starting_dissent = 2;
+Q.starting_relations = 2;
+Q.saves_disabled = 1;
+this.state.disableSaves = true;
+!}
+go-to: 1978_main
+
+@1978_custom
+go-to: custom_difficulty
 
 @1978_main
 new-page: true

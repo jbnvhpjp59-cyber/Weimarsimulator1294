@@ -1,19 +1,31 @@
 title: Norman Tebbit
 is-pinned-card: true
 tags: advisor
-view-if: tebbit_advisor = 1 and con_in_government = 1
+card-image: img/advisor_right.svg
+view-if: tebbit_advisor = 1
 new-page: true
 
 = Norman Tebbit
 
-Secretary of State for Employment. A former airline pilot and union official, he enjoys a fight, and Labour MPs call him "the Chingford Skinhead".
+[? if con_in_government = 1 and employment_secretary == "Tebbit" : Secretary of State for Employment. ?][? if con_in_government = 0 : A backbench scourge of Labour. ?] A former airline pilot and union official, he enjoys a fight, and Labour MPs call him "the Chingford Skinhead".
 
+- @savage_labour
 - @tebbit_act
 - @on_your_bike
 - @root: Return
 
+@savage_labour
+title: Savage Labour in the Commons
+subtitle: Labour's leader is wounded; the right cheers.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; lab_leader_rating -= 3; right_dissent -= 4; wet_dissent += 2
+
+Tebbit's insults are the best-reported speech of the week.
+
 @tebbit_act
 title: Fast-track a new Employment Act
+view-if: con_in_government = 1
 subtitle: Union power falls sharply.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [+ advisor_action_timer +] months before the next Cabinet action.

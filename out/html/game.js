@@ -6,7 +6,37 @@
     ui = dendryUI;
     game = ui.game;
 
-    // Add your custom code here.
+    // When hosted somewhere that hot-reloads the page on an update (such as
+    // a claude.ai artifact), keep the game in progress across the reload.
+    var hot = window.claude && window.claude.hot;
+    if (hot && hot.snapshot) {
+      hot.snapshot(function() {
+        return {state: JSON.parse(JSON.stringify(ui.dendryEngine.getExportableState()))};
+      });
+    }
+    var restore = function(data) {
+      if (data && data.state && data.state.qualities && data.state.qualities.started) {
+        try {
+          ui.dendryEngine.setState(data.state);
+        } catch (e) {
+          console.log('Could not restore the game in progress:', e);
+        }
+      }
+    };
+    if (hot && hot.ready) {
+      hot.ready(restore);
+    } else if (hot && hot.data) {
+      restore(hot.data);
+    }
+  };
+
+  // Storage can be unavailable (private windows, blocked site data).
+  var readStorage = function(key) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
   };
 
   window.showStats = function() {
@@ -190,6 +220,11 @@
   // Tabbed sidebar: each tab renders a section of status.scene.dry.
   window.updateSidebar = function() {
       $('#qualities').empty();
+      // nothing to show until a game has started (e.g. on the title screen)
+      if (!dendryUI.dendryEngine.state.qualities.started) {
+          $('#qualities').append($('<p>').text('Start a game to see the state of the nation.'));
+          return;
+      }
       var scene = dendryUI.game.scenes[window.statusTab];
       dendryUI.dendryEngine._runActions(scene.onArrival);
       var displayContent = dendryUI.dendryEngine._makeDisplayContent(scene.content, true);
@@ -242,6 +277,12 @@
 
   window.onload = function() {
     window.dendryUI.loadSettings({show_portraits: false});
+    // With no saved choice, follow the viewer's light or dark theme.
+    if (readStorage(window.dendryUI.game.title + '_dark_mode') === null) {
+      var theme = document.documentElement.getAttribute('data-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      window.dendryUI.dark_mode = theme === 'dark' || (theme !== 'light' && prefersDark);
+    }
     if (window.dendryUI.dark_mode) {
         document.body.classList.add('dark-mode');
     }

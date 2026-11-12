@@ -1,5 +1,6 @@
 title: Sir Keith Joseph
 is-pinned-card: true
+card-image: img/advisor_dry.svg
 tags: advisor
 view-if: joseph_advisor = 1
 new-page: true

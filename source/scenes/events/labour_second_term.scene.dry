@@ -1,0 +1,89 @@
+title: The Knives Come Out
+tags: event
+priority: 3
+view-if: con_in_government = 0 and defeated_once = 1 and in_campaign = 0 and time - leadership_challenge_time >= 12 and (thatcher_rating < 35 or dissent >= 0.3)
+new-page: true
+on-arrival: leadership_challenge_time = time
+
+= The Knives Come Out
+
+After the defeat, the 1922 Committee has agreed to a leadership election. Edward Heath's friends are canvassing, and Francis Pym has been sounded out.
+
+- @fight: Stand for re-election as leader.
+- @concessions: Offer the wets a share of the leadership.
+- @resign: Stand down.
+
+@fight
+on-arrival: {!
+var support = 62 + 0.6 * (Q.thatcher_rating - 30) - 30 * (Q.dissent - 0.2) + (Q.con_votes - Q.lab_votes);
+Q.challenge_support = Math.round(support);
+Q.survived = (support + (Math.random() - 0.5) * 12 >= 50) ? 1 : 0;
+!}
+go-to: survived if survived = 1; ousted if survived = 0
+
+@concessions
+on-arrival: {!
+Q.wet_dissent -= 15;
+Q.dry_dissent += 10;
+Q.economic_liberalism -= 3;
+var support = 68 + 0.6 * (Q.thatcher_rating - 30) - 30 * (Q.dissent - 0.2) + (Q.con_votes - Q.lab_votes);
+Q.challenge_support = Math.round(support);
+Q.survived = (support + (Math.random() - 0.5) * 12 >= 50) ? 1 : 0;
+!}
+go-to: survived if survived = 1; ousted if survived = 0
+
+You promise a broader front bench and a gentler economic message.
+
+@survived
+on-arrival: wet_dissent -= 5; loyalist_dissent -= 8; thatcher_rating += 4
+
+You win, not overwhelmingly, but clearly enough to end the talk of a second round. You will lead the party into the next election.
+
+@ousted
+on-arrival: ousted = 1
+go-to: game_over
+
+The party turns to a gentler, more familiar kind of leader. Your time as leader is over.
+
+@resign
+on-arrival: ousted = 1
+go-to: game_over
+
+You announce that you will not stand. The party will choose a new leader.
+
+@healey
+title: Callaghan Retires
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and time >= 35 and lab_leader == "Callaghan"
+max-visits: 1
+new-page: true
+on-arrival: lab_leader = "Healey"; prime_minister = "Healey"; lab_leader_rating = 46
+
+= Callaghan Retires
+
+James Callaghan, nearly seventy, has retired. Labour MPs have chosen Denis Healey to succeed him as Prime Minister, by a comfortable margin over Michael Foot. Healey is formidable, combative and respected in the markets. He will be harder to beat than Callaghan.
+
+@labour_winter
+title: Another Winter of Strikes
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and strike_wave >= 5 and labour_winter_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: labour_winter_seen = 1; labour_credibility -= 6; lab_leader_rating -= 6; union_backlash += 6
+
+= Another Winter of Strikes
+
+Labour's incomes policy has broken down again. The public-sector unions are out, and the newspapers reprint the photographs of 1979. Your case that only the Conservatives can deal with the unions has never been stronger.
+
+@labour_snap
+title: Labour Calls an Election
+tags: event
+view-if: con_in_government = 0 and defeated_once = 1 and months_since_election >= 42 and lab_votes >= con_votes + 2 and election_called = 0 and in_campaign = 0
+max-visits: 1
+new-page: true
+on-arrival: time_to_election = 2
+call: set_election
+
+= Labour Calls an Election
+
+With Labour ahead in the polls, [+ lab_leader +] goes to the Palace. The general election will be held in [+ next_election_month : month +] [+ next_election_year +].

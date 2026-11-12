@@ -167,5 +167,5 @@ go-to: game_over if final_election_reached = 1; taking_office if final_election_
 @concede
 title: Concede defeat.
 view-if: largest_party == "lab"
-on-arrival: result_type = 5; con_in_government = 0
-go-to: game_over
+on-arrival: result_type = 5; con_in_government = 0; govt_type = 0
+go-to: game_over if final_election_reached = 1; back_to_opposition if final_election_reached = 0

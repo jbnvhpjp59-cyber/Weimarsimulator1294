@@ -29,7 +29,9 @@ Like the original, each month you play one card from your hand. Historical and c
 | Reshuffle | Purge the wets, bring them back, promote loyalists |
 | Government Business (Commons) | Whip the rebels, keep partners on side |
 
-Pinned Cabinet cards include Number 10, which can call a snap election after three years. Tebbit appears once he joins the Cabinet.
+**Advisers.** As with the original's party leadership, you keep three advisers at a time as pinned cards, starting with Whitelaw, Joseph and Howe. Each has special actions, with one action every six months. The "Your Inner Circle" card swaps them for others from a pool of nine (Reece, Prior, Pym, Heseltine, Carrington and Tebbit). Dropping an adviser angers their faction; bringing one in strengthens theirs. In government, the pinned Number 10 card can call a snap election after three years.
+
+**Losing.** As in the original, defeat doesn't end the game. Lose in 1979 and Labour governs on, the recession hits them instead, and you fight on as Leader of the Opposition, facing a leadership challenge, until the final election.
 
 **The economy** runs every month. Interest rates trade inflation against jobs and the pound. The 1979 oil shock and the 1980–81 world recession hit, and recovery comes from 1982. Budget deficits feed inflation, and every January brings North Sea revenue, benefit costs and revenue from growth. Voters respond to unemployment, inflation, mortgage rates, growth and right-to-buy sales.
 
@@ -48,7 +50,16 @@ Pinned Cabinet cards include Number 10, which can call a snap election after thr
 - **1982:** three million unemployed, Hillhead, the Falklands (deterred, negotiated, won or lost).
 - **1983:** recovery, the "longest suicide note", and by-elections and defections throughout.
 
-**The end.** The game ends when you lose an election, are ousted, or win re-election. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the Falklands, Europe, and whether you turned. There are 23 achievements.
+**The end.** The game ends at the second general election (by 1984 at the latest), or earlier if you are ousted. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the Falklands, Europe, and whether you turned. There are 24 achievements.
+
+## Menus and options
+
+These mirror the original:
+
+- **Difficulty:** easy (a four-card hand, more resources, and the Inner Circle and Cabinet Room pinned cards), normal, hard, historical (no fundraising, polls or saves), and custom, where every setting is adjustable.
+- **Election simulation:** runs February 1974, October 1974, 1979 and 1983 through the seat model and compares the result with the real one.
+- **Library:** background pages, the current government, demographics, public opinion, and figures and charts (the Commons, seats won, opinion polls, and inflation and unemployment over time).
+- **Options:** save/load, dark mode (it follows your system theme until you choose), font size, and animations.
 
 ## Building
 
@@ -56,7 +67,7 @@ Requires Node.js (the GitHub workflow uses Node 16).
 
 ```sh
 npm install          # installs dendrynexus from GitHub
-npm run build        # dendrynexus make-html -> out/html/
+npm run build        # dendrynexus make-html, then copies game.json and d3 into out/html/
 npm run check        # static checks on the scene files (no dependencies)
 ```
 
@@ -97,14 +108,12 @@ The regional baselines are approximations and are worth refining against real co
 
 ## Balance
 
-From automated playthroughs of the full game on normal difficulty (300 games per strategy):
+From automated playthroughs of the full game on normal difficulty (400 games per strategy). "Lost in 1979" includes games that then continued in opposition.
 
-| Strategy | Re-elected | Ousted | Lost re-election | Lost in 1979 |
+| Strategy | Re-elected | Ousted in government | Lost the second election | Lost in 1979 |
 | --- | --- | --- | --- | --- |
-| Thatcher's historical choices | 79% | 9% | 3% | 10% |
-| Random choices | 65% | 15% | 5% | 15% |
-| Chasing the polls | 74% | 24% | 0% | 2% |
-| Doing nothing on your own turns | 44% | 6% | 7% | 43% |
+| Thatcher's historical choices | 84% | 12% | 3% | 2% |
+| Random choices | 65% | 16% | 5% | 14% |
 
 On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
 
@@ -138,12 +147,10 @@ Add `'my_card'` to `Q.timers` in `root.scene.dry` and initialise any new variabl
 
 For opposition-era cards, use `tags: party_affairs` or `commons` (add `con_in_government = 0` to `view-if` if the card only makes sense in opposition). Events use `tags: event` and a `view-if` on `time` (1 = January 1978, 17 = May 1979, 61 = January 1983).
 
-## Not done yet
+## Limits
 
-- The second term (1983–87): the miners' strike, Brighton, Westland, the Big Bang. The game ends at re-election; `Q.final_election` in `root.scene.dry` controls when.
-- Images and music. Card and event art is optional in dendrynexus and none is included.
-- Losing the 1979 election ends the game. In the original, defeat means continuing in opposition.
-- The build hasn't yet been run end-to-end with dendrynexus. The scene files pass the static checker and an automated playtest harness that interprets them, but the first real build may still turn up syntax issues.
+- Scope: the game covers January 1978 to the second general election, and no further. `Q.final_election` in `root.scene.dry` sets where it ends.
+- Music and portraits. Cards use simple generated art (`out/html/img/`); events have no images.
 
 ## Credits and licence
 

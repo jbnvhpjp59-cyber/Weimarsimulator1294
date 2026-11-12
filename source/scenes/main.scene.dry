@@ -21,6 +21,7 @@ max-cards: 3
 - @commons
 - @campaign
 - #advisor
+- @inner_circle_pinned
 
 @main_easy
 is-hand: true
@@ -43,15 +44,18 @@ max-cards: 4
 - @commons
 - @campaign
 - #advisor
+- @inner_circle_pinned
 
 @party
 title: Party Affairs
+card-image: img/party.svg
 is-deck: true
 
 - #party_affairs
 
 @govt
 title: Government Affairs
+card-image: img/government.svg
 view-if: con_in_government = 1
 is-deck: true
 
@@ -59,12 +63,14 @@ is-deck: true
 
 @commons
 title: The Commons
+card-image: img/commons.svg
 is-deck: true
 
 - #commons
 
 @campaign
 title: The Campaign
+card-image: img/campaign.svg
 view-if: in_campaign = 1
 is-deck: true
 

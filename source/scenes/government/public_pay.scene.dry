@@ -1,7 +1,8 @@
 title: Public Sector Pay
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and public_pay_timer <= 0
 on-arrival: public_pay_timer = 6; month_actions += 1
 
@@ -13,6 +14,7 @@ There is no incomes policy any more, but the government is still the employer of
 - @generous: Settle generously and avoid strikes.
 - @review_bodies: Refer nurses' pay to an independent review body.
 - @easy_discard
+- @cancel_advisor_action
 
 @cash_limits
 subtitle: +1 budget. Strikes are likely.

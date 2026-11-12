@@ -1,7 +1,8 @@
 title: The Budget
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and budget_timer <= 0
 on-arrival: budget_timer = 9; month_actions += 1
 
@@ -17,6 +18,7 @@ Income tax: [+ basic_rate +]% basic rate, [+ top_rate +]% top rate. VAT: [+ vat 
 - @reflate: A reflationary Budget to fight unemployment.
 - @standstill: A standstill Budget.
 - @easy_discard
+- @cancel_advisor_action
 
 @shift_to_vat
 view-if: basic_rate > 25 and vat < 20

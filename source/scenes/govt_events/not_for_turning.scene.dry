@@ -9,10 +9,10 @@ on-arrival: conference_1980_seen = 1
 
 Brighton, October. Unemployment is [+ unemployment_2 +]% and inflation is [+ inflation_2 +]%. Edward Heath, the CBI and half your Cabinet are urging you to change course, as Heath did in 1972: reflate, cut interest rates, rescue industry. Ronald Millar has written you a line for the conference speech, but it only works if you mean it.
 
-- @not_for_turning: "You turn if you want to. The lady's not for turning."
+- @hold_course: "You turn if you want to. The lady's not for turning."
 - @u_turn: Announce a change of course.
 
-@not_for_turning
+@hold_course
 on-arrival: u_turn = 1; dry_dissent -= 15; wet_dissent += 12; right_dissent -= 5; economic_liberalism += 5; thatcher_rating += 2; rebellion += 1; heath_hostility += 10
 
 The hall rises for a standing ovation. The markets take note that the government will not print money, and so do the wage bargainers. Over lunch, the wets agree among themselves that you have gone mad.

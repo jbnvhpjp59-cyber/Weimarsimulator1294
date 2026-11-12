@@ -1,0 +1,33 @@
+title: Michael Heseltine
+is-pinned-card: true
+tags: advisor
+card-image: img/advisor_wet.svg
+view-if: heseltine_advisor = 1
+new-page: true
+
+= Michael Heseltine
+
+Self-made publishing millionaire, conference star and, in his own view, a future Prime Minister. Labour MPs call him Tarzan since he seized the Commons mace in 1976.
+
+- @conference
+- @regeneration
+- @root: Return
+
+@conference
+title: A barnstorming conference speech
+subtitle: The activists are thrilled. Your own rating suffers a little from the comparison.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; resources += 1; c1_con += 2*(1-dissent); c2_con += 1*(1-dissent); thatcher_rating -= 1; loyalist_dissent -= 3
+
+Heseltine brings the conference hall to its feet. You clap along with everyone else.
+
+@regeneration
+title: Urban regeneration
+view-if: con_in_government = 1
+subtitle: -1 budget. The inner cities and the wets approve.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; budget -= 1; de_con += 2*(1-dissent); wet_dissent -= 5; dry_dissent += 3
+
+Enterprise zones and urban development corporations for the docklands of London and Liverpool.

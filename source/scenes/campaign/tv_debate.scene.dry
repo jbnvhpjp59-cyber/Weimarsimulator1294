@@ -1,6 +1,7 @@
 title: The TV Debate Challenge
 new-page: true
 is-card: true
+card-image: img/campaign.svg
 tags: campaign
 view-if: tv_debate_decided = 0
 on-arrival: tv_debate_decided = 1; month_actions += 1

@@ -1,5 +1,6 @@
 title: Gordon Reece
 is-pinned-card: true
+card-image: img/advisor_none.svg
 tags: advisor
 view-if: reece_advisor = 1
 new-page: true

@@ -6,7 +6,7 @@ Q.prime_minister = "Thatcher";
 Q.pm_party = "Conservative";
 Q.term_start_time = Q.time;
 Q.months_in_office = 0;
-Q.budget = 1;
+Q.budget = Q.starting_budget;
 Q.rebellion = 0;
 Q.cabinet_revolt = 0;
 // the opposition-era advisors become ministers
@@ -64,7 +64,7 @@ go-to: industry
 Prior takes Employment, as everyone expected. The TUC breathes a sigh of relief.
 
 @tebbit
-on-arrival: employment_secretary = "Tebbit"; employment_dry = 1; tebbit_advisor = 1; wet_dissent += 8; dry_dissent -= 5; union_power -= 2; strike_wave += 0.5
+on-arrival: employment_secretary = "Tebbit"; employment_dry = 1; wet_dissent += 8; dry_dissent -= 5; union_power -= 2; strike_wave += 0.5
 go-to: industry
 
 Promoting a backbench bruiser straight to the Cabinet is a sensation. Prior refuses any other post and returns to the backbenches, from where he will be a focus for the wets.

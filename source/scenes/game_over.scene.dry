@@ -7,6 +7,11 @@ Q.inflation_2 = Q.inflation.toFixed(1);
 Q.unemployment_2 = Q.unemployment.toFixed(1);
 Q.governed = (Q.term_start_time > 0) ? 1 : 0;
 Q.reelected = (Q.governed && Q.n_elections >= Q.final_election && Q.result_type >= 1 && Q.result_type <= 4 && !Q.ousted) ? 1 : 0;
+// won power at the last election, after losing in 1979
+Q.late_victory = (!Q.governed && Q.result_type >= 1 && Q.result_type <= 4 && !Q.ousted) ? 1 : 0;
+if (Q.late_victory) {
+    this.achieve('second_chance');
+}
 this.achieve('game_completed');
 if (Q.governed) {
     this.achieve('prime_minister');
@@ -62,14 +67,22 @@ if (Q.autumn_election_1978 && Q.governed) {
 #################### How it ended
 
 @defeat_1979
-title: Defeated at the first hurdle.
-view-if: result_type = 5 and governed = 0
+title: Defeated, and defeated again.
+view-if: result_type = 5 and governed = 0 and ousted = 0
 tags: endings
 go-to: eg_menu
 
-[? if lab_mps >= majority_line : James Callaghan has won a majority of his own. ?][? if lab_mps < majority_line : Callaghan carries on, at the head of the largest party in a hung parliament. ?] The post-war consensus has survived another election.
+[? if lab_mps >= majority_line : [+ lab_leader +] has won a majority of his own. ?][? if lab_mps < majority_line : [+ lab_leader +] carries on, at the head of the largest party in a hung parliament. ?] The post-war consensus has survived another election.
 
 By the weekend, the Sunday papers are full of leadership speculation. Edward Heath lets it be known that he is available.
+
+@late_victory_ending
+title: Prime Minister at last.
+view-if: late_victory = 1
+tags: endings
+go-to: eg_menu
+
+After the long years in opposition, the country has turned to you. [? if result_type = 1 : With a majority of [+ con_majority +], ?][? if result_type >= 2 : Without a majority of your own, ?] you go to the Palace to kiss hands. The real work starts now.
 
 @ousted_ending
 title: Ousted by your own party.
@@ -77,7 +90,7 @@ view-if: ousted = 1
 tags: endings
 go-to: eg_menu
 
-The men in grey suits came to Downing Street, and then the ballot of Conservative MPs did the rest. You leave Number 10 for the last time [+ months_in_office +] months after you arrived. The new leader promises a return to One Nation conservatism and a gentler economic policy.
+[? if governed = 1 : The men in grey suits came to Downing Street, and then the ballot of Conservative MPs did the rest. You leave Number 10 for the last time [+ months_in_office +] months after you arrived. ?][? if governed = 0 : Defeated at the polls and then by your own party, you return to the backbenches. ?] The new leader promises a return to One Nation conservatism and a gentler economic policy.
 
 @defeat_reelection
 title: Turned out of office.
@@ -301,13 +314,15 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_et_tu : **Et Tu** - be ousted by your own party. ?]
 
+[? if game_achievement_second_chance : **Second Chance** - lose in 1979, survive, and win the next election. ?]
+
 [? if game_achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
 
 [? if game_achievement_miners_beaten : **Not 1974** - defeat a miners' strike. ?]
 
 = Achievements not yet unlocked
 
-[? if not achievement_prime_minister : **Prime Minister** ?] [? if not achievement_re_elected : **Four More Years** ?] [? if not achievement_landslide : **Landslide** ?] [? if not achievement_one_nation : **One Nation** ?] [? if not achievement_thatcherism : **Thatcherism** ?] [? if not achievement_full_employment : **Full Employment** ?] [? if not achievement_not_for_turning : **Not for Turning** ?] [? if not achievement_lady_for_turning : **The Lady's for Turning** ?] [? if not achievement_rejoice : **Rejoice** ?] [? if not achievement_deterrence : **Deterrence** ?] [? if not achievement_money_back : **Our Own Money Back** ?] [? if not achievement_no_confidence : **311 to 310** ?] [? if not achievement_labour_isnt_working : **Labour Isn't Working** ?] [? if not achievement_crisis_what_crisis : **Crisis? What Crisis?** ?] [? if not achievement_debate_win : **The Great Debate** ?] [? if not achievement_ilford_north : **Ilford North** ?] [? if not achievement_ulster_deal : **Ulster Says Yes** ?] [? if not achievement_lib_con : **Lib-Con** ?] [? if not achievement_waiting_at_the_church : **Waiting at the Church** ?] [? if not achievement_sunny_jim : **Sunny Jim** ?] [? if not achievement_et_tu : **Et Tu** ?] [? if not achievement_purge : **Overboard** ?] [? if not achievement_miners_beaten : **Not 1974** ?]
+[? if not achievement_prime_minister : **Prime Minister** ?] [? if not achievement_re_elected : **Four More Years** ?] [? if not achievement_landslide : **Landslide** ?] [? if not achievement_one_nation : **One Nation** ?] [? if not achievement_thatcherism : **Thatcherism** ?] [? if not achievement_full_employment : **Full Employment** ?] [? if not achievement_not_for_turning : **Not for Turning** ?] [? if not achievement_lady_for_turning : **The Lady's for Turning** ?] [? if not achievement_rejoice : **Rejoice** ?] [? if not achievement_deterrence : **Deterrence** ?] [? if not achievement_money_back : **Our Own Money Back** ?] [? if not achievement_no_confidence : **311 to 310** ?] [? if not achievement_labour_isnt_working : **Labour Isn't Working** ?] [? if not achievement_crisis_what_crisis : **Crisis? What Crisis?** ?] [? if not achievement_debate_win : **The Great Debate** ?] [? if not achievement_ilford_north : **Ilford North** ?] [? if not achievement_ulster_deal : **Ulster Says Yes** ?] [? if not achievement_lib_con : **Lib-Con** ?] [? if not achievement_waiting_at_the_church : **Waiting at the Church** ?] [? if not achievement_sunny_jim : **Sunny Jim** ?] [? if not achievement_et_tu : **Et Tu** ?] [? if not achievement_second_chance : **Second Chance** ?] [? if not achievement_purge : **Overboard** ?] [? if not achievement_miners_beaten : **Not 1974** ?]
 
 @end_game
 game-over: true

@@ -57,6 +57,9 @@ for (const file of sceneFiles) {
     const line = lines[i];
     const header = line.match(/^@(\S+)\s*$/);
     if (header) {
+      if (header[1] === base) {
+        err(`${rel}:${i + 1}`, `section can't use the file id "${base}"`);
+      }
       const id = base + '.' + header[1];
       if (scenes[id]) {
         err(`${rel}:${i + 1}`, `duplicate section @${header[1]}`);
@@ -179,6 +182,11 @@ for (const s of Object.values(scenes)) {
       }
       t = t.slice(end + 2);
       inMagic = false;
+    }
+    for (const m of t.matchAll(/\{!(.*?)!\}/g)) {
+      if (/\[[+?]/.test(m[1])) {
+        err(`${s.file}:${line}`, 'insert or conditional inside {! !} is not evaluated; close the raw HTML around it');
+      }
     }
     t = t.replace(/\{!.*?!\}/g, '');
     if (t.includes('{!')) {

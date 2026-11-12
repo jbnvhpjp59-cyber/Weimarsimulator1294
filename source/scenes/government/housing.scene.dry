@@ -1,7 +1,8 @@
 title: Housing
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and housing_timer <= 0
 on-arrival: housing_timer = 5; month_actions += 1
 
@@ -14,6 +15,7 @@ One in three British households rents from a council. Michael Heseltine at the E
 - @cut_building: Cut council house building.
 - @mortgage_relief: Protect mortgage interest relief.
 - @easy_discard
+- @cancel_advisor_action
 
 @right_to_buy
 view-if: right_to_buy_progress = 0

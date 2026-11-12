@@ -1,0 +1,207 @@
+title: Your Inner Circle
+new-page: true
+is-card: true
+tags: party_affairs
+card-image: img/party.svg
+view-if: inner_circle_timer <= 0 and difficulty >= 0
+on-arrival: month_actions += 1; inner_circle_timer = 8
+go-to: rm_main
+
+Changing the people closest to you is painful, but perhaps it is necessary.
+
+Dropping an adviser angers their faction of the party; bringing one in strengthens their faction. You can have three at a time.
+
+@rm_main
+title: Drop advisers.
+
+- #remove_advisor
+- @add_advisors: Bring in advisers.
+
+@add_advisors
+title: Bring in advisers.
+choose-if: n_advisors < 3
+unavailable-subtitle: A maximum of three advisers.
+
+- #add_advisor
+- @rm_main: Drop advisers instead.
+- @remove_none: Stop changing advisers.
+
+@remove_none
+title: Stop changing advisers.
+go-to: root
+tags: remove_advisor
+
+#################### dropping
+
+@remove_whitelaw
+title: Drop Willie Whitelaw
+view-if: whitelaw_advisor = 1
+tags: remove_advisor
+on-arrival: whitelaw_advisor = 0; loyalist_dissent += 8; n_advisors -= 1
+go-to: rm_main
+
+Whitelaw takes it with good grace in public. The party managers are shaken.
+
+@remove_joseph
+title: Drop Sir Keith Joseph
+view-if: joseph_advisor = 1
+tags: remove_advisor
+on-arrival: joseph_advisor = 0; dry_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+The dries wonder whether you still believe what they believe.
+
+@remove_howe
+title: Drop Sir Geoffrey Howe
+view-if: howe_advisor = 1
+tags: remove_advisor
+on-arrival: howe_advisor = 0; dry_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Howe accepts it without complaint, as he accepts most things. The dries notice.
+
+@remove_reece
+title: Drop Gordon Reece
+view-if: reece_advisor = 1
+tags: remove_advisor
+on-arrival: reece_advisor = 0; n_advisors -= 1
+go-to: rm_main
+
+Reece goes back to the private sector, and to his cigars.
+
+@remove_prior
+title: Drop Jim Prior
+view-if: prior_advisor = 1
+tags: remove_advisor
+on-arrival: prior_advisor = 0; wet_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+The wets take it as a declaration of war.
+
+@remove_pym
+title: Drop Francis Pym
+view-if: pym_advisor = 1
+tags: remove_advisor
+on-arrival: pym_advisor = 0; wet_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Pym says nothing in public and a great deal in private.
+
+@remove_heseltine
+title: Drop Michael Heseltine
+view-if: heseltine_advisor = 1
+tags: remove_advisor
+on-arrival: heseltine_advisor = 0; wet_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+Heseltine goes off to build his own following.
+
+@remove_carrington
+title: Drop Lord Carrington
+view-if: carrington_advisor = 1
+tags: remove_advisor
+on-arrival: carrington_advisor = 0; loyalist_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+The grandees are puzzled.
+
+@remove_tebbit
+title: Drop Norman Tebbit
+view-if: tebbit_advisor = 1
+tags: remove_advisor
+on-arrival: tebbit_advisor = 0; right_dissent += 5; n_advisors -= 1
+go-to: rm_main
+
+The right feels it has lost its voice in Number 10.
+
+#################### bringing in
+
+@add_whitelaw
+title: Willie Whitelaw
+subtitle: Loyalist. The party's great conciliator. {!<br><br>!}Actions: calm the wets, party discipline.
+is-card: true
+card-image: img/advisor_loyalist.svg
+tags: add_advisor
+view-if: whitelaw_advisor = 0 and n_advisors < 3
+on-arrival: whitelaw_advisor = 1; n_advisors += 1; loyalist_strength += 5; loyalist_dissent -= 3
+go-to: add_advisors
+
+@add_joseph
+title: Sir Keith Joseph
+subtitle: Dry. The intellectual engine of the new Conservatism. {!<br><br>!}Actions: lecture tour, Stepping Stones, back management.
+is-card: true
+card-image: img/advisor_dry.svg
+tags: add_advisor
+view-if: joseph_advisor = 0 and n_advisors < 3
+on-arrival: joseph_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
+go-to: add_advisors
+
+@add_howe
+title: Sir Geoffrey Howe
+subtitle: Dry. Relentless on economic detail. {!<br><br>!}Actions: alternative budget or emergency package, reassure the City.
+is-card: true
+card-image: img/advisor_dry.svg
+tags: add_advisor
+view-if: howe_advisor = 0 and n_advisors < 3
+on-arrival: howe_advisor = 1; n_advisors += 1; dry_strength += 5; dry_dissent -= 3
+go-to: add_advisors
+
+@add_reece
+title: Gordon Reece
+subtitle: No faction. A television producer turned image-maker. {!<br><br>!}Actions: the makeover, the popular press.
+is-card: true
+card-image: img/advisor_none.svg
+tags: add_advisor
+view-if: reece_advisor = 0 and n_advisors < 3
+on-arrival: reece_advisor = 1; n_advisors += 1
+go-to: add_advisors
+
+@add_prior
+title: Jim Prior
+subtitle: Wet. A farmer with friends in the unions. {!<br><br>!}Actions: talk to the moderates, step-by-step union reform.
+is-card: true
+card-image: img/advisor_wet.svg
+tags: add_advisor
+view-if: prior_advisor = 0 and n_advisors < 3
+on-arrival: prior_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
+go-to: add_advisors
+
+@add_pym
+title: Francis Pym
+subtitle: Wet. A patrician pessimist and a safe pair of hands. {!<br><br>!}Actions: reassure the shires, foreign affairs.
+is-card: true
+card-image: img/advisor_wet.svg
+tags: add_advisor
+view-if: pym_advisor = 0 and n_advisors < 3
+on-arrival: pym_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
+go-to: add_advisors
+
+@add_heseltine
+title: Michael Heseltine
+subtitle: Wet. Ambitious, flamboyant, the darling of the conference. {!<br><br>!}Actions: a conference speech, urban regeneration.
+is-card: true
+card-image: img/advisor_wet.svg
+tags: add_advisor
+view-if: heseltine_advisor = 0 and n_advisors < 3
+on-arrival: heseltine_advisor = 1; n_advisors += 1; wet_strength += 5; wet_dissent -= 5
+go-to: add_advisors
+
+@add_carrington
+title: Lord Carrington
+subtitle: Loyalist. The grandest of the grandees. {!<br><br>!}Actions: diplomacy, steady the Lords.
+is-card: true
+card-image: img/advisor_loyalist.svg
+tags: add_advisor
+view-if: carrington_advisor = 0 and n_advisors < 3 and foreign_secretary == "Carrington"
+on-arrival: carrington_advisor = 1; n_advisors += 1; loyalist_strength += 5; loyalist_dissent -= 3
+go-to: add_advisors
+
+@add_tebbit
+title: Norman Tebbit
+subtitle: Right. A street fighter who enjoys the fight. {!<br><br>!}Actions: savage Labour or a new Employment Act, "On your bike".
+is-card: true
+card-image: img/advisor_right.svg
+tags: add_advisor
+view-if: tebbit_advisor = 0 and n_advisors < 3
+on-arrival: tebbit_advisor = 1; n_advisors += 1; right_strength += 5; right_dissent -= 5
+go-to: add_advisors

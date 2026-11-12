@@ -1,7 +1,8 @@
 title: Foreign Affairs
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and foreign_affairs_timer <= 0
 on-arrival: foreign_affairs_timer = 5; month_actions += 1
 
@@ -13,6 +14,7 @@ on-arrival: foreign_affairs_timer = 5; month_actions += 1
 - @europe: Compromise with our European partners.
 - @america: Stand shoulder to shoulder with Washington.
 - @easy_discard
+- @cancel_advisor_action
 
 @rebate
 view-if: eec_rebate < 2

@@ -9,10 +9,10 @@ on-arrival: rhodesia_seen = 1
 
 Bishop Muzorewa's government in Zimbabwe-Rhodesia was elected under a constitution that keeps power in white hands, while the war with the Patriotic Front guerrillas continues. Much of the party wants us to recognise him and lift sanctions. Lord Carrington wants one more attempt at a settlement everyone accepts.
 
-- @lancaster_house: Call all sides to a conference at Lancaster House.
+- @conference: Call all sides to a conference at Lancaster House.
 - @recognise: Recognise Muzorewa and lift sanctions.
 
-@lancaster_house
+@conference
 on-arrival: thatcher_rating += 2; us_relation += 3; europe_relation += 3; right_dissent += 5
 
 After three months of negotiation at Lancaster House, all sides agree to a ceasefire, a new constitution and elections. Britain briefly takes back control of its last African colony, then hands it over to an independent Zimbabwe. The Monday Club calls it a sell-out.

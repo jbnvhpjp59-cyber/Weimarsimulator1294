@@ -42,7 +42,7 @@ House of Commons ([+ total_seats +] seats, [+ majority_line +] for a majority):
 
 {!<span class="tooltip-text" title="Labour Party">Labour</span>!}: [+ lab_mps +]
 
-{!<span class="tooltip-text" title="Liberals, and the SDP once it is founded">[+ lib_name +]</span>!}: [+ lib_mps +]
+{!<span class="tooltip-text" title="Liberals, and the SDP once it is founded">!}[+ lib_name +]{!</span>!}: [+ lib_mps +]
 
 {!<span class="tooltip-text" title="Scottish National Party">SNP</span>!}: [+ snp_mps +]
 
@@ -76,7 +76,7 @@ Growth: [+ economic_growth_2 +]%
 
 = Other Parties
 
-{!<span class="tooltip-text" title="David Steel's Liberals (and the SDP, once the Alliance forms)">[+ lib_name +]s</span>!}: [+ lib_relation : relationships +]
+{!<span class="tooltip-text" title="David Steel's Liberals (and the SDP, once the Alliance forms)">!}[+ lib_name +]s{!</span>!}: [+ lib_relation : relationships +]
 
 {!<span class="tooltip-text" title="Scottish National Party">SNP</span>!}: [+ snp_relation : relationships +]
 

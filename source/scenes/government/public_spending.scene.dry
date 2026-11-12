@@ -1,7 +1,8 @@
 title: Public Spending
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and public_spending_timer <= 0
 on-arrival: public_spending_timer = 4; month_actions += 1
 
@@ -16,6 +17,7 @@ The Chief Secretary's annual spending round. Every department wants more; the Tr
 - @protect: Protect the NHS and pensions.
 - @invest: Invest in roads, housing and job schemes.
 - @easy_discard
+- @cancel_advisor_action
 
 @cut
 view-if: spending > -5

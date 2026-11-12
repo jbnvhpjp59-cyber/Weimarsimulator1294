@@ -1,7 +1,8 @@
 title: Trade Union Law
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and union_law_timer <= 0
 on-arrival: union_law_timer = 6; month_actions += 1
 
@@ -14,6 +15,7 @@ The Employment Secretary, [+ employment_secretary +], comes to discuss the union
 - @ballots: Pay for secret ballots.
 - @tuc: Invite the TUC to talks.
 - @easy_discard
+- @cancel_advisor_action
 
 @cautious_act
 view-if: employment_acts = 0

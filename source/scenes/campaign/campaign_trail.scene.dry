@@ -1,6 +1,7 @@
 title: On the Campaign Trail
 new-page: true
 is-card: true
+card-image: img/campaign.svg
 tags: campaign
 on-arrival: month_actions += 1
 

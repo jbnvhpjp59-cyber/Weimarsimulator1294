@@ -1,7 +1,8 @@
 title: Monetary Policy
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and monetary_policy_timer <= 0
 on-arrival: monetary_policy_timer = 3; month_actions += 1
 
@@ -15,6 +16,7 @@ The money supply is the heart of our economic strategy. Inflation is [+ inflatio
 - @exchange_controls: Abolish exchange controls.
 - @hold: Hold rates steady.
 - @easy_discard
+- @cancel_advisor_action
 
 @raise_rates
 view-if: interest_rate < 17

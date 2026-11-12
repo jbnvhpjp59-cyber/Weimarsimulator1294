@@ -11,10 +11,14 @@ Background on British politics in 1978.
 
 - @system: How Britain is governed
 - @timeline: How we got here: 1970-1978
+- @curr_gov: The current government
+- @demographics: Demographics
 - @parties: The parties
+- @public_opinion: Public opinion
 - @factions: The factions of the Conservative Party
 - @elections: How elections work in this game
 - @governing: How government works in this game
+- @figures: Figures and charts
 - @backSpecialScene: Leave the library.
 
 @system
@@ -94,3 +98,128 @@ Winning power is only the beginning. The game continues until the next general e
 **Threats.** Angry factions fuel a backbench rebellion. Wets in the Cabinet resist spending cuts and can revolt. Without a majority, your partners grow restless and a vote of no confidence may follow. If the rebellion gets out of hand, or the polls collapse with the party divided, you may face a leadership challenge, and you can lose.
 
 **The opposition.** Labour may lurch left and split; the Social Democrats and Liberals may form an Alliance strong enough to reshape British politics. From 1983, elections are fought on new boundaries: 650 seats, 326 for a majority.
+
+@curr_gov
+title: The current government
+go-to: menu
+
+= The current government
+
+Prime Minister: [+ prime_minister +] ([+ pm_party +]). [? if lib_lab_pact : The Lib-Lab Pact is in force. ?]
+
+[? if con_in_government = 0 : The Labour government is led by [+ lab_leader +]. We are the Official Opposition. ?]
+
+[? if con_in_government = 1 : Chancellor of the Exchequer: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. Home Office: Whitelaw. Foreign Office: [+ foreign_secretary +]. ?]
+
+[? if con_in_government = 1 : The Cabinet is [+ cabinet_dry +]% dry. ?][? if con_in_government = 1 and wets_purged = 1 : The wets have been purged from the economic departments. ?]
+
+[? if govt_type = 1 and con_in_government = 1 : We have a majority of [+ con_majority +]. ?][? if govt_type = 2 and con_in_government = 1 : We govern with the support of the Ulster Unionists. ?][? if govt_type = 3 and con_in_government = 1 : We govern with Liberal support, vote by vote. ?][? if govt_type = 4 and con_in_government = 1 : We govern as a minority. ?]
+
+The next general election must be held by [+ next_election_month : month +] [+ next_election_year +].
+
+@demographics
+title: Demographics
+go-to: menu
+
+= Demographics
+
+Voters are grouped by the standard market-research social grades:
+
+**AB** (professional and managerial): [+ ab +]% of the electorate. The Conservative heartland.
+
+**C1** (white-collar: clerks, teachers, sales staff): [+ c1 +]%. Leaning Conservative, and tempted by the Liberals.
+
+**C2** (skilled manual workers): [+ c2 +]%. The great battleground. Many are union members, many want to own their homes, and many are fed up with strikes.
+
+**DE** (semi-skilled and unskilled workers, and state pensioners): [+ de +]%. Labour's base.
+
+Scotland and Wales also have their own nationalist parties, the SNP and Plaid Cymru, whose support is tracked separately: [+ snp_share_disp +]% and [+ pc_share_disp +]% within their countries.
+
+Support by social grade is on the Polls tab of the sidebar.
+
+@public_opinion
+title: Public opinion
+go-to: menu
+
+= Public opinion
+
+Projected vote: Conservative [+ con_votes +]%, Labour [+ lab_votes +]%, [+ lib_name +] [+ lib_votes +]%.
+
+Projected seats: Conservative [+ con_seats +], Labour [+ lab_seats +], [+ lib_name +] [+ lib_seats +] ([+ projected_majority_line +] for a majority).
+
+Your rating: [+ thatcher_rating : rating +]. [+ lab_leader +]'s rating: [+ lab_leader_rating : rating +].
+
+Support for free-market economics: [+ economic_liberalism_disp +]%. Think the unions have too much power: [+ union_backlash_disp +]%. Trust Labour on the economy: [+ labour_credibility_disp +]%.
+
+@figures
+title: Figures and charts
+go-to: menu
+on-display: {!
+var data = [
+    {"id": "lab", "legend": "Labour", "name": "Labour", "seats": Q.lab_mps},
+    {"id": "snp", "legend": "SNP", "name": "SNP", "seats": Q.snp_mps},
+    {"id": "pc", "legend": "Plaid Cymru", "name": "Plaid Cymru", "seats": Q.pc_mps},
+    {"id": "lib", "legend": Q.lib_name, "name": Q.lib_name, "seats": Q.lib_mps},
+    {"id": "other", "legend": "Other", "name": "Other", "seats": Q.other_mps},
+    {"id": "ni", "legend": "Northern Ireland", "name": "Northern Ireland", "seats": Q.ni_mps},
+    {"id": "con", "legend": "Conservative", "name": "Conservative", "seats": Q.con_mps}
+];
+if (typeof window !== 'undefined' && typeof d3 !== 'undefined' && d3.parliament && d3.linegraph) {
+    var width = 500;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("lib_commons").style.height = screenWidth / 2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    d3.select("#lib_commons").datum(data).call(parliament);
+
+    var colors = {'con': '#0087DC', 'lab': '#DC241F', 'lib': '#FDBB30', 'snp': '#E5D300', 'pc': '#008142', 'ni': '#9999FF'};
+    var names = {'con': 'Conservative', 'lab': 'Labour', 'lib': Q.lib_name, 'snp': 'SNP', 'pc': 'Plaid Cymru', 'ni': 'N. Ireland'};
+    if (Q.election_records.length > 0) {
+        var lines = d3.linegraph(false, false, ['con', 'lab', 'lib'], colors, names);
+        lines.width(width).height(350);
+        d3.select("#election_history").datum(Q.election_records).call(lines);
+    }
+    if ((!Q.historical_mode || Q.game_over) && Q.party_support_records.length > 1) {
+        var lines_2 = d3.linegraph(true, true, ['con', 'lab', 'lib'], colors, names);
+        lines_2.width(width).height(350);
+        d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
+    }
+    if (Q.economic_records.length > 1) {
+        var maxValue = d3.max(Q.economic_records, function(d) { return Math.max(d.inflation, d.unemployment); });
+        var lines_3 = d3.linegraph(true, true, ['inflation', 'unemployment'],
+                {'inflation': '#0000FF', 'unemployment': '#FF0000'},
+                {'inflation': 'Inflation', 'unemployment': 'Unemployment'},
+                maxValue + 3, 0, 6);
+        lines_3.width(width).height(300);
+        d3.select("#economic_history").datum(Q.economic_records).call(lines_3);
+    }
+}
+!}
+
+= The House of Commons
+
+{!<svg id="lib_commons" style="width: 500px; height: 250px;"> </svg>!}
+
+Conservative [+ con_mps +], Labour [+ lab_mps +], [+ lib_name +] [+ lib_mps +], SNP [+ snp_mps +], Plaid Cymru [+ pc_mps +], Northern Ireland [+ ni_mps +].
+
+= Seats won at general elections
+
+[? if n_elections = 0 : No general election yet. ?]
+
+{!<svg id="election_history" style="width: 500px; height: 350px;"> </svg>!}
+
+= Opinion polls
+
+[? if historical_mode = 1 and game_over = 0 : Not available in historical mode. ?]
+
+{!<svg id="party_support_history" style="width: 500px; height: 350px;"> </svg>!}
+
+= Inflation and unemployment (%)
+
+{!<svg id="economic_history" style="width: 500px; height: 300px;"> </svg>!}

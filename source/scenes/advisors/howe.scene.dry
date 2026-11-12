@@ -1,5 +1,6 @@
 title: Sir Geoffrey Howe
 is-pinned-card: true
+card-image: img/advisor_dry.svg
 tags: advisor
 view-if: howe_advisor = 1
 new-page: true

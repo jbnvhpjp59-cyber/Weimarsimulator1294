@@ -5,11 +5,12 @@
   "main": "out/html/index.html",
   "scripts": {
     "dendrynexus": "dendrynexus",
-    "build": "dendrynexus make-html",
+    "build": "dendrynexus make-html && node tools/post_build.js",
     "check": "node tools/check_scenes.js"
   },
   "license": "MIT",
   "dependencies": {
+    "d3": "7.9.0",
     "dendrynexus": "github:aucchen/dendrynexus"
   }
 }

@@ -1,0 +1,118 @@
+title: Customise Difficulty
+on-departure: {!
+var num = function(id) {
+    return Number.parseInt(document.getElementById(id).value);
+};
+Q.difficulty = 2;
+Q.resources = num("resources");
+Q.donations = num("fundraising_income");
+Q.annual_income = num("annual_income");
+Q.starting_budget = num("budget");
+
+Q.starting_dissent = num("starting_dissent");
+if (Q.starting_dissent == 0) {
+    Q.wet_dissent = 10;
+    Q.right_dissent = 5;
+    Q.heath_hostility = 50;
+} else if (Q.starting_dissent == 1) {
+    Q.wet_dissent = 20;
+    Q.right_dissent = 10;
+    Q.heath_hostility = 60;
+} else {
+    Q.wet_dissent = 30;
+    Q.right_dissent = 20;
+    Q.dry_dissent = 15;
+    Q.heath_hostility = 75;
+}
+
+Q.starting_relations = num("starting_relations");
+if (Q.starting_relations == 0) {
+    Q.lib_relation = 36;
+    Q.uup_relation = 56;
+    Q.snp_relation = 30;
+} else if (Q.starting_relations == 1) {
+    Q.lib_relation = 30;
+    Q.uup_relation = 50;
+    Q.snp_relation = 25;
+} else {
+    Q.lib_relation = 25;
+    Q.uup_relation = 44;
+    Q.snp_relation = 20;
+}
+
+Q.thatcher_rating = num("thatcher_rating");
+Q.hand_size = num("hand_size");
+Q.historical_mode = num("historical_mode");
+Q.fundraising_disabled = Q.historical_mode;
+Q.discard_disabled = num("discard_disabled");
+Q.saves_disabled = num("saves_disabled");
+Q.cabinet_enabled = num("cabinet_enabled");
+Q.shuffle_leadership_enabled = num("shuffle_leadership_enabled");
+
+if (Q.saves_disabled) {
+    this.state.disableSaves = true;
+}
+if (Q.historical_mode && Q.annual_income == 0) {
+    alert("Annual income must be greater than 0 in historical mode - setting it to 1.");
+    Q.annual_income = 1;
+}
+!}
+
+= Difficulty Settings
+
+Starting party resources: {! <input type="number" id="resources" name="resources" value="3" min="0" max="10"></input> !}
+
+Fundraising income: {! <input type="number" id="fundraising_income" name="fundraising_income" value="2" min="0" max="5"></input> !}
+
+Annual party income (every January): {! <input type="number" id="annual_income" name="annual_income" value="0" min="0" max="5"></input> !}
+
+Treasury headroom on taking office: {! <input type="number" id="budget" name="budget" value="1" min="-3" max="6"></input> !}
+
+Your starting rating: {! <input type="number" id="thatcher_rating" name="thatcher_rating" value="40" min="20" max="60"></input> !}
+
+Starting party dissent: {! <select name="starting_dissent" id="starting_dissent">
+<option value="0">Easy</option>
+<option value="1" selected>Normal</option>
+<option value="2">Hard</option>
+</select> !}
+
+Starting relations with the other parties: {! <select name="starting_relations" id="starting_relations">
+<option value="0">Easy</option>
+<option value="1" selected>Normal</option>
+<option value="2">Hard</option>
+</select> !}
+
+Historical mode (no fundraising; polls hidden): {! <select name="historical_mode" id="historical_mode">
+<option value="0" selected>Disabled</option>
+<option value="1">Enabled</option>
+</select> !}
+
+"Your Inner Circle" pinned card: {! <select name="shuffle_leadership_enabled" id="shuffle_leadership_enabled">
+<option value="0" selected>Disabled</option>
+<option value="1">Enabled</option>
+</select> !}
+
+"Cabinet Room" pinned card (in government): {! <select name="cabinet_enabled" id="cabinet_enabled">
+<option value="0" selected>Disabled</option>
+<option value="1">Enabled</option>
+</select> !}
+
+Saving and loading: {! <select name="saves_disabled" id="saves_disabled">
+<option value="1">Disabled</option>
+<option value="0" selected>Enabled</option>
+</select> !}
+
+Hand size: {! <select name="hand_size" id="hand_size">
+<option value="3" selected>3</option>
+<option value="4">4</option>
+</select> !}
+
+Returning cards to hand: {! <select name="discard_disabled" id="discard_disabled">
+<option value="1">Disabled</option>
+<option value="0" selected>Enabled</option>
+</select> !}
+
+- @done: Done
+
+@done
+go-to: root.1978_main

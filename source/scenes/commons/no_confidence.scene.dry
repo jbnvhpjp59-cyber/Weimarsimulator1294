@@ -1,6 +1,7 @@
 title: Motion of No Confidence
 new-page: true
 is-card: true
+card-image: img/commons.svg
 tags: commons
 view-if: no_confidence_timer <= 0 and no_confidence_won = 0 and months_to_election > 2 and con_in_government = 0
 on-arrival: no_confidence_timer = 6; month_actions += 1

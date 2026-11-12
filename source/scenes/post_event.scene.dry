@@ -2,6 +2,7 @@ title: Post Event
 new-page: true
 on-arrival: {!
 Q.last_advisor_action = 0;
+Q.last_cabinet_action = 0;
 // keep support numbers non-negative
 for (var c of Q.classes) {
     for (var party of Q.parties) {
@@ -67,6 +68,9 @@ if (Q.month_actions >= 1) {
     if (Q.month >= 13) {
         Q.month = 1;
         Q.year += 1;
+        if (Q.annual_income > 0) {
+            Q.resources += Q.annual_income;
+        }
     }
     for (var timer of Q.timers) {
         if (Q[timer + '_timer'] && Q[timer + '_timer'] > 0) {
@@ -78,6 +82,9 @@ if (Q.month_actions >= 1) {
     Q.party_support_records.push({'date': new Date(Q.year, Q.month - 1),
                                   'con': Q.con_votes, 'lab': Q.lab_votes,
                                   'lib': Q.lib_votes});
+    Q.economic_records.push({'date': new Date(Q.year, Q.month - 1),
+                             'inflation': Math.round(Q.inflation * 10) / 10,
+                             'unemployment': Math.round(Q.unemployment * 10) / 10});
 
     // ---- the economy and the national mood: opposition years ----
     // Spring and summer 1978: inflation falls into single figures and
@@ -123,9 +130,15 @@ if (Q.month_actions >= 1) {
         Q.strike_wave -= 1.5;
     }
 
-    // ---- the economy in government ----
-    if (Q.con_in_government) {
-        Q.months_in_office = Q.time - Q.term_start_time;
+    // ---- the economy after the first election, whoever governs ----
+    // (in opposition, Labour runs it: rates stay put and an incomes policy
+    // brings strikes back every winter)
+    if (Q.con_in_government || Q.n_elections >= 1) {
+        if (Q.con_in_government) {
+            Q.months_in_office = Q.time - Q.term_start_time;
+        } else if ((Q.month >= 11 || Q.month <= 2) && Q.pay_norm <= 5) {
+            Q.strike_wave += 0.4;
+        }
         // external shocks: the second oil shock (mid-1979 to mid-1980),
         // world recession (1980-81), world recovery (from 1982)
         if (Q.time >= 17 && Q.time <= 30) {
@@ -205,28 +218,41 @@ if (Q.month_actions >= 1) {
         }
 
         // ---- the government is judged on the economy ----
+        // gp is the governing party, op the main opposition
+        var gp = Q.con_in_government ? 'con' : 'lab';
+        var op = Q.con_in_government ? 'lab' : 'con';
         if (Q.unemployment > 6) {
             var u = Q.unemployment - 6;
-            Q.c2_con -= 0.06 * u;
-            Q.de_con -= 0.06 * u;
-            Q.c1_con -= 0.03 * u;
-            Q.c2_lab += 0.03 * u;
-            Q.de_lab += 0.04 * u;
+            Q['c2_' + gp] -= 0.06 * u;
+            Q['de_' + gp] -= 0.06 * u;
+            Q['c1_' + gp] -= 0.03 * u;
+            Q['c2_' + op] += 0.03 * u;
+            Q['de_' + op] += 0.04 * u;
         }
         if (Q.inflation > 10) {
             var inf = Q.inflation - 10;
             for (var c of Q.classes) {
-                Q[c + '_con'] -= 0.03 * inf;
+                Q[c + '_' + gp] -= 0.03 * inf;
             }
-        } else if (Q.inflation < 7 && Q.months_in_office > 12) {
-            Q.c1_con += 0.15;
-            Q.ab_con += 0.1;
-            Q.c2_con += 0.1;
+        } else if (Q.inflation < 7 && (Q.months_in_office > 12 || !Q.con_in_government)) {
+            Q['c1_' + gp] += 0.15;
+            Q['ab_' + gp] += 0.1;
+            Q['c2_' + gp] += 0.1;
         }
         if (Q.economic_growth > 2) {
-            Q.c1_con += 0.15;
-            Q.c2_con += 0.15;
+            Q['c1_' + gp] += 0.15;
+            Q['c2_' + gp] += 0.15;
         }
+        if (!Q.con_in_government) {
+            Q.lab_leader_rating += (7 - Q.unemployment) * 0.05 + (8 - Q.inflation) * 0.03;
+            if (Q.lab_leader_rating > 50) {
+                Q.lab_leader_rating -= 0.3;
+            } else if (Q.lab_leader_rating < 30) {
+                Q.lab_leader_rating += 0.3;
+            }
+        }
+    }
+    if (Q.con_in_government) {
         // mortgage holders feel dear money
         if (Q.interest_rate >= 15) {
             Q.c1_con -= 0.15;
@@ -372,6 +398,9 @@ Q.interest_rate_disp = Math.round(Q.interest_rate * 10) / 10;
 Q.inflation_2 = Q.inflation.toFixed(1);
 Q.unemployment_2 = Q.unemployment.toFixed(1);
 Q.economic_growth_2 = Q.economic_growth.toFixed(1);
+Q.economic_liberalism_disp = Math.round(Q.economic_liberalism);
+Q.union_backlash_disp = Math.round(Q.union_backlash);
+Q.labour_credibility_disp = Math.round(Q.labour_credibility);
 Q.next_election_month = ((Q.next_election_time - 1) % 12) + 1;
 Q.next_election_year = 1978 + Math.floor((Q.next_election_time - 1) / 12);
 // the last two months before polling day are the campaign

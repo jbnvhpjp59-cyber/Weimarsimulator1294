@@ -8,8 +8,8 @@
     <title>Conservatism: An Alternate History</title>
     <link rel="stylesheet" type="text/css" href="game.css">
     <script src="jquery-1.11.1.min.js"></script>
-    <!-- d3 is not bundled by dendrynexus, so load a pinned copy from a CDN. -->
-    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <!-- d3 7.9.0, copied here from node_modules by tools/post_build.js -->
+    <script src="d3.v7.min.js"></script>
     <script src="d3-parliament.js"></script>
     <script src="d3-linegraph.js"></script>
     <script src="core.js"></script>
@@ -336,7 +336,7 @@
         <div id="mid_panel">
             <header>
                 <h1 id="game-title">Conservatism: An Alternate History</h1>
-                <h2 id="game-author">Britain, 1978 &middot; a mod of Social Democracy: An Alternate History by Autumn Chen</h2>
+                <h2 id="game-author">Autumn Chen (original game) &middot; Britain, 1978&ndash;84 mod</h2>
 
                 <div id="header-links">
                     <a id="stats-link" onclick="window.showStats();" href="#">Library</a>

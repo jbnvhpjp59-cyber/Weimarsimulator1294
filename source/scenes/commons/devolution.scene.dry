@@ -1,6 +1,7 @@
 title: The Devolution Question
 new-page: true
 is-card: true
+card-image: img/commons.svg
 tags: commons
 view-if: devolution_timer <= 0 and devolution_referendum_result = 0 and con_in_government = 0
 on-arrival: devolution_timer = 6; month_actions += 1

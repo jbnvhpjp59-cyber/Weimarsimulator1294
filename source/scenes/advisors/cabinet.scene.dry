@@ -1,0 +1,18 @@
+title: The Cabinet Room
+is-pinned-card: true
+tags: advisor
+card-image: img/cabinet.svg
+view-if: (difficulty < 0 or cabinet_enabled = 1) and con_in_government = 1
+on-arrival: last_cabinet_action = 1
+new-page: true
+
+= The Cabinet Room
+
+As Prime Minister, you can take any area of government in hand directly.
+
+- #cabinet
+- @back: Return to main
+
+@back
+on-arrival: last_cabinet_action = 0
+go-to: root

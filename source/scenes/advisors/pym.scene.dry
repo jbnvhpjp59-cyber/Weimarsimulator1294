@@ -1,0 +1,32 @@
+title: Francis Pym
+is-pinned-card: true
+tags: advisor
+card-image: img/advisor_wet.svg
+view-if: pym_advisor = 1
+new-page: true
+
+= Francis Pym
+
+A former Chief Whip from an old Cambridgeshire family, Pym is the voice of the shires and of the party's caution. He doubts that the new economics will work, and doesn't much hide it.
+
+- @shires
+- @diplomacy
+- @root: Return
+
+@shires
+title: Reassure the shires
+subtitle: Calms the wets and the party managers.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; wet_dissent -= 6; loyalist_dissent -= 4; c1_con += 1*(1-dissent); rebellion -= 1 if con_in_government
+
+Pym tours the county associations, promising that nothing reckless will be done.
+
+@diplomacy
+title: A diplomatic mission
+subtitle: Improves relations with Europe and the United States.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; europe_relation += 8; us_relation += 4; right_dissent += 2
+
+Pym's patient diplomacy repairs some of the damage done at the last European summit.

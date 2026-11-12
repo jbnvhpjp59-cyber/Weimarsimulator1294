@@ -1,7 +1,8 @@
 title: Reshuffle the Cabinet
 new-page: true
 is-card: true
-tags: govt_affairs
+card-image: img/government.svg
+tags: govt_affairs, cabinet
 view-if: con_in_government = 1 and reshuffle_timer <= 0 and months_in_office >= 6
 on-arrival: reshuffle_timer = 12; month_actions += 1
 
@@ -15,11 +16,12 @@ Chancellor: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: 
 - @bring_back: Bring the wets back into the economic departments.
 - @loyalists: Promote loyal managers.
 - @easy_discard
+- @cancel_advisor_action
 
 @purge
 view-if: wets_purged = 0
 subtitle: The Cabinet becomes yours. The sacked will not go quietly.
-on-arrival: wets_purged = 1; cabinet_dry += 35; cabinet_dry = 95 if cabinet_dry > 95; chancellor = "Howe"; chancellor_dry = 1; employment_secretary = "Tebbit"; employment_dry = 1; industry_secretary = "Joseph" if industry_dry = 0; industry_dry = 1; tebbit_advisor = 1; wet_dissent += 15; wet_strength -= 5; dry_dissent -= 8; cabinet_revolt = 0; rebellion += 2
+on-arrival: wets_purged = 1; cabinet_dry += 35; cabinet_dry = 95 if cabinet_dry > 95; chancellor = "Howe"; chancellor_dry = 1; employment_secretary = "Tebbit"; employment_dry = 1; industry_secretary = "Joseph" if industry_dry = 0; industry_dry = 1; wet_dissent += 15; wet_strength -= 5; dry_dissent -= 8; cabinet_revolt = 0; rebellion += 2
 achievement: purge
 
 Ian Gilmour, Christopher Soames and Mark Carlisle are sacked. Jim Prior is moved to Northern Ireland. Norman Tebbit, Nigel Lawson and Cecil Parkinson come in. Gilmour tells the cameras outside Number 10 that it does no harm to throw the occasional man overboard, but it doesn't do much good if you're steering full speed ahead for the rocks.

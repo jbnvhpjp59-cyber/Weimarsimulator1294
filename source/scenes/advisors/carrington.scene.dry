@@ -1,0 +1,32 @@
+title: Lord Carrington
+is-pinned-card: true
+tags: advisor
+card-image: img/advisor_loyalist.svg
+view-if: carrington_advisor = 1 and foreign_secretary == "Carrington"
+new-page: true
+
+= Lord Carrington
+
+[? if con_in_government = 0 : Leader of the Opposition in the Lords. ?][? if con_in_government = 1 : Foreign Secretary. ?] Witty, aristocratic and unflappable, Carrington is one of the few people who can tell you you're wrong and stay a friend.
+
+- @diplomacy
+- @lords
+- @root: Return
+
+@diplomacy
+title: Diplomacy
+subtitle: Improves our standing abroad, and with the minor parties at home.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; europe_relation += 6; us_relation += 6; lib_relation += 4; uup_relation += 3; right_dissent += 2
+
+Carrington charms the diplomats of three continents, and David Steel over lunch.
+
+@lords
+title: Steady the grandees
+subtitle: Calms the party managers and the rebels.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; loyalist_dissent -= 6; wet_dissent -= 3; rebellion -= 2 if con_in_government
+
+A word in the right ears at White's and the Carlton. The grandees agree to give you the benefit of the doubt.
