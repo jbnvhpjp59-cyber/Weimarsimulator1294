@@ -4,6 +4,7 @@ view-if: con_in_government = 1 and time >= 44 and time <= 46 and wets_purged = 0
 max-visits: 1
 new-page: true
 on-arrival: september_seen = 1
+face-image: img/events/cabinet.jpg
 
 = The September Reshuffle
 
