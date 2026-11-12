@@ -340,7 +340,7 @@ view-if: glc_abolition = 1
 tags: endings
 go-to: eg_menu
 
-The Greater London Council and the metropolitan counties are being abolished. Ken Livingstone has become a national figure fighting it, and London will have no city-wide government of its own for years to come.
+The Greater London Council and the metropolitan counties are being abolished. Ken Livingstone has become a national figure fighting it. [? if bill_glc_watered = 0 : London will have no city-wide government of its own for years to come. ?][? if bill_glc_watered = 1 : London will keep a smaller elected authority for its roads and planning, and Livingstone means to run it. ?]
 
 @docklands_ending
 title: The Docklands.
@@ -349,6 +349,30 @@ tags: endings
 go-to: eg_menu
 
 On the Isle of Dogs, where the West India Docks once employed thousands, the developers are moving in. A light railway is planned, and an American consortium talks of a vast office development at Canary Wharf.
+
+@telecoms_ending
+title: British Telecom.
+view-if: telecoms_sold = 1
+tags: endings
+go-to: eg_menu
+
+British Telecom is to be sold, and the share issue will be the largest the world has seen. If millions of people who have never owned a share buy one, every nationalised industry will be next in the queue.
+
+@pace_ending
+title: The police.
+view-if: pace_act = 1
+tags: endings
+go-to: eg_menu
+
+The Police and Criminal Evidence Act sets down, for the first time, what the police may do and what a suspect may demand. Its codes of practice will be argued over in every magistrates' court in the country, and outlast the government that wrote them.
+
+@defeats_ending
+title: The Commons.
+view-if: bills_defeated >= 2
+tags: endings
+go-to: eg_menu
+
+The House of Commons threw out [+ bills_defeated +] of the government's bills at Second Reading. The whips say it was the arithmetic; the backbenchers say it was the arrogance. Either way, a government that cannot get its business through Parliament has been noticed.
 
 @nuclear_ending
 title: Sizewell.
@@ -374,7 +398,7 @@ view-if: achievement_game_completed == 1
 tags: endings
 go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
-There are 57 achievements.
+There are 62 achievements.
 
 = In this playthrough
 
@@ -492,6 +516,16 @@ There are 57 achievements.
 
 [? if game_achievement_docklands : **Isle of Dogs** - create the docklands development corporations. ?]
 
+[? if game_achievement_statute_book : **The Statute Book** - pass five bills into law. ?]
+
+[? if game_achievement_confidence : **A Matter of Confidence** - win a Second Reading that you made a matter of confidence. ?]
+
+[? if game_achievement_ping_pong : **Ping-Pong** - overturn a Lords amendment and make the peers back down. ?]
+
+[? if game_achievement_pace : **Codes of Practice** - pass the Police and Criminal Evidence Act. ?]
+
+[? if game_achievement_telecoms : **The Biggest Share Issue** - pass the Telecommunications Act to sell British Telecom. ?]
+
 = Unlocked in earlier games
 
 [? if achievement_prime_minister and not game_achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -608,6 +642,16 @@ There are 57 achievements.
 
 [? if achievement_docklands and not game_achievement_docklands : **Isle of Dogs** - create the docklands development corporations. ?]
 
+[? if achievement_statute_book and not game_achievement_statute_book : **The Statute Book** - pass five bills into law. ?]
+
+[? if achievement_confidence and not game_achievement_confidence : **A Matter of Confidence** - win a Second Reading that you made a matter of confidence. ?]
+
+[? if achievement_ping_pong and not game_achievement_ping_pong : **Ping-Pong** - overturn a Lords amendment and make the peers back down. ?]
+
+[? if achievement_pace and not game_achievement_pace : **Codes of Practice** - pass the Police and Criminal Evidence Act. ?]
+
+[? if achievement_telecoms and not game_achievement_telecoms : **The Biggest Share Issue** - pass the Telecommunications Act to sell British Telecom. ?]
+
 = Not yet unlocked
 
 [? if not achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -723,6 +767,16 @@ There are 57 achievements.
 [? if not achievement_glc : **County Hall** - abolish the GLC. ?]
 
 [? if not achievement_docklands : **Isle of Dogs** - create the docklands development corporations. ?]
+
+[? if not achievement_statute_book : **The Statute Book** - pass five bills into law. ?]
+
+[? if not achievement_confidence : **A Matter of Confidence** - win a Second Reading that you made a matter of confidence. ?]
+
+[? if not achievement_ping_pong : **Ping-Pong** - overturn a Lords amendment and make the peers back down. ?]
+
+[? if not achievement_pace : **Codes of Practice** - pass the Police and Criminal Evidence Act. ?]
+
+[? if not achievement_telecoms : **The Biggest Share Issue** - pass the Telecommunications Act to sell British Telecom. ?]
 
 @end_game
 game-over: true

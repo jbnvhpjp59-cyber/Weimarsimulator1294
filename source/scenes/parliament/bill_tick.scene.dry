@@ -1,0 +1,140 @@
+title: Bills Before Parliament
+on-arrival: {!
+// Moves bills through their stages once a month, kills them at a
+// dissolution, and writes the lines shown in the Politics tab.
+//   stage 1: awaiting Second Reading (a Commons division, as an event)
+//   stage 2: in committee (an amendment may be moved, as an event)
+//   stage 3: Report stage and Third Reading
+//   stage 4: in the House of Lords (the peers may amend it, as an event)
+//   stage 5: awaiting Royal Assent (an event applies its effects)
+//   stage 6: law
+this._runActions(this.game.scenes['bill_defs'].onArrival);
+var D = Q.bill_defs;
+var keys = Q.bill_keys;
+var reset = function (k) {
+    Q['bill_' + k] = 0;
+    Q['bill_' + k + '_amend'] = 0;
+    Q['bill_' + k + '_lords'] = 0;
+};
+
+if (!Q.con_in_government) {
+    // out of office: the government's bills are someone else's problem
+    for (var k of keys) {
+        if (Q['bill_' + k] >= 1 && Q['bill_' + k] <= 5) {
+            reset(k);
+        }
+    }
+} else {
+    // dissolution: bills that have reached the Lords are rushed through in
+    // the "wash-up"; the rest fall, and must start again in a new Parliament
+    if (Q.in_campaign == 1 && Q.bills_dissolved_for != Q.next_election_time) {
+        Q.bills_dissolved_for = Q.next_election_time;
+        var fell = [];
+        var rushed = [];
+        for (var k of keys) {
+            var s = Q['bill_' + k];
+            if (s >= 1 && s <= 3) {
+                reset(k);
+                Q['bill_' + k + '_fell'] = 1;
+                fell.push('the ' + D[k].name);
+            } else if (s == 4) {
+                Q['bill_' + k] = 5;
+                rushed.push('the ' + D[k].name);
+            }
+        }
+        Q.wash_up_fell = fell.join(', ');
+        Q.wash_up_fell_n = fell.length;
+        Q.wash_up_passed = rushed.join(', ');
+        Q.wash_up_passed_n = rushed.length;
+        if (fell.length || rushed.length) {
+            Q.wash_up_pending = 1;
+        }
+    }
+    // a month's progress, once a month, while Parliament sits
+    if (Q.bills_last_tick != Q.time && Q.in_campaign != 1) {
+        Q.bills_last_tick = Q.time;
+        for (var k of keys) {
+            var b = 'bill_' + k;
+            if (Q[b + '_due'] > Q.time) {
+                continue;
+            }
+            if (Q[b] == 2 && Q[b + '_amend'] == 0) {
+                if (Math.random() < D[k].amend) {
+                    Q[b + '_amend'] = 1;
+                } else {
+                    Q[b] = 3;
+                    Q[b + '_due'] = Q.time + 1;
+                }
+            } else if (Q[b] == 3) {
+                Q[b] = 4;
+                Q[b + '_due'] = Q.time + (Q[b + '_fast'] ? 1 : D[k].lords);
+            } else if (Q[b] == 4 && Q[b + '_lords'] != 1) {
+                if (Q[b + '_lords'] == 0 && Math.random() < D[k].lords_risk) {
+                    Q[b + '_lords'] = 1;
+                } else {
+                    Q[b] = 5;
+                }
+            }
+        }
+    }
+}
+
+// ---- what the Politics tab shows ----
+var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+              'August', 'September', 'October', 'November', 'December'];
+var lines = [];
+var active = 0;
+var in_committee = 0;
+for (var k of keys) {
+    var b = 'bill_' + k;
+    var s = Q[b];
+    if (s < 1 || s > 5) {
+        continue;
+    }
+    var wait = Math.max(Q[b + '_due'] - Q.time, 0);
+    var committee = Q[b + '_fast'] ? 1 : D[k].committee;
+    var lords = Q[b + '_fast'] ? 1 : D[k].lords;
+    var stage;
+    var left;
+    if (s == 1) {
+        stage = 'awaiting its Second Reading';
+        left = Math.max(wait, 1) + committee + 1 + lords;
+    } else if (s == 2) {
+        stage = (Q[b + '_amend'] == 1) ? 'in committee, where an amendment has been tabled' : 'in committee';
+        left = wait + 1 + lords;
+    } else if (s == 3) {
+        stage = 'at Report stage and Third Reading';
+        left = wait + lords;
+    } else if (s == 4) {
+        stage = (Q[b + '_lords'] == 1) ? 'in the House of Lords, which has amended it' : 'in the House of Lords';
+        left = Math.max(wait, 1);
+    } else {
+        stage = 'awaiting Royal Assent';
+        left = 0;
+    }
+    if (s <= 3) {
+        active += 1;
+    }
+    if (s == 2 && Q[b + '_amend'] != 1) {
+        in_committee += 1;
+    }
+    var line = D[k].name + ': ' + stage;
+    if (s < 5) {
+        var t = Q.time + left;
+        line += '. Royal Assent expected around ' + MONTHS[(t - 1) % 12] + ' ' + (1978 + Math.floor((t - 1) / 12));
+    }
+    lines.push(line + '.');
+}
+for (var i = 0; i < 8; i++) {
+    Q['bill_line_' + (i + 1)] = lines[i] || '';
+}
+Q.bill_lines_n = lines.length;
+Q.bills_active = active;
+Q.bills_in_committee = in_committee;
+// the Commons has time for three major bills at once
+Q.bill_room = (Q.con_in_government && Q.in_campaign != 1 && active < 3) ? 1 : 0;
+Q.bill_room_text = (Q.in_campaign == 1) ? 'Parliament has been dissolved for the election.' :
+    'Three bills are already going through the Commons. One of them must reach the Lords first.';
+!}
+
+# Run by post_event after every action.

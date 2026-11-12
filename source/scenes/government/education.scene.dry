@@ -11,7 +11,7 @@ on-arrival: education_timer = 5; month_actions += 1
 [+ education_secretary +] at Education has a list of reforms and a shrinking budget. Comprehensive schools now teach most children, and two school-leavers in five can't find work.
 
 - @assisted_places: Create the Assisted Places Scheme.
-- @parental_choice: Give parents the right to choose their school.
+- @parental_choice: Introduce a bill to give parents a choice of school.
 - @university_cuts: Cut university funding.
 - @vouchers: Study education vouchers.
 - @vouchers_pilot: Pilot education vouchers.
@@ -30,11 +30,14 @@ achievement: assisted_places
 The state will pay the fees for bright children from poorer homes to attend independent schools. Labour calls it a subsidy for private schools and promises to abolish it.
 
 @parental_choice
-view-if: parental_choice = 0
-subtitle: Popular with parents.
-on-arrival: parental_choice = 1; c1_con += 2*(1-dissent); c2_con += 1*(1-dissent); lib_relation += 2; wet_dissent -= 1
+view-if: parental_choice = 0 and bill_education = 0 and time >= bill_education_wait
+subtitle: Popular with parents, once it becomes law in about six months.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: lib_relation += 2; wet_dissent -= 1; bill_new = "education"
+call: bill_introduce
 
-The Education Act gives parents the right to state a preference for their child's school and a place on every governing body. Councils must publish exam results.
+[+ education_secretary +] publishes the Education Bill. Parents will have the right to state a preference for their child's school and a place on every governing body, and councils will have to publish exam results.
 
 @university_cuts
 view-if: university_cuts = 0

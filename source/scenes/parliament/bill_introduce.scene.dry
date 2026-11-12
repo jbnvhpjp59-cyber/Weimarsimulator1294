@@ -1,0 +1,20 @@
+title: Introduce a Bill
+on-arrival: {!
+// Starts bill Q.bill_new on its way: First Reading now, Second Reading next month.
+this._runActions(this.game.scenes['bill_defs'].onArrival);
+var k = Q.bill_new;
+Q['bill_' + k] = 1;
+Q['bill_' + k + '_due'] = Q.time + 1;
+Q['bill_' + k + '_time'] = Q.time;
+for (var f of ['_watered', '_tough', '_amend', '_lords', '_insisted', '_fell']) {
+    Q['bill_' + k + f] = 0;
+}
+Q['bill_' + k + '_fast'] = Q.bill_new_fast ? 1 : 0;
+Q.bill_new_fast = 0;
+Q.bills_introduced += 1;
+// the bill takes up Commons time from today
+Q.bills_active += 1;
+Q.bill_room = (Q.bills_active < 3) ? 1 : 0;
+!}
+
+# Called by the cards and advisor actions that introduce a bill.

@@ -10,7 +10,7 @@ on-arrival: housing_timer = 5; month_actions += 1
 
 One in three British households rents from a council. [+ environment_secretary +] at the Environment department wants to change that.
 
-- @right_to_buy: Give council tenants the right to buy.
+- @right_to_buy: Introduce a bill to give council tenants the right to buy.
 - @bigger_discounts: Increase the right-to-buy discounts.
 - @cut_building: Cut council house building.
 - @mortgage_relief: Protect mortgage interest relief.
@@ -18,11 +18,14 @@ One in three British households rents from a council. [+ environment_secretary +
 - @cancel_advisor_action
 
 @right_to_buy
-view-if: right_to_buy_progress = 0
-subtitle: +1 budget. A lasting boost among skilled and working-class voters.
-on-arrival: right_to_buy_progress += 1; budget += 1; c2_con += 2*(1-dissent); de_con += 2*(1-dissent); policy_right_to_buy = 1
+view-if: right_to_buy_progress = 0 and bill_housing = 0 and time >= bill_housing_wait
+subtitle: +1 budget and a lasting boost among skilled and working-class voters, once it becomes law in about seven months.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: c2_con += 1*(1-dissent); de_con += 1*(1-dissent); bill_new = "housing"
+call: bill_introduce
 
-The Housing Act gives every council tenant of three years' standing the right to buy their home at a discount of up to 50%. Labour councils try to drag their feet; the law says they can't.
+[+ environment_secretary +] publishes the Housing Bill. Every council tenant of three years' standing will have the right to buy their home at a discount of up to 50%. Labour councils say they will drag their feet; the bill says they can't.
 
 @bigger_discounts
 view-if: right_to_buy_progress >= 1 and right_to_buy_progress < 4

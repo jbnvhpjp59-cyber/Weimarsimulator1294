@@ -10,27 +10,43 @@ on-arrival: union_law_timer = 6; month_actions += 1
 
 The Employment Secretary, [+ employment_secretary +], comes to discuss the unions. [? if union_power >= 60 : The union barons still believe they can bring down any government that crosses them. ?][? if union_power < 60 and union_power > 40 : The balance of power in industry is shifting. ?][? if union_power <= 40 : The unions are weaker than they have been for a generation. ?]
 
-- @cautious_act: A cautious Employment Act.
-- @tough_act: Strip the unions of their legal immunities.
+- @cautious_act: Introduce a cautious Employment Bill.
+- @tough_act: Introduce a bill to strip the unions of their legal immunities.
+- @trade_union_bill: Introduce a bill for secret ballots before strikes.
 - @ballots: Pay for secret ballots.
 - @tuc: Invite the TUC to talks.
 - @easy_discard
 - @cancel_advisor_action
 
 @cautious_act
-view-if: employment_acts = 0
-subtitle: Restricts secondary picketing and the closed shop, step by step.
-on-arrival: union_power -= 10; employment_acts += 1; strike_wave += 0.5; wet_dissent -= 2; dry_dissent += 3 if employment_dry = 0; c2_con += 1*(1-dissent) if union_backlash >= 60
+view-if: employment_acts = 0 and bill_employment1 = 0 and bill_employment2 = 0 and time >= bill_employment1_wait
+subtitle: Restricts secondary picketing and the closed shop, step by step. Law in about five months, if Parliament agrees.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: wet_dissent -= 2; dry_dissent += 3 if employment_dry = 0; bill_new = "employment1"
+call: bill_introduce
 
-The Employment Act limits picketing to a worker's own place of work and gives some protection against the closed shop. The TUC protests, but there is no general strike.
+[+ employment_secretary +] publishes the Employment Bill. It limits picketing to a worker's own place of work and gives some protection against the closed shop. The TUC protests, but nobody talks of a general strike.
 
 @tough_act
-subtitle: Makes unions liable for damages from unlawful strikes. Requires a dry Employment Secretary.
-choose-if: employment_dry = 1
-unavailable-subtitle: Jim Prior will not bring forward a bill this radical.
-on-arrival: union_power -= 20; employment_acts += 1; strike_wave += 2; dry_dissent -= 5; wet_dissent += 6; c2_con += 2*(1-dissent) if union_backlash >= 60; c2_lab += 1 if union_backlash < 60
+view-if: bill_employment2 = 0 and (bill_employment1 = 0 or bill_employment1 = 6) and time >= bill_employment2_wait
+subtitle: Makes unions liable for damages from unlawful strikes. Requires a dry Employment Secretary. Law in about five months.
+choose-if: employment_dry = 1 and bill_room = 1
+unavailable-subtitle: [? if employment_dry = 0 : [+ employment_secretary +] will not bring forward a bill this radical. ?][? if employment_dry = 1 : [+ bill_room_text +] ?]
+on-arrival: dry_dissent -= 5; wet_dissent += 6; bill_new = "employment2"
+call: bill_introduce
 
-Unions lose their blanket immunity from being sued. A union that calls an unlawful strike now risks its funds. Union leaders call it the most hostile legislation since 1927.
+The bill will take away the unions' blanket immunity from being sued. A union that calls an unlawful strike will put its funds at risk. Union leaders are already comparing it to the law passed after the General Strike.
+
+@trade_union_bill
+view-if: employment_acts >= 1 and bill_trade_union = 0 and time >= bill_trade_union_wait
+subtitle: No ballot, no immunity. Law in about five months.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: dry_dissent -= 2; right_dissent -= 1; wet_dissent += 1; bill_new = "trade_union"
+call: bill_introduce
+
+The Trade Union Bill will make every strike, every union executive and every political fund answer to a secret ballot of the members. The union leaders say it is none of the government's business how a union runs itself.
 
 @ballots
 subtitle: -1 budget.

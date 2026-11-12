@@ -94,6 +94,24 @@ Growth: [+ economic_growth_2 +]%
 
 [? if con_in_government : Health and Social Security: [+ health_secretary +] ([+ health_dry : drywet +]) ?]
 
+[? if con_in_government : **Bills before Parliament** ?]
+
+[? if con_in_government and bill_lines_n = 0 : None at present. ?]
+
+[? if bill_lines_n >= 1 : [+ bill_line_1 +] ?]
+
+[? if bill_lines_n >= 2 : [+ bill_line_2 +] ?]
+
+[? if bill_lines_n >= 3 : [+ bill_line_3 +] ?]
+
+[? if bill_lines_n >= 4 : [+ bill_line_4 +] ?]
+
+[? if bill_lines_n >= 5 : [+ bill_line_5 +] ?]
+
+[? if bill_lines_n >= 6 : [+ bill_line_6 +] ?]
+
+[? if acts_n >= 1 : **Acts passed:** [+ acts_list +]. ?]
+
 
 = Other Parties
 

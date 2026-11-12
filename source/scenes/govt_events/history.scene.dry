@@ -53,34 +53,6 @@ on-arrival: us_relation -= 4; right_dissent += 2
 
 The government condemns the invasion and leaves the Olympics to the sportsmen. The Americans conclude that their closest ally is not so close after all.
 
-@lords_defeat
-title: The Lords Rebel
-tags: event
-view-if: con_in_government = 1 and time >= 27 and time <= 29 and lords_seen = 0
-max-visits: 1
-new-page: true
-on-arrival: lords_seen = 1
-face-image: img/events/westminster.jpg
-
-= The Lords Rebel
-
-The Education Bill would let councils charge for school buses. In the House of Lords, the Duke of Norfolk leads Conservative peers, many of them from rural counties with Catholic schools miles from home, in a rebellion. The clause is defeated by a large majority.
-
-- @drop_charges: Accept the defeat and drop the charges.
-- @overturn: Overturn the Lords in the Commons.
-
-@drop_charges
-subtitle: -0.3 budget. The shires are relieved.
-on-arrival: budget -= 0.3; wet_dissent -= 2; dry_dissent += 1; loyalist_dissent -= 1
-
-The charges are dropped. The Lords have shown that they can still embarrass a government with a large majority.
-
-@overturn
-subtitle: +0.5 budget. Backbenchers from rural seats will rebel.
-on-arrival: budget += 0.5; rebellion += 1; wet_dissent += 3; c2_con -= 1
-
-The whips force the clause back through the Commons. A dozen county members vote against, and the newspapers run stories about children walking to school in the rain.
-
 @civil_service_strike
 title: The Civil Service Strike
 tags: event

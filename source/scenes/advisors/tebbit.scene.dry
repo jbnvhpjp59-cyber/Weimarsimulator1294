@@ -24,14 +24,15 @@ on-arrival: advisor_action_timer = 6; last_advisor_action = 1; lab_leader_rating
 Tebbit's insults are the best-reported speech of the week.
 
 @tebbit_act
-title: Fast-track a new Employment Act
-view-if: con_in_government = 1
-subtitle: Union power falls sharply.
-choose-if: advisor_action_timer = 0
-unavailable-subtitle: [+ advisor_action_timer +] months before the next Cabinet action.
-on-arrival: advisor_action_timer = 6; last_advisor_action = 1; union_power -= 12; employment_acts += 1; strike_wave += 1; wet_dissent += 4; dry_dissent -= 3
+title: Fast-track a new Employment Bill
+view-if: con_in_government = 1 and bill_employment2 = 0 and (bill_employment1 = 0 or bill_employment1 = 6) and time >= bill_employment2_wait
+subtitle: Strips the unions of their immunities. A month in committee, a month in the Lords.
+choose-if: advisor_action_timer = 0 and bill_room = 1
+unavailable-subtitle: [? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next Cabinet action. ?][? if advisor_action_timer = 0 : [+ bill_room_text +] ?]
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; wet_dissent += 4; dry_dissent -= 3; bill_new = "employment2"; bill_new_fast = 1
+call: bill_introduce
 
-Tebbit's Act narrows the definition of a lawful trade dispute and outlaws the closed shop unless a large majority of workers vote for it.
+Tebbit drafts much of the bill himself. It narrows the definition of a lawful trade dispute, exposes union funds to damages, and outlaws the closed shop unless a large majority of workers vote for it. The whips find time for it at the front of the queue.
 
 @on_your_bike
 title: "On your bike"

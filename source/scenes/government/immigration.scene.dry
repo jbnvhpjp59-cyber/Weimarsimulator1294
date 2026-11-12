@@ -10,7 +10,7 @@ on-arrival: immigration_timer = 6; month_actions += 1
 
 [? if swamped_seen = 1 : Your remark about people being afraid of being "swamped" won us votes in 1978. Now the government has to decide what it means in practice. ?][? if swamped_seen = 0 : The manifesto promised firm immigration control. Now the government has to decide what that means in practice. ?] [? if riots >= 1 : Since the riots, the inner cities have been watching too. ?]
 
-- @nationality: A new British Nationality Act.
+- @nationality: Introduce a British Nationality Bill.
 - @tighten_rules: Tighten the immigration rules.
 - @boat_people: Take in Vietnamese boat people.
 - @refuse_boat_people: Refuse to take more boat people.
@@ -19,12 +19,14 @@ on-arrival: immigration_timer = 6; month_actions += 1
 - @cancel_advisor_action
 
 @nationality
-view-if: nationality_act = 0
-subtitle: The right is pleased; the wets and the Liberals are not.
-on-arrival: nationality_act = 1; right_dissent -= 5; right_strength += 2; wet_dissent += 4; lib_relation -= 4; c2_con += 1*(1-dissent)
-achievement: nationality
+view-if: nationality_act = 0 and bill_nationality = 0 and time >= bill_nationality_wait
+subtitle: The right is pleased; the wets and the Liberals are not. Law in about seven months.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: right_dissent -= 5; wet_dissent += 4; lib_relation -= 2; bill_new = "nationality"
+call: bill_introduce
 
-The Act replaces citizenship of the United Kingdom and Colonies with three new categories. Only British citizens will have the automatic right to live here. Critics say it was designed to keep people out, and Hong Kong notices.
+[+ home_secretary +] publishes the British Nationality Bill. It will replace citizenship of the United Kingdom and Colonies with three new categories, and only British citizens will have the automatic right to live here. Hong Kong notices.
 
 @tighten_rules
 view-if: immigration_rules < 2

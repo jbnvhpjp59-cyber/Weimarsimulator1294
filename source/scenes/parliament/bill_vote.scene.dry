@@ -1,0 +1,131 @@
+title: A Division
+on-arrival: {!
+// Counts a Commons division on the Second Reading of bill Q.div_key.
+// div_mode "count" is the whips' projection (no randomness, no effects);
+// "press", "concede", "confidence" and "deal" hold the real vote.
+this._runActions(this.game.scenes['bill_defs'].onArrival);
+var k = Q.div_key;
+var d = Q.bill_defs[k];
+var mode = Q.div_mode;
+var count = (mode == 'count');
+var roll = function () { return count ? 0.5 : Math.random(); };
+
+// Conservative rebels: members of the faction that dislikes the bill, more of
+// them the angrier it is, plus the awkward squad that the rebellion meter tracks
+var fs = Q[d.faction + '_strength'] || 0;
+var fd = Q[d.faction + '_dissent'] || 0;
+var mood = Math.max(0, (fd - 40) / 60) + Math.max(0, Q.rebellion) / 25;
+if (mood > 1) {
+    mood = 1;
+}
+var rebels = Q.con_mps * fs / 100 * d.weight * 0.3 * mood + 0.3 * Math.max(0, Q.rebellion);
+var abstain = rebels * 0.6;
+if (mode == 'concede') {
+    rebels *= 0.3;
+    abstain *= 0.5;
+} else if (mode == 'confidence') {
+    rebels *= 0.25;
+    abstain *= 0.4;
+}
+rebels = Math.round(rebels * (0.8 + 0.4 * roll()));
+abstain = Math.round(abstain * (0.8 + 0.4 * roll()));
+
+// the minor parties: the Liberals (with the SDP, once it exists) and the
+// Ulster Unionists each vote with us, abstain, or vote against
+var unionists = Math.round(Q.ni_mps * 0.8);
+var lib = d.lib;
+var ulster = d.ulster;
+if (Q.govt_type == 2) {
+    ulster = (Q.partner_dissent >= 7) ? 'abstain' : 'yes';
+} else if (Q.govt_type == 3) {
+    lib = (Q.partner_dissent >= 7) ? 'no' : ((d.lib == 'no') ? 'abstain' : 'yes');
+}
+if (mode == 'deal') {
+    ulster = 'yes';
+    lib = (Q.govt_type == 3) ? 'yes' : ((lib == 'no') ? 'abstain' : lib);
+}
+
+// turnout: the government whips get out more of their side
+var con_turnout = count ? 0.96 : 0.95 + 0.02 * Math.random();
+var opp_turnout = count ? 0.91 : 0.89 + 0.04 * Math.random();
+var opposition = Q.lab_mps + Q.snp_mps + Q.pc_mps + (Q.ni_mps - unionists);
+var ayes = (Q.con_mps - rebels - abstain) * con_turnout;
+if (lib == 'yes') {
+    ayes += Q.lib_mps * opp_turnout;
+} else if (lib == 'no') {
+    opposition += Q.lib_mps;
+}
+if (ulster == 'yes') {
+    ayes += unionists * opp_turnout;
+} else if (ulster == 'no') {
+    opposition += unionists;
+}
+ayes = Math.round(ayes);
+var noes = Math.round(opposition * opp_turnout) + rebels;
+var majority = ayes - noes;
+
+if (count) {
+    var libs = Q.alliance_formed ? 'The Alliance' : 'The Liberals';
+    var words = {yes: 'will vote with us', abstain: 'will abstain', no: 'will vote against'};
+    var parts = [];
+    if (Q.lib_mps > 0 && (lib == 'yes' || Q.govt_type == 3)) {
+        parts.push(libs + ' ' + words[lib] + '.');
+    }
+    if (ulster == 'yes' || Q.govt_type == 2) {
+        parts.push('The Ulster Unionists ' + words[ulster] + '.');
+    }
+    Q.div_partner_text = parts.join(' ');
+    Q.div_partner_n = parts.length ? 1 : 0;
+    Q.div_proj_rebels = rebels;
+    Q.div_proj_abstain = abstain;
+    Q.div_proj_majority = majority;
+    Q.div_proj_deficit = -majority;
+    return;
+}
+
+Q.div_ayes = ayes;
+Q.div_noes = noes;
+Q.div_majority = majority;
+Q.div_deficit = -majority;
+Q.div_rebels = rebels;
+Q.div_abstain = abstain;
+Q.divisions += 1;
+if (mode == 'deal') {
+    Q.resources -= 1;
+    Q.partner_dissent -= 1;
+}
+if (majority > 0) {
+    Q.div_passed = 1;
+    Q['bill_' + k] = 2;
+    Q['bill_' + k + '_due'] = Q.time + (Q['bill_' + k + '_fast'] ? 1 : d.committee);
+    if (mode == 'concede') {
+        Q['bill_' + k + '_watered'] = 1;
+        Q[d.champion + '_dissent'] += 3;
+        Q[d.faction + '_dissent'] -= 3;
+    } else if (mode == 'confidence') {
+        Q.rebellion += 1;
+        Q[d.faction + '_dissent'] += 4;
+        if (!Q.achievement_confidence) {
+            this.achieve('confidence');
+        }
+    }
+    if (majority < 10) {
+        // a narrow escape still looks bad
+        Q.thatcher_rating -= 1;
+    }
+} else {
+    Q.div_passed = 0;
+    Q.bills_defeated += 1;
+    Q['bill_' + k] = 0;
+    Q['bill_' + k + '_wait'] = Q.time + 12;
+    Q.thatcher_rating -= 4;
+    Q.rebellion += 1;
+    Q[d.champion + '_dissent'] += 4;
+    if (mode == 'confidence') {
+        Q.thatcher_rating -= 5;
+        Q.rebellion += 2;
+    }
+}
+!}
+
+# Counts the votes in a Second Reading division. Called by the bills' events.

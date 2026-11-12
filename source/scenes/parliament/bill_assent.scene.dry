@@ -1,0 +1,16 @@
+title: Royal Assent
+on-arrival: {!
+// Adds bill Q.assent_key to the statute book.
+this._runActions(this.game.scenes['bill_defs'].onArrival);
+var d = Q.bill_defs[Q.assent_key];
+var name = d.act + ' ' + Q.year;
+Q.acts_list = Q.acts_list ? Q.acts_list + ', ' + name : name;
+Q.acts_n += 1;
+// a government that gets its programme through looks like it knows what it's doing
+Q.thatcher_rating += 1;
+if (Q.acts_n >= 5 && !Q.achievement_statute_book) {
+    this.achieve('statute_book');
+}
+!}
+
+# Called by each bill's Royal Assent event.
