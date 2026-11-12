@@ -29,6 +29,7 @@ tags: event
 view-if: con_in_government = 1 and time >= 43 and time <= 45 and riots = 1 and unemployment >= 9
 new-page: true
 on-arrival: riots = 2; thatcher_rating -= 3; wet_dissent += 4
+face-image: img/events/toxteth.jpg
 
 = Toxteth
 

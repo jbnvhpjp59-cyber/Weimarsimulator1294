@@ -3,6 +3,7 @@ tags: event
 view-if: con_in_government = 1 and unemployment >= 7.5 and unemployment_2m = 0
 new-page: true
 on-arrival: unemployment_2m = 1; thatcher_rating -= 3; wet_dissent += 5; rebellion += 1
+face-image: img/events/two_million.jpg
 
 = Two Million Unemployed
 
@@ -14,6 +15,7 @@ tags: event
 view-if: con_in_government = 1 and unemployment >= 11.5 and unemployment_3m = 0
 new-page: true
 on-arrival: unemployment_3m = 1; thatcher_rating -= 4; wet_dissent += 6; rebellion += 2; c2_con -= 2; de_con -= 2
+face-image: img/events/three_million.jpg
 
 = Three Million Unemployed
 

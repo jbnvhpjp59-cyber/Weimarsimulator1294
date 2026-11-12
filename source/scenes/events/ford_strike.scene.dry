@@ -4,6 +4,7 @@ view-if: time >= 10 and time <= 11 and pay_norm <= 5 and autumn_election_1978 = 
 max-visits: 1
 new-page: true
 on-arrival: strike_wave += 2; labour_credibility -= 3
+face-image: img/events/ford_strike.jpg
 
 = The Ford Strike
 

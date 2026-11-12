@@ -71,7 +71,7 @@ view-if: con_in_government = 0 and defeated_once = 1 and strike_wave >= 5 and la
 max-visits: 1
 new-page: true
 on-arrival: labour_winter_seen = 1; labour_credibility -= 6; lab_leader_rating -= 6; union_backlash += 6
-face-image: img/events/winter_of_discontent.jpg
+face-image: img/events/winter_of_discontent_2.jpg
 
 = Another Winter of Strikes
 
