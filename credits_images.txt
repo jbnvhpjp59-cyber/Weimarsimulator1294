@@ -281,6 +281,10 @@ img/cards/biffen.jpg
 img/cards/stevas.jpg
   Norman St John-Stevas. Used with permission.
 
+img/party.png
+  The Conservative Party's torch logo, as used in the 1980s.
+  The logo belongs to the Conservative Party and is not covered by the game's licence.
+
 All photographs were cropped and resized for the game. Adaptations of CC BY-SA images are
 shared under the same licence as the original.
 

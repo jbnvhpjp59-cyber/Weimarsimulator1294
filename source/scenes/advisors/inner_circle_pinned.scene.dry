@@ -2,6 +2,6 @@ title: Your Inner Circle
 view-if: difficulty < 0 or shuffle_leadership_enabled = 1
 new-page: true
 is-pinned-card: true
-card-image: img/party.svg
+card-image: img/party.png
 on-arrival: month_actions += 1; inner_circle_timer = 6
 go-to: inner_circle.rm_main

@@ -1,7 +1,7 @@
 title: The Shadow Cabinet
 new-page: true
 is-card: true
-card-image: img/party.svg
+card-image: img/party.png
 tags: party_affairs
 view-if: shadow_cabinet_timer <= 0 and con_in_government = 0
 on-arrival: shadow_cabinet_timer = 4; month_actions += 1

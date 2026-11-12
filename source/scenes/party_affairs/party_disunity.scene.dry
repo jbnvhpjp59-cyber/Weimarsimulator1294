@@ -1,7 +1,7 @@
 title: Party Disunity
 new-page: true
 is-card: true
-card-image: img/party.svg
+card-image: img/party.png
 tags: party_affairs
 view-if: party_disunity_timer <= 0 and (dissent >= 0.25 or wet_dissent > 40 or dry_dissent > 40 or right_dissent > 40)
 on-arrival: party_disunity_timer = 4; month_actions += 1

@@ -2,7 +2,7 @@ title: Your Inner Circle
 new-page: true
 is-card: true
 tags: party_affairs
-card-image: img/party.svg
+card-image: img/party.png
 view-if: inner_circle_timer <= 0 and difficulty >= 0
 on-arrival: month_actions += 1; inner_circle_timer = 8
 go-to: rm_main
