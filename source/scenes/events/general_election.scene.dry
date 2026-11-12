@@ -163,7 +163,7 @@ go-to: formation
 title: Form a Conservative government.
 view-if: con_mps >= majority_line
 on-arrival: result_type = 1; govt_type = 1
-go-to: game_over if final_election_reached = 1; taking_office if final_election_reached = 0
+go-to: game_over if final_election_reached = 1; second_term if final_election_reached = 0 and was_in_government = 1; taking_office if final_election_reached = 0 and was_in_government = 0
 
 @unionist_deal
 title: Govern with the support of the Ulster Unionists.
@@ -172,7 +172,7 @@ unavailable-subtitle: Conservatives + Unionists: [+ con_plus_ni +] seats. Our re
 view-if: con_mps < majority_line and largest_party == "con" and con_plus_ni >= majority_line
 choose-if: uup_relation >= 50
 on-arrival: result_type = 2; govt_type = 2; partner_dissent = 0
-go-to: game_over if final_election_reached = 1; taking_office if final_election_reached = 0
+go-to: game_over if final_election_reached = 1; second_term if final_election_reached = 0 and was_in_government = 1; taking_office if final_election_reached = 0 and was_in_government = 0
 achievement: ulster_deal
 
 @liberal_deal
@@ -189,17 +189,17 @@ The price of support, vote by vote, is a real move towards proportional represen
 
 @liberal_deal_accept
 on-arrival: result_type = 3; govt_type = 3; partner_dissent = 0; electoral_reform_promise = 1; right_dissent += 10; dry_dissent += 5
-go-to: game_over if final_election_reached = 1; taking_office if final_election_reached = 0
+go-to: game_over if final_election_reached = 1; second_term if final_election_reached = 0 and was_in_government = 1; taking_office if final_election_reached = 0 and was_in_government = 0
 achievement: lib_con
 
 @minority
 title: Form a minority government and dare the others to bring it down.
 view-if: con_mps < majority_line and largest_party == "con"
 on-arrival: result_type = 4; govt_type = 4; partner_dissent = 2
-go-to: game_over if final_election_reached = 1; taking_office if final_election_reached = 0
+go-to: game_over if final_election_reached = 1; second_term if final_election_reached = 0 and was_in_government = 1; taking_office if final_election_reached = 0 and was_in_government = 0
 
 @concede
 title: Concede defeat.
 view-if: largest_party == "lab"
 on-arrival: result_type = 5; con_in_government = 0; govt_type = 0
-go-to: game_over if final_election_reached = 1; back_to_opposition if final_election_reached = 0
+go-to: game_over if final_election_reached = 1 or was_in_government = 1 or defeated_once = 1; back_to_opposition if final_election_reached = 0 and was_in_government = 0 and defeated_once = 0

@@ -23,7 +23,7 @@ Q.lab_leader_rating -= 0.003 * Q.labour_civil_war;
 
 // the slow drain to the SDP
 var cap = Q.benn_won ? 33 : 28;
-if (Q.alliance_formed && Q.sdp_lab_mps < cap && Q.lab_mps > 0) {
+if (Q.alliance_formed && Q.sdp_lab_mps < cap && Q.lab_mps > 0 && !Q.second_term) {
     var n = Math.floor(Math.random() * 2 * Q.labour_civil_war / 40);
     n = Math.min(n, cap - Q.sdp_lab_mps);
     if (n > 0) {

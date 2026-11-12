@@ -5,6 +5,10 @@ Q.con_in_government = 1;
 Q.prime_minister = "Thatcher";
 Q.pm_party = "Conservative";
 Q.term_start_time = Q.time;
+Q.terms_won += 1;
+if (Q.defeated_once) {
+    this.achieve('second_chance');
+}
 Q.months_in_office = 0;
 Q.budget = Q.starting_budget;
 Q.rebellion = 0;

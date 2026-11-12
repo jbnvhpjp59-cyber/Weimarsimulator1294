@@ -1,0 +1,100 @@
+title: A Second Term
+new-page: true
+on-arrival: {!
+Q.second_term = 1;
+Q.second_term_start = Q.time;
+Q.terms_won += 1;
+// a smaller honeymoon than in 1979, and the party is grateful for a while
+Q.thatcher_rating += 4;
+for (var c of Q.classes) {
+    Q[c + '_con'] += 0.5;
+}
+Q.rebellion = Math.max(0, Q.rebellion - 3);
+Q.cabinet_revolt = Math.max(0, Q.cabinet_revolt - 3);
+Q.advisor_action_timer = 0;
+Q.lab_leader_rating -= 3;
+// the achievements for re-election are won now, not at the end of the game
+this._runActions(this.game.scenes['reelection_honours'].onArrival);
+!}
+face-image: img/events/thatcher.jpg
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/i_was_glad.mp3'); } !}
+
+= A Second Term
+
+[? if govt_type = 1 and con_majority >= 100 : A landslide: a majority of [+ con_majority +]. ?][? if govt_type = 1 and con_majority < 100 : Re-elected, with a majority of [+ con_majority +]. ?][? if govt_type >= 2 : Re-elected, but without a majority of our own. ?] No Conservative government has won a second term since 1959. You return to Downing Street with the authority that only a second victory brings, and the next Parliament could last until [+ next_election_month : month +] [+ next_election_year +].
+
+[? if bills_introduced >= 1 : Any bills that fell at the dissolution can be brought back in the new session. ?]
+
+The reshuffle can't wait. The question is whether to remake the Cabinet in your own image or to keep the team that won.
+
+- @remake: Lawson to the Treasury, Howe to the Foreign Office, Brittan to the Home Office.
+- @keep_team: Keep the team that won.
+
+@remake
+subtitle: The dries take the great offices. The wets lose their last big beast.
+on-arrival: {!
+var POSTS = ['chancellor', 'employment_secretary', 'industry_secretary', 'home_secretary', 'foreign_secretary',
+             'environment_secretary', 'defence_secretary', 'education_secretary', 'health_secretary'];
+var DRY = {Howe: 1, Lawson: 1, Pym: 0, Prior: 0, Tebbit: 1, Joseph: 1, Jenkin: 1, Walker: 0, Whitelaw: 0, Brittan: 1,
+           Carrington: 0, Ridley: 1, Heseltine: 0, Nott: 1, Carlisle: 0, Boyson: 1, Fowler: 1, Young: 0};
+var CAND = {chancellor: ['Howe', 'Lawson', 'Pym'], employment_secretary: ['Prior', 'Tebbit'],
+            industry_secretary: ['Joseph', 'Jenkin', 'Walker'], home_secretary: ['Whitelaw', 'Brittan'],
+            foreign_secretary: ['Carrington', 'Pym', 'Howe'], environment_secretary: ['Heseltine', 'Ridley'],
+            defence_secretary: ['Pym', 'Nott', 'Heseltine'], education_secretary: ['Carlisle', 'Joseph', 'Boyson'],
+            health_secretary: ['Jenkin', 'Fowler', 'Young']};
+var dryVar = function (post) { return post == 'chancellor' ? 'chancellor_dry' : post.replace('_secretary', '_dry'); };
+var holder = function (name) {
+    for (var p of POSTS) {
+        if (Q[p] == name) {
+            return p;
+        }
+    }
+    return null;
+};
+// put a minister in a post; whoever held it takes the minister's old job, if any
+var put = function (post, name) {
+    var from = holder(name);
+    var old = Q[post];
+    Q[post] = name;
+    Q[dryVar(post)] = DRY[name] ? 1 : 0;
+    if (from && from != post) {
+        Q[from] = old;
+        Q[dryVar(from)] = DRY[old] ? 1 : 0;
+    }
+};
+// a minister leaves the Cabinet; the post goes to someone not already in it
+var drop = function (name) {
+    var p = holder(name);
+    if (!p) {
+        return;
+    }
+    var held = POSTS.map(function (x) { return Q[x]; });
+    var pick = CAND[p].filter(function (n) { return held.indexOf(n) < 0 && n != 'Pym' && n != 'Whitelaw'; })[0];
+    if (!pick) {
+        pick = Object.keys(DRY).filter(function (n) { return held.indexOf(n) < 0 && DRY[n] && n != 'Pym' && n != 'Whitelaw'; })[0];
+    }
+    put(p, pick);
+};
+put('chancellor', 'Lawson');
+put('foreign_secretary', 'Howe');
+put('home_secretary', 'Brittan');
+drop('Whitelaw');
+drop('Pym');
+Q.whitelaw_lords = 1;
+Q.pym_sacked = 1;
+Q.wet_dissent += 6;
+Q.dry_dissent -= 5;
+Q.heath_hostility += 3;
+!}
+call: cabinet_recalc
+go-to: root
+
+Nigel Lawson goes to the Treasury, Sir Geoffrey Howe to the Foreign Office and Leon Brittan to the Home Office. Willie Whitelaw takes a peerage and becomes Lord President of the Council and Leader of the House of Lords, still your deputy. Francis Pym is sacked. He takes it badly, and before long he says so in public.
+
+@keep_team
+subtitle: The loyalists are content. The dries wanted more.
+on-arrival: loyalist_dissent -= 3; dry_dissent += 3
+call: cabinet_recalc
+go-to: root
+
+Nobody is sacked and nobody is promoted beyond their dreams. The Cabinet that won the election will govern for the next one, and the Reshuffle card is there if you change your mind.

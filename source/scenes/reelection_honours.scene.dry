@@ -1,0 +1,37 @@
+title: Re-election Honours
+on-arrival: {!
+// The achievements for winning re-election. Awarded when the government
+// wins a second term, and again if it wins the last election of the game.
+this.achieve('re_elected');
+if (Q.result_type == 1 && Q.con_majority >= 100) {
+    this.achieve('landslide');
+}
+if (Q.result_type == 1 && Q.con_majority >= 144) {
+    this.achieve('big_majority');
+}
+if (Q.wet_dissent < 20 && Q.dry_dissent < 20) {
+    this.achieve('one_nation');
+}
+if (Q.inflation < 5 && Q.union_power <= 40 && Q.privatisations >= 3 && Q.right_to_buy_progress >= 3) {
+    this.achieve('thatcherism');
+}
+if (Q.u_turn == -1) {
+    this.achieve('lady_for_turning');
+}
+if (Q.unemployment < 8) {
+    this.achieve('full_employment');
+}
+if (Q.nhs_funding >= 2 && !Q.cprs_defended) {
+    this.achieve('nhs_safe');
+}
+if (Q.historical_mode) {
+    this.achieve('tina');
+} else if (Q.difficulty >= 1) {
+    this.achieve('iron_lady');
+}
+if (!Q.unemployment_3m && Q.unemployment < 11) {
+    this.achieve('never_three_million');
+}
+!}
+
+# Called by second_term and game_over.

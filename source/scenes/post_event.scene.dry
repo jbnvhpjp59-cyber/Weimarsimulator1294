@@ -134,6 +134,7 @@ if (Q.month_actions >= 1) {
     // (in opposition, Labour runs it: rates stay put and an incomes policy
     // brings strikes back every winter)
     if (Q.con_in_government || Q.n_elections >= 1) {
+        var u_start = Q.unemployment;
         if (Q.con_in_government) {
             Q.months_in_office = Q.time - Q.term_start_time;
         } else if ((Q.month >= 11 || Q.month <= 2) && Q.pay_norm <= 5) {
@@ -207,6 +208,16 @@ if (Q.month_actions >= 1) {
         }
         if (Q.inflation < 1.5) {
             Q.inflation = 1.5;
+        }
+        // past 12%, each month's rise in the count slows sharply: the
+        // discouraged stop registering, and some leave the labour market
+        if (Q.unemployment > u_start && Q.unemployment > 12) {
+            Q.unemployment = u_start + (Q.unemployment - u_start) * (Q.unemployment > 14 ? 0.2 : 0.4);
+        }
+        // from 1982, as inflation falls the markets and the Bank bring rates
+        // down whether or not the Chancellor says so
+        if (Q.year >= 1982 && Q.inflation < 6 && Q.interest_rate > Q.inflation + 6) {
+            Q.interest_rate -= 0.25;
         }
         if (Q.unemployment < 3) {
             Q.unemployment = 3;
