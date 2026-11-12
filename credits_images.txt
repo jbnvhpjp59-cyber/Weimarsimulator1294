@@ -26,7 +26,7 @@ img/*/eec_summit_1981.jpg
   Licence: CC0
   Source: https://commons.wikimedia.org/wiki/File%3AEuropese_Raad_in_Maastricht%2C_27a_Van_Agt_e.a._tijdens_conferentie%2C_28a_en_29a_overzicht_tijdens_conferentie_met_links_Thatcher%2C_Bestanddeelnr_931-3910.jpg
 
-img/*/reagan_thatcher.jpg
+img/*/reagan_thatcher.jpg, img/*/cabinet.jpg
   Reagan-Thatcher cabinet talks.jpg
   Author: White House Photographic Office
   Licence: Public domain
@@ -296,6 +296,10 @@ img/cards/public_pay.jpg
 img/party.png
   The Conservative Party's torch logo, as used in the 1980s.
   The logo belongs to the Conservative Party and is not covered by the game's licence.
+
+img/events/labour_isnt_working.jpg
+  The "Labour Isn't Working" poster, by Saatchi & Saatchi for the Conservative Party (1978).
+  It is not covered by the game's licence.
 
 All photographs were cropped and resized for the game. Adaptations of CC BY-SA images are
 shared under the same licence as the original.

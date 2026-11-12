@@ -1,7 +1,7 @@
 title: The Cabinet Room
 is-pinned-card: true
 tags: advisor
-card-image: img/cabinet.svg
+card-image: img/cards/cabinet.jpg
 view-if: (difficulty < 0 or cabinet_enabled = 1) and con_in_government = 1
 on-arrival: last_cabinet_action = 1
 new-page: true

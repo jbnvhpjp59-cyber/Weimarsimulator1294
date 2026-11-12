@@ -3,6 +3,7 @@ tags: event
 view-if: time >= 8 and time <= 9 and saatchi_hired = 1
 max-visits: 1
 new-page: true
+face-image: img/events/labour_isnt_working.jpg
 
 = Labour Isn't Working
 

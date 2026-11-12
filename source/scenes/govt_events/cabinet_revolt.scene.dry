@@ -2,6 +2,7 @@ title: Revolt in Cabinet
 tags: event
 view-if: con_in_government = 1 and cabinet_revolt >= 8
 new-page: true
+face-image: img/events/cabinet.jpg
 
 = Revolt in Cabinet
 
