@@ -293,6 +293,21 @@ img/cards/law_order.jpg
 img/cards/public_pay.jpg
   The Public Sector Pay card. Used with permission. Photograph: Peter Brooker / Rex Features.
 
+img/events/winter_of_discontent_2.jpg
+  Rubbish in Leicester Square (the "Another Winter of Strikes" event). Used with permission. Photograph: Reportdigital.
+
+img/events/two_million.jpg
+  A queue at an unemployment benefit office (the two million unemployed event). Used with permission. Photograph: Reportdigital.
+
+img/events/three_million.jpg
+  A queue outside a DHSS office (the three million unemployed event). Used with permission. Photograph: Reportdigital.
+
+img/events/toxteth.jpg
+  The Toxteth riots, 1981. Used with permission. Photograph: Reportdigital.
+
+img/events/ford_strike.jpg
+  A pay protest (the Ford strike event). Used with permission. Photograph: Reportdigital.
+
 img/party.png
   The Conservative Party's torch logo, as used in the 1980s.
   The logo belongs to the Conservative Party and is not covered by the game's licence.
@@ -307,7 +322,7 @@ The following images were supplied for the game. Their rights remain with their 
 they are not covered by the game's licence and may not be reused without permission.
 
 img/events/winter_of_discontent.jpg
-  Rubbish in the streets during the Winter of Discontent (the Winter of Discontent events).
+  Rubbish in the streets during the Winter of Discontent (the Winter of Discontent event).
 
 img/events/iranian_embassy.jpg
   The end of the Iranian Embassy siege, May 1980.
