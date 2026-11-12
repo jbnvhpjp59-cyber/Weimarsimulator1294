@@ -3,6 +3,7 @@ tags: event
 priority: 3
 view-if: con_in_government = 1 and in_campaign = 0 and months_to_election > 3 and ((govt_type >= 2 and partner_dissent >= 8) or (govt_type = 1 and con_majority < 10 and rebellion >= 8))
 new-page: true
+face-image: img/events/commons_1970s.jpg
 
 = A Vote of No Confidence
 

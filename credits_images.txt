@@ -1,6 +1,6 @@
 Images used in Conservatism: An Alternate History
 Images from Wikimedia Commons are used under the licence shown.
-The adviser portraits listed at the end are used with permission.
+The portraits and photographs listed at the end are used with permission.
 
 img/*/thatcher.jpg
   Margaret Thatcher stock portrait (cropped).jpg
@@ -115,12 +115,6 @@ img/*/downing_1979.jpg
   Author: Nigel Thompson
   Licence: CC BY-SA 2.0
   Source: https://commons.wikimedia.org/wiki/File%3A10_Downing_Street_-_the_famous_front_door%2C_1979_-_geograph.org.uk_-_6873810.jpg
-
-img/*/commons_chamber.jpg
-  House of Commons Chamber 1.png
-  Author: UK Parliament
-  Licence: CC BY 3.0
-  Source: https://commons.wikimedia.org/wiki/File%3AHouse_of_Commons_Chamber_1.png
 
 img/*/bank_1983.jpg
   Saturday in the City, 1983, Threadneedle Street and Bank of England - geograph.org.uk - 4645960.jpg
@@ -248,9 +242,9 @@ img/map.jpg
   Licence: Public domain, CC BY 4.0
   Source: https://commons.wikimedia.org/wiki/File%3AOrdnance_Survey_Great_Britain_Sheet_2%2C_Published_1933.jpg
 
-Portraits used with permission
+Images used with permission
 
-The following card portraits are used with the permission of their rights holders.
+The following portraits and photographs are used with the permission of their rights holders.
 They are not covered by the game's licence or by any Creative Commons licence,
 and may not be reused without permission.
 
@@ -280,6 +274,24 @@ img/cards/biffen.jpg
 
 img/cards/stevas.jpg
   Norman St John-Stevas. Used with permission.
+
+img/cards/commons_1970s.jpg, img/events/commons_1970s.jpg
+  The Commons deck and cards, and the no-confidence events. Used with permission.
+
+img/events/westminster.jpg
+  The Palace of Westminster: the dissolution, leadership challenge and defection events. Used with permission.
+
+img/cards/budget_box.jpg, img/events/budget_box.jpg
+  The Budget card and the Budget events. Used with permission.
+
+img/cards/spending.jpg
+  The Public Spending card. Used with permission.
+
+img/cards/law_order.jpg
+  The Law and Order and Northern Ireland cards. Used with permission.
+
+img/cards/public_pay.jpg
+  The Public Sector Pay card. Used with permission. Photograph: Peter Brooker / Rex Features.
 
 img/party.png
   The Conservative Party's torch logo, as used in the 1980s.

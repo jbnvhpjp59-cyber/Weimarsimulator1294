@@ -4,6 +4,7 @@ priority: 3
 view-if: con_in_government = 1 and in_campaign = 0 and time - leadership_challenge_time >= 12 and ((thatcher_rating < 20 and dissent >= 0.35) or (rebellion >= 10 and thatcher_rating < 40) or falklands = 4)
 new-page: true
 on-arrival: leadership_challenge_time = time
+face-image: img/events/westminster.jpg
 
 = A Leadership Challenge
 

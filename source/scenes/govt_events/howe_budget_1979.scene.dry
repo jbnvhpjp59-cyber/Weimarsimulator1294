@@ -3,7 +3,7 @@ tags: event
 view-if: con_in_government = 1 and howe_budget_done = 0 and months_in_office >= 1 and months_in_office <= 3
 new-page: true
 on-arrival: howe_budget_done = 1; budget_timer = 9
-face-image: img/events/howe.jpg
+face-image: img/events/budget_box.jpg
 
 = The First Budget
 

@@ -3,6 +3,7 @@ tags: event
 view-if: time >= 15 and time <= 16 and devolution_failed = 1 and no_confidence_won = 0 and months_to_election > 2
 max-visits: 1
 new-page: true
+face-image: img/events/commons_1970s.jpg
 
 = The SNP Moves Against Callaghan
 

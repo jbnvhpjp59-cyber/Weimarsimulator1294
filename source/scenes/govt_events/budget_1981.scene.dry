@@ -4,7 +4,7 @@ view-if: con_in_government = 1 and time >= 39 and time <= 40 and budget_1981_see
 max-visits: 1
 new-page: true
 on-arrival: budget_1981_seen = 1; budget_timer = 9
-face-image: img/events/howe.jpg
+face-image: img/events/budget_box.jpg
 
 = The 1981 Budget
 
