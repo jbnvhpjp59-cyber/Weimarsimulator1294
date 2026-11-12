@@ -515,6 +515,8 @@ Q.voice_coached = 0;
 Q.minis = 0;
 // extra odds for the task force (Nott's action)
 Q.falklands_bonus = 0;
+// a lost war brings one leadership challenge, not one every year
+Q.falklands_challenge = 0;
 // state sales: asset_sales counts the share sales on the Industry card;
 // privatisations also counts British Telecom, which needs an Act
 Q.asset_sales = 0;

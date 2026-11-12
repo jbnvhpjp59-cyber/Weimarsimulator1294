@@ -15,6 +15,7 @@ on-arrival: immigration_timer = 6; month_actions += 1
 - @boat_people: Take in Vietnamese boat people.
 - @refuse_boat_people: Refuse to take more boat people.
 - @race_relations: Fund community projects in the inner cities.
+- @firm_line: Promise firm and fair immigration control.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -58,3 +59,9 @@ subtitle: -0.5 budget. The wets approve; the right calls it a waste.
 on-arrival: race_relations = 1; budget -= 0.5; wet_dissent -= 3; right_dissent += 2; de_con += 1*(1-dissent); c1_lib -= 1
 
 Money from the Urban Programme goes to community centres, youth projects and the Commission for Racial Equality. [? if riots >= 1 : It is the least that Lord Scarman will expect. ?]
+
+@firm_line
+subtitle: The right is reassured. The wets and the Liberals wince.
+on-arrival: right_dissent -= 2; wet_dissent += 2; c2_con += 0.5*(1-dissent); lib_relation -= 1
+
+[+ home_secretary +] tells the party conference that control is firm and that it will stay firm. The numbers settling here each year change little, and the speech is mostly for the hall.

@@ -43,4 +43,4 @@ on-arrival: de_con += 3*(1-dissent) if policy_law_order or policy_right_to_buy; 
 @liberal_seats
 on-arrival: ab_lib -= 2; c1_lib -= 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent); lib_relation -= 3
 
-A vote for the Liberals, our leaflets say, is a vote to keep Callaghan in Downing Street. David Steel doesn't appreciate it.
+[? if con_in_government = 0 : A vote for the Liberals, our leaflets say, is a vote to keep [+ prime_minister +] in Downing Street. ?][? if con_in_government = 1 : A vote for the [+ lib_name +] candidate, our leaflets say, is a vote to let [+ lab_leader +] into Downing Street. ?] David Steel doesn't appreciate it.

@@ -205,6 +205,22 @@ Support for free-market economics: [+ economic_liberalism_disp +]%
 Trust in Labour on the economy: [+ labour_credibility_disp +]%
 
 @polls
+on-arrival: {!
+// the seat model's projection, region by region
+var parts = Q.alliance_formed ? 'All' : 'Lib';
+var lines = [];
+for (var r of (Q.region_results || [])) {
+    var s = r.name + ': Con ' + r.con + ', Lab ' + r.lab + ', ' + parts + ' ' + r.lib;
+    if (r.nat_name) {
+        s += ', ' + (r.nat_name == 'snp' ? 'SNP' : 'Plaid') + ' ' + r.nat;
+    }
+    lines.push(s);
+}
+for (var i = 0; i < 11; i++) {
+    Q['region_line_' + (i + 1)] = lines[i] || '';
+}
+Q.region_lines_n = lines.length;
+!}
 
 = Opinion Poll
 
@@ -237,3 +253,27 @@ White-collar (C1): Con [+ c1_con_display +]%, Lab [+ c1_lab_display +]%, Lib [+ 
 Skilled manual (C2): Con [+ c2_con_display +]%, Lab [+ c2_lab_display +]%, Lib [+ c2_lib_display +]%
 
 Semi/unskilled & pensioners (DE): Con [+ de_con_display +]%, Lab [+ de_lab_display +]%, Lib [+ de_lib_display +]%
+
+**Projected seats by region**
+
+[? if region_lines_n >= 1 : [+ region_line_1 +] ?]
+
+[? if region_lines_n >= 2 : [+ region_line_2 +] ?]
+
+[? if region_lines_n >= 3 : [+ region_line_3 +] ?]
+
+[? if region_lines_n >= 4 : [+ region_line_4 +] ?]
+
+[? if region_lines_n >= 5 : [+ region_line_5 +] ?]
+
+[? if region_lines_n >= 6 : [+ region_line_6 +] ?]
+
+[? if region_lines_n >= 7 : [+ region_line_7 +] ?]
+
+[? if region_lines_n >= 8 : [+ region_line_8 +] ?]
+
+[? if region_lines_n >= 9 : [+ region_line_9 +] ?]
+
+[? if region_lines_n >= 10 : [+ region_line_10 +] ?]
+
+[? if region_lines_n >= 11 : [+ region_line_11 +] ?]

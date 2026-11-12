@@ -20,7 +20,7 @@ Labour has no majority. Every vote in the Commons depends on the Liberals, the n
 @liberals
 on-arrival: lib_relation += 8 if lib_lab_pact = 0; lib_relation += 4 if lib_lab_pact = 1; wet_dissent -= 2; dry_dissent += 2
 
-[? if lib_lab_pact : While the Pact lasts, Steel is polite but committed to Callaghan. ?][? if not lib_lab_pact : With the Pact over, Steel is free to listen. ?]
+[? if lib_lab_pact : While the Pact lasts, Steel is polite but committed to [+ prime_minister +]. ?][? if not lib_lab_pact : With the Pact over, Steel is free to listen. ?]
 
 @unionists
 on-arrival: uup_relation += 8; uup_relation += 4 if neave_dead = 0; right_dissent -= 2
