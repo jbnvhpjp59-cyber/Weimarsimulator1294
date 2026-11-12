@@ -10,7 +10,7 @@ on-arrival: no_confidence_timer = 6; month_actions += 1
 
 "That this House has no confidence in Her Majesty's Government."
 
-If the motion passes, Callaghan must call an election. If it fails, we look foolish and the government looks stronger. The arithmetic depends on the minor parties.
+If the motion passes, [+ prime_minister +] must call an election. If it fails, we look foolish and the government looks stronger. The arithmetic depends on the minor parties.
 
 [? if lib_lab_pact : While the Lib-Lab Pact holds, the Liberals will vote with the government. ?]
 
@@ -81,11 +81,11 @@ face-image: img/events/commons_1970s.jpg
 
 The tellers come to the table, and the Opposition whip is on the right-hand side: we have won. For the first time since 1924, a government has been defeated on a motion of confidence.
 
-Callaghan rises, says the government will take its case to the country, and sits down. The general election is set for [+ next_election_month : month +] [+ next_election_year +].
+[+ prime_minister +] rises, says the government will take its case to the country, and sits down. The general election is set for [+ next_election_month : month +] [+ next_election_year +].
 
 @failed
 on-arrival: no_confidence_lost += 1; thatcher_rating -= 4; lab_leader_rating += 2; loyalist_dissent += 4; wet_dissent += 4; labour_credibility += 2
 
 = Ayes [+ nc_ayes +], Noes [+ nc_noes +]
 
-The government survives. Callaghan thanks the House with a smile, and the papers ask whether the Opposition can count. [? if nc_unionist_ayes < 8 : We needed more of the Ulster Unionists. ?][? if lib_lab_pact : While the Pact lasts, the Liberals were never going to help. ?]
+The government survives. [+ prime_minister +] thanks the House with a smile, and the papers ask whether the Opposition can count. [? if nc_unionist_ayes < 8 : We needed more of the Ulster Unionists. ?][? if lib_lab_pact : While the Pact lasts, the Liberals were never going to help. ?]

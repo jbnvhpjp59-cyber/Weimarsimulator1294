@@ -14,6 +14,7 @@ on-arrival: energy_timer = 5; month_actions += 1
 - @bp_shares: Sell part of the state's stake in BP.
 - @nuclear: Order a programme of nuclear power stations.
 - @gas_prices: Raise gas and electricity prices to market levels.
+- @coal_investment: Fund the Coal Board's investment in new pits.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -45,3 +46,9 @@ subtitle: +1 budget. Bills rise.
 on-arrival: gas_prices = 1; budget += 1; inflation += 0.5; de_con -= 2; c2_con -= 1; dry_dissent -= 2; wet_dissent += 2
 
 Gas and electricity prices will rise by 10% a year above inflation until they reflect what the fuel is worth. The nationalised boards start to make a profit, and the bills arrive just as winter does.
+
+@coal_investment
+subtitle: -0.5 budget. The miners are calmer; the dries see money poured down a shaft.
+on-arrival: budget -= 0.5; num_mood -= 6; ru_yorkshire -= 0.2; ru_wales -= 0.1; wet_dissent -= 1; dry_dissent += 2
+
+The Coal Board gets another year's investment for new faces at Selby and in the Vale of Belvoir. The NUM takes the money and promises nothing.

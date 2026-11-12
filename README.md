@@ -30,15 +30,15 @@ Like the original, each month you play one card from your hand. Historical and c
 | Foreign Affairs | The EEC rebate, compromise with Europe, the special relationship |
 | Defence | The defence review (dry Defence Secretary only; it invites the Falklands), Trident, HMS Endurance, NATO spending |
 | Northern Ireland, Public Sector Pay | Security vs. talks, cash limits vs. peace |
-| The Health Service | Funding above inflation, prescription charges, contracting out, private insurance, the Griffiths managers |
+| The Health Service | Funding above inflation, prescription charges, contracting out, private insurance, the Griffiths managers, money for waiting lists |
 | Education and Training | Assisted places, a bill for parental choice, university cuts, education vouchers, the Youth Training Scheme |
 | Social Security | Breaking the pensions-earnings link, taxing benefits, statutory sick pay, child benefit, fraud drives |
-| The Common Market | The Exchange Rate Mechanism, farm policy reform, the "lamb war", fisheries, the single market |
-| Immigration and Nationality | The British Nationality Bill, immigration rules, the Vietnamese boat people, inner-city projects |
-| Energy and North Sea Oil | Oil taxes, selling BP shares, a nuclear programme (which weakens the miners), market energy prices |
+| The Common Market | The Exchange Rate Mechanism, farm policy reform, the "lamb war", fisheries, the single market, keeping the peace at the European Council |
+| Immigration and Nationality | The British Nationality Bill, immigration rules, the Vietnamese boat people, inner-city projects, promising firm control |
+| Energy and North Sea Oil | Oil taxes, selling BP shares, a nuclear programme (which weakens the miners), market energy prices, investment in new pits |
 | The Union Leaders | Invite Len Murray to Downing Street, freeze the TUC out, court the moderate union leaders, keep Joe Gormley sweet or let Scargill do the talking |
 | Regional Policy | Cutting or restoring regional aid, the Scottish and Welsh Development Agencies, a Japanese car plant for the North East |
-| Local Government | Rate Support Grant cuts, bills for rate-capping and for abolishing the GLC, abolishing the rates, the Docklands, tendering |
+| Local Government | Rate Support Grant cuts or a generous settlement, bills for rate-capping and for abolishing the GLC, abolishing the rates, the Docklands, tendering |
 | Reshuffle | Move any minister, purge the wets department by department, bring them back, promote loyalists |
 | Government Business (Commons) | Whip the rebels, guillotine a bill in committee, keep partners on side |
 
@@ -62,7 +62,7 @@ The Commons has time for three major bills at once. The Government Business card
 
 **The economy** runs every month. Interest rates trade inflation against jobs and the pound. The 1979 oil shock and the 1980–81 world recession hit, and recovery comes from 1982. Budget deficits feed inflation, and every January brings North Sea revenue, benefit costs and revenue from growth. Voters respond to unemployment, inflation, mortgage rates, growth and right-to-buy sales.
 
-**The regions.** Each of the seat model's eleven regions has its own unemployment rate, shown in the Industry tab. As the recession deepens, the pattern shifts from the old one (the North, Scotland and Wales far above the South) to the 1980s one, with the West Midlands and the North West hit hardest. Policy moves it too: closures, pit closures and the steel settlement push up unemployment in the industrial regions, the strong pound hurts manufacturing, and bail-outs, regional aid, the development agencies, Docklands and a Minister for Merseyside pull it down. A region where unemployment has risen faster than the national rate swings against the governing party. On election night, a table shows the seats won in each region, the change since the last election, and each region's unemployment.
+**The regions.** Each of the seat model's eleven regions has its own unemployment rate, shown in the Industry tab. As the recession deepens, the pattern shifts from the old one (the North, Scotland and Wales far above the South) to the 1980s one, with the West Midlands and the North West hit hardest. Policy moves it too: closures, pit closures and the steel settlement push up unemployment in the industrial regions, the strong pound hurts manufacturing, and bail-outs, regional aid, the development agencies, Docklands and a Minister for Merseyside pull it down. A region where unemployment has risen faster than the national rate swings against the governing party. The Polls tab projects the seats in each region. On election night, a table shows the seats won in each region, the change since the last election, and each region's unemployment.
 
 **Threats**, mirroring the original's coalition dissent, capital strike and coup meters:
 

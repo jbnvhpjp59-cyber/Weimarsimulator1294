@@ -16,6 +16,7 @@ The National Health Service employs a million people and costs more every year, 
 - @reorganise: Abolish the area health authorities.
 - @private_insurance: Encourage private health insurance.
 - @griffiths: Bring in general managers.
+- @waiting_lists: Put money into cutting waiting lists.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -64,3 +65,9 @@ subtitle: +0.5 budget. The doctors and nurses are suspicious.
 on-arrival: nhs_griffiths = 1; budget += 0.5; dry_dissent -= 2; wet_dissent += 1; economic_liberalism += 1
 
 Roy Griffiths of Sainsbury's reports on NHS management: "If Florence Nightingale were carrying her lamp through the corridors of the NHS today, she would almost certainly be searching for the people in charge." General managers, many of them from business, are appointed at every level.
+
+@waiting_lists
+subtitle: -0.5 budget. Patients notice.
+on-arrival: budget -= 0.5; de_con += 0.5*(1-dissent); c1_con += 0.5*(1-dissent); wet_dissent -= 1; nupe_mood -= 2
+
+Health authorities get money ring-fenced for operations on the longest waiting lists: hips, cataracts and varicose veins. The lists shrink a little, and the local papers report it.

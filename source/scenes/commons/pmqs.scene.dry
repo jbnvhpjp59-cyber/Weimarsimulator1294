@@ -8,7 +8,7 @@ on-arrival: pmqs_timer = 2; month_actions += 1
 
 = Prime Minister's Questions
 
-Tuesday and Thursday, 3.15pm. [? if con_in_government = 0 : Callaghan is an old hand at the dispatch box, and he enjoys patronising you. ?][? if con_in_government = 1 : Now you are at the dispatch box, and [+ lab_leader +] is asking the questions. ?]
+Tuesday and Thursday, 3.15pm. [? if con_in_government = 0 : [+ prime_minister +] is an old hand at the dispatch box, and enjoys patronising you. ?][? if con_in_government = 1 : Now you are at the dispatch box, and [+ lab_leader +] is asking the questions. ?]
 
 - @attack: Go on the attack.
 - @careful: Stick to the detail.
@@ -34,12 +34,12 @@ go-to: attack_win if pmq_success = 1; attack_lose if pmq_success = 0
 @attack_win
 on-arrival: thatcher_rating += 3; lab_leader_rating -= 2; rebellion -= 1 if con_in_government and rebellion > 0
 
-[? if con_in_government = 0 : You land the blow. Callaghan's avuncular manner slips, and the sketch-writers notice. ?][? if con_in_government = 1 : You demolish [+ lab_leader +]'s question and turn it back on Labour. Our backbenchers wave their order papers. ?]
+[? if con_in_government = 0 : You land the blow. [+ prime_minister +]'s composure slips, and the sketch-writers notice. ?][? if con_in_government = 1 : You demolish [+ lab_leader +]'s question and turn it back on Labour. Our backbenchers wave their order papers. ?]
 
 @attack_lose
 on-arrival: thatcher_rating -= 2; lab_leader_rating += 1
 
-[? if con_in_government = 0 : Callaghan swats the question aside with a joke at your expense. Labour's benches roar. ?][? if con_in_government = 1 : [+ lab_leader +] reads out the latest unemployment figures, and our own backbenchers stare at their shoes. ?]
+[? if con_in_government = 0 : [+ prime_minister +] swats the question aside with a joke at your expense. Labour's benches roar. ?][? if con_in_government = 1 : [+ lab_leader +] reads out the latest unemployment figures, and our own backbenchers stare at their shoes. ?]
 
 @careful
 on-arrival: thatcher_rating += 1

@@ -15,6 +15,7 @@ Britain joined the European Community in 1973, and two-thirds of the country vot
 - @lamb_war: Stand up to France in the "lamb war".
 - @fisheries: Agree a Common Fisheries Policy.
 - @single_market: Press for a single European market.
+- @council: Keep the peace at the European Council.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -55,3 +56,9 @@ subtitle: The City and business approve.
 on-arrival: single_market = 1; europe_relation += 6; ab_con += 1*(1-dissent); economic_liberalism += 2; right_dissent += 1; wet_dissent -= 1
 
 We set out a British plan for Europe: tear down the barriers to trade in goods and services, and let the free market do the rest. Our partners are surprised to find us leading for once.
+
+@council
+subtitle: Our partners are pleased. The right is not.
+on-arrival: europe_relation += 3; right_dissent += 1; wet_dissent -= 1
+
+Two days of bargaining in a provincial capital end in a communiqué about everything and nothing. Our partners find you more patient than they expected, and the right-wing press wonders whether you have gone native.

@@ -8,7 +8,7 @@ on-arrival: local_government_timer = 5; month_actions += 1
 
 = Local Government
 
-Councils spend a quarter of public money, and many of the biggest are run by Labour. [? if time >= 40 : Ken Livingstone's Greater London Council has cut London Transport fares by a third and flies a red flag over County Hall. ?] Every pound they overspend undoes a pound of the Treasury's cuts.
+Councils spend a quarter of public money, and many of the biggest are run by Labour. [? if time >= 40 and glc_abolition = 0 : Ken Livingstone's Greater London Council has cut London Transport fares by a third and flies a red flag over County Hall. ?] Every pound they overspend undoes a pound of the Treasury's cuts.
 
 - @rsg_cut: Cut the Rate Support Grant.
 - @rate_capping: Introduce a bill to cap the rates of overspending councils.
@@ -16,6 +16,7 @@ Councils spend a quarter of public money, and many of the biggest are run by Lab
 - @abolish_glc: Introduce a bill to abolish the GLC and the metropolitan counties.
 - @docklands: Create urban development corporations for the docklands.
 - @tendering: Make councils put their services out to tender.
+- @settlement: Settle this year's grant to the councils generously.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -68,3 +69,9 @@ subtitle: +0.5 budget. The council unions lose ground.
 on-arrival: council_tendering = 1; budget += 0.5; union_power -= 2; dry_dissent -= 2; wet_dissent += 1
 
 Council building and maintenance departments must now win their work in competition with private firms. In some towns the direct labour organisation wins; in many it doesn't.
+
+@settlement
+subtitle: -0.5 budget. The rates rise less; the dries grumble.
+on-arrival: budget -= 0.5; c1_con += 0.5*(1-dissent); de_con += 0.5*(1-dissent); wet_dissent -= 2; dry_dissent += 2
+
+The Rate Support Grant settlement is kinder than the councils feared. Rate bills still go up, but by less, and the shire Conservatives stop writing to their MPs for a while.
