@@ -4,6 +4,7 @@ view-if: time >= 2 and time <= 3
 max-visits: 1
 new-page: true
 on-arrival: swamped_seen = 1
+face-image: img/events/world_in_action.jpg
 
 = World in Action
 
