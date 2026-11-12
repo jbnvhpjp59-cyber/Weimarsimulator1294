@@ -45,7 +45,7 @@ if (became('con_in_government', 1)) {
                                'Hung Parliament: Thatcher forms a government');
 }
 if (rose('n_elections') && Q.con_in_government && was('con_in_government')) {
-    add(10, 'Thatcher wins a second term');
+    add(10, 'Thatcher wins a ' + (Q.terms_won >= 3 ? 'third' : 'second') + ' term');
 }
 if (became('con_in_government', 0) && Q.ousted) {
     add(10, 'Thatcher is out: Tories choose a new leader');

@@ -1,6 +1,6 @@
 # Conservatism: An Alternate History
 
-A total-conversion mod of [Social Democracy: An Alternate History](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen. Instead of the SPD in Weimar Germany, you lead Margaret Thatcher's Conservative Party from **January 1978**. You start in opposition, win power, then govern Britain through the recession, the unions, the SDP and the South Atlantic, and finally fight for re-election.
+A total-conversion mod of [Social Democracy: An Alternate History](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen. Instead of the SPD in Weimar Germany, you lead Margaret Thatcher's Conservative Party from **January 1978**. You start in opposition, win power, then govern Britain through the recession, the unions, the SDP and the South Atlantic, fight for re-election, and then govern a second term to the third general election.
 
 **Play it in your browser: https://political-hist-sim.github.io/conservatism/**
 
@@ -79,7 +79,9 @@ The Commons has time for three major bills at once. The Government Business card
 - **1982:** three million unemployed, the exodus of Labour MPs to the SDP, Militant, Hillhead, the health service dispute, the Think Tank leak, the Falklands (deterred, negotiated, won or lost), the rail strike, the Siberian pipeline row, Hong Kong, Greenham Common.
 - **1983:** recovery, Bermondsey, the "longest suicide note", and by-elections and defections throughout.
 
-**The end.** The game ends at the second general election (by 1984 at the latest), or earlier if you are ousted. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the NHS, pensions, education, the rates, the Falklands, Europe, and whether you turned. There are 62 achievements, listed on the start menu with the ones you have and haven't unlocked.
+**A second term.** Win the second election as the government and a second term begins with a reshuffle: remake the Cabinet as in June 1983 (Lawson to the Treasury, Howe to the Foreign Office, Brittan to the Home Office, Whitelaw to the Lords and Pym sacked), or keep the team that won. The budget, the Cabinet's balance and the party's mood carry over, and the next Parliament runs to a third general election. The second term is being built in stages; its own events, bills and the miners' strike come next.
+
+**The end.** The game ends at the third general election, or earlier if you lose office: a defeat in government ends it, and so does losing twice from opposition. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the NHS, pensions, education, the rates, the Falklands, Europe, and whether you turned. There are 63 achievements, listed on the start menu with the ones you have and haven't unlocked.
 
 ## Menus and options
 
@@ -195,7 +197,7 @@ To add a bill, add an entry to the `BILLS` list in `tools/gen_bills.py` (its tex
 
 ## Limits
 
-- Scope: the game covers January 1978 to the second general election, and no further. `Q.final_election` in `root.scene.dry` sets where it ends.
+- Scope: the game covers January 1978 to the third general election (1987 or 1988), and no further. `Q.final_election` in `root.scene.dry` sets where it ends; the second term is still being filled in.
 - Pictures are resized copies (cards 240×300, events up to 400 px wide) and music is re-encoded at 96 kbps to keep the download small.
 
 ## Credits and licence

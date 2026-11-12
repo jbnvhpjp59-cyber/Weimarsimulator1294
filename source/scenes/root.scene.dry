@@ -262,7 +262,13 @@ Q.sun_endorsed = 0;
 // Government. Everything below matters once we win power.
 // ---------------------------------------------------------------
 // the game ends after this many general elections (the re-election)
-Q.final_election = 2;
+Q.final_election = 3;
+// how many general elections we have won, and whether we are in a second term
+Q.terms_won = 0;
+Q.second_term = 0;
+Q.second_term_start = 0;
+Q.whitelaw_lords = 0;
+Q.pym_sacked = 0;
 Q.last_election_time = 0;
 Q.term_start_time = 0;
 // 1 = majority, 2 = Unionist deal, 3 = Liberal deal, 4 = minority
@@ -731,4 +737,4 @@ You have led the Conservative Party for nearly three years, and most of your own
 
 Across the dispatch box, James Callaghan runs a minority Labour government that has lost its majority through by-elections and defections. It survives on the Lib-Lab Pact with David Steel's Liberals. The IMF crisis of 1976 is fading, inflation has fallen from 26% to under 10%, and North Sea oil is starting to flow. "Sunny Jim" is more popular than you are.
 
-Parliament must be dissolved by the autumn of 1979. Callaghan can call an election before then, or the Commons can bring him down sooner. Win that election, and the real test begins: governing Britain, and winning a second term.
+Parliament must be dissolved by the autumn of 1979. Callaghan can call an election before then, or the Commons can bring him down sooner. Win that election, and the real test begins: governing Britain, winning a second term, and perhaps a third.

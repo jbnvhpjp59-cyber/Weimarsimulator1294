@@ -7,31 +7,17 @@ Q.inflation_2 = Q.inflation.toFixed(1);
 Q.unemployment_2 = Q.unemployment.toFixed(1);
 Q.governed = (Q.term_start_time > 0) ? 1 : 0;
 Q.reelected = (Q.governed && Q.n_elections >= Q.final_election && Q.result_type >= 1 && Q.result_type <= 4 && !Q.ousted) ? 1 : 0;
-// won power at the last election, after losing in 1979
+// won power at the last election, after losing in 1979 (no longer the last election of the game)
 Q.late_victory = (!Q.governed && Q.result_type >= 1 && Q.result_type <= 4 && !Q.ousted) ? 1 : 0;
-if (Q.late_victory) {
-    this.achieve('second_chance');
-}
 this.achieve('game_completed');
 if (Q.governed) {
     this.achieve('prime_minister');
 }
 if (Q.reelected) {
-    this.achieve('re_elected');
-    if (Q.result_type == 1 && Q.con_majority >= 100) {
-        this.achieve('landslide');
-    }
-    if (Q.wet_dissent < 20 && Q.dry_dissent < 20) {
-        this.achieve('one_nation');
-    }
-    if (Q.inflation < 5 && Q.union_power <= 40 && Q.privatisations >= 3 && Q.right_to_buy_progress >= 3) {
-        this.achieve('thatcherism');
-    }
-    if (Q.u_turn == -1) {
-        this.achieve('lady_for_turning');
-    }
-    if (Q.unemployment < 8) {
-        this.achieve('full_employment');
+    Q.terms_won += 1;
+    this._runActions(this.game.scenes['reelection_honours'].onArrival);
+    if (Q.terms_won >= 3) {
+        this.achieve('third_term');
     }
 }
 if (Q.governed && Q.u_turn == 1) {
@@ -54,22 +40,6 @@ if (Q.result_type == 5 && !Q.governed) {
 }
 if (Q.autumn_election_1978 && Q.governed) {
     this.achieve('waiting_at_the_church');
-}
-if (Q.reelected) {
-    if (Q.nhs_funding >= 2 && !Q.cprs_defended) {
-        this.achieve('nhs_safe');
-    }
-    if (Q.historical_mode) {
-        this.achieve('tina');
-    } else if (Q.difficulty >= 1) {
-        this.achieve('iron_lady');
-    }
-    if (!Q.unemployment_3m && Q.unemployment < 11) {
-        this.achieve('never_three_million');
-    }
-    if (Q.result_type == 1 && Q.con_majority >= 144) {
-        this.achieve('big_majority');
-    }
 }
 if (Q.governed && !Q.ousted && Q.inflation < 4) {
     this.achieve('sound_money');
@@ -130,7 +100,7 @@ view-if: result_type = 5 and governed = 1 and ousted = 0
 tags: endings
 go-to: eg_menu
 
-[? if lab_mps >= majority_line : Labour, under [+ lab_leader +], has won a majority. ?][? if lab_mps < majority_line : Labour, under [+ lab_leader +], is the largest party in a hung parliament. ?] Your government lasted [+ months_in_office +] months. To your critics, the experiment has been tried and has failed. To your admirers, it was abandoned too soon.
+[? if lab_mps >= majority_line : Labour, under [+ lab_leader +], has won a majority. ?][? if lab_mps < majority_line : Labour, under [+ lab_leader +], is the largest party in a hung parliament. ?] Your government lasted [+ months_in_office +] months[? if second_term = 1 : , through two Parliaments ?]. To your critics, the experiment has been tried and has failed. To your admirers, it was abandoned too soon.
 
 @landslide_reelection
 title: Re-elected by a landslide.
@@ -138,7 +108,7 @@ view-if: reelected = 1 and result_type = 1 and con_majority >= 100
 tags: endings
 go-to: eg_menu
 
-A majority of [+ con_majority +]. The country has endorsed not just a government but a new settlement. The wets are finished as a force, and the next Parliament is yours to shape.
+A majority of [+ con_majority +]. The country has endorsed not just a government but a new settlement. [? if terms_won >= 3 : Three victories in a row: no Prime Minister has won three since Lord Liverpool. ?] The wets are finished as a force, and the next Parliament is yours to shape.
 
 @comfortable_reelection
 title: Re-elected.
@@ -146,7 +116,7 @@ view-if: reelected = 1 and result_type = 1 and con_majority < 100
 tags: endings
 go-to: eg_menu
 
-A majority of [+ con_majority +]. Not a landslide, but a second term, something no Conservative government has managed since 1959.
+A majority of [+ con_majority +]. Not a landslide, but [? if terms_won >= 3 : a third election victory in a row, which no Prime Minister has managed since Lord Liverpool. ?][? if terms_won < 3 : a second term, something no Conservative government has managed since 1959. ?]
 
 @hung_reelection
 title: Clinging on.
@@ -396,7 +366,7 @@ view-if: reelected = 1
 tags: endings
 go-to: eg_menu
 
-This version of the game ends at your re-election. The second term, with the miners, Brighton, Westland and the Big Bang, is not written yet.
+The game ends here. [? if terms_won >= 3 : The third term, with the poll tax, the Lawson boom and its bust, and the long quarrel over Europe, is not written yet. ?][? if terms_won < 3 : Another Parliament lies ahead, and it is not written yet. ?]
 
 #################### Achievements
 
@@ -406,7 +376,7 @@ view-if: achievement_game_completed == 1
 tags: endings
 go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
-There are 62 achievements.
+There are 63 achievements.
 
 = In this playthrough
 
@@ -534,6 +504,8 @@ There are 62 achievements.
 
 [? if game_achievement_telecoms : **The Biggest Share Issue** - pass the Telecommunications Act to sell British Telecom. ?]
 
+[? if game_achievement_third_term : **Three in a Row** - win a third general election. ?]
+
 = Unlocked in earlier games
 
 [? if achievement_prime_minister and not game_achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -660,6 +632,8 @@ There are 62 achievements.
 
 [? if achievement_telecoms and not game_achievement_telecoms : **The Biggest Share Issue** - pass the Telecommunications Act to sell British Telecom. ?]
 
+[? if achievement_third_term and not game_achievement_third_term : **Three in a Row** - win a third general election. ?]
+
 = Not yet unlocked
 
 [? if not achievement_prime_minister : **Prime Minister** - win power. ?]
@@ -785,6 +759,8 @@ There are 62 achievements.
 [? if not achievement_pace : **Codes of Practice** - pass the Police and Criminal Evidence Act. ?]
 
 [? if not achievement_telecoms : **The Biggest Share Issue** - pass the Telecommunications Act to sell British Telecom. ?]
+
+[? if not achievement_third_term : **Three in a Row** - win a third general election. ?]
 
 @end_game
 game-over: true

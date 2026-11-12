@@ -309,7 +309,7 @@
   };
 
   // Music by era: the opposition years, the hard years of 1979-81 in
-  // government, and the recovery from 1982. When the era changes, the new
+  // government, the recovery from 1982, and the second term. When the era changes, the new
   // playlist takes over once the current piece ends.
   var ERAS = {
       opposition: ['pomp_and_circumstance_4', 'rule_britannia', 'jupiter', 'march_of_the_mogul_emperors',
@@ -317,11 +317,16 @@
       hard_years: ['nimrod', 'saturn', 'venus', 'i_vow_to_thee', 'pomp_and_circumstance_1',
                    'march_of_the_mogul_emperors'],
       recovery: ['land_of_hope_and_glory', 'rule_britannia', 'pomp_and_circumstance_1', 'pomp_and_circumstance_2',
-                 'jupiter', 'i_was_glad', 'second_suite_march']
+                 'jupiter', 'i_was_glad', 'second_suite_march'],
+      second_term: ['jupiter', 'nimrod', 'i_was_glad', 'pomp_and_circumstance_4', 'second_suite_march',
+                    'land_of_hope_and_glory', 'venus']
   };
   window.musicEra = function(Q) {
       if (!Q.con_in_government) {
           return 'opposition';
+      }
+      if (Q.second_term) {
+          return 'second_term';
       }
       return Q.time < 49 ? 'hard_years' : 'recovery';
   };
