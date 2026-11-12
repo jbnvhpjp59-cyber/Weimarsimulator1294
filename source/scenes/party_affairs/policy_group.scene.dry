@@ -1,0 +1,79 @@
+title: Policy Group
+new-page: true
+is-card: true
+card-image: img/party.png
+tags: party_affairs
+view-if: policy_group_timer <= 0 and manifesto_planks < 8
+on-arrival: policy_group_timer = 4; month_actions += 1
+
+= Policy Group
+
+Our policy groups have been arguing for three years. One of their proposals is ready to become official policy and a plank of the next manifesto.
+
+[? if manifesto_planks >= 4 : The manifesto is already full of commitments. Some colleagues think we are promising too much. ?]
+
+- @monetarism: Sound money: control the money supply to beat inflation.
+- @tax_cuts: Cut income tax and shift the burden onto spending.
+- @union_reform: Reform the trade unions.
+- @right_to_buy: Give council tenants the right to buy.
+- @law_order: Law and order.
+- @defence: Strengthen defence.
+- @privatisation: Return nationalised industries to the private sector.
+- @immigration: Tighter immigration control.
+- @easy_discard
+
+@monetarism
+view-if: policy_monetarism = 0
+subtitle: Dries strengthen; wets grow uneasy.
+on-arrival: policy_monetarism = 1; dry_strength += 5; dry_dissent -= 5; wet_dissent += 6; economic_liberalism += 3
+
+Controlling the money supply is now the heart of our economic case. The wets mutter that it is a theory from Chicago, not a policy for Britain.
+
+@tax_cuts
+view-if: policy_tax_cuts = 0
+subtitle: Popular with the middle classes; Labour will ask how we pay for it.
+on-arrival: policy_tax_cuts = 1; ab_con += 4*(1-dissent); c1_con += 3*(1-dissent); c2_con += 2*(1-dissent); wet_dissent += 2; de_con -= 1
+
+We will cut the basic rate and slash the top rate, and pay for it partly by raising VAT. Labour's attack on the VAT rise writes itself.
+
+@union_reform
+view-if: policy_union_reform = 0
+subtitle: [? if union_backlash >= 60 : Increasingly popular. ?][? if union_backlash < 60 : The public isn't asking for it yet. ?] Jim Prior wants a cautious approach.
+on-arrival: policy_union_reform = 1; dry_strength += 3; wet_dissent += 5; c2_con += 2*(1-dissent) if union_backlash >= 60; c2_con -= 1 if union_backlash < 60
+
+We commit to secret ballots, restrictions on secondary picketing, and protection against the closed shop.
+
+@right_to_buy
+view-if: policy_right_to_buy = 0
+subtitle: Hugely popular with council tenants.
+on-arrival: policy_right_to_buy = 1; c2_con += 4*(1-dissent); de_con += 3*(1-dissent); wet_dissent -= 1
+
+Millions of council tenants could own their homes. Even Labour councillors privately admit it will be popular.
+
+@law_order
+view-if: policy_law_order = 0
+subtitle: The right is pleased.
+on-arrival: policy_law_order = 1; right_strength += 3; right_dissent -= 5; c2_con += 2*(1-dissent); de_con += 2*(1-dissent); c1_lib += 1
+
+More police, better police pay, and tougher sentences.
+
+@defence
+view-if: policy_defence = 0
+subtitle: Reassures the right and the services.
+on-arrival: policy_defence = 1; right_dissent -= 3; ab_con += 1*(1-dissent); c2_con += 1*(1-dissent)
+
+Higher defence spending and a firm line against the Soviet Union. The Soviet press already calls you the "Iron Lady", and you have decided to wear it as a compliment.
+
+@privatisation
+view-if: policy_privatisation = 0
+subtitle: [? if economic_liberalism < 45 : The public isn't ready for this. ?] The wets will be alarmed.
+on-arrival: policy_privatisation = 1; dry_strength += 4; wet_dissent += 5; c2_con -= 1 if economic_liberalism < 45; ab_con += 2*(1-dissent); economic_liberalism += 2
+
+We commit to selling the state's stakes in aerospace, shipbuilding and the National Freight Corporation. More may follow.
+
+@immigration
+view-if: policy_immigration = 0
+subtitle: The right strengthens. The wets and the Liberals are appalled.
+on-arrival: policy_immigration = 1; right_strength += 4; right_dissent -= 8; wet_dissent += 6; c2_con += 2*(1-dissent); de_con += 2*(1-dissent); c2_other -= 1; de_other -= 1; c1_lib += 2; ab_lib += 1; lib_relation -= 5
+
+We commit to a register of dependants and tighter rules on entry. National Front voters come back to us; some of our own moderates threaten to speak out.

@@ -1,0 +1,58 @@
+title: The September Reshuffle
+tags: event
+view-if: con_in_government = 1 and time >= 44 and time <= 46 and wets_purged = 0 and cabinet_dry < 70 and u_turn != -1 and september_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: september_seen = 1
+
+= The September Reshuffle
+
+The summer has been brutal: riots, a Cabinet revolt over spending and the worst polls of any government since polling began. The wets assume you will have to compromise with them. Your closest advisers say the opposite: now is the moment to take control of your own Cabinet.
+
+- @reshuffle.purge: Sack the wets.
+- @keep: Keep the Cabinet as it is.
+
+@keep
+on-arrival: wet_dissent -= 3; dry_dissent += 5
+
+The Cabinet stays as it is, balanced and quarrelling.
+
+@hillhead
+title: Glasgow Hillhead
+tags: event
+view-if: con_in_government = 1 and alliance_formed = 1 and time >= 51 and time <= 52 and hillhead_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: hillhead_seen = 1; hillhead_lost = 1 if lib_votes >= con_votes - 10; con_mps -= 1 if hillhead_lost = 1; lib_mps += 1 if hillhead_lost = 1; con_majority = 2 * con_mps - total_seats
+face-image: img/events/jenkins.jpg
+
+= Glasgow Hillhead
+
+Roy Jenkins, the former Labour Chancellor and President of the European Commission, is standing for the SDP in Glasgow Hillhead, our last seat in the city.
+
+[? if hillhead_lost = 1 : Jenkins wins. The founder of the SDP is back in the Commons, and we have lost another seat. ?][? if hillhead_lost = 0 : We hold Hillhead. Jenkins will have to find another way back. ?]
+
+@suicide_note
+title: Labour's Manifesto
+tags: event
+view-if: con_in_government = 1 and in_campaign = 1 and lab_left = 1 and suicide_note_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: suicide_note_seen = 1; c1_lab -= 3; c2_lab -= 3; de_lab -= 2; lab_leader_rating -= 3
+face-image: img/events/foot.jpg
+
+= Labour's Manifesto
+
+Labour's manifesto promises unilateral nuclear disarmament, withdrawal from the Common Market, nationalisation and a massive increase in public spending. Gerald Kaufman, one of Foot's own front bench, calls it "the longest suicide note in history".
+
+@recovery
+title: Recovery
+tags: event
+view-if: con_in_government = 1 and time >= 61 and time <= 63 and recovery_seen = 0 and inflation < 8
+max-visits: 1
+new-page: true
+on-arrival: recovery_seen = 1; c1_con += 2*(1-dissent); c2_con += 2*(1-dissent); thatcher_rating += 3
+
+= Recovery
+
+Inflation is down to [+ inflation_2 +]% and the economy is growing again. House prices are rising, and people with jobs are better off than they have been for years. Unemployment is still [+ unemployment_2 +]%, but the government's message is simple: the medicine is working.

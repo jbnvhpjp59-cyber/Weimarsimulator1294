@@ -1,0 +1,46 @@
+title: Defence
+new-page: true
+is-card: true
+card-image: img/cards/endurance.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and defence_timer <= 0
+on-arrival: defence_timer = 6; month_actions += 1
+
+= Defence
+
+The Ministry of Defence's budget is the third largest in Whitehall, and the Treasury wants it cut. The Navy wants it raised.
+
+- @nott_review: A defence review: cut the surface fleet.
+- @trident: Buy Trident to replace Polaris.
+- @endurance: Keep HMS Endurance in the South Atlantic.
+- @nato: Raise defence spending by 3% a year, as NATO asks.
+- @easy_discard
+- @cancel_advisor_action
+
+@nott_review
+view-if: defence_cuts = 0
+subtitle: +2 budget. The Navy and the right will be furious.
+on-arrival: defence_cuts = 1; endurance_withdrawn = 1; budget += 2; right_dissent += 6; us_relation -= 3
+achievement: the_way_forward
+
+John Nott's review cuts the surface fleet to concentrate on the Atlantic and the nuclear deterrent. The aircraft carrier Invincible is to be sold to Australia, and the ice patrol ship HMS Endurance is to be withdrawn from the South Atlantic. In Buenos Aires, the junta reads the announcement closely.
+
+@trident
+view-if: trident = 0
+subtitle: -2 budget.
+on-arrival: trident = 1; budget -= 2; us_relation += 8; right_dissent -= 3; c1_lib += 1
+
+Britain will buy the Trident missile system from the United States. CND calls it obscene; the Americans are grateful.
+
+@endurance
+view-if: endurance_withdrawn = 1 and falklands = 0
+subtitle: -1 budget.
+on-arrival: endurance_withdrawn = 0; budget -= 1; right_dissent -= 2
+
+HMS Endurance stays on station. The Falkland Islanders, and the Argentine navy, notice.
+
+@nato
+subtitle: -1 budget.
+on-arrival: budget -= 1; right_dissent -= 3; us_relation += 4; defence_cuts = 0 if defence_cuts = 1 and endurance_withdrawn = 0
+
+Defence spending rises in real terms, as NATO asks. It is one of the few budgets to grow.

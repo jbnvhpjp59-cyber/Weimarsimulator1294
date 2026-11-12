@@ -1,0 +1,91 @@
+title: Motion of No Confidence
+new-page: true
+is-card: true
+card-image: img/cards/commons_1970s.jpg
+tags: commons
+view-if: no_confidence_timer <= 0 and no_confidence_won = 0 and months_to_election > 2 and con_in_government = 0
+on-arrival: no_confidence_timer = 6; month_actions += 1
+
+= Motion of No Confidence
+
+"That this House has no confidence in Her Majesty's Government."
+
+If the motion passes, Callaghan must call an election. If it fails, we look foolish and the government looks stronger. The arithmetic depends on the minor parties.
+
+[? if lib_lab_pact : While the Lib-Lab Pact holds, the Liberals will vote with the government. ?]
+
+[? if devolution_failed = 0 : The SNP still hopes Labour will deliver a Scottish Assembly. ?][? if devolution_failed = 1 : After the referendum fiasco, the SNP has no reason left to keep Labour in office. ?]
+
+- @vote: Table the motion.
+- @easy_discard
+
+@vote
+title: Table the motion
+on-arrival: {!
+// ---- count the division ----
+// Labour: the Speaker is counted in "other"; two Labour deputy speakers
+// don't vote, and one gravely ill Labour MP can't attend.
+var noes = Q.lab_mps - 3;
+var ayes = Q.con_mps;
+var abstain = 0;
+// Liberals: free to vote against the government only once the Pact is over.
+if (Q.lib_lab_pact == 0 && Q.lib_relation >= 30) {
+    ayes += Q.lib_mps;
+} else {
+    noes += Q.lib_mps;
+}
+// SNP: turns on Labour if devolution has failed, or if we've courted them.
+if (Q.devolution_failed == 1 || Q.snp_relation >= 50) {
+    ayes += Q.snp_mps;
+} else {
+    noes += Q.snp_mps;
+}
+// Plaid Cymru: usually sustains Labour.
+if (Q.pc_relation >= 55) {
+    ayes += Q.pc_mps;
+} else {
+    noes += Q.pc_mps;
+}
+// Northern Ireland: two nationalist MPs abstain; the ten Unionists split
+// according to how far we've won them over.
+var unionists = 10;
+var frac = (Q.uup_relation - 30) / 40;
+if (frac < 0) {
+    frac = 0;
+} else if (frac > 1) {
+    frac = 1;
+}
+var unionist_ayes = Math.round(unionists * frac);
+ayes += unionist_ayes;
+noes += unionists - unionist_ayes;
+abstain += Q.ni_mps - unionists;
+// a dissident or two on our own side if the party is badly split
+if (Q.dissent > 0.35) {
+    ayes -= 2;
+    abstain += 2;
+}
+Q.nc_ayes = ayes;
+Q.nc_noes = noes;
+Q.nc_unionist_ayes = unionist_ayes;
+Q.nc_passed = (ayes > noes) ? 1 : 0;
+!}
+go-to: passed if nc_passed = 1; failed if nc_passed = 0
+
+@passed
+on-arrival: no_confidence_won = 1; time_to_election = 2; thatcher_rating += 5; dry_dissent -= 5; loyalist_dissent -= 5; right_dissent -= 5; wet_dissent -= 3
+call: set_election
+achievement: no_confidence
+face-image: img/events/commons_1970s.jpg
+
+= Ayes [+ nc_ayes +], Noes [+ nc_noes +]
+
+The tellers come to the table, and the Opposition whip is on the right-hand side: we have won. For the first time since 1924, a government has been defeated on a motion of confidence.
+
+Callaghan rises, says the government will take its case to the country, and sits down. The general election is set for [+ next_election_month : month +] [+ next_election_year +].
+
+@failed
+on-arrival: no_confidence_lost += 1; thatcher_rating -= 4; lab_leader_rating += 2; loyalist_dissent += 4; wet_dissent += 4; labour_credibility += 2
+
+= Ayes [+ nc_ayes +], Noes [+ nc_noes +]
+
+The government survives. Callaghan thanks the House with a smile, and the papers ask whether the Opposition can count. [? if nc_unionist_ayes < 8 : We needed more of the Ulster Unionists. ?][? if lib_lab_pact : While the Pact lasts, the Liberals were never going to help. ?]

@@ -1,0 +1,103 @@
+title: Election Simulation
+set-jump: results
+
+= Election Simulation
+
+Run a real general election through the game's seat model, using the actual national vote shares.
+
+- @feb_1974: February 1974
+- @oct_1974: October 1974
+- @may_1979: May 1979
+- @jun_1983: June 1983 (new boundaries, the Alliance)
+- @root.start_menu_2: Back
+
+@feb_1974
+on-arrival: {!
+Q.sim_name = "February 1974";
+Q.sim_actual = "Con 297, Lab 301, Lib 14, SNP 7, PC 2, NI 12";
+Q.sim = {con: 40.2, lab: 37.6, lib: 21.3, other: 0.9, snp: 21.9, pc: 10.7, alliance: 0, boundaries: 0};
+!}
+go-to: run
+
+@oct_1974
+on-arrival: {!
+Q.sim_name = "October 1974";
+Q.sim_actual = "Con 277, Lab 319, Lib 13, SNP 11, PC 3, NI 12";
+Q.sim = {con: 38.9, lab: 40.1, lib: 20.2, other: 0.8, snp: 30.4, pc: 10.8, alliance: 0, boundaries: 0};
+!}
+go-to: run
+
+@may_1979
+on-arrival: {!
+Q.sim_name = "May 1979";
+Q.sim_actual = "Con 339, Lab 269, Lib 11, SNP 2, PC 2, NI 12";
+Q.sim = {con: 47.2, lab: 36.7, lib: 14.9, other: 1.2, snp: 17.3, pc: 8.1, alliance: 0, boundaries: 0};
+!}
+go-to: run
+
+@jun_1983
+on-arrival: {!
+Q.sim_name = "June 1983";
+Q.sim_actual = "Con 397, Lab 209, Alliance 23, SNP 2, PC 2, NI 17";
+Q.sim = {con: 46.0, lab: 26.9, lib: 26.4, other: 0.7, snp: 11.8, pc: 7.8, alliance: 1, boundaries: 1};
+!}
+go-to: run
+
+@run
+on-arrival: {!
+// a single "class" holding the English vote shares reproduces the national result
+Q.classes = ['everyone'];
+Q.parties = ['con', 'lab', 'lib', 'other'];
+Q.everyone = 100;
+Q.everyone_con = Q.sim.con;
+Q.everyone_lab = Q.sim.lab;
+Q.everyone_lib = Q.sim.lib;
+Q.everyone_other = Q.sim.other;
+Q.snp_share = Q.sim.snp;
+Q.pc_share = Q.sim.pc;
+Q.alliance_formed = Q.sim.alliance;
+Q.new_boundaries = Q.sim.boundaries;
+Q.total_seats = Q.sim.boundaries ? 650 : 635;
+Q.lib_name = Q.sim.alliance ? "Alliance" : "Liberal";
+Q.apply_poll_error = 0;
+!}
+go-to: election_algorithm
+
+@results
+on-display: {!
+var data = [
+    {"id": "lab", "legend": "Labour", "name": "Labour", "seats": Q.lab_seats},
+    {"id": "snp", "legend": "SNP", "name": "SNP", "seats": Q.snp_seats},
+    {"id": "pc", "legend": "Plaid Cymru", "name": "Plaid Cymru", "seats": Q.pc_seats},
+    {"id": "lib", "legend": Q.lib_name, "name": Q.lib_name, "seats": Q.lib_seats},
+    {"id": "ni", "legend": "Northern Ireland", "name": "Northern Ireland", "seats": Q.ni_seats},
+    {"id": "con", "legend": "Conservative", "name": "Conservative", "seats": Q.con_seats}
+];
+if (typeof window !== 'undefined' && typeof d3 !== 'undefined' && d3.parliament) {
+    var width = 500;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("sim_commons").style.height = screenWidth / 2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    d3.select("#sim_commons").datum(data).call(parliament);
+}
+!}
+
+= [+ sim_name +]
+
+{!<svg id="sim_commons" style="width: 500px; height: 250px;"> </svg>!}
+
+**Model:** Conservative [+ con_seats +] ([+ con_votes +]%), Labour [+ lab_seats +] ([+ lab_votes +]%), [+ lib_name +] [+ lib_seats +] ([+ lib_votes +]%), SNP [+ snp_seats +], Plaid Cymru [+ pc_seats +], Northern Ireland [+ ni_seats +].
+
+**Actual result:** [+ sim_actual +].
+
+The model shares out seats region by region with a "square law", so it exaggerates the winner's lead a little in landslides.
+
+- @election_simulation: Run another election
+- @root.start_menu_2: Back to the main menu

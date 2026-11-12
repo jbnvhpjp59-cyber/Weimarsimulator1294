@@ -1,0 +1,27 @@
+title: Back to Opposition
+new-page: true
+on-arrival: {!
+Q.con_in_government = 0;
+Q.prime_minister = Q.lab_leader;
+Q.pm_party = "Labour";
+Q.lib_lab_pact = 0;
+Q.thatcher_rating -= 8;
+Q.lab_leader_rating += 6;
+Q.wet_dissent += 12;
+Q.loyalist_dissent += 10;
+Q.right_dissent += 6;
+Q.heath_hostility += 10;
+Q.defeated_once = 1;
+!}
+face-image: img/events/callaghan.jpg
+audio: clear shuffle music/nimrod.mp3 music/pomp_and_circumstance_4.mp3 music/jupiter.mp3
+
+= Defeat
+
+[+ lab_leader +] goes back to Downing Street[? if lab_mps >= majority_line : , this time with a majority of his own ?][? if lab_mps < majority_line : , at the head of the largest party ?]. For the Conservatives, it is a fifth defeat in six elections.
+
+You are still Leader of the Opposition, for now. Edward Heath has said nothing in public, which is how everyone knows he is available. The wets are saying openly that the party chose the wrong leader in 1975.
+
+The next general election must be held by [+ next_election_month : month +] [+ next_election_year +]. If the party gives you that long.
+
+- @root: Carry on.

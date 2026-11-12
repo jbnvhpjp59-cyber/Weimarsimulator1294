@@ -1,0 +1,25 @@
+title: Labour Isn't Working
+tags: event
+view-if: time >= 8 and time <= 9 and saatchi_hired = 1
+max-visits: 1
+new-page: true
+
+= Labour Isn't Working
+
+Saatchi & Saatchi bring in a poster: a long, snaking dole queue under the slogan "Labour Isn't Working. Britain's Better Off With The Conservatives."
+
+The queue is actually Young Conservatives from Hendon, photographed again and again. It will only go up on a few dozen sites, but if Labour complains it could be front-page news.
+
+- @run: Run it.
+- @shelve: Too risky. Shelve it.
+
+@run
+on-arrival: labour_credibility -= 5; de_con += 2*(1-dissent); c2_con += 2*(1-dissent); thatcher_rating += 1; lab_leader_rating -= 1; economic_liberalism -= 1
+achievement: labour_isnt_working
+
+Denis Healey denounces the poster in the Commons, and every newspaper and news bulletin reproduces it. A few thousand pounds of billboard space turns into millions of pounds' worth of free publicity.
+
+@shelve
+on-arrival: wet_dissent -= 1
+
+The poster goes into a drawer at Charlotte Street. Maurice Saatchi is too polite to say what he thinks.

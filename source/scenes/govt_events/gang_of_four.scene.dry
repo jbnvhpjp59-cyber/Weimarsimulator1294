@@ -1,0 +1,34 @@
+title: The Gang of Four
+tags: event
+view-if: con_in_government = 1 and time >= 37 and lab_left = 1 and alliance_formed = 0
+max-visits: 1
+new-page: true
+on-arrival: {!
+Q.alliance_formed = 1;
+Q.lib_name = "Alliance";
+// Labour MPs defect to the new Social Democratic Party
+Q.lab_mps -= 13;
+Q.lib_mps += 13;
+// the Alliance is a lasting new force: shift the baselines as well as today's polls
+var surge = {ab: 16, c1: 18, c2: 16, de: 12};
+for (var c in surge) {
+    Q.baseline_support[c + '_lib'] += surge[c];
+    Q[c + '_lib'] += surge[c];
+}
+// Labour's right-wing voters follow the Gang of Four
+var exodus = {ab: 4, c1: 8, c2: 8, de: 5};
+for (var c2 in exodus) {
+    Q.baseline_support[c2 + '_lab'] -= exodus[c2];
+    Q[c2 + '_lab'] -= exodus[c2];
+}
+Q.c1_con -= 2;
+Q.ab_con -= 2;
+Q.lib_relation += 5;
+!}
+face-image: img/events/jenkins.jpg
+
+= The Gang of Four
+
+At Limehouse, four former Labour Cabinet ministers, Roy Jenkins, David Owen, Shirley Williams and Bill Rodgers, announce a Council for Social Democracy. Within weeks it becomes the Social Democratic Party, and a dozen Labour MPs have joined it.
+
+The SDP forms an Alliance with David Steel's Liberals. The polls are extraordinary: the Alliance is drawing voters from Labour and from us. Some polls put it ahead of both parties.

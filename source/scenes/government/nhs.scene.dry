@@ -1,0 +1,62 @@
+title: The Health Service
+new-page: true
+is-card: true
+card-image: img/cards/nhs.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and nhs_timer <= 0
+on-arrival: nhs_timer = 5; month_actions += 1
+
+= The Health Service
+
+The National Health Service employs a million people and costs more every year, as the population ages and medicine advances. [? if nhs_funding >= 1 : We have funded it above inflation [+ nhs_funding +] times. ?][? if prescription_charges = 1 : The prescription charge is now 45p an item. ?][? if prescription_charges = 2 : The prescription charge is now £1 an item. ?][? if prescription_charges >= 3 : The prescription charge is now £1.30 an item. ?]
+
+- @fund: Fund the NHS above inflation.
+- @prescriptions: Raise prescription charges.
+- @contract_out: Contract out hospital cleaning, catering and laundry.
+- @reorganise: Abolish the area health authorities.
+- @private_insurance: Encourage private health insurance.
+- @griffiths: Bring in general managers.
+- @easy_discard
+- @cancel_advisor_action
+
+@fund
+view-if: nhs_funding < 4
+subtitle: -1 budget. Popular with everyone except the Treasury.
+on-arrival: nhs_funding += 1; budget -= 1; de_con += 2*(1-dissent); c1_con += 1*(1-dissent); c2_con += 1*(1-dissent); wet_dissent -= 3; dry_dissent += 2
+
+The health budget grows faster than prices again this year. The Health Secretary can tell the Commons that spending on the NHS has never been higher, and Labour can't deny it.
+
+@prescriptions
+view-if: prescription_charges < 3
+subtitle: +0.5 budget. Pensioners and the poor feel it most.
+on-arrival: prescription_charges += 1; budget += 0.5; de_con -= 2; c2_con -= 1; de_lab += 1; wet_dissent += 2; dry_dissent -= 1
+
+[? if prescription_charges = 1 : The charge for a prescription goes up from 20p to 45p. ?][? if prescription_charges = 2 : The prescription charge goes up to £1, five times what it was when we took office. ?][? if prescription_charges = 3 : The prescription charge reaches £1.30. Labour's posters ask what the Conservatives have against the sick. ?] The exemptions for children, pensioners and people on benefit remain.
+
+@contract_out
+view-if: nhs_contracting = 0
+subtitle: +1 budget. The health service unions will fight it.
+on-arrival: nhs_contracting = 1; budget += 1; union_power -= 3; strike_wave += 1; de_lab += 1; economic_liberalism += 1; wet_dissent += 2; dry_dissent -= 3
+
+Health authorities must put cleaning, catering and laundry out to competitive tender. Private contractors win most of the work by paying lower wages. NUPE and COHSE call it privatisation by the back door.
+
+@reorganise
+view-if: nhs_reorganised = 0
+subtitle: +0.5 budget.
+on-arrival: nhs_reorganised = 1; budget += 0.5; loyalist_dissent -= 2; dry_dissent -= 1
+
+Patrick Jenkin abolishes the area health authorities that Sir Keith Joseph created in 1974. One layer of administration disappears, and with it several thousand jobs.
+
+@private_insurance
+view-if: private_health = 0
+subtitle: The right and the professional classes approve. The NHS lobby is alarmed.
+on-arrival: private_health = 1; ab_con += 2*(1-dissent); c1_con += 1*(1-dissent); de_con -= 2; de_lab += 1; economic_liberalism += 2; wet_dissent += 3; dry_dissent -= 2
+
+Employees on modest incomes no longer pay tax on private medical insurance provided by their employer. Membership of BUPA and its rivals grows quickly. The BMA warns of a two-tier health service.
+
+@griffiths
+view-if: nhs_reorganised = 1 and nhs_griffiths = 0 and time >= 50
+subtitle: +0.5 budget. The doctors and nurses are suspicious.
+on-arrival: nhs_griffiths = 1; budget += 0.5; dry_dissent -= 2; wet_dissent += 1; economic_liberalism += 1
+
+Roy Griffiths of Sainsbury's reports on NHS management: "If Florence Nightingale were carrying her lamp through the corridors of the NHS today, she would almost certainly be searching for the people in charge." General managers, many of them from business, are appointed at every level.

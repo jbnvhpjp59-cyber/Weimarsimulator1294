@@ -1,0 +1,14 @@
+title: Winning the Battle Against Inflation
+tags: event
+view-if: time >= 7 and pay_norm > 5
+max-visits: 1
+new-page: true
+on-arrival: pay_norm = 5; strike_wave += 0.5; labour_credibility += 2
+
+= Winning the Battle Against Inflation
+
+The government publishes its White Paper for the next pay round: wage rises are to be held to 5%. With inflation around 8%, that is a cut in real pay for millions of workers.
+
+Ministers argue that one more year of restraint will finish off inflation. Union leaders warn that their members won't stand for it. Moss Evans of the Transport and General Workers' Union says the policy is dead before it starts.
+
+[? if pay_stance = 2 : Our support for free collective bargaining looks prescient to some, and opportunistic to others. ?]

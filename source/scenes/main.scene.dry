@@ -1,0 +1,79 @@
+title: Next month
+set-bg: img/map.jpg
+is-hand: true
+on-arrival: {!
+var label = Q.con_in_government ? 'Cabinet' : 'Shadow Cabinet';
+if (Q.advisor_action_timer <= 0) {
+    Q.pinnedCardsDescription = label + ' - an action is available.';
+} else if (Q.advisor_action_timer == 1) {
+    Q.pinnedCardsDescription = label + ' - next action available in 1 month.';
+} else {
+    Q.pinnedCardsDescription = label + ' - next action available in ' + Q.advisor_action_timer + ' months.';
+}
+!}
+max-cards: 3
+
+# The main deck is displayed here. Clicking a deck draws a card into your hand; clicking a card plays it.
+
+[? if in_campaign : **The general election campaign is under way.** Polling day is [+ next_election_month : month +] [+ next_election_year +]. ?]
+
+- @party
+- @govt
+- @commons
+- @campaign
+- #advisor
+- @inner_circle_pinned
+
+@main_easy
+set-bg: img/map.jpg
+is-hand: true
+on-arrival: {!
+var label = Q.con_in_government ? 'Cabinet' : 'Shadow Cabinet';
+if (Q.advisor_action_timer <= 0) {
+    Q.pinnedCardsDescription = label + ' - an action is available.';
+} else if (Q.advisor_action_timer == 1) {
+    Q.pinnedCardsDescription = label + ' - next action available in 1 month.';
+} else {
+    Q.pinnedCardsDescription = label + ' - next action available in ' + Q.advisor_action_timer + ' months.';
+}
+!}
+max-cards: 4
+
+[? if in_campaign : **The general election campaign is under way.** Polling day is [+ next_election_month : month +] [+ next_election_year +]. ?]
+
+- @party
+- @govt
+- @commons
+- @campaign
+- #advisor
+- @inner_circle_pinned
+
+@party
+title: Party Affairs
+card-image: img/party.png
+is-deck: true
+
+- #party_affairs
+
+@govt
+title: Government Affairs
+card-image: img/cards/downing_1979.jpg
+view-if: con_in_government = 1
+is-deck: true
+
+- #govt_affairs
+
+@commons
+title: The Commons
+card-image: img/cards/commons_1970s.jpg
+is-deck: true
+
+- #commons
+
+@campaign
+title: The Campaign
+card-image: img/cards/polling_station.jpg
+view-if: in_campaign = 1
+is-deck: true
+
+- #campaign

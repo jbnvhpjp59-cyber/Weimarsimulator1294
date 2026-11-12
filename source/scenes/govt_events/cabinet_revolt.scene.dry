@@ -1,0 +1,21 @@
+title: Revolt in Cabinet
+tags: event
+view-if: con_in_government = 1 and cabinet_revolt >= 8
+new-page: true
+
+= Revolt in Cabinet
+
+At the Cabinet meeting on public spending, the Treasury asks for another round of cuts. One by one, the wets refuse. It is the most open revolt against a Prime Minister by her own Cabinet in living memory, and by the evening it is in all the papers.
+
+- @give_way: Give way on spending.
+- @face_down: Face them down, and remember who spoke.
+
+@give_way
+on-arrival: spending += 1; budget -= 2; cabinet_revolt = 2; wet_dissent -= 6; dry_dissent += 8; thatcher_rating -= 2
+
+The cuts are dropped. The wets have shown they can stop you.
+
+@face_down
+on-arrival: cabinet_revolt = 4; wet_dissent += 10; rebellion += 2; reshuffle_timer = 0; dry_dissent -= 4
+
+The meeting ends without agreement and the cuts go ahead anyway, imposed department by department. A reshuffle is now only a matter of time.

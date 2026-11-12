@@ -1,0 +1,36 @@
+title: Fundraising
+new-page: true
+is-card: true
+card-image: img/party.png
+tags: party_affairs
+view-if: fundraising_timer <= 0 and not fundraising_disabled
+on-arrival: fundraising_timer = 4; month_actions += 1
+frequency: 300
+
+= Fundraising
+
+Central Office is short of money, as it always is. Elections are expensive, and the next one cannot be more than two years away.
+
+- @city: Court the City and big industry.
+- @members: Run a membership drive in the constituencies.
+- @increase: Ask our donors to dig deeper.
+- @easy_discard
+
+@city
+subtitle: [+ donations + 1 +] resources. The dries approve; Labour will call us the party of the bosses.
+on-arrival: resources += donations + 1; dry_strength += 2; wet_dissent += 2; c2_con -= 1
+
+The chairmen of the big companies are happy to help a party that promises to get the state off their backs. Labour's press office is just as happy to point it out.
+
+@members
+subtitle: [+ donations +] resources. Calms the grassroots.
+on-arrival: resources += donations; loyalist_dissent -= 3; right_dissent -= 3
+
+Coffee mornings, raffles and jumble sales across the shires. It isn't glamorous, but the associations feel listened to.
+
+@increase
+view-if: donations <= 4
+subtitle: Permanently increases fundraising income, giving [+ donations + 1 +] resources now. Donors will expect influence.
+on-arrival: donations += 1; resources += donations; dry_strength += 2; wet_dissent += 3
+
+Our biggest backers agree to give more, and make clear they expect a more radical economic programme in return.

@@ -1,0 +1,55 @@
+title: Sir Ian Gilmour
+is-pinned-card: true
+card-image: img/cards/gilmour.jpg
+tags: advisor
+view-if: gilmour_advisor = 1
+new-page: true
+
+= Sir Ian Gilmour
+
+[? if con_in_government = 0 : Shadow Defence Secretary. ?][? if con_in_government = 1 : Lord Privy Seal, and Carrington's deputy at the Foreign Office. ?] A baronet, former owner of The Spectator, and the most articulate of the wets. He thinks monetarism is a doctrine, and that Conservatives should distrust doctrines.
+
+- @one_nation
+- @defence
+- @europe
+- @temper
+- @root: Return
+
+@one_nation
+title: A speech on One Nation
+subtitle: The wets and working-class voters are reassured. The dries suspect a coded attack.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; wet_dissent -= 6; c2_con += 1*(1-dissent); de_con += 1*(1-dissent); dry_dissent += 3
+
+Gilmour reminds the party that Disraeli wanted to unite the two nations, not to choose between them. The speech is reported as a rebuke. He insists it isn't.
+
+@defence
+title: Back the armed forces
+view-if: con_in_government = 0
+subtitle: The right and the services approve.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; right_dissent -= 4; c2_con += 1*(1-dissent); labour_credibility -= 1
+
+Gilmour attacks Labour's defence cuts and promises the forces a pay rise. Even the right has to admit he does it well.
+
+@europe
+title: Negotiate with our European partners
+view-if: con_in_government = 1
+subtitle: Better relations with Europe, and progress on the budget rebate.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; europe_relation += 8; eec_rebate += 1 if eec_rebate = 1; wet_dissent -= 2; right_dissent += 3
+
+Gilmour and Carrington spend a long weekend in Brussels. [? if eec_rebate = 2 : They come back with a deal on the rebate that you think is too generous to the Community and everyone else thinks is a triumph. ?][? if eec_rebate < 2 : They come back with goodwill rather than money. ?]
+
+@temper
+title: Temper the monetarists in Cabinet
+view-if: con_in_government = 1
+subtitle: Cabinet tension falls. The dries resent it.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; cabinet_revolt -= 1; wet_dissent -= 4; dry_dissent += 5; economic_liberalism -= 1
+
+Gilmour argues, at length and with footnotes, that the money supply figures mean nothing. The wets feel they have a champion at the table.

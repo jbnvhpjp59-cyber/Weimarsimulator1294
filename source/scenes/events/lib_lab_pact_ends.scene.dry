@@ -1,0 +1,13 @@
+title: The End of the Lib-Lab Pact
+tags: event
+view-if: time >= 7 and lib_lab_pact = 1
+max-visits: 1
+new-page: true
+on-arrival: lib_lab_pact = 0; lib_relation += 5; c1_lib += 1; ab_lib += 1
+face-image: img/events/steel.jpg
+
+= The End of the Lib-Lab Pact
+
+David Steel has confirmed that the Lib-Lab Pact ends with this session of Parliament. The Liberals got little from it except survival, and their poll ratings collapsed while it lasted.
+
+From the autumn, Callaghan will govern as a minority, depending vote by vote on whoever he can persuade. [? if lib_relation >= 40 : Steel's people have made it known they are open to talking. ?]

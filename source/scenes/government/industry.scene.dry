@@ -1,0 +1,48 @@
+title: Nationalised Industries
+new-page: true
+is-card: true
+card-image: img/cards/leyland.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and industry_timer <= 0
+on-arrival: industry_timer = 4; month_actions += 1
+
+= Nationalised Industries
+
+[+ industry_secretary +] reports on the state sector. British Steel loses money every week, British Leyland is kept alive by subsidy, and the coal industry is a law unto itself. [? if privatisations > 0 : So far we have sold off [+ privatisations +] state enterprises. ?]
+
+- @bail_out: Bail out British Leyland and British Steel.
+- @cut_subsidies: Cut the subsidies and let them shrink.
+- @privatise: Sell a state enterprise.
+- @coal_stocks: Quietly build up coal stocks at the power stations.
+- @easy_discard
+- @cancel_advisor_action
+
+@bail_out
+subtitle: -2 budget. Saves jobs for now.
+on-arrival: budget -= 2; industry_subsidy += 1; unemployment -= 0.5; c2_con += 1*(1-dissent); wet_dissent -= 4; dry_dissent += 6; economic_liberalism -= 2
+
+The money is found, again. Sir Michael Edwardes keeps BL going on condition that he can close plants and face down the shop stewards.
+
+@cut_subsidies
+subtitle: +2 budget. Closures and redundancies. Requires a dry Industry Secretary.
+choose-if: industry_dry = 1
+unavailable-subtitle: [+ industry_secretary +] won't let the lame ducks die.
+on-arrival: budget += 2; unemployment += 0.7; strike_wave += 1; union_power -= 3; c2_con -= 2; de_con -= 1; dry_dissent -= 4; wet_dissent += 4
+
+Steelworks at Consett and Corby close, along with car plants and shipyards. Whole towns lose their main employer.
+
+@privatise
+view-if: privatisations < 5
+subtitle: +2 budget.
+choose-if: policy_privatisation = 1 or industry_dry = 1 or economic_liberalism >= 50
+unavailable-subtitle: Neither the party nor the public is ready for denationalisation.
+on-arrival: privatisations += 1; budget += 2; economic_liberalism += 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent) if privatisations >= 3; dry_dissent -= 3; wet_dissent += 2
+
+[? if privatisations = 1 : The government sells its shares in British Aerospace. ?][? if privatisations = 2 : Cable & Wireless goes to the market. ?][? if privatisations = 3 : Britoil, the state's North Sea oil company, is floated. Ordinary investors queue for shares. ?][? if privatisations = 4 : Associated British Ports is sold. ?][? if privatisations = 5 : The government announces it will sell British Telecom, the biggest share offer in history. ?]
+
+@coal_stocks
+view-if: coal_stocks < 3
+subtitle: -1 budget. Prepares for a future miners' strike.
+on-arrival: coal_stocks += 1; budget -= 1
+
+The Central Electricity Generating Board is told to build up coal stocks at the power stations and to convert some to burn oil. Nobody says why, and nobody needs to.

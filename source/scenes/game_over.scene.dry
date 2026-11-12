@@ -1,0 +1,728 @@
+title: Game Over.
+new-page: true
+go-to: eg_menu
+on-arrival: {!
+Q.game_over = 1;
+Q.inflation_2 = Q.inflation.toFixed(1);
+Q.unemployment_2 = Q.unemployment.toFixed(1);
+Q.governed = (Q.term_start_time > 0) ? 1 : 0;
+Q.reelected = (Q.governed && Q.n_elections >= Q.final_election && Q.result_type >= 1 && Q.result_type <= 4 && !Q.ousted) ? 1 : 0;
+// won power at the last election, after losing in 1979
+Q.late_victory = (!Q.governed && Q.result_type >= 1 && Q.result_type <= 4 && !Q.ousted) ? 1 : 0;
+if (Q.late_victory) {
+    this.achieve('second_chance');
+}
+this.achieve('game_completed');
+if (Q.governed) {
+    this.achieve('prime_minister');
+}
+if (Q.reelected) {
+    this.achieve('re_elected');
+    if (Q.result_type == 1 && Q.con_majority >= 100) {
+        this.achieve('landslide');
+    }
+    if (Q.wet_dissent < 20 && Q.dry_dissent < 20) {
+        this.achieve('one_nation');
+    }
+    if (Q.inflation < 5 && Q.union_power <= 40 && Q.privatisations >= 3 && Q.right_to_buy_progress >= 3) {
+        this.achieve('thatcherism');
+    }
+    if (Q.u_turn == -1) {
+        this.achieve('lady_for_turning');
+    }
+    if (Q.unemployment < 8) {
+        this.achieve('full_employment');
+    }
+}
+if (Q.governed && Q.u_turn == 1) {
+    this.achieve('not_for_turning');
+}
+if (Q.falklands == 3) {
+    this.achieve('rejoice');
+}
+if (Q.falklands == 6) {
+    this.achieve('deterrence');
+}
+if (Q.eec_rebate >= 2) {
+    this.achieve('money_back');
+}
+if (Q.ousted) {
+    this.achieve('et_tu');
+}
+if (Q.result_type == 5 && !Q.governed) {
+    this.achieve('sunny_jim');
+}
+if (Q.autumn_election_1978 && Q.governed) {
+    this.achieve('waiting_at_the_church');
+}
+if (Q.reelected) {
+    if (Q.nhs_funding >= 2 && !Q.cprs_defended) {
+        this.achieve('nhs_safe');
+    }
+    if (Q.historical_mode) {
+        this.achieve('tina');
+    } else if (Q.difficulty >= 1) {
+        this.achieve('iron_lady');
+    }
+    if (!Q.unemployment_3m && Q.unemployment < 11) {
+        this.achieve('never_three_million');
+    }
+    if (Q.result_type == 1 && Q.con_majority >= 144) {
+        this.achieve('big_majority');
+    }
+}
+if (Q.governed && !Q.ousted && Q.inflation < 4) {
+    this.achieve('sound_money');
+}
+if (Q.privatisations >= 5) {
+    this.achieve('share_owning');
+}
+if (Q.governed && Q.union_power <= 30) {
+    this.achieve('union_power_broken');
+}
+!}
+face-image: img/events/thatcher_1980.jpg
+on-display: {!
+if (typeof window !== 'undefined' && window.playMoment) {
+    var sad = Q.ousted || (Q.governed && Q.result_type == 5);
+    window.playMoment(sad ? 'music/funeral_march.mp3' : 'music/god_save_the_queen.mp3');
+}
+!}
+
+= The Verdict of History
+
+@eg_menu
+
+- #endings
+- @end_game: End game.
+
+#################### How it ended
+
+@defeat_1979
+title: Defeated, and defeated again.
+view-if: result_type = 5 and governed = 0 and ousted = 0
+tags: endings
+go-to: eg_menu
+
+[? if lab_mps >= majority_line : [+ lab_leader +] has won a majority of his own. ?][? if lab_mps < majority_line : [+ lab_leader +] carries on, at the head of the largest party in a hung parliament. ?] The post-war consensus has survived another election.
+
+By the weekend, the Sunday papers are full of leadership speculation. Edward Heath lets it be known that he is available.
+
+@late_victory_ending
+title: Prime Minister at last.
+view-if: late_victory = 1
+tags: endings
+go-to: eg_menu
+
+After the long years in opposition, the country has turned to you. [? if result_type = 1 : With a majority of [+ con_majority +], ?][? if result_type >= 2 : Without a majority of your own, ?] you go to the Palace to kiss hands. The real work starts now.
+
+@ousted_ending
+title: Ousted by your own party.
+view-if: ousted = 1
+tags: endings
+go-to: eg_menu
+
+[? if governed = 1 : The men in grey suits came to Downing Street, and then the ballot of Conservative MPs did the rest. You leave Number 10 for the last time [+ months_in_office +] months after you arrived. ?][? if governed = 0 : Defeated at the polls and then by your own party, you return to the backbenches. ?] The new leader promises a return to One Nation conservatism and a gentler economic policy.
+
+@defeat_reelection
+title: Turned out of office.
+view-if: result_type = 5 and governed = 1 and ousted = 0
+tags: endings
+go-to: eg_menu
+
+[? if lab_mps >= majority_line : Labour, under [+ lab_leader +], has won a majority. ?][? if lab_mps < majority_line : Labour, under [+ lab_leader +], is the largest party in a hung parliament. ?] Your government lasted [+ months_in_office +] months. To your critics, the experiment has been tried and has failed. To your admirers, it was abandoned too soon.
+
+@landslide_reelection
+title: Re-elected by a landslide.
+view-if: reelected = 1 and result_type = 1 and con_majority >= 100
+tags: endings
+go-to: eg_menu
+
+A majority of [+ con_majority +]. The country has endorsed not just a government but a new settlement. The wets are finished as a force, and the next Parliament is yours to shape.
+
+@comfortable_reelection
+title: Re-elected.
+view-if: reelected = 1 and result_type = 1 and con_majority < 100
+tags: endings
+go-to: eg_menu
+
+A majority of [+ con_majority +]. Not a landslide, but a second term, something no Conservative government has managed since 1959.
+
+@hung_reelection
+title: Clinging on.
+view-if: reelected = 1 and result_type >= 2
+tags: endings
+go-to: eg_menu
+
+You remain in Downing Street, but without a majority of your own. [? if result_type = 2 : The Ulster Unionists hold the balance of power. ?][? if result_type = 3 : The price of power is electoral reform. ?][? if result_type = 4 : Every vote in the new Parliament will be a struggle. ?]
+
+#################### The record in government
+
+@inflation_beaten
+title: Inflation has been beaten.
+view-if: governed = 1 and inflation < 5
+tags: endings
+go-to: eg_menu
+
+Inflation is down to [+ inflation_2 +]%, the lowest in more than a decade. Sound money was the promise, and it has been kept.
+
+@inflation_high
+title: Inflation still rages.
+view-if: governed = 1 and inflation >= 10
+tags: endings
+go-to: eg_menu
+
+Inflation is still [+ inflation_2 +]%. The central promise of the government has not been kept.
+
+@mass_unemployment
+title: Three million unemployed.
+view-if: governed = 1 and unemployment >= 11
+tags: endings
+go-to: eg_menu
+
+Unemployment stands at [+ unemployment_2 +]%. Whole towns in the North, Scotland and Wales have lost the industries that built them, and they won't forget who was in charge.
+
+@jobs_kept
+title: The dole queues kept short.
+view-if: governed = 1 and unemployment < 8
+tags: endings
+go-to: eg_menu
+
+Unemployment is [+ unemployment_2 +]%, far below what the critics of monetarism predicted.
+
+@unions_tamed
+title: The unions brought within the law.
+view-if: governed = 1 and union_power <= 40
+tags: endings
+go-to: eg_menu
+
+Secret ballots, limits on picketing and the end of blanket legal immunities have shifted the balance of power in industry. [? if coal_stocks >= 2 : The coal stocks at the power stations are high; if the miners strike, the lights will stay on. ?]
+
+@unions_unbowed
+title: The unions are as strong as ever.
+view-if: governed = 1 and union_power >= 65
+tags: endings
+go-to: eg_menu
+
+The trade union barons still hold the whip hand. Whoever governs next will have to come to terms with them, or fight them.
+
+@popular_capitalism
+title: Popular capitalism.
+view-if: governed = 1 and privatisations >= 3
+tags: endings
+go-to: eg_menu
+
+[+ privatisations +] state enterprises have been returned to the private sector, and the queues for share offers are growing. The frontiers of the state are being rolled back.
+
+@property_owning
+title: A property-owning democracy.
+view-if: governed = 1 and right_to_buy_progress >= 3
+tags: endings
+go-to: eg_menu
+
+Hundreds of thousands of council tenants have bought their homes. Many of them will never vote Labour again.
+
+@falklands_won
+title: Rejoice.
+view-if: falklands = 3
+tags: endings
+go-to: eg_menu
+
+The Union Jack flies again over Port Stanley. Britain has shown it will fight for its own, and you have become a war leader.
+
+@falklands_lost
+title: The South Atlantic disaster.
+view-if: falklands = 4
+tags: endings
+go-to: eg_menu
+
+The task force failed. The Falkland Islands are now the Malvinas, and Britain's standing in the world has fallen further than at any time since Suez.
+
+@falklands_negotiated
+title: A deal over the Falklands.
+view-if: falklands = 5
+tags: endings
+go-to: eg_menu
+
+The islands passed to Argentine administration under an international settlement. Peace was kept; the right of the party will never forgive it.
+
+@falklands_deterred
+title: No war in the South Atlantic.
+view-if: falklands = 6
+tags: endings
+go-to: eg_menu
+
+HMS Endurance stayed on station, and the Argentine junta never risked it. History will never know what it was spared.
+
+@money_back
+title: "Our own money back."
+view-if: eec_rebate >= 2
+tags: endings
+go-to: eg_menu
+
+After years of handbag-swinging at European summits, Britain has won a permanent rebate on its contributions to the Community budget.
+
+@not_for_turning_ending
+title: The lady was not for turning.
+view-if: governed = 1 and u_turn = 1
+tags: endings
+go-to: eg_menu
+
+Through the worst of the recession, with the wets in revolt and 364 economists against you, you held the course. Whether that was courage or stubbornness, it is now the defining fact of your premiership.
+
+@u_turn_ending
+title: The U-turn.
+view-if: governed = 1 and u_turn = -1
+tags: endings
+go-to: eg_menu
+
+Like Heath before you, you turned. The government reflated and the dries despaired. To the consensus, it was common sense; to the believers, it was betrayal.
+
+@alliance_ending
+title: The Alliance.
+view-if: alliance_formed = 1
+tags: endings
+go-to: eg_menu
+
+Labour split, and the Social Democrats and Liberals together have reshaped the opposition. [? if lib_mps >= 40 : With [+ lib_mps +] MPs, the Alliance has broken the two-party system. ?][? if lib_mps < 40 : First-past-the-post has cheated them of the breakthrough their votes deserved. ?]
+
+@nhs_safe_ending
+title: "The NHS is safe with us."
+view-if: governed = 1 and nhs_funding >= 2 and cprs_defended = 0
+tags: endings
+go-to: eg_menu
+
+The health service was funded above inflation [+ nhs_funding +] times, and Labour's warnings that the Conservatives would dismantle it rang hollow. [? if prescription_charges >= 2 : The prescription charge went up, but the service itself is intact. ?][? if nhs_contracting = 1 : The cleaners and caterers now work for private contractors; the doctors and nurses still work for the state. ?]
+
+@nhs_strain_ending
+title: The health service under strain.
+view-if: governed = 1 and (cprs_defended = 1 or (private_health = 1 and nhs_funding = 0))
+tags: endings
+go-to: eg_menu
+
+Waiting lists are growing, and the government's commitment to a free health service is openly doubted. [? if cprs_defended = 1 : Nobody has forgotten the Think Tank's paper, or that you defended it. ?] Labour will make the NHS the centre of every campaign for a generation.
+
+@pensions_ending
+title: Pensions tied to prices.
+view-if: governed = 1 and pension_link_broken = 1
+tags: endings
+go-to: eg_menu
+
+Breaking the link between pensions and earnings saved little at first. It will save a fortune by the end of the century, and the pensioners of the 1990s will be correspondingly poorer than their parents expected.
+
+@education_ending
+title: Choice in education.
+view-if: governed = 1 and (assisted_places = 1 or parental_choice = 1 or school_vouchers = 2)
+tags: endings
+go-to: eg_menu
+
+[? if parental_choice = 1 : Parents can now state a preference for their school and read its exam results. ?] [? if assisted_places = 1 : Thousands of children from modest homes hold assisted places at independent schools. ?] [? if school_vouchers = 2 : In Kent, the voucher experiment is being watched by every education authority in the country. ?]
+
+@erm_ending
+title: Sterling in the Exchange Rate Mechanism.
+view-if: erm = 1
+tags: endings
+go-to: eg_menu
+
+The pound is tied to the Deutschmark. The City likes the stability; the monetarists say that interest rates are now set in Frankfurt. Whether the peg holds through the next recession is a question for another Parliament.
+
+@rates_ending
+title: "The rates must go."
+view-if: rates_pledge = 1
+tags: endings
+go-to: eg_menu
+
+The promise to abolish the domestic rates stands, and nobody has yet found anything to replace them. The civil servants still favour a flat-rate charge on every adult. Some ministers have started to call it the community charge, which sounds better than a poll tax.
+
+@glc_ending
+title: The end of the GLC.
+view-if: glc_abolition = 1
+tags: endings
+go-to: eg_menu
+
+The Greater London Council and the metropolitan counties are being abolished. Ken Livingstone has become a national figure fighting it, and London will have no city-wide government of its own for years to come.
+
+@docklands_ending
+title: The Docklands.
+view-if: docklands = 1
+tags: endings
+go-to: eg_menu
+
+On the Isle of Dogs, where the West India Docks once employed thousands, the developers are moving in. A light railway is planned, and an American consortium talks of a vast office development at Canary Wharf.
+
+@nuclear_ending
+title: Sizewell.
+view-if: nuclear_programme = 1
+tags: endings
+go-to: eg_menu
+
+The public inquiry into the Sizewell B reactor is still sitting, and will sit for years. If the plan survives it, the miners will never again be able to turn off the country's lights.
+
+@to_be_continued
+title: What comes next.
+view-if: reelected = 1
+tags: endings
+go-to: eg_menu
+
+This version of the game ends at your re-election. The second term, with the miners, Brighton, Westland and the Big Bang, is not written yet.
+
+#################### Achievements
+
+@achievements
+title: Achievements
+view-if: achievement_game_completed == 1
+tags: endings
+go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
+
+There are 57 achievements.
+
+= In this playthrough
+
+[? if game_achievement_prime_minister : **Prime Minister** - win power. ?]
+
+[? if game_achievement_re_elected : **Four More Years** - win re-election. ?]
+
+[? if game_achievement_landslide : **Landslide** - be re-elected with a majority of 100 or more. ?]
+
+[? if game_achievement_big_majority : **Hundred and Forty-Four** - be re-elected with a majority of 144 or more. ?]
+
+[? if game_achievement_one_nation : **One Nation** - be re-elected with both the wets and the dries content. ?]
+
+[? if game_achievement_thatcherism : **Thatcherism** - be re-elected with inflation beaten, the unions tamed, three privatisations and the right to buy. ?]
+
+[? if game_achievement_full_employment : **Full Employment** - be re-elected with unemployment below 8%. ?]
+
+[? if game_achievement_never_three_million : **Never Three Million** - be re-elected without unemployment ever reaching three million. ?]
+
+[? if game_achievement_nhs_safe : **Safe With Us** - be re-elected having funded the NHS above inflation at least twice. ?]
+
+[? if game_achievement_iron_lady : **The Iron Lady** - be re-elected on hard difficulty. ?]
+
+[? if game_achievement_tina : **There Is No Alternative** - be re-elected in historical mode. ?]
+
+[? if game_achievement_not_for_turning : **Not for Turning** - hold the economic course through the recession. ?]
+
+[? if game_achievement_lady_for_turning : **The Lady's for Turning** - be re-elected after a U-turn. ?]
+
+[? if game_achievement_sound_money : **Sound Money** - end the game in government with inflation below 4%. ?]
+
+[? if game_achievement_union_power_broken : **Union Power Broken** - end the game in government with union power at 30 or below. ?]
+
+[? if game_achievement_share_owning : **Share-Owning Democracy** - sell five state enterprises. ?]
+
+[? if game_achievement_rejoice : **Rejoice** - win the Falklands War. ?]
+
+[? if game_achievement_deterrence : **Deterrence** - prevent the Falklands War. ?]
+
+[? if game_achievement_money_back : **Our Own Money Back** - win the EEC budget rebate. ?]
+
+[? if game_achievement_no_confidence : **311 to 310** - bring down the government on a motion of no confidence. ?]
+
+[? if game_achievement_labour_isnt_working : **Labour Isn't Working** - run the poster. ?]
+
+[? if game_achievement_saatchi : **Saatchi & Saatchi** - hire the admen. ?]
+
+[? if game_achievement_crisis_what_crisis : **Crisis? What Crisis?** - live through the Winter of Discontent. ?]
+
+[? if game_achievement_debate_win : **The Great Debate** - win a televised election debate. ?]
+
+[? if game_achievement_ilford_north : **Ilford North** - win the Ilford North by-election. ?]
+
+[? if game_achievement_ulster_deal : **Ulster Says Yes** - govern with Unionist support. ?]
+
+[? if game_achievement_lib_con : **Lib-Con** - govern with Liberal support. ?]
+
+[? if game_achievement_waiting_at_the_church : **Waiting at the Church** - win Callaghan's autumn 1978 election. ?]
+
+[? if game_achievement_sunny_jim : **Sunny Jim** - lose to Callaghan. ?]
+
+[? if game_achievement_et_tu : **Et Tu** - be ousted by your own party. ?]
+
+[? if game_achievement_second_chance : **Second Chance** - lose in 1979, survive, and win the next election. ?]
+
+[? if game_achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
+
+[? if game_achievement_full_speed_ahead : **The Occasional Man Overboard** - drop Sir Ian Gilmour from your inner circle while in government. ?]
+
+[? if game_achievement_broad_church : **Broad Church** - have a wet, a dry and a loyalist in your inner circle at once. ?]
+
+[? if game_achievement_miners_beaten : **Not 1974** - defeat a miners' strike. ?]
+
+[? if game_achievement_steel : **Cash Limits** - hold firm in the steel strike. ?]
+
+[? if game_achievement_medium_term : **Medium Term** - adopt the Medium-Term Financial Strategy. ?]
+
+[? if game_achievement_seventeen : **Seventeen Per Cent** - raise Bank Rate to 17%. ?]
+
+[? if game_achievement_economists : **364 Economists** - raise taxes in the depths of the recession. ?]
+
+[? if game_achievement_on_your_bike : **On Your Bike** - let Norman Tebbit tell the unemployed to look for work. ?]
+
+[? if game_achievement_select_committees : **Select Committees** - let Norman St John-Stevas reform the Commons. ?]
+
+[? if game_achievement_the_way_forward : **The Way Forward** - carry out John Nott's defence review. ?]
+
+[? if game_achievement_hunger_strike : **Crime Is Crime** - refuse the hunger strikers' demands. ?]
+
+[? if game_achievement_scarman : **Scarman** - implement the Scarman Report. ?]
+
+[? if game_achievement_hanging : **Free Vote** - let the Commons vote on the death penalty. ?]
+
+[? if game_achievement_nationality : **Three Kinds of Citizen** - pass the British Nationality Act. ?]
+
+[? if game_achievement_boat_people : **Geneva** - take in the Vietnamese boat people. ?]
+
+[? if game_achievement_think_tank : **Think the Unthinkable** - live through the Think Tank leak. ?]
+
+[? if game_achievement_pension_link : **Breaking the Link** - tie pensions to prices instead of earnings. ?]
+
+[? if game_achievement_assisted_places : **Assisted Places** - create the Assisted Places Scheme. ?]
+
+[? if game_achievement_vouchers : **The Voucher Lives** - pilot education vouchers. ?]
+
+[? if game_achievement_yts : **Youth Training** - launch the Youth Training Scheme. ?]
+
+[? if game_achievement_erm : **Half-Baked** - take sterling into the Exchange Rate Mechanism. ?]
+
+[? if game_achievement_sizewell : **Sizewell** - order a nuclear power programme. ?]
+
+[? if game_achievement_rates : **The Rates Must Go** - promise to abolish the domestic rates. ?]
+
+[? if game_achievement_glc : **County Hall** - abolish the GLC. ?]
+
+[? if game_achievement_docklands : **Isle of Dogs** - create the docklands development corporations. ?]
+
+= Unlocked in earlier games
+
+[? if achievement_prime_minister and not game_achievement_prime_minister : **Prime Minister** - win power. ?]
+
+[? if achievement_re_elected and not game_achievement_re_elected : **Four More Years** - win re-election. ?]
+
+[? if achievement_landslide and not game_achievement_landslide : **Landslide** - be re-elected with a majority of 100 or more. ?]
+
+[? if achievement_big_majority and not game_achievement_big_majority : **Hundred and Forty-Four** - be re-elected with a majority of 144 or more. ?]
+
+[? if achievement_one_nation and not game_achievement_one_nation : **One Nation** - be re-elected with both the wets and the dries content. ?]
+
+[? if achievement_thatcherism and not game_achievement_thatcherism : **Thatcherism** - be re-elected with inflation beaten, the unions tamed, three privatisations and the right to buy. ?]
+
+[? if achievement_full_employment and not game_achievement_full_employment : **Full Employment** - be re-elected with unemployment below 8%. ?]
+
+[? if achievement_never_three_million and not game_achievement_never_three_million : **Never Three Million** - be re-elected without unemployment ever reaching three million. ?]
+
+[? if achievement_nhs_safe and not game_achievement_nhs_safe : **Safe With Us** - be re-elected having funded the NHS above inflation at least twice. ?]
+
+[? if achievement_iron_lady and not game_achievement_iron_lady : **The Iron Lady** - be re-elected on hard difficulty. ?]
+
+[? if achievement_tina and not game_achievement_tina : **There Is No Alternative** - be re-elected in historical mode. ?]
+
+[? if achievement_not_for_turning and not game_achievement_not_for_turning : **Not for Turning** - hold the economic course through the recession. ?]
+
+[? if achievement_lady_for_turning and not game_achievement_lady_for_turning : **The Lady's for Turning** - be re-elected after a U-turn. ?]
+
+[? if achievement_sound_money and not game_achievement_sound_money : **Sound Money** - end the game in government with inflation below 4%. ?]
+
+[? if achievement_union_power_broken and not game_achievement_union_power_broken : **Union Power Broken** - end the game in government with union power at 30 or below. ?]
+
+[? if achievement_share_owning and not game_achievement_share_owning : **Share-Owning Democracy** - sell five state enterprises. ?]
+
+[? if achievement_rejoice and not game_achievement_rejoice : **Rejoice** - win the Falklands War. ?]
+
+[? if achievement_deterrence and not game_achievement_deterrence : **Deterrence** - prevent the Falklands War. ?]
+
+[? if achievement_money_back and not game_achievement_money_back : **Our Own Money Back** - win the EEC budget rebate. ?]
+
+[? if achievement_no_confidence and not game_achievement_no_confidence : **311 to 310** - bring down the government on a motion of no confidence. ?]
+
+[? if achievement_labour_isnt_working and not game_achievement_labour_isnt_working : **Labour Isn't Working** - run the poster. ?]
+
+[? if achievement_saatchi and not game_achievement_saatchi : **Saatchi & Saatchi** - hire the admen. ?]
+
+[? if achievement_crisis_what_crisis and not game_achievement_crisis_what_crisis : **Crisis? What Crisis?** - live through the Winter of Discontent. ?]
+
+[? if achievement_debate_win and not game_achievement_debate_win : **The Great Debate** - win a televised election debate. ?]
+
+[? if achievement_ilford_north and not game_achievement_ilford_north : **Ilford North** - win the Ilford North by-election. ?]
+
+[? if achievement_ulster_deal and not game_achievement_ulster_deal : **Ulster Says Yes** - govern with Unionist support. ?]
+
+[? if achievement_lib_con and not game_achievement_lib_con : **Lib-Con** - govern with Liberal support. ?]
+
+[? if achievement_waiting_at_the_church and not game_achievement_waiting_at_the_church : **Waiting at the Church** - win Callaghan's autumn 1978 election. ?]
+
+[? if achievement_sunny_jim and not game_achievement_sunny_jim : **Sunny Jim** - lose to Callaghan. ?]
+
+[? if achievement_et_tu and not game_achievement_et_tu : **Et Tu** - be ousted by your own party. ?]
+
+[? if achievement_second_chance and not game_achievement_second_chance : **Second Chance** - lose in 1979, survive, and win the next election. ?]
+
+[? if achievement_purge and not game_achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
+
+[? if achievement_full_speed_ahead and not game_achievement_full_speed_ahead : **The Occasional Man Overboard** - drop Sir Ian Gilmour from your inner circle while in government. ?]
+
+[? if achievement_broad_church and not game_achievement_broad_church : **Broad Church** - have a wet, a dry and a loyalist in your inner circle at once. ?]
+
+[? if achievement_miners_beaten and not game_achievement_miners_beaten : **Not 1974** - defeat a miners' strike. ?]
+
+[? if achievement_steel and not game_achievement_steel : **Cash Limits** - hold firm in the steel strike. ?]
+
+[? if achievement_medium_term and not game_achievement_medium_term : **Medium Term** - adopt the Medium-Term Financial Strategy. ?]
+
+[? if achievement_seventeen and not game_achievement_seventeen : **Seventeen Per Cent** - raise Bank Rate to 17%. ?]
+
+[? if achievement_economists and not game_achievement_economists : **364 Economists** - raise taxes in the depths of the recession. ?]
+
+[? if achievement_on_your_bike and not game_achievement_on_your_bike : **On Your Bike** - let Norman Tebbit tell the unemployed to look for work. ?]
+
+[? if achievement_select_committees and not game_achievement_select_committees : **Select Committees** - let Norman St John-Stevas reform the Commons. ?]
+
+[? if achievement_the_way_forward and not game_achievement_the_way_forward : **The Way Forward** - carry out John Nott's defence review. ?]
+
+[? if achievement_hunger_strike and not game_achievement_hunger_strike : **Crime Is Crime** - refuse the hunger strikers' demands. ?]
+
+[? if achievement_scarman and not game_achievement_scarman : **Scarman** - implement the Scarman Report. ?]
+
+[? if achievement_hanging and not game_achievement_hanging : **Free Vote** - let the Commons vote on the death penalty. ?]
+
+[? if achievement_nationality and not game_achievement_nationality : **Three Kinds of Citizen** - pass the British Nationality Act. ?]
+
+[? if achievement_boat_people and not game_achievement_boat_people : **Geneva** - take in the Vietnamese boat people. ?]
+
+[? if achievement_think_tank and not game_achievement_think_tank : **Think the Unthinkable** - live through the Think Tank leak. ?]
+
+[? if achievement_pension_link and not game_achievement_pension_link : **Breaking the Link** - tie pensions to prices instead of earnings. ?]
+
+[? if achievement_assisted_places and not game_achievement_assisted_places : **Assisted Places** - create the Assisted Places Scheme. ?]
+
+[? if achievement_vouchers and not game_achievement_vouchers : **The Voucher Lives** - pilot education vouchers. ?]
+
+[? if achievement_yts and not game_achievement_yts : **Youth Training** - launch the Youth Training Scheme. ?]
+
+[? if achievement_erm and not game_achievement_erm : **Half-Baked** - take sterling into the Exchange Rate Mechanism. ?]
+
+[? if achievement_sizewell and not game_achievement_sizewell : **Sizewell** - order a nuclear power programme. ?]
+
+[? if achievement_rates and not game_achievement_rates : **The Rates Must Go** - promise to abolish the domestic rates. ?]
+
+[? if achievement_glc and not game_achievement_glc : **County Hall** - abolish the GLC. ?]
+
+[? if achievement_docklands and not game_achievement_docklands : **Isle of Dogs** - create the docklands development corporations. ?]
+
+= Not yet unlocked
+
+[? if not achievement_prime_minister : **Prime Minister** - win power. ?]
+
+[? if not achievement_re_elected : **Four More Years** - win re-election. ?]
+
+[? if not achievement_landslide : **Landslide** - be re-elected with a majority of 100 or more. ?]
+
+[? if not achievement_big_majority : **Hundred and Forty-Four** - be re-elected with a majority of 144 or more. ?]
+
+[? if not achievement_one_nation : **One Nation** - be re-elected with both the wets and the dries content. ?]
+
+[? if not achievement_thatcherism : **Thatcherism** - be re-elected with inflation beaten, the unions tamed, three privatisations and the right to buy. ?]
+
+[? if not achievement_full_employment : **Full Employment** - be re-elected with unemployment below 8%. ?]
+
+[? if not achievement_never_three_million : **Never Three Million** - be re-elected without unemployment ever reaching three million. ?]
+
+[? if not achievement_nhs_safe : **Safe With Us** - be re-elected having funded the NHS above inflation at least twice. ?]
+
+[? if not achievement_iron_lady : **The Iron Lady** - be re-elected on hard difficulty. ?]
+
+[? if not achievement_tina : **There Is No Alternative** - be re-elected in historical mode. ?]
+
+[? if not achievement_not_for_turning : **Not for Turning** - hold the economic course through the recession. ?]
+
+[? if not achievement_lady_for_turning : **The Lady's for Turning** - be re-elected after a U-turn. ?]
+
+[? if not achievement_sound_money : **Sound Money** - end the game in government with inflation below 4%. ?]
+
+[? if not achievement_union_power_broken : **Union Power Broken** - end the game in government with union power at 30 or below. ?]
+
+[? if not achievement_share_owning : **Share-Owning Democracy** - sell five state enterprises. ?]
+
+[? if not achievement_rejoice : **Rejoice** - win the Falklands War. ?]
+
+[? if not achievement_deterrence : **Deterrence** - prevent the Falklands War. ?]
+
+[? if not achievement_money_back : **Our Own Money Back** - win the EEC budget rebate. ?]
+
+[? if not achievement_no_confidence : **311 to 310** - bring down the government on a motion of no confidence. ?]
+
+[? if not achievement_labour_isnt_working : **Labour Isn't Working** - run the poster. ?]
+
+[? if not achievement_saatchi : **Saatchi & Saatchi** - hire the admen. ?]
+
+[? if not achievement_crisis_what_crisis : **Crisis? What Crisis?** - live through the Winter of Discontent. ?]
+
+[? if not achievement_debate_win : **The Great Debate** - win a televised election debate. ?]
+
+[? if not achievement_ilford_north : **Ilford North** - win the Ilford North by-election. ?]
+
+[? if not achievement_ulster_deal : **Ulster Says Yes** - govern with Unionist support. ?]
+
+[? if not achievement_lib_con : **Lib-Con** - govern with Liberal support. ?]
+
+[? if not achievement_waiting_at_the_church : **Waiting at the Church** - win Callaghan's autumn 1978 election. ?]
+
+[? if not achievement_sunny_jim : **Sunny Jim** - lose to Callaghan. ?]
+
+[? if not achievement_et_tu : **Et Tu** - be ousted by your own party. ?]
+
+[? if not achievement_second_chance : **Second Chance** - lose in 1979, survive, and win the next election. ?]
+
+[? if not achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
+
+[? if not achievement_full_speed_ahead : **The Occasional Man Overboard** - drop Sir Ian Gilmour from your inner circle while in government. ?]
+
+[? if not achievement_broad_church : **Broad Church** - have a wet, a dry and a loyalist in your inner circle at once. ?]
+
+[? if not achievement_miners_beaten : **Not 1974** - defeat a miners' strike. ?]
+
+[? if not achievement_steel : **Cash Limits** - hold firm in the steel strike. ?]
+
+[? if not achievement_medium_term : **Medium Term** - adopt the Medium-Term Financial Strategy. ?]
+
+[? if not achievement_seventeen : **Seventeen Per Cent** - raise Bank Rate to 17%. ?]
+
+[? if not achievement_economists : **364 Economists** - raise taxes in the depths of the recession. ?]
+
+[? if not achievement_on_your_bike : **On Your Bike** - let Norman Tebbit tell the unemployed to look for work. ?]
+
+[? if not achievement_select_committees : **Select Committees** - let Norman St John-Stevas reform the Commons. ?]
+
+[? if not achievement_the_way_forward : **The Way Forward** - carry out John Nott's defence review. ?]
+
+[? if not achievement_hunger_strike : **Crime Is Crime** - refuse the hunger strikers' demands. ?]
+
+[? if not achievement_scarman : **Scarman** - implement the Scarman Report. ?]
+
+[? if not achievement_hanging : **Free Vote** - let the Commons vote on the death penalty. ?]
+
+[? if not achievement_nationality : **Three Kinds of Citizen** - pass the British Nationality Act. ?]
+
+[? if not achievement_boat_people : **Geneva** - take in the Vietnamese boat people. ?]
+
+[? if not achievement_think_tank : **Think the Unthinkable** - live through the Think Tank leak. ?]
+
+[? if not achievement_pension_link : **Breaking the Link** - tie pensions to prices instead of earnings. ?]
+
+[? if not achievement_assisted_places : **Assisted Places** - create the Assisted Places Scheme. ?]
+
+[? if not achievement_vouchers : **The Voucher Lives** - pilot education vouchers. ?]
+
+[? if not achievement_yts : **Youth Training** - launch the Youth Training Scheme. ?]
+
+[? if not achievement_erm : **Half-Baked** - take sterling into the Exchange Rate Mechanism. ?]
+
+[? if not achievement_sizewell : **Sizewell** - order a nuclear power programme. ?]
+
+[? if not achievement_rates : **The Rates Must Go** - promise to abolish the domestic rates. ?]
+
+[? if not achievement_glc : **County Hall** - abolish the GLC. ?]
+
+[? if not achievement_docklands : **Isle of Dogs** - create the docklands development corporations. ?]
+
+@end_game
+game-over: true

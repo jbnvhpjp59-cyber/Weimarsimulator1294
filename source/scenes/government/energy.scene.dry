@@ -1,0 +1,47 @@
+title: Energy and North Sea Oil
+new-page: true
+is-card: true
+card-image: img/cards/power_station.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and energy_timer <= 0
+on-arrival: energy_timer = 5; month_actions += 1
+
+= Energy and North Sea Oil
+
+[? if north_sea_oil = 0 : The North Sea fields are coming on stream, and Britain will soon be self-sufficient in oil. ?][? if north_sea_oil = 1 : Britain is now self-sufficient in oil, and North Sea revenues pour into the Treasury. They also push up the pound, which hurts exporters. ?] Coal still generates most of the country's electricity, and the miners know it.
+
+- @windfall: Raise the tax on North Sea oil profits.
+- @bp_shares: Sell part of the state's stake in BP.
+- @nuclear: Order a programme of nuclear power stations.
+- @gas_prices: Raise gas and electricity prices to market levels.
+- @easy_discard
+- @cancel_advisor_action
+
+@windfall
+view-if: oil_tax < 2 and time >= 25
+subtitle: +1 budget. The oil companies complain.
+on-arrival: oil_tax += 1; budget += 1; ab_con -= 1; dry_dissent += 2; us_relation -= 1
+
+[? if oil_tax = 1 : A Supplementary Petroleum Duty takes a further slice of North Sea revenues. ?][? if oil_tax = 2 : Petroleum Revenue Tax goes up again. The oil companies warn that new fields won't be developed. ?] The Treasury, for once, is happy.
+
+@bp_shares
+view-if: bp_sold = 0
+subtitle: +1 budget.
+on-arrival: bp_sold = 1; budget += 1; economic_liberalism += 1; dry_dissent -= 2
+
+The government sells part of its stake in British Petroleum. It raises a large sum and hardly anyone notices.
+
+@nuclear
+view-if: nuclear_programme = 0
+subtitle: -1 budget. Weakens the miners' hold over the power supply.
+on-arrival: nuclear_programme = 1; budget -= 1; union_power -= 3; c1_lib += 1; lib_relation -= 2; right_dissent -= 1
+achievement: sizewell
+
+The Energy Secretary announces a programme of pressurised-water reactors, starting at Sizewell in Suffolk. Anti-nuclear groups prepare for the longest public inquiry in British history. The NUM sees the threat immediately.
+
+@gas_prices
+view-if: gas_prices = 0
+subtitle: +1 budget. Bills rise.
+on-arrival: gas_prices = 1; budget += 1; inflation += 0.5; de_con -= 2; c2_con -= 1; dry_dissent -= 2; wet_dissent += 2
+
+Gas and electricity prices will rise by 10% a year above inflation until they reflect what the fuel is worth. The nationalised boards start to make a profit, and the bills arrive just as winter does.

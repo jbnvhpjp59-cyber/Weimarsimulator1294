@@ -1,0 +1,227 @@
+title: library
+new-page: true
+is-special: true
+go-to: menu
+
+= The Library
+
+Background on British politics in 1978.
+
+@menu
+
+- @system: How Britain is governed
+- @timeline: How we got here: 1970-1978
+- @curr_gov: The current government
+- @demographics: Demographics
+- @parties: The parties
+- @public_opinion: Public opinion
+- @factions: The factions of the Conservative Party
+- @elections: How elections work in this game
+- @governing: How government works in this game
+- @figures: Figures and charts
+- @backSpecialScene: Leave the library.
+
+@system
+go-to: menu
+
+The United Kingdom is a parliamentary monarchy. Real power lies with the House of Commons: 635 MPs, each elected by first-past-the-post in a single constituency. Whoever commands a majority of the Commons (318 seats) becomes Prime Minister.
+
+A Parliament can last at most five years. The Prime Minister chooses the date of the election within that limit, unless the government loses a vote of confidence in the Commons, in which case it must resign or seek a dissolution.
+
+The Parliament elected in October 1974 must therefore be dissolved by the autumn of 1979.
+
+@timeline
+go-to: menu
+
+**1970**: Edward Heath's Conservatives win a surprise victory, promising to modernise the economy and tame the unions.
+
+**1972**: Heath's "U-turn": faced with rising unemployment, he rescues failing industries and introduces statutory controls on pay and prices.
+
+**1973-74**: The oil shock and a miners' strike. Industry works a three-day week. Heath calls an election in February 1974 on the question "Who governs Britain?" and loses.
+
+**1974**: Harold Wilson forms a minority Labour government and wins a majority of three in October.
+
+**1975**: You defeat Heath for the party leadership. Keith Joseph, the intellectual leader of the free-market right, had decided not to stand.
+
+**1976**: Wilson resigns; James Callaghan becomes Prime Minister. A sterling crisis forces the government to borrow from the International Monetary Fund in exchange for spending cuts.
+
+**1977**: With its majority gone, Labour survives through the Lib-Lab Pact with David Steel's Liberals.
+
+@parties
+go-to: menu
+
+**The Conservative Party**: your party. The party of property, the Union and the shires, divided over how far to break with the post-war consensus.
+
+**The Labour Party**: in government under James Callaghan. Funded by and tied to the trade unions, and split between the moderates in Cabinet and a resurgent left in the constituencies.
+
+**The Liberal Party**: led by David Steel since the fall of Jeremy Thorpe. Strong in the South West and the Celtic fringe, and unfairly treated by first-past-the-post.
+
+**The Scottish National Party**: eleven MPs, won in 1974 on the promise of North Sea oil and home rule. Supports Labour as long as Labour delivers a Scottish Assembly.
+
+**Plaid Cymru**: three Welsh nationalist MPs, concentrated in Welsh-speaking north and west Wales.
+
+**The Ulster Unionists and others**: twelve Northern Irish MPs. The ten Unionists were once Conservative allies, until Heath imposed direct rule. They are now open to offers from either side.
+
+@factions
+go-to: menu
+
+**The dries** believe the post-war settlement has failed. Inflation must be beaten by controlling the money supply, the unions must be brought within the law, and the state must shrink. Keith Joseph and Geoffrey Howe lead them; you are, by conviction, one of them.
+
+**The wets** served in Heath's government and believe in consensus, incomes policy and One Nation. They hold many senior posts in your Shadow Cabinet: Jim Prior, Ian Gilmour, Francis Pym.
+
+**The loyalists** are the party managers, such as Willie Whitelaw, Lord Carrington and the whips. They will back the leader as long as the leader looks like a winner.
+
+**The right** are traditionalists: law and order, immigration, the Union, and suspicion of Europe.
+
+High dissent in any faction weakens every gain in support you make. If the party as a whole becomes too divided, it starts to bleed votes.
+
+@elections
+go-to: menu
+
+Your national vote share comes from your support among four social grades: professional and managerial (AB), white-collar (C1), skilled manual (C2) and semi-skilled, unskilled and pensioners (DE). In the 1970s, the skilled working class was the great battleground.
+
+Seats are projected region by region. Each region starts from its approximate October 1974 result and moves with the national swing. The South swings harder than the North, and Scotland and Wales have their own nationalist parties. Within a region, the leading party takes a share of seats well above its share of votes (a "square law"). The Liberals, whose vote is spread thinly, win very few seats.
+
+Given the real vote shares, the model reproduces the October 1974 result to within a few seats. On election night, actual results can differ from the final polls by a couple of points.
+
+@governing
+go-to: menu
+
+Winning power is only the beginning. The game continues until the next general election, which must come within five years. Win it, and the verdict of history weighs up your record.
+
+**The Cabinet.** When you take office you choose a dry or a wet for the Treasury, Employment and Industry. The minister decides which policies are possible: a wet Chancellor won't raise taxes in a recession, and Jim Prior won't strip the unions of their immunities. A reshuffle can change that, at a price.
+
+**The Treasury.** The budget is the government's fiscal headroom. Tax cuts, spending and bail-outs use it up; cuts, privatisation and North Sea oil add to it. Every January the cost of unemployment benefit is deducted and growth brings in revenue. If the budget falls to -5, the markets revolt.
+
+**Policy.** Beyond the economy, the Government Affairs deck covers health, education, social security, the Common Market, immigration, energy and local government. Some reforms pay off slowly: breaking the link between pensions and earnings saves more each year, taxing benefits cuts the cost of unemployment, and a nuclear programme weakens the miners' grip on the power stations.
+
+**The economy.** High interest rates beat inflation but cost jobs and push up the pound, which hurts manufacturing. The second oil shock and a world recession hit in 1979-81; recovery comes from 1982. Voters judge the government on unemployment, prices, mortgage rates and growth.
+
+**Threats.** Angry factions fuel a backbench rebellion. Wets in the Cabinet resist spending cuts and can revolt. Without a majority, your partners grow restless and a vote of no confidence may follow. If the rebellion gets out of hand, or the polls collapse with the party divided, you may face a leadership challenge, and you can lose.
+
+**The opposition.** Labour may lurch left and split; the Social Democrats and Liberals may form an Alliance strong enough to reshape British politics. From 1983, elections are fought on new boundaries: 650 seats, 326 for a majority.
+
+@curr_gov
+title: The current government
+go-to: menu
+
+= The current government
+
+Prime Minister: [+ prime_minister +] ([+ pm_party +]). [? if lib_lab_pact : The Lib-Lab Pact is in force. ?]
+
+[? if con_in_government = 0 : The Labour government is led by [+ lab_leader +]. We are the Official Opposition. ?]
+
+[? if con_in_government = 1 : Chancellor of the Exchequer: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. Home Office: Whitelaw. Foreign Office: [+ foreign_secretary +]. ?]
+
+[? if con_in_government = 1 : The Cabinet is [+ cabinet_dry +]% dry. ?][? if con_in_government = 1 and wets_purged = 1 : The wets have been purged from the economic departments. ?]
+
+[? if govt_type = 1 and con_in_government = 1 : We have a majority of [+ con_majority +]. ?][? if govt_type = 2 and con_in_government = 1 : We govern with the support of the Ulster Unionists. ?][? if govt_type = 3 and con_in_government = 1 : We govern with Liberal support, vote by vote. ?][? if govt_type = 4 and con_in_government = 1 : We govern as a minority. ?]
+
+The next general election must be held by [+ next_election_month : month +] [+ next_election_year +].
+
+@demographics
+title: Demographics
+go-to: menu
+
+= Demographics
+
+Voters are grouped by the standard market-research social grades:
+
+**AB** (professional and managerial): [+ ab +]% of the electorate. The Conservative heartland.
+
+**C1** (white-collar: clerks, teachers, sales staff): [+ c1 +]%. Leaning Conservative, and tempted by the Liberals.
+
+**C2** (skilled manual workers): [+ c2 +]%. The great battleground. Many are union members, many want to own their homes, and many are fed up with strikes.
+
+**DE** (semi-skilled and unskilled workers, and state pensioners): [+ de +]%. Labour's base.
+
+Scotland and Wales also have their own nationalist parties, the SNP and Plaid Cymru, whose support is tracked separately: [+ snp_share_disp +]% and [+ pc_share_disp +]% within their countries.
+
+Support by social grade is on the Polls tab of the sidebar.
+
+@public_opinion
+title: Public opinion
+go-to: menu
+
+= Public opinion
+
+Projected vote: Conservative [+ con_votes +]%, Labour [+ lab_votes +]%, [+ lib_name +] [+ lib_votes +]%.
+
+Projected seats: Conservative [+ con_seats +], Labour [+ lab_seats +], [+ lib_name +] [+ lib_seats +] ([+ projected_majority_line +] for a majority).
+
+Your rating: [+ thatcher_rating : rating +]. [+ lab_leader +]'s rating: [+ lab_leader_rating : rating +].
+
+Support for free-market economics: [+ economic_liberalism_disp +]%. Think the unions have too much power: [+ union_backlash_disp +]%. Trust Labour on the economy: [+ labour_credibility_disp +]%.
+
+@figures
+title: Figures and charts
+go-to: menu
+on-display: {!
+var data = [
+    {"id": "lab", "legend": "Labour", "name": "Labour", "seats": Q.lab_mps},
+    {"id": "snp", "legend": "SNP", "name": "SNP", "seats": Q.snp_mps},
+    {"id": "pc", "legend": "Plaid Cymru", "name": "Plaid Cymru", "seats": Q.pc_mps},
+    {"id": "lib", "legend": Q.lib_name, "name": Q.lib_name, "seats": Q.lib_mps},
+    {"id": "other", "legend": "Other", "name": "Other", "seats": Q.other_mps},
+    {"id": "ni", "legend": "Northern Ireland", "name": "Northern Ireland", "seats": Q.ni_mps},
+    {"id": "con", "legend": "Conservative", "name": "Conservative", "seats": Q.con_mps}
+];
+if (typeof window !== 'undefined' && typeof d3 !== 'undefined' && d3.parliament && d3.linegraph) {
+    var width = 500;
+    var height = 500;
+    var screenWidth = document.getElementById('content').offsetWidth;
+    if (screenWidth < width - 50) {
+        width = screenWidth - 50;
+        height = width;
+        document.getElementById("lib_commons").style.height = screenWidth / 2 + "px";
+    }
+    var parliament = d3.parliament();
+    parliament.width(width).height(height).innerRadiusCoef(0.4);
+    parliament.enter.fromCenter(true).smallToBig(true);
+    d3.select("#lib_commons").datum(data).call(parliament);
+
+    var colors = {'con': '#0087DC', 'lab': '#DC241F', 'lib': '#FDBB30', 'snp': '#E5D300', 'pc': '#008142', 'ni': '#9999FF'};
+    var names = {'con': 'Conservative', 'lab': 'Labour', 'lib': Q.lib_name, 'snp': 'SNP', 'pc': 'Plaid Cymru', 'ni': 'N. Ireland'};
+    if (Q.election_records.length > 0) {
+        var lines = d3.linegraph(false, false, ['con', 'lab', 'lib'], colors, names);
+        lines.width(width).height(350);
+        d3.select("#election_history").datum(Q.election_records).call(lines);
+    }
+    if ((!Q.historical_mode || Q.game_over) && Q.party_support_records.length > 1) {
+        var lines_2 = d3.linegraph(true, true, ['con', 'lab', 'lib'], colors, names);
+        lines_2.width(width).height(350);
+        d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
+    }
+    if (Q.economic_records.length > 1) {
+        var maxValue = d3.max(Q.economic_records, function(d) { return Math.max(d.inflation, d.unemployment); });
+        var lines_3 = d3.linegraph(true, true, ['inflation', 'unemployment'],
+                {'inflation': '#0000FF', 'unemployment': '#FF0000'},
+                {'inflation': 'Inflation', 'unemployment': 'Unemployment'},
+                maxValue + 3, 0, 6);
+        lines_3.width(width).height(300);
+        d3.select("#economic_history").datum(Q.economic_records).call(lines_3);
+    }
+}
+!}
+
+= The House of Commons
+
+{!<svg id="lib_commons" style="width: 500px; height: 250px;"> </svg>!}
+
+Conservative [+ con_mps +], Labour [+ lab_mps +], [+ lib_name +] [+ lib_mps +], SNP [+ snp_mps +], Plaid Cymru [+ pc_mps +], Northern Ireland [+ ni_mps +].
+
+= Seats won at general elections
+
+[? if n_elections = 0 : No general election yet. ?]
+
+{!<svg id="election_history" style="width: 500px; height: 350px;"> </svg>!}
+
+= Opinion polls
+
+[? if historical_mode = 1 and game_over = 0 : Not available in historical mode. ?]
+
+{!<svg id="party_support_history" style="width: 500px; height: 350px;"> </svg>!}
+
+= Inflation and unemployment (%)
+
+{!<svg id="economic_history" style="width: 500px; height: 300px;"> </svg>!}

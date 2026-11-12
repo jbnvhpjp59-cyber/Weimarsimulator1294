@@ -1,0 +1,55 @@
+title: Leon Brittan
+is-pinned-card: true
+card-image: img/cards/brittan.jpg
+tags: advisor
+view-if: brittan_advisor = 1
+new-page: true
+
+= Leon Brittan
+
+[? if con_in_government = 0 : The Shadow spokesman on devolution. ?][? if con_in_government = 1 and time < 45 : Minister of State at the Home Office. ?][? if con_in_government = 1 and time >= 45 : Chief Secretary to the Treasury. ?] A barrister with a formidable command of detail. He is clever, careful and dry, and he looks less comfortable on television than he is in committee.
+
+- @scotland_bill
+- @briefing
+- @spending_review
+- @police_bill
+- @root: Return
+
+@scotland_bill
+title: Lead the attack on the Scotland Bill
+view-if: con_in_government = 0
+subtitle: The right and English Tories are pleased.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; right_dissent -= 3; labour_credibility -= 2; wet_dissent += 1
+
+Brittan picks the Scotland Bill apart clause by clause, and asks again and again why Scottish MPs should vote on English schools when English MPs can't vote on Scottish ones.
+
+@briefing
+title: Brief you before Question Time
+subtitle: Improves your rating, and dents your opponent's.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; thatcher_rating += 2; lab_leader_rating -= 1
+
+Brittan reads every Labour speech and every set of figures, and finds the weak point in each. You go into the chamber knowing more than anyone opposite.
+
+@spending_review
+title: A spending review
+view-if: con_in_government = 1
+subtitle: +1 budget. The wets will feel it.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; budget += 1; spending -= 1 if spending > -5; wet_dissent += 2
+
+Brittan takes the spending ministers one at a time and wins most of the arguments on the detail.
+
+@police_bill
+title: The Police and Criminal Evidence Bill
+view-if: con_in_government = 1 and pace_bill = 0
+subtitle: The right approves. The Liberals and civil libertarians don't.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; pace_bill = 1; right_dissent -= 3; lib_relation -= 2; c2_con += 1*(1-dissent); wet_dissent += 1
+
+A single code for police powers of stop, search, arrest and detention, with new safeguards for suspects. The police say it ties their hands; the civil liberties lobby says it frees them.

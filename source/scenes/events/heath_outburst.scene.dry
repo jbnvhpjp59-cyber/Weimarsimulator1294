@@ -1,0 +1,30 @@
+title: Heath Speaks Out
+tags: event
+view-if: heath_hostility >= 70 and random_roll < 0.2 and time - last_heath_outburst >= 4
+max-visits: 3
+new-page: true
+on-arrival: last_heath_outburst = time; wet_dissent += 5; thatcher_rating -= 2
+face-image: img/events/heath.jpg
+
+= Heath Speaks Out
+
+Edward Heath has given another interview criticising the direction of the party. He doesn't mention you by name; he never does.
+
+- @rebuke: Have the party chairman rebuke him.
+- @ignore: Rise above it.
+- @olive_branch: Send Willie Whitelaw to see him.
+
+@rebuke
+on-arrival: heath_hostility += 5; dry_dissent -= 3; wet_dissent += 2
+
+Lord Thorneycroft issues a sharp statement. The dries are delighted, and the feud runs for another week.
+
+@ignore
+on-arrival: wet_dissent += 1
+
+You say you have nothing to add to Mr Heath's remarks. The story dies, slowly.
+
+@olive_branch
+on-arrival: heath_hostility -= 10; wet_dissent -= 3; dry_dissent += 2
+
+Whitelaw spends an evening at Heath's flat in Wilton Street. It doesn't end the feud, but it cools it.

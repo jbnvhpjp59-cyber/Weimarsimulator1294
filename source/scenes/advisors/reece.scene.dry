@@ -1,0 +1,43 @@
+title: Gordon Reece
+is-pinned-card: true
+card-image: img/cards/reece.jpg
+tags: advisor
+view-if: reece_advisor = 1
+new-page: true
+
+= Gordon Reece
+
+Director of Publicity, a former television producer who smokes cigars and drinks champagne. He understands that most voters read the Sun, not the Times.
+
+- @makeover
+- @popular_press
+- @voice
+- @root: Return
+
+@makeover
+title: The full makeover
+subtitle: Greatly improves your personal rating.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; thatcher_rating += 6
+
+Fewer serious current-affairs programmes, more chat shows and women's magazines. The public starts to see a person, not a political phenomenon.
+
+@popular_press
+title: Win over the popular press
+subtitle: Skilled and working-class voters warm to us.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; c2_con += 3*(1-dissent); de_con += 2*(1-dissent); tabloid_support += 1
+
+Reece introduces you to the Sun's editor, Larry Lamb. A paper whose readers voted Labour starts to wonder whether they still should.
+
+@voice
+title: Voice lessons
+view-if: voice_coached = 0
+subtitle: Improves your rating, once.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; voice_coached = 1; thatcher_rating += 4; c2_con += 1*(1-dissent)
+
+Reece arranges sessions with a coach from the National Theatre. Your voice drops in pitch, and the shrillness the cartoonists love begins to fade.

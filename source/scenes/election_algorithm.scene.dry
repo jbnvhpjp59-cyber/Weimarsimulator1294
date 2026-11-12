@@ -1,0 +1,213 @@
+title: Election
+on-arrival: {!
+// ===================================================================
+// Election model.
+//
+// Step 1: vote shares from the social-grade model. These are
+// "England-equivalent" shares for con / lab / lib / other.
+//
+// Step 2: a regional first-past-the-post seat model. Each region starts
+// from its (approximate) October 1974 result and moves by the national
+// swing, scaled by a regional elasticity (the South swung harder than
+// the North in the 1970s). In Scotland and Wales the nationalist share
+// is set directly and the other parties are rescaled around it.
+//
+// Step 3: seats are shared out inside each region with a generalised
+// "square law": seats are proportional to (efficiency * share)^2.
+// Third parties get efficiencies below 1 because their vote is spread
+// thinly; Plaid Cymru's is above 1 because its vote is concentrated.
+//
+// Calibration: given the real national shares, the model gives
+//   Oct 1974: Con 276, Lab 316, Lib 15, SNP 12, PC 4 (actual 277/319/13/11/3)
+//   Feb 1974: Con 303, Lab 293, Lib 17, SNP 6, PC 4  (actual 297/301/14/7/2)
+//   1979:     Con 357, Lab 250, Lib 11, SNP 3, PC 2  (actual 339/269/11/2/2)
+// (1979 includes the Liberal stronghold floor below.)
+// The regional figures are approximations and should be refined.
+// ===================================================================
+
+// ---- Step 1: social-grade model ----
+for (var c of Q.classes) {
+    var class_votes = 0;
+    for (var party of Q.parties) {
+        if (Q[c + '_' + party] < 0) {
+            Q[c + '_' + party] = 0;
+        }
+        class_votes += Q[c + '_' + party];
+    }
+    for (var party of Q.parties) {
+        Q[c + '_' + party + '_normalized'] = 100 * Q[c + '_' + party] / class_votes;
+        Q[c + '_' + party + '_display'] = Math.round(100 * Q[c + '_' + party] / class_votes);
+    }
+}
+var support = {};
+var total_support = 0;
+for (var party of Q.parties) {
+    var s = 0;
+    for (var c of Q.classes) {
+        s += Q[c] * Q[c + '_' + party + '_normalized'];
+    }
+    support[party] = s;
+    total_support += s;
+}
+var eng = {};
+for (var party of Q.parties) {
+    eng[party] = 100 * support[party] / total_support;
+}
+// polling error, only applied on election night
+if (Q.apply_poll_error && Q.poll_error) {
+    eng.con += Q.poll_error;
+    eng.lab -= Q.poll_error;
+}
+
+// ---- Step 2: regions ----
+// seats, swing elasticity, approximate October 1974 shares
+var REGIONS = [
+    {id: 'north',      name: 'North of England',     seats: 38, el: 0.75, con: 29, lab: 50, lib: 20, other: 1},
+    {id: 'northwest',  name: 'North West',           seats: 74, el: 0.85, con: 37, lab: 45, lib: 17, other: 1},
+    {id: 'yorkshire',  name: 'Yorkshire & Humber',   seats: 54, el: 0.85, con: 31, lab: 49, lib: 19, other: 1},
+    {id: 'eastmids',   name: 'East Midlands',        seats: 42, el: 1.05, con: 37, lab: 44, lib: 18, other: 1},
+    {id: 'westmids',   name: 'West Midlands',        seats: 58, el: 1.05, con: 36, lab: 45, lib: 18, other: 1},
+    {id: 'eastanglia', name: 'East Anglia',          seats: 19, el: 1.2,  con: 43, lab: 34, lib: 22, other: 1},
+    {id: 'london',     name: 'Greater London',       seats: 92, el: 1.0,  con: 37, lab: 44, lib: 17, other: 2},
+    {id: 'southeast',  name: 'South East',           seats: 96, el: 1.15, con: 46, lab: 27, lib: 26, other: 1},
+    {id: 'southwest',  name: 'South West',           seats: 43, el: 1.15, con: 44, lab: 27, lib: 28, other: 1},
+    {id: 'wales',      name: 'Wales',                seats: 36, el: 0.8,  con: 24, lab: 50, lib: 15, other: 0, nat: 'pc'},
+    {id: 'scotland',   name: 'Scotland',             seats: 71, el: 0.7,  con: 25, lab: 36, lib: 8,  other: 1, nat: 'snp'}
+];
+// England baseline = seat-weighted average of the English regions above
+var BASE = {con: 38.15, lab: 40.27, lib: 20.4, other: 1.18};
+var NI_SEATS = 12;
+var K = 2;
+var EFF = {con: 1, lab: 0.98, lib: 0.45, other: 0.3, snp: 0.65, pc: 1.7};
+// The Liberal-SDP Alliance: same efficiency by default (its seats come
+// mostly from the stronghold floor below, with a higher cap).
+// Given 1983's real vote shares the model gives Con 414, Lab 189,
+// Alliance 26 (actual 397/209/23).
+if (Q.alliance_formed) {
+    EFF.lib = Q.alliance_eff || 0.45;
+}
+// The 1983 boundary review: 650 seats, 17 of them in Northern Ireland.
+// Scale every region's seats up to the new GB total of 633.
+if (Q.new_boundaries) {
+    NI_SEATS = 17;
+    var old_total = 0;
+    for (var r0 of REGIONS) {
+        old_total += r0.seats;
+    }
+    var scaled = 0;
+    for (var r1 of REGIONS) {
+        r1.seats = Math.round(r1.seats * 633 / old_total);
+        scaled += r1.seats;
+    }
+    // put any rounding difference in the South East, which gained most seats
+    REGIONS[7].seats += 633 - scaled;
+}
+// regional modifiers set by events (e.g. a Scottish campaign)
+var scot_con_bonus = Q.scotland_con_bonus || 0;
+var midlands_con_bonus = Q.midlands_con_bonus || 0;
+
+var seats = {con: 0, lab: 0, lib: 0, snp: 0, pc: 0, other: 0};
+var votes = {con: 0, lab: 0, lib: 0, snp: 0, pc: 0, other: 0};
+var gb_seats = 0;
+var region_results = [];
+for (var r of REGIONS) {
+    var v = {};
+    for (var p of ['con', 'lab', 'lib', 'other']) {
+        v[p] = r[p] + r.el * (eng[p] - BASE[p]);
+    }
+    if (r.id == 'scotland') {
+        v.con += scot_con_bonus;
+        v.lab -= scot_con_bonus;
+    }
+    if (r.id == 'eastmids' || r.id == 'westmids') {
+        v.con += midlands_con_bonus;
+        v.lab -= midlands_con_bonus;
+    }
+    for (var p of ['con', 'lab', 'lib', 'other']) {
+        if (v[p] < 0.5) {
+            v[p] = 0.5;
+        }
+    }
+    var nat_share = 0;
+    if (r.nat == 'snp') {
+        nat_share = Q.snp_share;
+    } else if (r.nat == 'pc') {
+        nat_share = Q.pc_share;
+    }
+    var sum = v.con + v.lab + v.lib + v.other;
+    for (var p of ['con', 'lab', 'lib', 'other']) {
+        v[p] = v[p] * (100 - nat_share) / sum;
+    }
+    if (r.nat) {
+        v[r.nat] = nat_share;
+    }
+    // square law
+    var w = {};
+    var w_total = 0;
+    for (var p in v) {
+        w[p] = Math.pow(v[p] * EFF[p], K);
+        w_total += w[p];
+    }
+    // largest-remainder rounding
+    var raw = {};
+    var rs = {};
+    var assigned = 0;
+    for (var p in v) {
+        raw[p] = r.seats * w[p] / w_total;
+        rs[p] = Math.floor(raw[p]);
+        assigned += rs[p];
+    }
+    var order = Object.keys(raw).sort(function(a, b) {
+        return (raw[b] - Math.floor(raw[b])) - (raw[a] - Math.floor(raw[a]));
+    });
+    for (var i = 0; i < r.seats - assigned; i++) {
+        rs[order[i]] += 1;
+    }
+    for (var p in rs) {
+        seats[p] += rs[p];
+        votes[p] += v[p] * r.seats;
+    }
+    gb_seats += r.seats;
+    region_results.push({id: r.id, name: r.name, seats: r.seats,
+                         con: rs.con, lab: rs.lab, lib: rs.lib,
+                         nat: r.nat ? rs[r.nat] : 0,
+                         con_share: Math.round(v.con), lab_share: Math.round(v.lab)});
+}
+
+// ---- Liberal strongholds ----
+// The square law undercounts the Liberals, who hold seats through local
+// strongholds (Steel, Grimond, Smith, Beith...). Guarantee a floor based
+// on their national vote: about 11 seats on 13.8% (1979), capped at 14.
+var lib_gb = votes.lib / gb_seats;
+var lib_cap = Q.alliance_formed ? 30 : 14;
+var lib_floor = Math.round(Math.max(0, Math.min(lib_cap, (lib_gb - 5) * 1.25)));
+if (seats.lib < lib_floor) {
+    var extra = lib_floor - seats.lib;
+    var con_take = Math.round(extra * seats.con / (seats.con + seats.lab));
+    seats.con -= con_take;
+    seats.lab -= extra - con_take;
+    seats.lib = lib_floor;
+}
+
+// ---- Step 3: outputs ----
+// GB vote share, weighted by seats as a stand-in for electorate
+for (var p in votes) {
+    Q[p + '_votes'] = Math.round(10 * votes[p] / gb_seats) / 10;
+    Q[p + '_seats'] = seats[p];
+}
+Q.ni_seats = NI_SEATS;
+Q.projected_majority_line = Q.new_boundaries ? 326 : 318;
+Q.snp_share_disp = Math.round(Q.snp_share);
+Q.pc_share_disp = Math.round(Q.pc_share);
+Q.region_results = region_results;
+Q.projected_largest = 'con';
+if (Q.lab_seats > Q.con_seats) {
+    Q.projected_largest = 'lab';
+}
+Q.projected_con_majority = 2 * Q.con_seats - Q.total_seats;
+Q.projected_lab_majority = 2 * Q.lab_seats - Q.total_seats;
+Q.con_lead = Math.round(10 * (Q.con_votes - Q.lab_votes)) / 10;
+!}
+go-to: jumpScene
+
+# Subroutine: compute projected votes and seats, then return to the jump point.

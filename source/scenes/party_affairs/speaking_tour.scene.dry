@@ -1,0 +1,50 @@
+title: Speaking Tour
+new-page: true
+is-card: true
+card-image: img/party.png
+tags: party_affairs
+view-if: speaking_tour_timer <= 0
+on-arrival: speaking_tour_timer = 3; month_actions += 1
+
+= Speaking Tour
+
+You will spend the week on the road: town halls, factory gates, and the Conservative clubs of marginal seats. What is the message?
+
+- @unions: The unions are running the country.
+- @tax: Let people keep more of what they earn.
+- @inflation: Inflation is the thief in every pay packet.
+- @homes: A property-owning democracy.
+- @order: Law, order and pride in Britain.
+- @one_nation: One Nation: we govern for everyone.
+- @easy_discard
+
+@unions
+on-arrival: union_backlash += 3; c2_con += 3*(1-dissent) if union_backlash >= 55; c2_con += 2*(1-dissent) if policy_union_reform; de_lab += 1 if strike_wave < 3; wet_dissent += 3; dry_dissent -= 3
+
+[? if strike_wave >= 4 : With picket lines on the evening news, the message lands hard. ?][? if strike_wave < 4 : While the industrial scene is quiet, some voters think we are picking a fight for its own sake. ?] Jim Prior winces at every speech.
+
+@tax
+on-arrival: c1_con += 3*(1-dissent); ab_con += 2*(1-dissent); c2_con += 2*(1-dissent) if policy_tax_cuts; economic_liberalism += 2
+
+A basic rate of 33% and a top rate of 83% are easy targets. [? if policy_tax_cuts : Because tax cuts are now official policy, skilled workers take the promise seriously. ?]
+
+@inflation
+on-arrival: economic_liberalism += 3; c1_con += 2*(1-dissent); de_con += 2*(1-dissent) if inflation >= 10; dry_strength += 2
+
+You explain to housewives and pensioners that inflation robs savers and wage-earners alike, and that governments cause it by printing money. [? if inflation < 10 : With inflation falling, the warning sounds abstract to many. ?]
+
+@homes
+view-if: policy_right_to_buy
+on-arrival: c2_con += 4*(1-dissent); de_con += 3*(1-dissent)
+
+Council tenants listen closely when you promise them the right to buy their homes at a discount.
+
+@order
+on-arrival: right_strength += 2; right_dissent -= 3; c2_con += 2*(1-dissent); de_con += 2*(1-dissent); c1_lib += 1; wet_dissent += 2
+
+Crime, discipline and national pride go down well in the clubs. The Liberals say we are playing to fear.
+
+@one_nation
+on-arrival: wet_dissent -= 5; c1_con += 2*(1-dissent); dry_dissent += 3
+
+You quote Disraeli and promise a government for the whole country. The wets are pleased; Keith Joseph wonders aloud what the point of winning is.

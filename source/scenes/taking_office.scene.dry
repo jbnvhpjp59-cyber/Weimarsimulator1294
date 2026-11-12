@@ -1,0 +1,108 @@
+title: Taking Office
+new-page: true
+on-arrival: {!
+Q.con_in_government = 1;
+Q.prime_minister = "Thatcher";
+Q.pm_party = "Conservative";
+Q.term_start_time = Q.time;
+Q.months_in_office = 0;
+Q.budget = Q.starting_budget;
+Q.rebellion = 0;
+Q.cabinet_revolt = 0;
+// the opposition-era advisors become ministers
+Q.advisor_action_timer = 0;
+// new governments get a honeymoon
+Q.thatcher_rating += 8;
+for (var c of Q.classes) {
+    Q[c + '_con'] += 1;
+}
+// the leader of the opposition is now the Labour leader
+Q.lab_leader_rating -= 5;
+!}
+go-to: treasury
+face-image: img/events/thatcher.jpg
+audio: clear shuffle music/nimrod.mp3 music/pomp_and_circumstance_1.mp3 music/pomp_and_circumstance_2.mp3 music/land_of_hope_and_glory.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3 music/rule_britannia.mp3
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/zadok_the_priest.mp3'); } !}
+
+= Prime Minister
+
+On the steps of Downing Street you quote St Francis of Assisi: "Where there is discord, may we bring harmony. Where there is error, may we bring truth. Where there is doubt, may we bring faith. And where there is despair, may we bring hope."
+
+[? if govt_type = 1 : We have a majority of [+ con_majority +]. ?][? if govt_type = 2 : We govern with the votes of the Ulster Unionists, and they will want paying. ?][? if govt_type = 3 : We govern with Liberal support, vote by vote. ?][? if govt_type = 4 : We govern as a minority. Any vote could be our last. ?]
+
+Inside, the civil servants are waiting. Before anything else, you must form a Cabinet. Most of the people who expect jobs are wets; the question is how many of them to give the posts that matter.
+
+@treasury
+title: The Treasury
+
+**Chancellor of the Exchequer.** The Treasury runs the Budget, taxes, spending and, with the Bank of England, interest rates. Everything in our economic programme depends on who holds it.
+
+- @howe: Sir Geoffrey Howe, the architect of our economic policy.
+- @pym: Francis Pym, a reassuring One Nation figure.
+
+@howe
+on-arrival: chancellor = "Howe"; chancellor_dry = 1; dry_dissent -= 5; wet_dissent += 3
+go-to: employment
+
+Howe goes to Number 11, with John Biffen and Nigel Lawson beside him at the Treasury. The monetarists hold the commanding heights.
+
+@pym
+on-arrival: chancellor = "Pym"; chancellor_dry = 0; wet_dissent -= 8; dry_dissent += 10; economic_liberalism -= 2
+go-to: employment
+
+Pym is a safe pair of hands. The City is puzzled, and Keith Joseph is appalled.
+
+@employment
+title: Employment
+
+**Secretary of State for Employment.** The Department of Employment will draft our trade union law and deal with the TUC.
+
+- @prior: Jim Prior: step by step, without provoking a general strike.
+- @tebbit: Norman Tebbit: the unions need to be confronted, not soothed.
+
+@prior
+on-arrival: employment_secretary = "Prior"; employment_dry = 0; wet_dissent -= 6; dry_dissent += 3
+go-to: industry
+
+Prior takes Employment, as everyone expected. The TUC breathes a sigh of relief.
+
+@tebbit
+on-arrival: employment_secretary = "Tebbit"; employment_dry = 1; wet_dissent += 8; dry_dissent -= 5; union_power -= 2; strike_wave += 0.5
+go-to: industry
+
+Promoting a backbench bruiser straight to the Cabinet is a sensation. Prior refuses any other post and returns to the backbenches, from where he will be a focus for the wets.
+
+@industry
+title: Industry
+
+**Secretary of State for Industry.** The Department of Industry is responsible for the nationalised giants, British Steel and British Leyland among them, and their subsidies.
+
+- @joseph: Sir Keith Joseph: end the subsidies for lame ducks.
+- @walker: Peter Walker: a Heathite interventionist who knows industry.
+
+@joseph
+on-arrival: industry_secretary = "Joseph"; industry_dry = 1; dry_dissent -= 4; wet_dissent += 3
+go-to: summary
+
+Sir Keith hands his civil servants a reading list of free-market economists.
+
+@walker
+on-arrival: industry_secretary = "Walker"; industry_dry = 0; wet_dissent -= 6; dry_dissent += 5
+go-to: summary
+
+Walker will keep British Leyland and British Steel afloat while trying to make them efficient. The dries consider this a betrayal before it has begun.
+
+@summary
+on-arrival: {!
+Q.cabinet_dry = 15 + 30 * Q.chancellor_dry + 25 * Q.employment_dry + 20 * Q.industry_dry;
+!}
+
+= The Cabinet
+
+Chancellor: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. Home Secretary: Whitelaw. Foreign Secretary: Lord Carrington.
+
+[? if cabinet_dry >= 70 : This is a Cabinet built to break with the past. The wets have been kept out of the economic departments, and they know it. ?][? if cabinet_dry >= 40 and cabinet_dry < 70 : The Cabinet is a balance of believers and doubters. That will make for long meetings. ?][? if cabinet_dry < 40 : The Cabinet is dominated by the wets. Radical policies will be hard to get past it. ?]
+
+The Government Affairs deck is now open to you. Govern well: the next general election must be held by [+ next_election_month : month +] [+ next_election_year +].
+
+- @root: Begin governing.

@@ -1,0 +1,12 @@
+title: A Defection
+tags: event
+view-if: con_in_government = 1 and alliance_formed = 1 and wet_dissent >= 65 and sdp_defections < 2 and random_roll < 0.15 and time - last_defection_time >= 9
+new-page: true
+on-arrival: last_defection_time = time; sdp_defections += 1; con_mps -= 1; lib_mps += 1; wet_dissent -= 5; rebellion += 1; con_majority = 2 * con_mps - total_seats
+face-image: img/events/westminster.jpg
+
+= A Defection
+
+A Conservative MP has crossed the floor to join the SDP, saying that the party of One Nation has become the party of one ideology. [? if sdp_defections > 1 : That makes [+ sdp_defections +] of them. ?]
+
+Our majority is now [+ con_majority +].

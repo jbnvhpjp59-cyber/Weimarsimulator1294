@@ -1,0 +1,16 @@
+title: Parliament Is Dissolved
+tags: event
+view-if: in_campaign = 1 and campaign_started = 0
+new-page: true
+on-arrival: campaign_started = 1; ab_lib += 2; c1_lib += 2; c2_lib += 1; de_lib += 1; ab_lib += 2 if alliance_formed; c1_lib += 3 if alliance_formed; c2_lib += 2 if alliance_formed; de_lib += 1 if alliance_formed
+face-image: img/events/westminster.jpg
+
+= Parliament Is Dissolved
+
+The Queen has granted the dissolution. Polling day is [+ next_election_month : month +] [+ next_election_year +].
+
+As always, the Liberals rise during the campaign once they get equal airtime, and they will take votes from both sides.
+
+From now until polling day, campaign cards are available.
+
+Latest poll: Conservative [+ con_votes +]%, Labour [+ lab_votes +]%, Liberal [+ lib_votes +]%.

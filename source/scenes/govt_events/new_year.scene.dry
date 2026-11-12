@@ -1,0 +1,47 @@
+title: A New Year
+tags: event
+priority: 2
+view-if: con_in_government = 1 and month = 1 and last_new_year < year
+new-page: true
+on-arrival: {!
+Q.last_new_year = Q.year;
+// North Sea oil revenues start to flow into the Treasury
+if (Q.year >= 1980) {
+    Q.budget += 1;
+    Q.north_sea_oil = 1;
+}
+if (Q.year >= 1982) {
+    Q.budget += 0.5;
+}
+// growth brings in revenue; recession loses it
+Q.budget += 0.3 * Q.economic_growth;
+// the cost of unemployment benefit
+Q.benefit_cost = 0;
+if (Q.unemployment > 6) {
+    Q.benefit_cost = (Q.unemployment - 6) * 0.25;
+    // taxing benefits and ending the earnings-related supplement
+    if (Q.benefits_cut) {
+        Q.benefit_cost *= 0.8;
+    }
+    Q.benefit_cost = Math.round(Q.benefit_cost * 10) / 10;
+    Q.budget -= Q.benefit_cost;
+}
+// pensions linked to prices rather than earnings: the saving grows each year
+if (Q.pension_link_broken) {
+    Q.budget += 0.3;
+}
+// the 1983 boundary review applies from the next election
+if (Q.year >= 1983) {
+    Q.new_boundaries = 1;
+}
+// demographic and NHS pressures on spending
+Q.budget -= 0.5;
+Q.budget = Math.round(Q.budget * 10) / 10;
+Q.budget_disp = Q.budget;
+!}
+
+= [+ year +]
+
+[? if year = 1980 : The world economy is sliding into recession, and the second oil shock has doubled the price of crude. North Sea oil is now flowing into the Treasury. ?][? if year = 1981 : The recession is the deepest since the 1930s. Manufacturing output has fallen by a sixth. ?][? if year = 1982 : There are signs the recession has bottomed out, though unemployment is still climbing. ?][? if year = 1983 : The recovery is under way. The new parliamentary boundaries, with 650 seats, will apply at the next general election. ?][? if year >= 1984 : Another year in Downing Street. ?]
+
+[? if benefit_cost > 0 : Paying benefit to the unemployed costs the Treasury [+ benefit_cost +] this year. ?] The Treasury's headroom stands at [+ budget_disp +].

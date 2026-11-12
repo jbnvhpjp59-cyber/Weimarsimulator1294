@@ -1,0 +1,40 @@
+title: Government Business
+new-page: true
+is-card: true
+card-image: img/cards/commons_1970s.jpg
+tags: commons
+view-if: whips_timer <= 0 and con_in_government = 1
+on-arrival: whips_timer = 3; month_actions += 1
+
+= Government Business
+
+The Chief Whip brings the week's business. [? if govt_type = 1 : With a majority of [+ con_majority +], the government's bills will pass if the party holds together. ?][? if govt_type >= 2 : Without a majority of our own, every division is a negotiation. ?]
+
+Backbench rebellion: [+ rebellion_disp +] out of 10. [? if govt_type >= 2 : Our partners' discontent: [+ partner_dissent_disp +] out of 10. ?]
+
+- @whip_hard: Crack the whip.
+- @listen: Meet the 1922 Committee and listen.
+- @partners: Keep our partners on side.
+- @easy_discard
+
+@whip_hard
+on-arrival: rebellion -= 2; wet_dissent += 3; loyalist_dissent -= 2
+
+The whips make clear that careers depend on loyalty. The rebels go quiet, and the resentment goes underground.
+
+@listen
+subtitle: -1 resource
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; rebellion -= 1; wet_dissent -= 3; right_dissent -= 3; dry_dissent -= 2
+
+An evening in Committee Room 14. Nobody gets what they want, but everybody gets heard.
+
+@partners
+view-if: govt_type >= 2
+subtitle: -1 resource
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; partner_dissent -= 2; uup_relation += 4 if govt_type = 2; lib_relation += 4 if govt_type = 3
+
+A road here, a factory there, a promise on the next bill. [? if govt_type = 2 : The Unionists want security and seats. ?][? if govt_type = 3 : The Liberals want progress on electoral reform. ?]

@@ -1,0 +1,12 @@
+title: Crosby
+tags: event
+view-if: con_in_government = 1 and alliance_formed = 1 and time >= 47 and time <= 49 and crosby_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: crosby_seen = 1; crosby_lost = 1 if lib_votes >= con_votes - 6; con_mps -= 1 if crosby_lost = 1; lib_mps += 1 if crosby_lost = 1; thatcher_rating -= 2 if crosby_lost = 1; rebellion += 1 if crosby_lost = 1; con_majority = 2 * con_mps - total_seats
+
+= Crosby
+
+Shirley Williams is standing for the SDP in the Crosby by-election, in one of our safest seats in Merseyside.
+
+[? if crosby_lost = 1 : She wins it, overturning a majority of nearly 20,000. The Alliance looks unstoppable. ?][? if crosby_lost = 0 : We hold Crosby, narrowly. The Alliance has peaked, our strategists hope. ?]

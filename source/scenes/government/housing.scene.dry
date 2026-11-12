@@ -1,0 +1,44 @@
+title: Housing
+new-page: true
+is-card: true
+card-image: img/cards/housing.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and housing_timer <= 0
+on-arrival: housing_timer = 5; month_actions += 1
+
+= Housing
+
+One in three British households rents from a council. Michael Heseltine at the Environment department wants to change that.
+
+- @right_to_buy: Give council tenants the right to buy.
+- @bigger_discounts: Increase the right-to-buy discounts.
+- @cut_building: Cut council house building.
+- @mortgage_relief: Protect mortgage interest relief.
+- @easy_discard
+- @cancel_advisor_action
+
+@right_to_buy
+view-if: right_to_buy_progress = 0
+subtitle: +1 budget. A lasting boost among skilled and working-class voters.
+on-arrival: right_to_buy_progress += 1; budget += 1; c2_con += 2*(1-dissent); de_con += 2*(1-dissent); policy_right_to_buy = 1
+
+The Housing Act gives every council tenant of three years' standing the right to buy their home at a discount of up to 50%. Labour councils try to drag their feet; the law says they can't.
+
+@bigger_discounts
+view-if: right_to_buy_progress >= 1 and right_to_buy_progress < 4
+subtitle: Speeds up sales.
+on-arrival: right_to_buy_progress += 1; c2_con += 2*(1-dissent); de_con += 1*(1-dissent); wet_dissent += 1
+
+Larger discounts and easier mortgages for tenants. The queue at the town hall grows longer.
+
+@cut_building
+subtitle: +1 budget.
+on-arrival: budget += 1; de_con -= 1; de_lab += 1; wet_dissent += 2
+
+Council house building falls to its lowest level since the war. Waiting lists grow.
+
+@mortgage_relief
+subtitle: -1 budget.
+on-arrival: budget -= 1; c1_con += 2*(1-dissent); c2_con += 1*(1-dissent); dry_dissent += 2
+
+Mortgage interest relief is safe. The Treasury points out that it's a subsidy to the middle classes; Number 10 points out who votes.

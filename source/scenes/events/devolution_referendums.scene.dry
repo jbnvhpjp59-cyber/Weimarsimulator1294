@@ -1,0 +1,43 @@
+title: The Devolution Referendums
+tags: event
+view-if: time >= 15 and devolution_referendum_result = 0
+max-visits: 1
+new-page: true
+on-arrival: {!
+// Scotland: the Yes share depends on the SNP's strength and our stance.
+var yes = 52 + (Q.snp_share - 20) * 0.3;
+if (Q.devolution_stance == 1) {
+    yes += 4;
+} else if (Q.devolution_stance == 0) {
+    yes -= 2;
+} else {
+    yes -= 1;
+}
+if (Q.winter_of_discontent) {
+    yes -= 1;
+}
+var turnout = 64;
+Q.scot_yes = Math.round(yes * 10) / 10;
+Q.scot_no = Math.round((100 - yes) * 10) / 10;
+Q.scot_yes_electorate = Math.round(yes * turnout / 10) / 10;
+// the 40% rule: Yes must be at least 40% of the whole electorate
+Q.devolution_referendum_result = (Q.scot_yes_electorate >= 40) ? 1 : 2;
+Q.devolution_failed = (Q.devolution_referendum_result == 2) ? 1 : 0;
+if (Q.devolution_failed) {
+    Q.snp_relation += 25;
+    Q.snp_share -= 2;
+    Q.labour_credibility -= 2;
+} else {
+    Q.snp_share += 2;
+}
+!}
+
+= The Devolution Referendums
+
+On 1 March, Scotland and Wales vote on the Devolution Acts.
+
+Wales says No by four to one. In Scotland, Yes wins [+ scot_yes +]% to [+ scot_no +]%, on a turnout of 64%.
+
+[? if devolution_referendum_result = 2 : That is only [+ scot_yes_electorate +]% of the whole electorate, short of the 40% the Act requires. The government will have to move to repeal the Scotland Act. The SNP is incandescent, and its eleven MPs no longer have any reason to keep Callaghan in office. ?]
+
+[? if devolution_referendum_result = 1 : That is [+ scot_yes_electorate +]% of the whole electorate, enough to clear the 40% hurdle. Scotland will have its Assembly, and the SNP is jubilant. ?]

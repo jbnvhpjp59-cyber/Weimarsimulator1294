@@ -1,0 +1,46 @@
+title: Law and Order
+new-page: true
+is-card: true
+card-image: img/cards/law_order.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and law_order_timer <= 0
+on-arrival: law_order_timer = 6; month_actions += 1
+
+= Law and Order
+
+Willie Whitelaw at the Home Office has a full in-tray.
+
+- @police_pay: Implement the Edmund-Davies police pay award in full.
+- @short_sharp_shock: A "short, sharp shock" for young offenders.
+- @hanging: Allow a free vote on restoring the death penalty.
+- @scarman: Implement the Scarman Report.
+- @easy_discard
+- @cancel_advisor_action
+
+@police_pay
+view-if: police_pay_done = 0
+subtitle: -1 budget.
+on-arrival: police_pay_done = 1; budget -= 1; right_dissent -= 4; c2_con += 1*(1-dissent); de_con += 1*(1-dissent)
+
+Police pay rises by up to 45%. Recruitment picks up, and the Police Federation is delighted.
+
+@short_sharp_shock
+on-arrival: right_dissent -= 3; c1_lib += 1; c2_con += 1*(1-dissent)
+
+Military-style detention centres for young offenders. The party conference cheers; criminologists doubt it will work.
+
+@hanging
+view-if: hanging_vote = 0
+subtitle: Popular in the country and on the right. The House will almost certainly vote it down.
+on-arrival: hanging_vote = 1; right_dissent -= 4; c2_con += 1*(1-dissent); de_con += 1*(1-dissent); wet_dissent += 2; lib_relation -= 3
+achievement: hanging
+
+You have always believed in capital punishment for the worst murders, and you say so. In a free vote, the Commons rejects restoring the death penalty by 362 votes to 243, with Whitelaw and most of the Cabinet in the majority. The polls say three-quarters of the public wanted it back.
+
+@scarman
+view-if: riots >= 1 and scarman_done = 0
+subtitle: The wets approve; the right says it rewards rioters.
+on-arrival: scarman_done = 1; wet_dissent -= 4; right_dissent += 3; c1_con += 1*(1-dissent); budget -= 1
+achievement: scarman
+
+Lord Scarman's report on Brixton calls for community policing, better recruitment from ethnic minorities, and an end to stop-and-search under the "sus" law.

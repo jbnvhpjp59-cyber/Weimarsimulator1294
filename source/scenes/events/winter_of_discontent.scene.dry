@@ -1,0 +1,34 @@
+title: The Winter of Discontent
+tags: event
+view-if: time >= 13 and time <= 14 and strike_wave >= 4 and autumn_election_1978 = 0
+max-visits: 1
+new-page: true
+on-arrival: winter_of_discontent = 1; strike_wave = 8 if strike_wave < 8; union_backlash += 10; labour_credibility -= 10; lab_leader_rating -= 8
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/saturn.mp3'); } !}
+
+= The Winter of Discontent
+
+The 5% pay limit has collapsed. Lorry drivers have struck, and flying pickets are blocking ports and depots. Hospital porters, dustmen and council workers are coming out. Rubbish is piling up in Leicester Square, and in Liverpool gravediggers have refused to bury the dead.
+
+The country is in the coldest winter for sixteen years, and the government looks paralysed.
+
+- @national_interest: Offer to back the government in the national interest.
+- @hammer: Hammer the government and the union barons.
+- @emergency: Demand a state of emergency.
+
+@national_interest
+on-arrival: thatcher_rating += 6; wet_dissent -= 4; c1_con += 3*(1-dissent); c2_con += 2*(1-dissent); union_backlash += 2
+
+In a party political broadcast, you speak directly to camera. If the government will bring in laws to curb secondary picketing and require strike ballots, the Opposition will support them. "We have to learn again to be one nation, or one day we shall be no nation."
+
+Callaghan can't accept without breaking his party. Everyone notices that you offered.
+
+@hammer
+on-arrival: union_backlash += 5; c2_con += 4*(1-dissent) if policy_union_reform; c2_con += 2*(1-dissent) if not policy_union_reform; dry_strength += 3; wet_dissent += 4
+
+You tear into the government at every opportunity: Labour is in hock to the union barons and cannot govern. [? if policy_union_reform : Because we already have a plan to reform the unions, the attack carries weight. ?]
+
+@emergency
+on-arrival: right_strength += 3; right_dissent -= 3; c1_lib += 2; wet_dissent += 5; thatcher_rating -= 2; union_backlash += 3
+
+You demand that troops move essential supplies. The right cheers; moderate voters wonder whether we would make the confrontation worse.

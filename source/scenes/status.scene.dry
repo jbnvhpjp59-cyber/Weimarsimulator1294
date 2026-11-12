@@ -1,0 +1,160 @@
+title: Status
+new-page: true
+is-special: true
+on-arrival: {!
+Q.inflation_2 = Q.inflation ? Q.inflation.toFixed(1) : '0';
+Q.unemployment_2 = Q.unemployment ? Q.unemployment.toFixed(1) : '0';
+Q.economic_growth_2 = Q.economic_growth ? Q.economic_growth.toFixed(1) : '0';
+Q.dissent_disp = Math.round(Q.dissent_percent || 0);
+Q.budget_disp = Math.round(Q.budget * 10) / 10;
+Q.interest_rate_disp = Math.round(Q.interest_rate * 10) / 10;
+Q.thatcher_rating_disp = Math.round(Q.thatcher_rating);
+Q.lab_leader_rating_disp = Math.round(Q.lab_leader_rating);
+!}
+
+= Status
+
+[+ month : month +] [+ year +]
+
+Resources: [+ resources +]
+
+Conservative position: [? if con_in_government : in government ?][? if not con_in_government : Opposition ?]
+
+Party dissent: [+ dissent_disp : dissent +]
+
+Your rating: [+ thatcher_rating : rating +] ([+ thatcher_rating_disp +])
+
+Labour leader ([+ lab_leader +]): [+ lab_leader_rating : rating +] ([+ lab_leader_rating_disp +])
+
+= Government
+
+Prime Minister: [+ prime_minister +] ([+ pm_party +])
+
+[? if lib_lab_pact : The Lib-Lab Pact is in force. ?]
+
+[? if con_in_government : Chancellor: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. ?]
+
+[? if con_in_government : Cabinet: [+ cabinet_dry +]% dry. Backbench rebellion: [+ rebellion_disp +]/10. ?][? if con_in_government and cabinet_dry < 60 : Cabinet revolt: [+ cabinet_revolt_disp +]/10. ?][? if govt_type >= 2 and con_in_government : Partners' discontent: [+ partner_dissent_disp +]/10. ?]
+
+House of Commons ([+ total_seats +] seats, [+ majority_line +] for a majority):
+
+{!<span class="tooltip-text" title="Conservative and Unionist Party">Conservative</span>!}: [+ con_mps +]
+
+{!<span class="tooltip-text" title="Labour Party">Labour</span>!}: [+ lab_mps +]
+
+{!<span class="tooltip-text" title="Liberals, and the SDP once it is founded">!}[+ lib_name +]{!</span>!}: [+ lib_mps +]
+
+{!<span class="tooltip-text" title="Scottish National Party">SNP</span>!}: [+ snp_mps +]
+
+{!<span class="tooltip-text" title="Plaid Cymru">Plaid Cymru</span>!}: [+ pc_mps +]
+
+{!<span class="tooltip-text" title="Ulster Unionists, SDLP and Northern Irish independents">Northern Ireland</span>!}: [+ ni_mps +]
+
+{!<span class="tooltip-text" title="The Speaker, the Scottish Labour Party and vacancies">Others</span>!}: [+ other_mps +]
+
+Next election: [? if election_called : [+ next_election_month : month +] [+ next_election_year +] ?][? if not election_called : due by [+ next_election_month : month +] [+ next_election_year +] ?]
+
+= Economy
+
+Inflation: [+ inflation_2 +]%
+
+Unemployment: [+ unemployment_2 +]%
+
+Growth: [+ economic_growth_2 +]%
+
+[? if not con_in_government : Pay norm: [+ pay_norm +]% ?]
+
+[? if con_in_government : Bank Rate: [+ interest_rate_disp +]% ?]
+
+[? if con_in_government : Budget: [+ budget_disp +] ?][? if con_in_government and budget < 0 : (borrowing) ?]
+
+[? if con_in_government : Income tax: [+ basic_rate +]% basic, [+ top_rate +]% top. VAT: [+ vat +]% ?]
+
+[? if con_in_government : Public spending: [+ spending : taxation +] ?]
+
+@politics
+
+= Other Parties
+
+{!<span class="tooltip-text" title="David Steel's Liberals (and the SDP, once the Alliance forms)">!}[+ lib_name +]s{!</span>!}: [+ lib_relation : relationships +]
+
+{!<span class="tooltip-text" title="Scottish National Party">SNP</span>!}: [+ snp_relation : relationships +]
+
+{!<span class="tooltip-text" title="Plaid Cymru">Plaid Cymru</span>!}: [+ pc_relation : relationships +]
+
+{!<span class="tooltip-text" title="The Ulster Unionists and their allies">Ulster Unionists</span>!}: [+ uup_relation : relationships +]
+
+= Factions of the Conservative Party
+
+{!<span class="tooltip-text" title="Free-market reformers: monetarism, lower taxes, curbing the unions. Keith Joseph, Geoffrey Howe.">Dries</span>!} strength: [+ dry_strength : strength +], dissent: [+ dry_dissent : dissent +]
+
+{!<span class="tooltip-text" title="One Nation moderates who served under Heath and prefer consensus. Jim Prior, Ian Gilmour, Francis Pym.">Wets</span>!} strength: [+ wet_strength : strength +], dissent: [+ wet_dissent : dissent +]
+
+{!<span class="tooltip-text" title="Party managers who back whoever leads. Willie Whitelaw, Lord Carrington.">Loyalists</span>!} strength: [+ loyalist_strength : strength +], dissent: [+ loyalist_dissent : dissent +]
+
+{!<span class="tooltip-text" title="Traditionalists: law and order, immigration, the Union.">Right</span>!} strength: [+ right_strength : strength +], dissent: [+ right_dissent : dissent +]
+
+Edward Heath: [? if heath_hostility >= 70 : openly hostile ?][? if heath_hostility >= 40 and heath_hostility < 70 : sulking ?][? if heath_hostility < 40 : grudgingly reconciled ?]
+
+= Manifesto
+
+[? if manifesto_planks = 0 : No policies adopted yet. ?][? if policy_monetarism : Sound money. ?] [? if policy_tax_cuts : Cut income tax. ?] [? if policy_union_reform : Trade union reform. ?] [? if policy_right_to_buy : Right to buy. ?] [? if policy_law_order : Law and order. ?] [? if policy_defence : Strong defence. ?] [? if policy_privatisation : Denationalisation. ?] [? if policy_immigration : Tighter immigration control. ?]
+
+Devolution: [? if devolution_stance = 0 : opposed ?][? if devolution_stance = 1 : supported ?][? if devolution_stance = 2 : "No, for a better Bill" ?]
+
+@industry
+on-arrival: {!
+Q.union_backlash_disp = Math.round(Q.union_backlash);
+Q.economic_liberalism_disp = Math.round(Q.economic_liberalism);
+Q.labour_credibility_disp = Math.round(Q.labour_credibility);
+!}
+
+= Industrial Relations
+
+Strikes: [+ strike_wave : strikes +]
+
+Public who say the unions have too much power: [+ union_backlash_disp +]%
+
+Government pay norm: [+ pay_norm +]%
+
+Our position on pay: [? if pay_stance = 0 : undecided ?][? if pay_stance = 1 : back the pay norm ?][? if pay_stance = 2 : free collective bargaining ?][? if pay_stance = 3 : statutory wage controls ?]
+
+= Public Opinion
+
+Support for free-market economics: [+ economic_liberalism_disp +]%
+
+Trust in Labour on the economy: [+ labour_credibility_disp +]%
+
+@polls
+
+= Opinion Poll
+
+(if an election were held now)
+
+Conservative: [+ con_votes +]%
+
+Labour: [+ lab_votes +]%
+
+[+ lib_name +]: [+ lib_votes +]%
+
+SNP: [+ snp_votes +]% (in Scotland: [+ snp_share_disp +]%)
+
+Plaid Cymru: [+ pc_votes +]%
+
+Others: [+ other_votes +]%
+
+**Projected seats** ([+ projected_majority_line +] for a majority)
+
+Conservative [+ con_seats +], Labour [+ lab_seats +], [+ lib_name +] [+ lib_seats +], SNP [+ snp_seats +], Plaid [+ pc_seats +], Northern Ireland [+ ni_seats +]
+
+[? if con_seats >= projected_majority_line : Projected result: Conservative majority. ?][? if lab_seats >= projected_majority_line : Projected result: Labour majority. ?][? if con_seats < projected_majority_line and lab_seats < projected_majority_line : Projected result: hung parliament. ?]
+
+**Support by social grade**
+
+Professional & managerial (AB): Con [+ ab_con_display +]%, Lab [+ ab_lab_display +]%, Lib [+ ab_lib_display +]%
+
+White-collar (C1): Con [+ c1_con_display +]%, Lab [+ c1_lab_display +]%, Lib [+ c1_lib_display +]%
+
+Skilled manual (C2): Con [+ c2_con_display +]%, Lab [+ c2_lab_display +]%, Lib [+ c2_lib_display +]%
+
+Semi/unskilled & pensioners (DE): Con [+ de_con_display +]%, Lab [+ de_lab_display +]%, Lib [+ de_lib_display +]%

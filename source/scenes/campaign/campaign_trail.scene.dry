@@ -1,0 +1,33 @@
+title: On the Campaign Trail
+new-page: true
+is-card: true
+card-image: img/campaign.svg
+tags: campaign
+on-arrival: month_actions += 1
+
+= On the Campaign Trail
+
+Three weeks, a battlebus, and a press pack that wants a picture every day.
+
+- @photo: Photo opportunities.
+- @marginals: A whistle-stop tour of the marginals.
+- @scotland: Fly north to Scotland.
+- @easy_discard
+
+@photo
+on-arrival: thatcher_rating += 3
+
+You hold a newborn calf on a Suffolk farm for the photographers, for rather longer than Denis thinks wise. It makes every front page.
+
+@marginals
+subtitle: -1 resource
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; midlands_con_bonus += 1; c2_con += 2*(1-dissent)
+
+Factory gates, shopping precincts and a chocolate factory in the West Midlands.
+
+@scotland
+on-arrival: scotland_con_bonus += 1; snp_share -= 1
+
+A rally in Glasgow and a walkabout in Perth. The SNP vote is softening, and we mean to pick it up.

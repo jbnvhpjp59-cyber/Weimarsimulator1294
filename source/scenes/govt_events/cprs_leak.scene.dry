@@ -1,0 +1,28 @@
+title: The Think Tank Leak
+tags: event
+view-if: con_in_government = 1 and time >= 56 and time <= 58 and cprs_leak = 0
+max-visits: 1
+new-page: true
+on-arrival: cprs_leak = 1; thatcher_rating -= 2; de_con -= 1
+achievement: think_tank
+
+= The Think Tank Leak
+
+The Economist has obtained a paper from the Central Policy Review Staff, the Cabinet's own think tank. To control public spending in the long run, it suggests ending free state education for some children, freezing benefits, and replacing the National Health Service with private insurance and charges. [? if private_health = 1 : Our tax break for private health insurance makes the story look like a plan rather than a thought experiment. ?][? if nhs_funding >= 2 : Our record of funding the NHS gives us something to point to. ?]
+
+Labour says the government's true intentions have been exposed. The Cabinet is furious that the paper was circulated at all.
+
+- @disown: Disown it: "The National Health Service is safe with us."
+- @defend: Defend the right to think the unthinkable.
+
+@disown
+subtitle: -0.5 budget. The voters are reassured. The dries are disappointed.
+on-arrival: nhs_funding += 1; budget -= 0.5; thatcher_rating += 2 + nhs_funding / 2; de_con += 1*(1-dissent); c2_con += 1*(1-dissent); dry_dissent += 3; wet_dissent -= 3
+
+At the party conference you tell the hall, and the cameras: "The National Health Service is safe with us." The paper is withdrawn, and the Cabinet minutes are rewritten to show it was never discussed.
+
+@defend
+subtitle: The dries cheer. The voters will remember.
+on-arrival: cprs_defended = 1; economic_liberalism += 2; de_con -= 3; c2_con -= 2; c1_con -= 1; de_lab += 2; thatcher_rating -= 3; dry_dissent -= 4; wet_dissent += 6
+
+You tell the Commons that a government which never considers radical options doesn't deserve the name. The wets leak their horror to the Sunday papers, and Labour's next election broadcast is about nothing else.

@@ -1,0 +1,541 @@
+title: Root Scene
+new-page: true
+go-to: post_event if started = 1; start_menu if started = 0
+
+@start_menu
+new-page: true
+go-to: start_menu_2
+
+= Conservatism: An Alternate History
+
+@start_menu_2
+
+- @start: Start game
+- @election_simulation: Election simulation
+- @credits: Credits
+- @game_over.achievements
+
+@start
+on-arrival: {!
+Q.started = 1;
+// ---------------------------------------------------------------
+// Time. time = 1 is January 1978; each turn is one month.
+// ---------------------------------------------------------------
+Q.time = 1;
+Q.year = 1978;
+Q.month = 1;
+// how many actions have been taken this month?
+Q.month_actions = 0;
+
+// -1 = easy, 0 = normal, 1 = hard
+Q.difficulty = 0;
+Q.historical_mode = 0;
+Q.saves_disabled = 0;
+Q.discard_disabled = 0;
+Q.hand_size = 3;
+// party income every January (historical mode replaces fundraising with this)
+Q.annual_income = 0;
+Q.fundraising_disabled = 0;
+// the Treasury's headroom when we take office
+Q.starting_budget = 1;
+// pinned cards offered on easy difficulty (or in custom settings)
+Q.shuffle_leadership_enabled = 0;
+Q.cabinet_enabled = 0;
+Q.starting_dissent = 1;
+Q.starting_relations = 1;
+
+// ---------------------------------------------------------------
+// The Conservative Party
+// ---------------------------------------------------------------
+// resources: money and political capital, spent on cards.
+Q.resources = 3;
+// donations: income from each fundraising round.
+Q.donations = 2;
+
+// overall dissent (0 to 1) is recalculated each month from the factions.
+// it dampens every gain in support.
+Q.dissent = 0.1;
+Q.dissent_percent = 10;
+
+// factions of the parliamentary party (strengths are normalised to 100)
+// dry: free-market "Thatcherites" (Keith Joseph, Geoffrey Howe)
+// wet: One Nation / Heathite moderates (Jim Prior, Ian Gilmour, Francis Pym)
+// loyalist: the managers who back whoever leads (Willie Whitelaw, Lord Carrington)
+// right: traditionalists, law-and-order and Unionist Tories
+Q.factions = ['dry', 'wet', 'loyalist', 'right'];
+Q.dry_strength = 25;
+Q.dry_dissent = 5;
+Q.wet_strength = 35;
+Q.wet_dissent = 20;
+Q.loyalist_strength = 30;
+Q.loyalist_dissent = 5;
+Q.right_strength = 10;
+Q.right_dissent = 10;
+
+// Edward Heath sulks on the backbenches. 0 = reconciled, 100 = open war.
+Q.heath_hostility = 60;
+
+// ---------------------------------------------------------------
+// Leaders and public opinion
+// ---------------------------------------------------------------
+// net-ish satisfaction ratings, 0 to 100
+Q.thatcher_rating = 40;
+Q.lab_leader = "Callaghan";
+Q.lab_leader_rating = 55;
+// public appetite for free-market economics, 0 to 100
+Q.economic_liberalism = 40;
+// share of the public who think the unions have too much power, 0 to 100
+Q.union_backlash = 55;
+// how far the public trusts Labour to run the economy, 0 to 100
+Q.labour_credibility = 55;
+
+// ---------------------------------------------------------------
+// The economy (the Labour government controls it, for now)
+// ---------------------------------------------------------------
+Q.inflation = 9.9;
+Q.unemployment = 5.8;
+Q.economic_growth = 3.0;
+// the government's pay norm, in % (Phase 3 = 10%, Phase 4 = 5%)
+Q.pay_norm = 10;
+// industrial unrest, 0 to 10
+Q.strike_wave = 2;
+
+// ---------------------------------------------------------------
+// Policy: planks of the next Conservative manifesto (0 = not adopted)
+// ---------------------------------------------------------------
+Q.policy_monetarism = 0;
+Q.policy_tax_cuts = 0;
+Q.policy_union_reform = 0;
+Q.policy_right_to_buy = 0;
+Q.policy_law_order = 0;
+Q.policy_defence = 0;
+Q.policy_privatisation = 0;
+Q.policy_immigration = 0;
+Q.manifesto_planks = 0;
+// devolution: 0 = oppose the Scotland and Wales Acts,
+// 1 = support them, 2 = "vote No for a better Bill"
+Q.devolution_stance = 0;
+// the government's incomes policy: 0 = no position, 1 = back the pay norm,
+// 2 = free collective bargaining, 3 = statutory wage controls
+Q.pay_stance = 0;
+
+// ---------------------------------------------------------------
+// Other parties
+// ---------------------------------------------------------------
+Q.lib_relation = 30;
+Q.snp_relation = 25;
+Q.pc_relation = 15;
+Q.uup_relation = 50;
+// is the Lib-Lab Pact still propping up the government?
+Q.lib_lab_pact = 1;
+
+// ---------------------------------------------------------------
+// Social grades (share of the electorate)
+// ab: professional & managerial, c1: white-collar,
+// c2: skilled manual, de: semi/unskilled manual & state pensioners
+// ---------------------------------------------------------------
+Q.ab = 17;
+Q.c1 = 23;
+Q.c2 = 32;
+Q.de = 28;
+Q.classes = ['ab', 'c1', 'c2', 'de'];
+// the class model covers Great Britain outside the nationalist vote.
+// The SNP and Plaid Cymru are handled by the regional seat model.
+Q.parties = ['con', 'lab', 'lib', 'other'];
+
+// Support for each party by social grade. These need not sum to 100;
+// they are normalised. Tuned to give roughly level pegging in Jan 1978.
+Q.ab_con = 64;
+Q.ab_lab = 17;
+Q.ab_lib = 15;
+Q.ab_other = 2;
+
+Q.c1_con = 54;
+Q.c1_lab = 30;
+Q.c1_lib = 12;
+Q.c1_other = 3;
+
+Q.c2_con = 41;
+Q.c2_lab = 48;
+Q.c2_lib = 7;
+Q.c2_other = 3;
+
+Q.de_con = 29;
+Q.de_lab = 61;
+Q.de_lib = 6;
+Q.de_other = 3;
+
+// remember the starting support: post_event pulls support back towards it
+Q.baseline_support = {};
+for (var bc of Q.classes) {
+    for (var bp of Q.parties) {
+        Q.baseline_support[bc + '_' + bp] = Q[bc + '_' + bp];
+    }
+}
+
+// nationalist vote within Scotland and Wales, in %
+Q.snp_share = 25;
+Q.pc_share = 9;
+
+// ---------------------------------------------------------------
+// The House of Commons (approximate, January 1978)
+// 635 seats; 318 needed for a majority.
+// "other" covers the Speaker and the breakaway Scottish Labour Party.
+// ---------------------------------------------------------------
+Q.total_seats = 635;
+Q.majority_line = 318;
+Q.con_mps = 281;
+Q.lab_mps = 310;
+Q.lib_mps = 13;
+Q.snp_mps = 11;
+Q.pc_mps = 3;
+Q.ni_mps = 12;
+Q.other_mps = 5;
+// Unionist MPs among the Northern Irish members (15 of 17 after 1983)
+Q.unionist_seats = 10;
+
+Q.prime_minister = "Callaghan";
+Q.pm_party = "Labour";
+Q.con_in_government = 0;
+
+// ---------------------------------------------------------------
+// Elections. The Parliament elected in October 1974 must be
+// dissolved by autumn 1979 (time 22 = October 1979).
+// ---------------------------------------------------------------
+Q.next_election_time = 22;
+Q.election_deadline_time = 22;
+Q.next_election_month = 10;
+Q.next_election_year = 1979;
+Q.months_to_election = 21;
+Q.months_since_election = 0;
+Q.months_in_office = 0;
+Q.rebellion_disp = 0;
+Q.cabinet_revolt_disp = 0;
+Q.partner_dissent_disp = 0;
+Q.in_campaign = 0;
+Q.election_called = 0;
+Q.n_elections = 0;
+Q.apply_poll_error = 0;
+Q.poll_error = 0;
+// set by the no-confidence vote
+Q.no_confidence_won = 0;
+Q.no_confidence_lost = 0;
+
+// records for charts
+Q.party_support_records = [];
+Q.election_records = [];
+Q.economic_records = [];
+
+// ---------------------------------------------------------------
+// Events seen
+// ---------------------------------------------------------------
+Q.saatchi_hired = 0;
+Q.swamped_seen = 0;
+Q.autumn_election_1978 = 0;
+Q.winter_of_discontent = 0;
+// 0 = not yet held, 1 = Yes cleared the 40% rule, 2 = it failed
+Q.devolution_referendum_result = 0;
+Q.devolution_failed = 0;
+Q.neave_dead = 0;
+Q.tabloid_support = 0;
+Q.electoral_reform_promise = 0;
+// regional campaign bonuses (percentage points, Con over Lab)
+Q.scotland_con_bonus = 0;
+Q.midlands_con_bonus = 0;
+// campaign
+Q.campaign_started = 0;
+Q.manifesto_launched = 0;
+Q.tv_debate_decided = 0;
+Q.general_election_held = 0;
+// 1 = majority, 2 = Unionist deal, 3 = Liberal deal, 4 = minority, 5 = defeat
+Q.result_type = 0;
+// random events
+Q.random_roll = 1;
+Q.last_heath_outburst = 0;
+Q.last_advisor_action = 0;
+Q.pmq_success = 0;
+Q.debate_win = 0;
+Q.callaghan_calls = 0;
+Q.sun_endorsed = 0;
+
+// ---------------------------------------------------------------
+// Government. Everything below matters once we win power.
+// ---------------------------------------------------------------
+// the game ends after this many general elections (the re-election)
+Q.final_election = 2;
+Q.last_election_time = 0;
+Q.term_start_time = 0;
+// 1 = majority, 2 = Unionist deal, 3 = Liberal deal, 4 = minority
+Q.govt_type = 0;
+Q.con_majority = 0;
+Q.ousted = 0;
+Q.government_fell = 0;
+
+// The Treasury. budget is the government's fiscal headroom: negative
+// means borrowing. Below -5, the markets revolt.
+Q.budget = 0;
+Q.basic_rate = 33;
+Q.top_rate = 83;
+Q.vat = 8;
+// public spending relative to Labour's plans (negative = cuts)
+Q.spending = 0;
+// Minimum Lending Rate (Bank Rate), in %
+Q.interest_rate = 12;
+// exchange-rate index: high sterling hurts manufacturing
+Q.sterling = 50;
+Q.mtfs = 0;
+Q.exchange_controls = 1;
+Q.north_sea_oil = 0;
+// "The lady's not for turning": 1 = held course, -1 = U-turn
+Q.u_turn = 0;
+
+// Industry and unions
+// union power, 0-100: falls with union law, rises with defeats
+Q.union_power = 70;
+Q.employment_acts = 0;
+Q.privatisations = 0;
+Q.right_to_buy_progress = 0;
+Q.industry_subsidy = 0;
+// coal stocks at power stations, 0-3: a miners' strike can't be won without them
+Q.coal_stocks = 0;
+Q.miners_beaten = 0;
+
+// The Cabinet. Treasury, Employment and Industry each go to a dry or a wet.
+// cabinet_dry (0-100) is how far the Cabinet backs the radical programme.
+Q.chancellor = "Howe";
+Q.chancellor_dry = 1;
+Q.employment_secretary = "Prior";
+Q.employment_dry = 0;
+Q.industry_secretary = "Joseph";
+Q.industry_dry = 1;
+Q.foreign_secretary = "Carrington";
+Q.cabinet_dry = 40;
+Q.wets_purged = 0;
+// pressure from the wets inside Cabinet, 0-10: at 10 they revolt
+Q.cabinet_revolt = 0;
+// backbench rebellion, 0-10: high values defeat bills and threaten the leader
+Q.rebellion = 0;
+// discontent of our partners if we govern without a majority, 0-10
+Q.partner_dissent = 0;
+Q.leadership_challenge_time = 0;
+
+// Opposition
+Q.lab_left = 0;
+Q.alliance_formed = 0;
+Q.lib_name = "Liberal";
+Q.sdp_defections = 0;
+Q.falklands_factor = 0;
+
+// Foreign affairs and defence
+Q.europe_relation = 50;
+Q.us_relation = 55;
+Q.eec_rebate = 0;
+Q.defence_cuts = 0;
+Q.endurance_withdrawn = 0;
+// 0 = nothing, 1 = invaded, 2 = task force sailing, 3 = won, 4 = lost, 5 = negotiated away, 6 = deterred
+Q.falklands = 0;
+Q.falklands_odds = 0;
+
+// One-off events in government
+Q.howe_budget_done = 0;
+Q.unemployment_2m = 0;
+Q.unemployment_3m = 0;
+Q.riots = 0;
+Q.hunger_strike_conceded = 0;
+Q.new_boundaries = 0;
+Q.police_pay_done = 0;
+Q.nationality_act = 0;
+Q.scarman_done = 0;
+Q.trident = 0;
+Q.was_in_government = 0;
+Q.final_election_reached = 0;
+Q.last_new_year = 0;
+Q.benefit_cost = 0;
+Q.budget_disp = 0;
+Q.interest_rate_disp = 12;
+Q.inflation_2 = '9.9';
+Q.unemployment_2 = '5.8';
+Q.economic_growth_2 = '3.0';
+Q.projected_majority_line = 318;
+Q.howe_resigned = 0;
+Q.invaded = 0;
+Q.war_won = 0;
+Q.survived = 0;
+Q.survived_confidence = 0;
+Q.challenge_support = 0;
+Q.miners_win = 0;
+Q.by_election_loss = 0;
+Q.by_election_winner = "";
+Q.crosby_lost = 0;
+Q.hillhead_lost = 0;
+Q.last_defection_time = 0;
+Q.defeated_once = 0;
+Q.labour_winter_seen = 0;
+Q.late_victory = 0;
+Q.last_cabinet_action = 0;
+Q.hanging_vote = 0;
+
+// Health: nhs_funding counts the years we funded the NHS above inflation
+Q.nhs_funding = 0;
+Q.prescription_charges = 0;
+Q.nhs_contracting = 0;
+Q.nhs_reorganised = 0;
+Q.private_health = 0;
+Q.nhs_griffiths = 0;
+Q.cprs_leak = 0;
+Q.cprs_defended = 0;
+Q.health_dispute = 0;
+// Education and training (school_vouchers: 1 = studied, 2 = piloted, -1 = dropped)
+Q.assisted_places = 0;
+Q.parental_choice = 0;
+Q.university_cuts = 0;
+Q.school_vouchers = 0;
+Q.yts = 0;
+Q.school_spending = 0;
+// Social security
+Q.pension_link_broken = 0;
+Q.benefits_cut = 0;
+Q.sick_pay_reform = 0;
+Q.child_benefit = 0;
+Q.fraud_drive = 0;
+// The Common Market
+Q.erm = 0;
+Q.cap_reform = 0;
+Q.lamb_war = 0;
+Q.fisheries_deal = 0;
+Q.single_market = 0;
+// Immigration (boat_people: 1 = took them in, -1 = refused)
+Q.immigration_rules = 0;
+Q.boat_people = 0;
+Q.race_relations = 0;
+// Energy
+Q.oil_tax = 0;
+Q.bp_sold = 0;
+Q.nuclear_programme = 0;
+Q.gas_prices = 0;
+// Local government
+Q.rsg_cuts = 0;
+Q.rate_capping = 0;
+Q.rates_pledge = 0;
+Q.glc_abolition = 0;
+Q.docklands = 0;
+Q.council_tendering = 0;
+
+// ---------------------------------------------------------------
+// Timers. Each card sets its own timer; post_event counts them down.
+// ---------------------------------------------------------------
+Q.timers = ['advisor_action',
+            // party affairs
+            'fundraising', 'speaking_tour', 'media', 'policy_group',
+            'shadow_cabinet', 'target_voters', 'other_parties',
+            'party_disunity', 'inner_circle',
+            // commons
+            'opposition_day', 'pmqs', 'devolution', 'pay_policy',
+            'no_confidence', 'whips',
+            // government
+            'budget', 'monetary_policy', 'public_spending', 'union_law',
+            'industry', 'housing', 'law_order', 'foreign_affairs',
+            'defence', 'northern_ireland', 'public_pay', 'reshuffle',
+            'nhs', 'education', 'social_security', 'europe', 'immigration',
+            'energy', 'local_government',
+            // events
+            'by_election', 'gilt_crisis'];
+for (var t of Q.timers) {
+    Q[t + '_timer'] = 0;
+}
+// shadow cabinet members with pinned advisor cards
+// the inner circle: three advisers at a time, as in the original game
+Q.n_advisors = 3;
+Q.whitelaw_advisor = 1;
+Q.joseph_advisor = 1;
+Q.howe_advisor = 1;
+Q.reece_advisor = 0;
+Q.prior_advisor = 0;
+Q.pym_advisor = 0;
+Q.heseltine_advisor = 0;
+Q.carrington_advisor = 0;
+Q.tebbit_advisor = 0;
+Q.lawson_advisor = 0;
+Q.gilmour_advisor = 0;
+Q.parkinson_advisor = 0;
+Q.biffen_advisor = 0;
+Q.brittan_advisor = 0;
+Q.nott_advisor = 0;
+Q.stevas_advisor = 0;
+// one-off advisor actions
+Q.pace_bill = 0;
+Q.price_commission = 0;
+Q.select_committees = 0;
+Q.voice_coached = 0;
+Q.minis = 0;
+// extra odds for the task force (Nott's action)
+Q.falklands_bonus = 0;
+
+// project the starting polls
+this._runActions(this.game.scenes['election_algorithm'].onArrival);
+!}
+new-page: true
+
+> *"We used to think that you could spend your way out of a recession and increase employment by cutting taxes and boosting government spending. I tell you in all candour that that option no longer exists."*
+
+ - James Callaghan, Labour Party Conference, 1976
+
+This is a game of alternate history. It tries to be faithful to the period, but any game that lets you change history has to make things up. If you spot a glaring mistake, please report it.
+
+For background on British politics in 1978, see the "Library" link at the top of the page.
+
+- @1978_easy: Begin (easy difficulty)
+- @1978_main: Begin (normal difficulty)
+- @1978_hard: Begin (hard difficulty)
+- @1978_historical: Begin (historical mode)
+- @1978_custom: Customise difficulty settings
+
+@1978_easy
+on-arrival: difficulty = -1; resources = 5; donations = 3; hand_size = 4; wet_dissent = 10; lib_relation = 36; thatcher_rating = 44
+go-to: 1978_main
+
+@1978_hard
+on-arrival: difficulty = 1; resources = 1; donations = 1; discard_disabled = 1; wet_dissent = 30; right_dissent = 20; heath_hostility = 75; lib_relation = 25; thatcher_rating = 36; starting_budget = 0; starting_dissent = 2; starting_relations = 2
+go-to: 1978_main
+
+@1978_historical
+subtitle: Saving, loading and polls are disabled. [? if not achievement_game_completed : Not recommended for a first playthrough. ?]
+on-arrival: {!
+Q.hand_size = 3;
+Q.difficulty = 2;
+Q.discard_disabled = 1;
+Q.historical_mode = 1;
+Q.annual_income = 2;
+Q.fundraising_disabled = 1;
+Q.resources = 2;
+Q.donations = 1;
+Q.wet_dissent = 30;
+Q.right_dissent = 20;
+Q.heath_hostility = 75;
+Q.lib_relation = 25;
+Q.thatcher_rating = 36;
+Q.starting_budget = 0;
+Q.starting_dissent = 2;
+Q.starting_relations = 2;
+Q.saves_disabled = 1;
+this.state.disableSaves = true;
+!}
+go-to: 1978_main
+
+@1978_custom
+go-to: custom_difficulty
+
+@1978_main
+new-page: true
+set-bg: img/map.jpg
+go-to: main if hand_size == 3; main.main_easy if hand_size == 4
+face-image: img/events/thatcher_1976.jpg
+audio: shuffle music/pomp_and_circumstance_4.mp3 music/rule_britannia.mp3 music/jupiter.mp3 music/march_of_the_mogul_emperors.mp3
+
+= January 1978
+
+You have led the Conservative Party for nearly three years, and most of your own front bench still isn't sure you should. Many of them served Edward Heath, and Heath himself hasn't forgiven you for taking his job.
+
+Across the dispatch box, James Callaghan runs a minority Labour government that has lost its majority through by-elections and defections. It survives on the Lib-Lab Pact with David Steel's Liberals. The IMF crisis of 1976 is fading, inflation has fallen from 26% to under 10%, and North Sea oil is starting to flow. "Sunny Jim" is more popular than you are.
+
+Parliament must be dissolved by the autumn of 1979. Callaghan can call an election before then, or the Commons can bring him down sooner. Win that election, and the real test begins: governing Britain, and winning a second term.

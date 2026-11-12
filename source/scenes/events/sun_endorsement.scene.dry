@@ -1,0 +1,9 @@
+title: The Sun Says
+tags: event
+view-if: in_campaign = 1 and tabloid_support >= 1 and months_to_election <= 1 and sun_endorsed = 0
+new-page: true
+on-arrival: sun_endorsed = 1; c2_con += 3*(1-dissent); de_con += 2*(1-dissent)
+
+= The Sun Says
+
+The Sun, the country's best-selling newspaper and read by millions of Labour voters, lets it be known that its polling-day front page will tell them to "vote Tory this time".

@@ -1,0 +1,42 @@
+title: The TV Debate Challenge
+new-page: true
+is-card: true
+card-image: img/campaign.svg
+tags: campaign
+view-if: tv_debate_decided = 0
+on-arrival: tv_debate_decided = 1; month_actions += 1
+
+= The TV Debate Challenge
+
+London Weekend Television offers to stage a televised debate between the party leaders. [+ lab_leader +] has accepted at once, and thinks he would win.
+
+- @accept: Accept the debate.
+- @decline: Decline: this election is about policies, not personalities.
+
+@accept
+on-arrival: {!
+var chance = 40 + (Q.thatcher_rating - Q.lab_leader_rating) + 2 * Q.strike_wave;
+if (chance < 15) {
+    chance = 15;
+} else if (chance > 85) {
+    chance = 85;
+}
+Q.debate_win = (Math.random() * 100 < chance) ? 1 : 0;
+!}
+go-to: accept_win if debate_win = 1; accept_lose if debate_win = 0
+
+@accept_win
+on-arrival: thatcher_rating += 6; lab_leader_rating -= 4; c1_con += 3*(1-dissent); c2_con += 3*(1-dissent)
+achievement: debate_win
+
+[+ lab_leader +] plays to the gallery; you have the figures. Afterwards, the snap polls give it to you.
+
+@accept_lose
+on-arrival: thatcher_rating -= 5; lab_leader_rating += 3; c1_con -= 2; c2_con -= 2
+
+You come across as shrill and [+ lab_leader +] as reassuring. Central Office spends the next morning on damage control.
+
+@decline
+on-arrival: thatcher_rating -= 1
+
+You say the election is about policies, not personalities. Labour calls you frightened of the debate, but the story fades within a day.

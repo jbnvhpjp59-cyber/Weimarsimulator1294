@@ -1,0 +1,56 @@
+title: Nigel Lawson
+is-pinned-card: true
+card-image: img/cards/lawson.jpg
+tags: advisor
+view-if: lawson_advisor = 1
+new-page: true
+
+= Nigel Lawson
+
+[? if con_in_government = 0 : A Treasury spokesman in the Shadow Cabinet's second rank. ?][? if con_in_government = 1 and time < 45 : Financial Secretary to the Treasury. ?][? if con_in_government = 1 and time >= 45 : Secretary of State for Energy. ?] A former financial journalist, clever, combative and certain that he is right. He usually is about the numbers, and less often about the politics.
+
+- @tax_plan
+- @mtfs
+- @coal
+- @city
+- @root: Return
+
+@tax_plan
+title: Draft the tax reform plan
+view-if: con_in_government = 0
+subtitle: Lower income tax, paid for by VAT. Undermines Labour's economic credibility.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; economic_liberalism += 3; labour_credibility -= 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent)
+
+Lawson's paper is short, brutal and costed. A top rate of 60%, a basic rate on its way to 25%, and VAT to pay for it.
+
+@mtfs
+title: The Medium-Term Financial Strategy
+view-if: con_in_government = 1 and mtfs = 0
+subtitle: Lower inflation and a framework the markets trust. The wets dislike the rigidity.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; mtfs = 1; inflation -= 1; economic_liberalism += 3; dry_dissent -= 5; wet_dissent += 4
+achievement: medium_term
+
+Lawson publishes four years of declining targets for the money supply and for government borrowing. The markets are impressed. The wets point out that nobody knows how to measure the money supply.
+
+@coal
+title: Prepare for the miners
+view-if: con_in_government = 1 and coal_stocks < 3
+subtitle: -0.5 budget. Builds up coal stocks at the power stations.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; coal_stocks += 1; budget -= 0.5
+
+Lawson quietly orders the Central Electricity Generating Board to stockpile coal, recruit non-union drivers, and keep oil-fired stations ready. He calls it preparing for a strike that every Energy Secretary since 1974 has dreaded.
+
+@city
+title: Brief the City
+subtitle: Gain [+ donations + 1 +] resources.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; resources += donations + 1
+
+Lawson explains the strategy to the fund managers in language they understand. Donations follow.

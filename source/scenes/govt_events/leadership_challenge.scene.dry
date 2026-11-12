@@ -1,0 +1,64 @@
+title: A Leadership Challenge
+tags: event
+priority: 3
+view-if: con_in_government = 1 and in_campaign = 0 and time - leadership_challenge_time >= 12 and ((thatcher_rating < 20 and dissent >= 0.35) or (rebellion >= 10 and thatcher_rating < 40) or falklands = 4)
+new-page: true
+on-arrival: leadership_challenge_time = time
+face-image: img/events/westminster.jpg
+
+= A Leadership Challenge
+
+[? if falklands = 4 : After the South Atlantic disaster, ?][? if falklands != 4 : With the party in revolt and the polls dire, ?] a senior backbencher announces he will stand against you for the leadership. He's a stalking horse: if you are weakened in the first ballot, the real contenders will come in for the second.
+
+- @fight: Fight it on your record.
+- @concessions: Buy off the wets with a change of course first.
+- @resign: Resign rather than face the humiliation.
+
+@fight
+on-arrival: {!
+var support = 62 + 0.5 * (Q.thatcher_rating - 30) - 30 * (Q.dissent - 0.2) - 1 * Q.rebellion;
+if (Q.falklands == 3) {
+    support += 20;
+}
+if (Q.falklands == 4) {
+    support -= 15;
+}
+Q.challenge_support = Math.round(support);
+Q.survived = (support + (Math.random() - 0.5) * 10 >= 50) ? 1 : 0;
+!}
+go-to: survived if survived = 1; ousted if survived = 0
+
+@concessions
+on-arrival: {!
+Q.wet_dissent -= 15;
+Q.dry_dissent += 10;
+Q.economic_liberalism -= 4;
+Q.spending += 1;
+Q.budget -= 2;
+var support = 68 + 0.5 * (Q.thatcher_rating - 30) - 30 * (Q.dissent - 0.2) - 1 * Q.rebellion;
+if (Q.falklands == 4) {
+    support -= 15;
+}
+Q.challenge_support = Math.round(support);
+Q.survived = (support + (Math.random() - 0.5) * 10 >= 50) ? 1 : 0;
+!}
+go-to: survived if survived = 1; ousted if survived = 0
+
+You promise a "review" of economic strategy, more for the regions, and a seat at the table for the wets.
+
+@survived
+on-arrival: rebellion -= 4; wet_dissent -= 5; loyalist_dissent -= 5; thatcher_rating += 3
+
+You win the ballot comfortably enough that no one else enters. The rebellion is over, for now.
+
+@ousted
+on-arrival: ousted = 1; con_in_government = 0
+go-to: game_over
+
+Too many abstentions. The men in grey suits tell you that you cannot win a second ballot. You withdraw, and the party chooses a new leader.
+
+@resign
+on-arrival: ousted = 1; con_in_government = 0
+go-to: game_over
+
+You announce that you will not put the party through a contest, and that you will resign as soon as a successor is chosen.

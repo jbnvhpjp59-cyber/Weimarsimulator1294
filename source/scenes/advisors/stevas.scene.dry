@@ -1,0 +1,56 @@
+title: Norman St John-Stevas
+is-pinned-card: true
+card-image: img/cards/stevas.jpg
+tags: advisor
+view-if: stevas_advisor = 1
+new-page: true
+
+= Norman St John-Stevas
+
+[? if con_in_government = 0 : Shadow Leader of the House and education spokesman. ?][? if con_in_government = 1 : Leader of the House of Commons and Minister for the Arts. ?] Witty, theatrical and devoutly Catholic, he calls you "the Blessed Margaret" and "the Leaderene", and you are not always sure he means it kindly.
+
+- @parents
+- @charm
+- @select_committees
+- @arts
+- @root: Return
+
+@parents
+title: Champion parents in education
+view-if: con_in_government = 0
+subtitle: White-collar voters warm to us.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; c1_con += 2*(1-dissent); c2_con += 1*(1-dissent); labour_credibility -= 1
+
+St John-Stevas publishes a Parents' Charter promising choice of school, published exam results and a say on governing bodies.
+
+@charm
+title: Charm the House
+subtitle: Calms the party, and the backbenches in government.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; wet_dissent -= 3; loyalist_dissent -= 2; rebellion -= 1 if con_in_government
+
+A performance at the dispatch box that has the whole House laughing, Labour included. For a week or two, tempers cool.
+
+@select_committees
+title: Create the select committees
+view-if: con_in_government = 1 and select_committees = 0
+subtitle: Parliament gains power to scrutinise ministers. The backbenches and the Liberals approve.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; select_committees = 1; lib_relation += 3; rebellion -= 1; wet_dissent -= 3; loyalist_dissent += 1
+achievement: select_committees
+
+Every government department will now be shadowed by a committee of backbenchers with the power to call ministers and civil servants. Whitehall is appalled. St John-Stevas calls it the most important reform of the Commons this century.
+
+@arts
+title: Protect the arts budget
+view-if: con_in_government = 1
+subtitle: -0.5 budget. The professional classes approve.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; budget -= 0.5; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent); wet_dissent -= 2
+
+The Arts Council grant survives the spending round intact. The Royal Opera House sends its thanks; the Treasury sends a memo.

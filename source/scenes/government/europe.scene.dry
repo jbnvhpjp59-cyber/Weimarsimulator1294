@@ -1,0 +1,57 @@
+title: The Common Market
+new-page: true
+is-card: true
+card-image: img/cards/eec_summit_1981.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and europe_timer <= 0
+on-arrival: europe_timer = 6; month_actions += 1
+
+= The Common Market
+
+Britain joined the European Community in 1973, and two-thirds of the country voted to stay in at the 1975 referendum. The Community's budget, its farm policy and its plans for monetary union all need an answer from London. [? if europe_relation >= 60 : Our partners think we are coming round to Europe. ?][? if europe_relation < 35 : Our partners regard us as the awkward ones. ?]
+
+- @erm: Take sterling into the Exchange Rate Mechanism.
+- @cap_reform: Fight for reform of the farm policy.
+- @lamb_war: Stand up to France in the "lamb war".
+- @fisheries: Agree a Common Fisheries Policy.
+- @single_market: Press for a single European market.
+- @easy_discard
+- @cancel_advisor_action
+
+@erm
+view-if: erm = 0
+subtitle: Steadier sterling and lower inflation. The monetarists and the right will be appalled.
+choose-if: chancellor_dry = 0 or europe_relation >= 55
+unavailable-subtitle: [+ chancellor +] won't give up control of interest rates, and Europe hasn't been courted enough.
+on-arrival: erm = 1; europe_relation += 12; inflation -= 0.5; sterling -= 5; right_dissent += 6; dry_dissent += 4; wet_dissent -= 4; lib_relation += 4; economic_liberalism -= 1
+achievement: erm
+
+Sterling joins the Exchange Rate Mechanism of the European Monetary System. Interest rates will now have to defend the pound against the Deutschmark. Your economic adviser, Alan Walters, calls the system "half-baked", and the newspapers quote him.
+
+@cap_reform
+view-if: cap_reform < 2
+subtitle: [? if cap_reform = 1 : +0.5 budget. ?] Our partners resent it.
+on-arrival: cap_reform += 1; europe_relation -= 4; budget += 0.5 if cap_reform = 2; c2_con += 1*(1-dissent); right_dissent -= 1
+
+[? if cap_reform = 1 : We demand an end to the butter mountains and wine lakes, paid for by British taxpayers and shoppers. The French farm minister accuses us of not understanding agriculture. ?][? if cap_reform = 2 : A ceiling on farm spending is agreed at last. It is less than we wanted, and more than anyone expected. ?]
+
+@lamb_war
+view-if: lamb_war = 0 and time <= 40
+subtitle: The tabloids love it. Brussels doesn't.
+on-arrival: lamb_war = 1; europe_relation -= 6; c2_con += 1*(1-dissent); thatcher_rating += 1; right_dissent -= 3
+
+France has illegally blocked imports of British lamb for months, despite a ruling by the European Court. We threaten to ban French apples. The Sun prints a guide to insulting Frenchmen.
+
+@fisheries
+view-if: fisheries_deal = 0 and time >= 48
+subtitle: Improves relations with Europe. Some Scottish fishermen will be unhappy.
+on-arrival: fisheries_deal = 1; europe_relation += 6; scotland_con_bonus -= 0.5; right_dissent += 2
+
+After seven years of argument, a Common Fisheries Policy is agreed. Britain gets the biggest share of the catch, but foreign boats keep access to British waters.
+
+@single_market
+view-if: single_market = 0 and time >= 45
+subtitle: The City and business approve.
+on-arrival: single_market = 1; europe_relation += 6; ab_con += 1*(1-dissent); economic_liberalism += 2; right_dissent += 1; wet_dissent -= 1
+
+We set out a British plan for Europe: tear down the barriers to trade in goods and services, and let the free market do the rest. Our partners are surprised to find us leading for once.

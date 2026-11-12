@@ -1,0 +1,25 @@
+title: The Local Elections
+tags: event
+view-if: time = 5
+max-visits: 1
+new-page: true
+go-to: good if con_lead >= 2; mixed if con_lead < 2 and con_lead > -2; bad if con_lead <= -2
+
+= The Local Elections
+
+The May local elections are the last big test of opinion before Callaghan has to choose a date.
+
+@good
+on-arrival: resources += 1; loyalist_dissent -= 4; wet_dissent -= 2; thatcher_rating += 1
+
+We make solid gains in the London boroughs and the metropolitan districts. Volunteers return to the constituencies with their tails up.
+
+@mixed
+on-arrival: loyalist_dissent += 1
+
+A mixed night. We hold our own, and Labour does better than the papers expected.
+
+@bad
+on-arrival: loyalist_dissent += 4; wet_dissent += 4; thatcher_rating -= 2
+
+Labour recovers ground across the cities. The Sunday papers run profiles of Willie Whitelaw as a leader-in-waiting.

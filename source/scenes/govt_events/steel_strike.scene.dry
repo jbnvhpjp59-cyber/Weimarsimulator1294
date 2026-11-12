@@ -1,0 +1,24 @@
+title: The Steel Strike
+tags: event
+view-if: con_in_government = 1 and time >= 25 and time <= 27 and steel_strike_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: steel_strike_seen = 1; strike_wave += 3
+
+= The Steel Strike
+
+The steelworkers are on national strike for the first time since 1926. British Steel offered 2% while losing hundreds of millions a year; the Iron and Steel Trades Confederation wants 20%. It is the first big test of the government's refusal to bail out nationalised industries.
+
+- @hold_firm: Hold firm: British Steel must settle within its cash limits.
+- @settle: Find the money to settle it.
+
+@hold_firm
+on-arrival: union_power -= 6; budget -= 1; economic_growth -= 0.3; dry_dissent -= 4; wet_dissent += 3; c2_con += 1*(1-dissent) if union_backlash >= 60
+achievement: steel
+
+After thirteen weeks the strikers settle for about 16%, paid for through productivity deals and closures. Neither side wins outright, but the government didn't write a cheque.
+
+@settle
+on-arrival: budget -= 2; union_power += 5; strike_wave -= 2; dry_dissent += 6; wet_dissent -= 3; economic_liberalism -= 2
+
+The Treasury finds the money and the strike ends. The unions conclude that this government can be pushed.

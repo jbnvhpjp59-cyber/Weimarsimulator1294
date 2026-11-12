@@ -1,0 +1,24 @@
+title: The Party Conference
+tags: event
+view-if: con_in_government = 1 and time >= 34 and time <= 36 and u_turn = 0 and conference_1980_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: conference_1980_seen = 1
+face-image: img/events/thatcher_1980.jpg
+
+= The Party Conference
+
+Brighton, October. Unemployment is [+ unemployment_2 +]% and inflation is [+ inflation_2 +]%. Edward Heath, the CBI and half your Cabinet are urging you to change course, as Heath did in 1972: reflate, cut interest rates, rescue industry. Ronald Millar has written you a line for the conference speech, but it only works if you mean it.
+
+- @hold_course: "You turn if you want to. The lady's not for turning."
+- @u_turn: Announce a change of course.
+
+@hold_course
+on-arrival: u_turn = 1; dry_dissent -= 15; wet_dissent += 12; right_dissent -= 5; economic_liberalism += 5; thatcher_rating += 2; rebellion += 1; heath_hostility += 10
+
+The hall rises for a standing ovation. The markets take note that the government will not print money, and so do the wage bargainers. Over lunch, the wets agree among themselves that you have gone mad.
+
+@u_turn
+on-arrival: u_turn = -1; interest_rate -= 3; budget -= 2; spending += 1; unemployment -= 0.5; inflation += 2; dry_dissent += 20; wet_dissent -= 15; economic_liberalism -= 6; heath_hostility -= 20; howe_resigned = 1 if chancellor_dry = 1; chancellor = "Pym" if chancellor_dry = 1; chancellor_dry = 0; cabinet_dry -= 25; cabinet_revolt = 0; mtfs = 0
+
+You announce a programme for jobs: lower interest rates, more public investment, help for industry. [? if howe_resigned : Sir Geoffrey Howe resigns as Chancellor and is replaced by Francis Pym. ?] Heath says he is glad you have come to your senses. Sir Keith Joseph is seen leaving Number 10 in tears.

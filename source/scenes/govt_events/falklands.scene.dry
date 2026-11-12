@@ -1,0 +1,152 @@
+title: The Falkland Islands
+tags: event
+view-if: con_in_government = 1 and time >= 52 and falklands = 0
+max-visits: 1
+new-page: true
+on-arrival: {!
+// The junta read British signals. Withdrawing HMS Endurance and cutting
+// the surface fleet told them Britain would not fight.
+var risk = 25;
+if (Q.endurance_withdrawn) {
+    risk += 45;
+}
+if (Q.defence_cuts) {
+    risk += 20;
+}
+Q.invaded = (Math.random() * 100 < risk) ? 1 : 0;
+!}
+go-to: invasion if invaded = 1; deterred if invaded = 0
+
+@deterred
+on-arrival: falklands = 6; thatcher_rating += 1
+achievement: deterrence
+face-image: img/events/endurance.jpg
+
+= Tension in the South Atlantic
+
+Argentine scrap-metal workers have landed on South Georgia and raised their flag. HMS Endurance, still on station, is ordered to remove them, and the junta in Buenos Aires decides that Britain is not bluffing. The crisis fades within weeks. Most people in Britain never hear of it.
+
+@invasion
+on-arrival: falklands = 1; thatcher_rating -= 4; right_dissent += 10
+face-image: img/events/stanley_1982.jpg
+
+= Invasion
+
+On 2 April, Argentine forces land on the Falkland Islands. The small garrison of Royal Marines is overwhelmed, and the Governor is flown out. For the first time since 1945, British territory has been seized by a foreign power, eight thousand miles away.
+
+In an emergency Saturday sitting of the Commons, members on every side demand action. Lord Carrington, the Foreign Secretary, offers his resignation.
+
+- @accept_resignation: Accept Carrington's resignation.
+- @refuse_resignation: Refuse it.
+
+@accept_resignation
+on-arrival: foreign_secretary = "Pym"; right_dissent -= 4
+go-to: task_force
+
+Carrington goes, taking responsibility for the Foreign Office's failure. Francis Pym replaces him.
+
+@refuse_resignation
+on-arrival: thatcher_rating -= 2; right_dissent += 4
+go-to: task_force
+
+You keep Carrington. The backbenches want a head, and if it isn't his it may be someone else's.
+
+@task_force
+
+The First Sea Lord, Sir Henry Leach, says the Navy can assemble a task force within days and retake the islands. Most of your advisers think it is a huge gamble. The Americans would prefer a negotiated settlement.
+
+- @send: Send the task force.
+- @negotiate: Negotiate: accept international mediation.
+
+@send
+on-arrival: falklands = 2; budget -= 2; thatcher_rating += 4; right_dissent -= 10
+face-image: img/events/hermes_1982.jpg
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/rule_britannia.mp3'); } !}
+
+Within three days, the carriers Hermes and Invincible sail from Portsmouth to cheering crowds. Liners are requisitioned as troopships. Al Haig, the American Secretary of State, begins shuttling between London and Buenos Aires.
+
+@negotiate
+on-arrival: falklands = 5; thatcher_rating -= 12; right_dissent += 25; rebellion += 4; c2_con -= 3; c1_con -= 2
+
+You agree to talks under American mediation. The islands will be under joint administration while their future is negotiated. The Commons hears it in near-silence, and then the right of the party erupts.
+
+@war
+title: The South Atlantic War
+tags: event
+view-if: falklands = 2 and time >= 53
+max-visits: 1
+new-page: true
+face-image: img/events/belgrano.jpg
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/mars.mp3'); } !}
+
+= The South Atlantic War
+
+The task force is in the Exclusion Zone around the islands. The Argentine cruiser General Belgrano is sailing outside it with two destroyers. The commander of the task force says it is a threat to the carriers and asks for permission to attack.
+
+- @sink: Authorise the attack on the Belgrano.
+- @hold_fire: Hold fire while the Peruvian peace plan is discussed.
+
+@sink
+on-arrival: {!
+var odds = 78 + (Q.us_relation - 50) / 2 + (Q.defence_cuts ? -8 : 6) + 6 + Q.falklands_bonus;
+Q.falklands_odds = Math.round(odds);
+Q.war_won = (Math.random() * 100 < odds) ? 1 : 0;
+Q.europe_relation -= 3;
+!}
+go-to: victory if war_won = 1; defeat if war_won = 0
+
+The Belgrano is sunk by the submarine HMS Conqueror. 323 Argentine sailors die. The Argentine navy returns to port and stays there for the rest of the war.
+
+@hold_fire
+on-arrival: {!
+var odds = 78 + (Q.us_relation - 50) / 2 + (Q.defence_cuts ? -8 : 6) - 8 + Q.falklands_bonus;
+Q.falklands_odds = Math.round(odds);
+Q.war_won = (Math.random() * 100 < odds) ? 1 : 0;
+!}
+go-to: victory if war_won = 1; defeat if war_won = 0
+
+The Belgrano returns to port. The peace plan collapses within days, and the Argentine navy remains a threat to the carriers for the rest of the campaign.
+
+@victory
+on-arrival: {!
+Q.falklands = 3;
+Q.falklands_factor = 14;
+Q.thatcher_rating += 20;
+for (var c of Q.classes) {
+    Q[c + '_con'] += 3;
+}
+Q.right_dissent -= 15;
+Q.wet_dissent -= 8;
+Q.dry_dissent -= 8;
+Q.rebellion = 0;
+Q.cabinet_revolt = 0;
+Q.us_relation += 5;
+!}
+achievement: rejoice
+face-image: img/events/hermes_return.jpg
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/i_vow_to_thee.mp3'); } !}
+
+= Victory
+
+After landings at San Carlos, battles at Goose Green and on the mountains around Stanley, the Argentine garrison surrenders on 14 June. 255 British servicemen and three islanders have died.
+
+When South Georgia was retaken in April, you told reporters outside Number 10 to "just rejoice at that news". Now the whole country does. Your poll ratings soar.
+
+@defeat
+on-arrival: {!
+Q.falklands = 4;
+Q.thatcher_rating -= 25;
+for (var c of Q.classes) {
+    Q[c + '_con'] -= 4;
+}
+Q.right_dissent += 25;
+Q.wet_dissent += 15;
+Q.rebellion += 5;
+!}
+on-display: {! if (typeof window !== 'undefined' && window.playMoment) { window.playMoment('music/funeral_march.mp3'); } !}
+
+= Disaster
+
+Exocet missiles and bombs sink two carriers within a week. Without air cover, the landings are impossible, and the task force has to turn for home. The islands stay in Argentine hands.
+
+The country is stunned. In the Commons, the question is no longer whether there will be a leadership challenge, but when.
