@@ -1,0 +1,25 @@
+title: The 1981 Budget
+tags: event
+view-if: con_in_government = 1 and time >= 39 and time <= 40 and budget_1981_seen = 0 and u_turn != -1
+max-visits: 1
+new-page: true
+on-arrival: budget_1981_seen = 1; budget_timer = 9
+
+= The 1981 Budget
+
+The recession is deep, and borrowing has overshot because of it. Alan Walters, your economic adviser, argues that the only way to bring interest rates down is to raise taxes now, in the depths of the slump. Every economic textbook says the opposite.
+
+- @tighten: Raise taxes in a recession.
+- @hold: Let borrowing rise for now.
+
+@tighten
+choose-if: chancellor_dry = 1
+unavailable-subtitle: [+ chancellor +] won't do it.
+on-arrival: budget += 3; inflation -= 1.5; unemployment += 0.4; interest_rate -= 2 if interest_rate > 10; ab_con -= 2; c1_con -= 3; c2_con -= 3; de_con -= 2; wet_dissent += 8; dry_dissent -= 5; rebellion += 1
+
+Allowances are frozen and duties raised: about £4 billion taken out of the economy. 364 economists write to The Times to say there is "no basis in economic theory or supporting evidence" for the policy. Bank Rate comes down to [+ interest_rate +]%.
+
+@hold
+on-arrival: budget -= 1; inflation += 0.5; dry_dissent += 6; wet_dissent -= 3
+
+The Budget holds taxes steady and accepts higher borrowing. The gilt market grumbles, and the money supply targets slip again.

@@ -2,7 +2,7 @@ title: Motion of No Confidence
 new-page: true
 is-card: true
 tags: commons
-view-if: no_confidence_timer <= 0 and no_confidence_won = 0 and months_to_election > 2
+view-if: no_confidence_timer <= 0 and no_confidence_won = 0 and months_to_election > 2 and con_in_government = 0
 on-arrival: no_confidence_timer = 6; month_actions += 1
 
 = Motion of No Confidence
@@ -82,7 +82,7 @@ The tellers come to the table, and the Opposition whip is on the right-hand side
 Callaghan rises, says the government will take its case to the country, and sits down. The general election is set for [+ next_election_month : month +] [+ next_election_year +].
 
 @failed
-on-arrival: no_confidence_lost += 1; thatcher_rating -= 4; callaghan_rating += 2; loyalist_dissent += 4; wet_dissent += 4; labour_credibility += 2
+on-arrival: no_confidence_lost += 1; thatcher_rating -= 4; lab_leader_rating += 2; loyalist_dissent += 4; wet_dissent += 4; labour_credibility += 2
 
 = Ayes [+ nc_ayes +], Noes [+ nc_noes +]
 

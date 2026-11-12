@@ -14,7 +14,7 @@ The queue is actually Young Conservatives from Hendon, photographed again and ag
 - @shelve: Too risky. Shelve it.
 
 @run
-on-arrival: labour_credibility -= 5; de_con += 2*(1-dissent); c2_con += 2*(1-dissent); thatcher_rating += 1; callaghan_rating -= 1; economic_liberalism -= 1
+on-arrival: labour_credibility -= 5; de_con += 2*(1-dissent); c2_con += 2*(1-dissent); thatcher_rating += 1; lab_leader_rating -= 1; economic_liberalism -= 1
 achievement: labour_isnt_working
 
 Denis Healey denounces the poster in the Commons, and every newspaper and news bulletin reproduces it. A few thousand pounds of billboard space turns into millions of pounds' worth of free publicity.

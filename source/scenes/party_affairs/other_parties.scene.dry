@@ -37,7 +37,7 @@ on-arrival: pc_relation += 6
 Plaid's three MPs are mostly interested in Welsh questions, slate quarrymen's compensation in particular. We listen politely.
 
 @electoral_reform
-view-if: electoral_reform_promise = 0
+view-if: electoral_reform_promise = 0 and con_in_government = 0
 subtitle: The Liberals would be delighted. Almost everyone in our own party would be furious.
 on-arrival: electoral_reform_promise = 1; lib_relation += 15; right_dissent += 8; dry_dissent += 5; loyalist_dissent += 5
 

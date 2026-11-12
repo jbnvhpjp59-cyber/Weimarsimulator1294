@@ -12,7 +12,7 @@ for (var c of Q.classes) {
 }
 
 // clamp 0-100 opinion meters
-var meters = ['thatcher_rating', 'callaghan_rating', 'economic_liberalism',
+var meters = ['thatcher_rating', 'lab_leader_rating', 'economic_liberalism',
               'union_backlash', 'labour_credibility', 'heath_hostility',
               'lib_relation', 'snp_relation', 'pc_relation', 'uup_relation'];
 for (var m of meters) {
@@ -79,29 +79,36 @@ if (Q.month_actions >= 1) {
                                   'con': Q.con_votes, 'lab': Q.lab_votes,
                                   'lib': Q.lib_votes});
 
-    // ---- the economy and the national mood ----
+    // ---- the economy and the national mood: opposition years ----
     // Spring and summer 1978: inflation falls into single figures and
     // Labour recovers. From autumn 1978, the 5% pay norm meets the unions.
     var in_winter_crisis = (Q.year == 1978 && Q.month >= 10) || (Q.year == 1979 && Q.month <= 3);
-    if (Q.year == 1978 && Q.month <= 8) {
-        Q.inflation -= 0.25;
-        Q.unemployment -= 0.03;
-        Q.callaghan_rating += 0.5;
-        Q.labour_credibility += 0.6;
-        Q.c2_lab += 0.25;
-        Q.de_lab += 0.2;
-        Q.snp_share -= 0.3;
-    } else {
-        Q.inflation += 0.15;
-        Q.snp_share -= 0.15;
-    }
-    if (Q.pay_norm <= 5 && in_winter_crisis) {
-        Q.strike_wave += 0.6;
+    if (!Q.con_in_government && Q.n_elections == 0) {
+        if (Q.year == 1978 && Q.month <= 8) {
+            Q.inflation -= 0.25;
+            Q.unemployment -= 0.03;
+            Q.lab_leader_rating += 0.5;
+            Q.labour_credibility += 0.6;
+            Q.c2_lab += 0.25;
+            Q.de_lab += 0.2;
+            Q.snp_share -= 0.3;
+        } else {
+            Q.inflation += 0.15;
+            Q.snp_share -= 0.15;
+        }
+        if (Q.pay_norm <= 5 && in_winter_crisis) {
+            Q.strike_wave += 0.6;
+        }
+        if (Q.inflation >= 10) {
+            Q.labour_credibility -= 1;
+        }
     }
     if (Q.strike_wave >= 3) {
         Q.union_backlash += 0.4 * Q.strike_wave;
-        Q.labour_credibility -= 0.3 * Q.strike_wave;
-        Q.callaghan_rating -= 0.2 * Q.strike_wave;
+        if (!Q.con_in_government) {
+            Q.labour_credibility -= 0.3 * Q.strike_wave;
+            Q.lab_leader_rating -= 0.2 * Q.strike_wave;
+        }
     } else {
         // once the strikes end, tempers cool and Labour slowly recovers
         if (Q.union_backlash > 55) {
@@ -115,8 +122,158 @@ if (Q.month_actions >= 1) {
     if (!in_winter_crisis && Q.strike_wave > 2) {
         Q.strike_wave -= 1.5;
     }
-    if (Q.inflation >= 10) {
-        Q.labour_credibility -= 1;
+
+    // ---- the economy in government ----
+    if (Q.con_in_government) {
+        Q.months_in_office = Q.time - Q.term_start_time;
+        // external shocks: the second oil shock (mid-1979 to mid-1980),
+        // world recession (1980-81), world recovery (from 1982)
+        if (Q.time >= 17 && Q.time <= 30) {
+            Q.inflation += 0.3;
+        }
+        if ((Q.year == 1980 || Q.year == 1981) && Q.economic_growth > -2.5) {
+            Q.economic_growth -= 0.15;
+        }
+        if (Q.year >= 1982 && Q.economic_growth < 3) {
+            Q.economic_growth += 0.15;
+        }
+        // growth drifts back towards its long-run trend
+        Q.economic_growth += (1.5 - Q.economic_growth) * 0.04;
+        // monetary policy: dear money beats inflation, at the cost of jobs
+        // and an overvalued pound
+        if (Q.interest_rate >= 15) {
+            Q.inflation -= 0.3;
+            Q.unemployment += 0.08;
+            Q.economic_growth -= 0.08;
+            Q.sterling += 1.5;
+        } else if (Q.interest_rate >= 12) {
+            Q.inflation -= 0.15;
+            Q.unemployment += 0.04;
+            Q.sterling += 0.5;
+        } else if (Q.interest_rate <= 9) {
+            Q.inflation += 0.15;
+            Q.unemployment -= 0.04;
+            Q.economic_growth += 0.05;
+            Q.sterling -= 1;
+        }
+        if (Q.mtfs) {
+            Q.inflation -= 0.05;
+        }
+        // North Sea oil props up the pound
+        if (Q.year >= 1980) {
+            Q.sterling += 0.3;
+        }
+        Q.sterling += (50 - Q.sterling) * 0.03;
+        // an overvalued pound crushes manufacturing
+        if (Q.sterling >= 65) {
+            Q.unemployment += 0.06;
+            Q.economic_growth -= 0.05;
+        }
+        // fiscal policy
+        if (Q.budget < 0) {
+            Q.inflation += 0.06 * -Q.budget;
+        }
+        if (Q.spending < 0) {
+            Q.unemployment += 0.02 * -Q.spending;
+        } else if (Q.spending > 0) {
+            Q.unemployment -= 0.02 * Q.spending;
+            Q.inflation += 0.03 * Q.spending;
+        }
+        // unemployment follows growth, with a lag (Okun's law); rises slow
+        // once it is very high, as discouraged workers drop out of the count
+        var du = (1.5 - Q.economic_growth) * 0.05;
+        if (du > 0 && Q.unemployment > 12) {
+            du *= 0.1;
+        } else if (du > 0 && Q.unemployment > 10) {
+            du *= 0.35;
+        }
+        Q.unemployment += du;
+        // mass unemployment pushes inflation down (the Phillips curve)
+        if (Q.unemployment > 8) {
+            Q.inflation -= 0.05 * (Q.unemployment - 8);
+        }
+        if (Q.inflation < 1.5) {
+            Q.inflation = 1.5;
+        }
+        if (Q.unemployment < 3) {
+            Q.unemployment = 3;
+        }
+        if (Q.economic_growth < -5) {
+            Q.economic_growth = -5;
+        } else if (Q.economic_growth > 6) {
+            Q.economic_growth = 6;
+        }
+
+        // ---- the government is judged on the economy ----
+        if (Q.unemployment > 6) {
+            var u = Q.unemployment - 6;
+            Q.c2_con -= 0.06 * u;
+            Q.de_con -= 0.06 * u;
+            Q.c1_con -= 0.03 * u;
+            Q.c2_lab += 0.03 * u;
+            Q.de_lab += 0.04 * u;
+        }
+        if (Q.inflation > 10) {
+            var inf = Q.inflation - 10;
+            for (var c of Q.classes) {
+                Q[c + '_con'] -= 0.03 * inf;
+            }
+        } else if (Q.inflation < 7 && Q.months_in_office > 12) {
+            Q.c1_con += 0.15;
+            Q.ab_con += 0.1;
+            Q.c2_con += 0.1;
+        }
+        if (Q.economic_growth > 2) {
+            Q.c1_con += 0.15;
+            Q.c2_con += 0.15;
+        }
+        // mortgage holders feel dear money
+        if (Q.interest_rate >= 15) {
+            Q.c1_con -= 0.15;
+            Q.c2_con -= 0.1;
+        }
+        // council tenants who bought their homes
+        if (Q.right_to_buy_progress > 0) {
+            Q.c2_con += 0.05 * Q.right_to_buy_progress;
+            Q.de_con += 0.05 * Q.right_to_buy_progress;
+        }
+        // the Falklands factor
+        if (Q.falklands_factor > 0) {
+            for (var c of Q.classes) {
+                Q[c + '_con'] += 0.25;
+            }
+            Q.falklands_factor -= 1;
+        }
+        Q.thatcher_rating += (7 - Q.unemployment) * 0.05 + (8 - Q.inflation) * 0.03;
+
+        // ---- threat meters ----
+        // backbench rebellion grows when factions are angry, and fades slowly
+        for (var f of Q.factions) {
+            if (Q[f + '_dissent'] > 45) {
+                Q.rebellion += 0.3;
+            }
+        }
+        if (Q.thatcher_rating < 25) {
+            Q.rebellion += 0.15;
+        }
+        Q.rebellion -= 0.25;
+        // wets inside the Cabinet resist spending cuts
+        if (Q.spending < 0 && Q.cabinet_dry < 60) {
+            Q.cabinet_revolt += 0.15 * -Q.spending;
+        }
+        Q.cabinet_revolt -= 0.15;
+        // partners in a hung parliament grow restless
+        if (Q.govt_type >= 2) {
+            Q.partner_dissent += 0.15;
+        }
+        var meters10 = ['rebellion', 'cabinet_revolt', 'partner_dissent'];
+        for (var m10 of meters10) {
+            if (Q[m10] < 0) {
+                Q[m10] = 0;
+            } else if (Q[m10] > 10) {
+                Q[m10] = 10;
+            }
+        }
     }
 
     // ---- support drifts back towards its January 1978 level ----
@@ -152,7 +309,7 @@ if (Q.month_actions >= 1) {
         Q.c2_lab += 0.3;
         Q.c1_lab += 0.2;
     }
-    var leader_gap = Q.thatcher_rating - Q.callaghan_rating;
+    var leader_gap = Q.thatcher_rating - Q.lab_leader_rating;
     if (leader_gap <= -20) {
         Q.c1_con -= 0.3;
         Q.c1_lib += 0.2;
@@ -177,9 +334,10 @@ if (Q.month_actions >= 1) {
     // (and the unions' money) works to win back its voters.
     var lead = Q.con_votes - Q.lab_votes;
     if (lead > 2) {
-        Q.c2_lab += 0.12 * (lead - 2);
-        Q.de_lab += 0.1 * (lead - 2);
-        Q.c1_lab += 0.06 * (lead - 2);
+        var machine = (Q.lab_left ? 0.5 : 1) * (Q.alliance_formed ? 0.7 : 1);
+        Q.c2_lab += 0.12 * (lead - 2) * machine;
+        Q.de_lab += 0.1 * (lead - 2) * machine;
+        Q.c1_lab += 0.06 * (lead - 2) * machine;
     }
     // a Heath intervention now and then
     if (Q.heath_hostility >= 70) {
@@ -203,8 +361,17 @@ if (Q.month_actions >= 1) {
 // recalculate projected votes and seats
 this._runActions(this.game.scenes['election_algorithm'].onArrival);
 
-// how many months until the election?
+// how many months until the election, and since the last one?
 Q.months_to_election = Q.next_election_time - Q.time;
+Q.months_since_election = Q.time - Q.last_election_time;
+Q.rebellion_disp = Math.round(Q.rebellion);
+Q.cabinet_revolt_disp = Math.round(Q.cabinet_revolt);
+Q.partner_dissent_disp = Math.round(Q.partner_dissent);
+Q.budget_disp = Math.round(Q.budget * 10) / 10;
+Q.interest_rate_disp = Math.round(Q.interest_rate * 10) / 10;
+Q.inflation_2 = Q.inflation.toFixed(1);
+Q.unemployment_2 = Q.unemployment.toFixed(1);
+Q.economic_growth_2 = Q.economic_growth.toFixed(1);
 Q.next_election_month = ((Q.next_election_time - 1) % 12) + 1;
 Q.next_election_year = 1978 + Math.floor((Q.next_election_time - 1) / 12);
 // the last two months before polling day are the campaign

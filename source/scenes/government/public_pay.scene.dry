@@ -1,0 +1,33 @@
+title: Public Sector Pay
+new-page: true
+is-card: true
+tags: govt_affairs
+view-if: con_in_government = 1 and public_pay_timer <= 0
+on-arrival: public_pay_timer = 6; month_actions += 1
+
+= Public Sector Pay
+
+There is no incomes policy any more, but the government is still the employer of nurses, teachers, civil servants, and the workers in the nationalised industries.
+
+- @cash_limits: Hold the line with strict cash limits.
+- @generous: Settle generously and avoid strikes.
+- @review_bodies: Refer nurses' pay to an independent review body.
+- @easy_discard
+
+@cash_limits
+subtitle: +1 budget. Strikes are likely.
+on-arrival: budget += 1; strike_wave += 1.5; union_power -= 2; inflation -= 0.3; dry_dissent -= 2; c2_con -= 1
+
+Pay rises are held below inflation. The civil service unions announce selective strikes.
+
+@generous
+subtitle: -2 budget.
+on-arrival: budget -= 2; strike_wave -= 1.5; union_power += 3; inflation += 0.5; dry_dissent += 4; wet_dissent -= 2
+
+The settlements buy peace. The dries ask what happened to sound money.
+
+@review_bodies
+subtitle: -1 budget.
+on-arrival: budget -= 1; de_con += 1*(1-dissent); c1_con += 1*(1-dissent); wet_dissent -= 2
+
+The nurses get an independent pay review body, taking their pay out of politics.

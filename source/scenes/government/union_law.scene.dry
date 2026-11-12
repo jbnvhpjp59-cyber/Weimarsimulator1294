@@ -1,0 +1,42 @@
+title: Trade Union Law
+new-page: true
+is-card: true
+tags: govt_affairs
+view-if: con_in_government = 1 and union_law_timer <= 0
+on-arrival: union_law_timer = 6; month_actions += 1
+
+= Trade Union Law
+
+The Employment Secretary, [+ employment_secretary +], comes to discuss the unions. [? if union_power >= 60 : The union barons still believe they can bring down any government that crosses them. ?][? if union_power < 60 and union_power > 40 : The balance of power in industry is shifting. ?][? if union_power <= 40 : The unions are weaker than they have been for a generation. ?]
+
+- @cautious_act: A cautious Employment Act.
+- @tough_act: Strip the unions of their legal immunities.
+- @ballots: Pay for secret ballots.
+- @tuc: Invite the TUC to talks.
+- @easy_discard
+
+@cautious_act
+view-if: employment_acts = 0
+subtitle: Restricts secondary picketing and the closed shop, step by step.
+on-arrival: union_power -= 10; employment_acts += 1; strike_wave += 0.5; wet_dissent -= 2; dry_dissent += 3 if employment_dry = 0; c2_con += 1*(1-dissent) if union_backlash >= 60
+
+The Employment Act limits picketing to a worker's own place of work and gives some protection against the closed shop. The TUC protests, but there is no general strike.
+
+@tough_act
+subtitle: Makes unions liable for damages from unlawful strikes. Requires a dry Employment Secretary.
+choose-if: employment_dry = 1
+unavailable-subtitle: Jim Prior will not bring forward a bill this radical.
+on-arrival: union_power -= 20; employment_acts += 1; strike_wave += 2; dry_dissent -= 5; wet_dissent += 6; c2_con += 2*(1-dissent) if union_backlash >= 60; c2_lab += 1 if union_backlash < 60
+
+Unions lose their blanket immunity from being sued. A union that calls an unlawful strike now risks its funds. Union leaders call it the most hostile legislation since 1927.
+
+@ballots
+subtitle: -1 budget.
+on-arrival: budget -= 1; union_power -= 5; c2_con += 1*(1-dissent)
+
+Public money pays for postal ballots on strikes and union elections. Moderates start to win union elections.
+
+@tuc
+on-arrival: union_power += 5; strike_wave -= 1; wet_dissent -= 3; dry_dissent += 4
+
+Union leaders come to Downing Street for beer and sandwiches. It's the first time since 1979, and the dries hope it's the last.

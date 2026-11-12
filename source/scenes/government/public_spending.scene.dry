@@ -1,0 +1,48 @@
+title: Public Spending
+new-page: true
+is-card: true
+tags: govt_affairs
+view-if: con_in_government = 1 and public_spending_timer <= 0
+on-arrival: public_spending_timer = 4; month_actions += 1
+
+= Public Spending
+
+The Chief Secretary's annual spending round. Every department wants more; the Treasury wants less. Spending is currently [+ spending : taxation +] compared with Labour's plans.
+
+[? if cabinet_dry < 60 : The wets in Cabinet will fight any cut to their departments. ?]
+
+- @cut: Cut spending.
+- @deep_cuts: Deep cuts across Whitehall.
+- @protect: Protect the NHS and pensions.
+- @invest: Invest in roads, housing and job schemes.
+- @easy_discard
+
+@cut
+view-if: spending > -5
+subtitle: +2 budget.
+on-arrival: spending -= 1; budget += 2; de_con -= 2; c2_con -= 1; wet_dissent += 4; cabinet_revolt += 1 if cabinet_dry < 60
+
+Cash limits are tightened across the board. Councils, schools and hospitals feel the squeeze.
+
+@deep_cuts
+view-if: spending > -5
+subtitle: +4 budget. Requires a dry Chancellor.
+choose-if: chancellor_dry = 1
+unavailable-subtitle: [+ chancellor +] won't propose cuts this deep.
+on-arrival: spending -= 2; budget += 4; de_con -= 4; c2_con -= 2; c1_con -= 1; wet_dissent += 8; cabinet_revolt += 2 if cabinet_dry < 60; rebellion += 1
+
+The Treasury demands cuts from every department. In Cabinet, the wets fight department by department.
+
+@protect
+view-if: spending < 5
+subtitle: -1 budget.
+on-arrival: spending += 1; budget -= 1; de_con += 2*(1-dissent); wet_dissent -= 3; dry_dissent += 2
+
+"The NHS is safe in our hands." Pensions are protected too.
+
+@invest
+view-if: spending < 5
+subtitle: -2 budget. Cuts unemployment.
+on-arrival: spending += 1; budget -= 2; unemployment -= 0.4; economic_growth += 0.3; c2_con += 1*(1-dissent); wet_dissent -= 4; dry_dissent += 4
+
+New roads, council repairs and youth training schemes. Michael Heseltine is delighted. Sir Keith Joseph asks who will pay for it.

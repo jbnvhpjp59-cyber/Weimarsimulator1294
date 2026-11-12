@@ -1,0 +1,38 @@
+title: A Vote of No Confidence
+tags: event
+priority: 3
+view-if: con_in_government = 1 and in_campaign = 0 and months_to_election > 3 and ((govt_type >= 2 and partner_dissent >= 8) or (govt_type = 1 and con_majority < 10 and rebellion >= 8))
+new-page: true
+
+= A Vote of No Confidence
+
+[+ lab_leader +] has tabled a motion of no confidence in the government. [? if govt_type = 2 : The Ulster Unionists are threatening to vote with Labour. ?][? if govt_type = 3 : The Liberals say we have broken our side of the bargain. ?][? if govt_type = 4 : Every opposition party could vote together. ?][? if govt_type = 1 : With our majority down to [+ con_majority +], a handful of rebels could bring us down. ?]
+
+- @buy_off: Make whatever concessions it takes.
+- @face_it: Face the vote, and dare them.
+
+@buy_off
+subtitle: -3 resources
+choose-if: resources >= 3
+unavailable-subtitle: Requires 3 resources.
+on-arrival: resources -= 3; partner_dissent = 3; rebellion -= 3; uup_relation += 8 if govt_type = 2; lib_relation += 8 if govt_type = 3; wet_dissent -= 4; budget -= 1
+
+Promises are made in the corridors. The motion is defeated comfortably.
+
+@face_it
+on-arrival: {!
+var survive = 50 - 4 * (Q.partner_dissent - 6) - 3 * (Q.rebellion - 6) + (Q.thatcher_rating - 35) * 0.5;
+Q.survived_confidence = (Math.random() * 100 < survive) ? 1 : 0;
+!}
+go-to: survived if survived_confidence = 1; fell if survived_confidence = 0
+
+@survived
+on-arrival: partner_dissent -= 3; rebellion -= 3; thatcher_rating += 2
+
+The government survives by a handful of votes.
+
+@fell
+on-arrival: government_fell = 1; time_to_election = 1; thatcher_rating -= 5
+call: set_election
+
+The government is defeated. You go to the Palace to ask for a dissolution. The general election will be held in [+ next_election_month : month +] [+ next_election_year +].

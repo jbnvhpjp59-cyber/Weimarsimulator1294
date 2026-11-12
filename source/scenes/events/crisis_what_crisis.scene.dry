@@ -3,7 +3,7 @@ tags: event
 view-if: time >= 13 and time <= 14 and winter_of_discontent = 1
 max-visits: 1
 new-page: true
-on-arrival: callaghan_rating -= 8; labour_credibility -= 4
+on-arrival: lab_leader_rating -= 8; labour_credibility -= 4
 achievement: crisis_what_crisis
 
 = Crisis? What Crisis?

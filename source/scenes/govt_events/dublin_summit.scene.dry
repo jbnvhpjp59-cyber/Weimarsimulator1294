@@ -1,0 +1,23 @@
+title: The Dublin Summit
+tags: event
+view-if: con_in_government = 1 and time >= 23 and time <= 25 and eec_rebate = 0 and dublin_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: dublin_seen = 1
+
+= The Dublin Summit
+
+At the European Council in Dublin, the other heads of government offer to refund a third of Britain's excess contribution to the Community budget. Britain pays in far more than any other member except West Germany, despite being one of the poorer ones.
+
+- @money_back: "I want my money back."
+- @accept: Take the offer and keep the peace.
+
+@money_back
+on-arrival: eec_rebate += 1; europe_relation -= 12; thatcher_rating += 3; c2_con += 2*(1-dissent); right_dissent -= 3; wet_dissent += 2
+
+You refuse the offer and lecture the summit for hours. Chancellor Schmidt pretends to fall asleep. The British papers love it.
+
+@accept
+on-arrival: europe_relation += 6; budget += 0.5; right_dissent += 4
+
+We accept the partial refund. Europe is relieved; our Eurosceptics are not.

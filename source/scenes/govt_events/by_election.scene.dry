@@ -1,0 +1,32 @@
+title: A By-election
+tags: event
+view-if: con_in_government = 1 and random_roll < 0.07 and by_election_timer <= 0 and in_campaign = 0 and months_in_office >= 6
+new-page: true
+on-arrival: {!
+Q.by_election_timer = 8;
+// a Conservative-held seat falls vacant; who would win it?
+var con = Q.con_votes;
+var challenger = Math.max(Q.lab_votes, Q.lib_votes);
+// governments do badly in mid-term by-elections
+Q.by_election_loss = (con - 4 < challenger) ? 1 : 0;
+Q.by_election_winner = (Q.lib_votes > Q.lab_votes) ? Q.lib_name : 'Labour';
+if (Q.by_election_loss) {
+    Q.con_mps -= 1;
+    if (Q.lib_votes > Q.lab_votes) {
+        Q.lib_mps += 1;
+    } else {
+        Q.lab_mps += 1;
+    }
+    Q.thatcher_rating -= 2;
+    Q.rebellion += 0.5;
+    Q.con_majority = 2 * Q.con_mps - Q.total_seats;
+} else {
+    Q.thatcher_rating += 1;
+}
+!}
+
+= A By-election
+
+The death of a Conservative MP has caused a by-election in a seat we have held for years.
+
+[? if by_election_loss = 1 : The seat falls to the [+ by_election_winner +] candidate on a huge swing. Our majority in the Commons is now [+ con_majority +]. ?][? if by_election_loss = 0 : We hold the seat, with a reduced majority. In mid-term, that counts as a good result. ?]

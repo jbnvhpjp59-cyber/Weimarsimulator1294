@@ -18,7 +18,7 @@ We have [+ manifesto_planks +] firm commitments.
 @bold
 on-arrival: economic_liberalism += 3; c2_con += 2*(1-dissent) if economic_liberalism >= 50; c1_con += 2*(1-dissent) if economic_liberalism >= 50; c1_con -= 2 if economic_liberalism < 45; c1_lib += 2 if economic_liberalism < 45; c2_con += 1*(1-dissent) if manifesto_planks >= 4; dry_dissent -= 6; wet_dissent += 5
 
-"The Conservative Manifesto 1979" promises to restore the balance of power in industry and to roll back the frontiers of the state. [? if economic_liberalism >= 50 : The mood of the country matches it. ?][? if economic_liberalism < 45 : Swing voters find it alarming. ?]
+The manifesto promises to restore the balance of power in industry and to roll back the frontiers of the state. [? if economic_liberalism >= 50 : The mood of the country matches it. ?][? if economic_liberalism < 45 : Swing voters find it alarming. ?]
 
 @cautious
 on-arrival: wet_dissent -= 8; c1_con += 2*(1-dissent); c1_lib -= 1; dry_dissent += 4

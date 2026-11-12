@@ -1,0 +1,34 @@
+title: Number 10
+is-pinned-card: true
+tags: advisor
+view-if: con_in_government = 1
+new-page: true
+
+= Number 10
+
+The Prime Minister's own office: the Policy Unit, the Press Secretary Bernard Ingham, and the power to choose the date of the next general election.
+
+[? if months_since_election < 36 : It is only [+ months_since_election +] months since the last election. Going to the country before three years have passed would look like panic. ?]
+
+- @snap_election
+- @strategy
+- @root: Return
+
+@snap_election
+title: Call a general election
+subtitle: Polling day will be in two months. Latest poll: Conservative [+ con_votes +]%, Labour [+ lab_votes +]%, [+ lib_name +] [+ lib_votes +]%.
+choose-if: advisor_action_timer = 0 and months_since_election >= 36 and in_campaign = 0
+unavailable-subtitle: [? if months_since_election < 36 : Not before three years have passed since the last election. ?][? if advisor_action_timer > 0 : [+ advisor_action_timer +] months before the next Cabinet action. ?]
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; time_to_election = 2
+call: set_election
+
+You go to the Palace to ask for a dissolution. The general election will be held in [+ next_election_month : month +] [+ next_election_year +].
+
+@strategy
+title: A weekend at Chequers
+subtitle: Calms the party and gives a sense of direction.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; rebellion -= 2; loyalist_dissent -= 5; cabinet_revolt -= 2; thatcher_rating += 2
+
+Ministers spend a weekend at Chequers agreeing the government's priorities, and, more importantly, being seen to agree.

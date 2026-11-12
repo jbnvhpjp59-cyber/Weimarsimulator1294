@@ -1,0 +1,30 @@
+title: Northern Ireland
+new-page: true
+is-card: true
+tags: govt_affairs
+view-if: con_in_government = 1 and northern_ireland_timer <= 0
+on-arrival: northern_ireland_timer = 6; month_actions += 1
+
+= Northern Ireland
+
+The Troubles go on: bombings, shootings and the protest in the H-Blocks of the Maze prison. [? if neave_dead = 1 : Airey Neave's murder is a raw memory. ?]
+
+- @security: Tighten security.
+- @dublin: Open talks with Dublin.
+- @devolution: Try to restore devolved government at Stormont.
+- @easy_discard
+
+@security
+on-arrival: uup_relation += 5; right_dissent -= 2; partner_dissent -= 1 if govt_type = 2; europe_relation -= 2
+
+More troops and the RUC take the lead against the IRA. The Unionists are reassured.
+
+@dublin
+on-arrival: uup_relation -= 8; partner_dissent += 2 if govt_type = 2; europe_relation += 5; us_relation += 3; wet_dissent -= 2; right_dissent += 3
+
+You meet the Taoiseach to discuss the "totality of relationships" between the two islands. Unionists smell betrayal.
+
+@devolution
+on-arrival: uup_relation -= 3; wet_dissent -= 2
+
+An elected Assembly at Stormont is proposed, to gain powers step by step if both communities can agree. Few expect them to.

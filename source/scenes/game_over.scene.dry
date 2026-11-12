@@ -3,101 +3,253 @@ new-page: true
 go-to: eg_menu
 on-arrival: {!
 Q.game_over = 1;
+Q.inflation_2 = Q.inflation.toFixed(1);
+Q.unemployment_2 = Q.unemployment.toFixed(1);
+Q.governed = (Q.term_start_time > 0) ? 1 : 0;
+Q.reelected = (Q.governed && Q.n_elections >= Q.final_election && Q.result_type >= 1 && Q.result_type <= 4 && !Q.ousted) ? 1 : 0;
 this.achieve('game_completed');
-if (Q.result_type == 1) {
-    this.achieve('iron_lady');
-    if (Q.con_majority >= 100) {
+if (Q.governed) {
+    this.achieve('prime_minister');
+}
+if (Q.reelected) {
+    this.achieve('re_elected');
+    if (Q.result_type == 1 && Q.con_majority >= 100) {
         this.achieve('landslide');
     }
-    if (Q.wet_dissent < 15 && Q.dry_dissent < 15) {
+    if (Q.wet_dissent < 20 && Q.dry_dissent < 20) {
         this.achieve('one_nation');
     }
-    if (Q.devolution_stance == 1) {
-        this.achieve('home_rule_tory');
+    if (Q.inflation < 5 && Q.union_power <= 40 && Q.privatisations >= 3 && Q.right_to_buy_progress >= 3) {
+        this.achieve('thatcherism');
+    }
+    if (Q.u_turn == -1) {
+        this.achieve('lady_for_turning');
+    }
+    if (Q.unemployment < 8) {
+        this.achieve('full_employment');
     }
 }
-if (Q.result_type == 5) {
+if (Q.governed && Q.u_turn == 1) {
+    this.achieve('not_for_turning');
+}
+if (Q.falklands == 3) {
+    this.achieve('rejoice');
+}
+if (Q.falklands == 6) {
+    this.achieve('deterrence');
+}
+if (Q.eec_rebate >= 2) {
+    this.achieve('money_back');
+}
+if (Q.ousted) {
+    this.achieve('et_tu');
+}
+if (Q.result_type == 5 && !Q.governed) {
     this.achieve('sunny_jim');
 }
-if (Q.autumn_election_1978 && Q.result_type >= 1 && Q.result_type <= 4) {
+if (Q.autumn_election_1978 && Q.governed) {
     this.achieve('waiting_at_the_church');
 }
 !}
 
-= The End of the Beginning
+= The Verdict of History
 
 @eg_menu
 
 - #endings
 - @end_game: End game.
 
-@landslide
-title: A landslide.
-view-if: result_type = 1 and con_majority >= 100
+#################### How it ended
+
+@defeat_1979
+title: Defeated at the first hurdle.
+view-if: result_type = 5 and governed = 0
 tags: endings
 go-to: eg_menu
 
-With a majority of [+ con_majority +], you have a mandate few post-war Prime Ministers have enjoyed. On the steps of Downing Street you quote St Francis of Assisi: "Where there is discord, may we bring harmony."
-
-The wets will stay in the Cabinet for now. They won't be able to stop you.
-
-@working_majority
-title: A working majority.
-view-if: result_type = 1 and con_majority >= 20 and con_majority < 100
-tags: endings
-go-to: eg_menu
-
-A majority of [+ con_majority +]: enough to govern, and enough to take on the unions, the money supply and the nationalised industries, if the party holds together. On the steps of Downing Street you quote St Francis of Assisi: "Where there is discord, may we bring harmony."
-
-@slim_majority
-title: A slender majority.
-view-if: result_type = 1 and con_majority < 20
-tags: endings
-go-to: eg_menu
-
-A majority of [+ con_majority +]. It is a victory, but by-elections and rebellions will eat into it, and every controversial vote will depend on the whips. The radical programme may have to wait.
-
-@unionist_government
-title: A government sustained by the Ulster Unionists.
-view-if: result_type = 2
-tags: endings
-go-to: eg_menu
-
-You are Prime Minister, kept in office by the votes of the Ulster Unionists. Their price is more Westminster seats for Northern Ireland and a firm line on security, and they will remind you of it often.
-
-@liberal_arrangement
-title: A Lib-Con arrangement.
-view-if: result_type = 3
-tags: endings
-go-to: eg_menu
-
-You enter Downing Street with David Steel's Liberals promising support vote by vote. A Speaker's Conference on electoral reform will meet within the year, and half your party already regrets it.
-
-@minority_government
-title: A minority government.
-view-if: result_type = 4
-tags: endings
-go-to: eg_menu
-
-You form a minority government and dare the opposition parties to unite against you. Like Harold Wilson in February 1974, you will probably need a second election within months to secure a majority.
-
-@defeat
-title: Defeat.
-view-if: result_type = 5
-tags: endings
-go-to: eg_menu
-
-[? if lab_mps >= 318 : James Callaghan has won a majority of his own. ?][? if lab_mps < 318 : Callaghan carries on, at the head of the largest party in a hung parliament. ?] The 1970s consensus has survived another election.
+[? if lab_mps >= majority_line : James Callaghan has won a majority of his own. ?][? if lab_mps < majority_line : Callaghan carries on, at the head of the largest party in a hung parliament. ?] The post-war consensus has survived another election.
 
 By the weekend, the Sunday papers are full of leadership speculation. Edward Heath lets it be known that he is available.
 
-@to_be_continued
-title: What comes next.
-view-if: result_type >= 1 and result_type <= 4
+@ousted_ending
+title: Ousted by your own party.
+view-if: ousted = 1
 tags: endings
 go-to: eg_menu
 
-This version of the game ends at the first general election. The years in government, with the 1980 Budget, the miners and the Falklands, are not written yet.
+The men in grey suits came to Downing Street, and then the ballot of Conservative MPs did the rest. You leave Number 10 for the last time [+ months_in_office +] months after you arrived. The new leader promises a return to One Nation conservatism and a gentler economic policy.
+
+@defeat_reelection
+title: Turned out of office.
+view-if: result_type = 5 and governed = 1 and ousted = 0
+tags: endings
+go-to: eg_menu
+
+[? if lab_mps >= majority_line : Labour, under [+ lab_leader +], has won a majority. ?][? if lab_mps < majority_line : Labour, under [+ lab_leader +], is the largest party in a hung parliament. ?] Your government lasted [+ months_in_office +] months. To your critics, the experiment has been tried and has failed. To your admirers, it was abandoned too soon.
+
+@landslide_reelection
+title: Re-elected by a landslide.
+view-if: reelected = 1 and result_type = 1 and con_majority >= 100
+tags: endings
+go-to: eg_menu
+
+A majority of [+ con_majority +]. The country has endorsed not just a government but a new settlement. The wets are finished as a force, and the next Parliament is yours to shape.
+
+@comfortable_reelection
+title: Re-elected.
+view-if: reelected = 1 and result_type = 1 and con_majority < 100
+tags: endings
+go-to: eg_menu
+
+A majority of [+ con_majority +]. Not a landslide, but a second term, something no Conservative government has managed since 1959.
+
+@hung_reelection
+title: Clinging on.
+view-if: reelected = 1 and result_type >= 2
+tags: endings
+go-to: eg_menu
+
+You remain in Downing Street, but without a majority of your own. [? if result_type = 2 : The Ulster Unionists hold the balance of power. ?][? if result_type = 3 : The price of power is electoral reform. ?][? if result_type = 4 : Every vote in the new Parliament will be a struggle. ?]
+
+#################### The record in government
+
+@inflation_beaten
+title: Inflation has been beaten.
+view-if: governed = 1 and inflation < 5
+tags: endings
+go-to: eg_menu
+
+Inflation is down to [+ inflation_2 +]%, the lowest in more than a decade. Sound money was the promise, and it has been kept.
+
+@inflation_high
+title: Inflation still rages.
+view-if: governed = 1 and inflation >= 10
+tags: endings
+go-to: eg_menu
+
+Inflation is still [+ inflation_2 +]%. The central promise of the government has not been kept.
+
+@mass_unemployment
+title: Three million unemployed.
+view-if: governed = 1 and unemployment >= 11
+tags: endings
+go-to: eg_menu
+
+Unemployment stands at [+ unemployment_2 +]%. Whole towns in the North, Scotland and Wales have lost the industries that built them, and they won't forget who was in charge.
+
+@jobs_kept
+title: The dole queues kept short.
+view-if: governed = 1 and unemployment < 8
+tags: endings
+go-to: eg_menu
+
+Unemployment is [+ unemployment_2 +]%, far below what the critics of monetarism predicted.
+
+@unions_tamed
+title: The unions brought within the law.
+view-if: governed = 1 and union_power <= 40
+tags: endings
+go-to: eg_menu
+
+Secret ballots, limits on picketing and the end of blanket legal immunities have shifted the balance of power in industry. [? if coal_stocks >= 2 : The coal stocks at the power stations are high; if the miners strike, the lights will stay on. ?]
+
+@unions_unbowed
+title: The unions are as strong as ever.
+view-if: governed = 1 and union_power >= 65
+tags: endings
+go-to: eg_menu
+
+The trade union barons still hold the whip hand. Whoever governs next will have to come to terms with them, or fight them.
+
+@popular_capitalism
+title: Popular capitalism.
+view-if: governed = 1 and privatisations >= 3
+tags: endings
+go-to: eg_menu
+
+[+ privatisations +] state enterprises have been returned to the private sector, and the queues for share offers are growing. The frontiers of the state are being rolled back.
+
+@property_owning
+title: A property-owning democracy.
+view-if: governed = 1 and right_to_buy_progress >= 3
+tags: endings
+go-to: eg_menu
+
+Hundreds of thousands of council tenants have bought their homes. Many of them will never vote Labour again.
+
+@falklands_won
+title: Rejoice.
+view-if: falklands = 3
+tags: endings
+go-to: eg_menu
+
+The Union Jack flies again over Port Stanley. Britain has shown it will fight for its own, and you have become a war leader.
+
+@falklands_lost
+title: The South Atlantic disaster.
+view-if: falklands = 4
+tags: endings
+go-to: eg_menu
+
+The task force failed. The Falkland Islands are now the Malvinas, and Britain's standing in the world has fallen further than at any time since Suez.
+
+@falklands_negotiated
+title: A deal over the Falklands.
+view-if: falklands = 5
+tags: endings
+go-to: eg_menu
+
+The islands passed to Argentine administration under an international settlement. Peace was kept; the right of the party will never forgive it.
+
+@falklands_deterred
+title: No war in the South Atlantic.
+view-if: falklands = 6
+tags: endings
+go-to: eg_menu
+
+HMS Endurance stayed on station, and the Argentine junta never risked it. History will never know what it was spared.
+
+@money_back
+title: "Our own money back."
+view-if: eec_rebate >= 2
+tags: endings
+go-to: eg_menu
+
+After years of handbag-swinging at European summits, Britain has won a permanent rebate on its contributions to the Community budget.
+
+@not_for_turning_ending
+title: The lady was not for turning.
+view-if: governed = 1 and u_turn = 1
+tags: endings
+go-to: eg_menu
+
+Through the worst of the recession, with the wets in revolt and 364 economists against you, you held the course. Whether that was courage or stubbornness, it is now the defining fact of your premiership.
+
+@u_turn_ending
+title: The U-turn.
+view-if: governed = 1 and u_turn = -1
+tags: endings
+go-to: eg_menu
+
+Like Heath before you, you turned. The government reflated and the dries despaired. To the consensus, it was common sense; to the believers, it was betrayal.
+
+@alliance_ending
+title: The Alliance.
+view-if: alliance_formed = 1
+tags: endings
+go-to: eg_menu
+
+Labour split, and the Social Democrats and Liberals together have reshaped the opposition. [? if lib_mps >= 40 : With [+ lib_mps +] MPs, the Alliance has broken the two-party system. ?][? if lib_mps < 40 : First-past-the-post has cheated them of the breakthrough their votes deserved. ?]
+
+@to_be_continued
+title: What comes next.
+view-if: reelected = 1
+tags: endings
+go-to: eg_menu
+
+This version of the game ends at your re-election. The second term, with the miners, Brighton, Westland and the Big Bang, is not written yet.
+
+#################### Achievements
 
 @achievements
 title: Achievements
@@ -107,11 +259,27 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 = Achievements in this playthrough
 
-[? if game_achievement_iron_lady : **The Iron Lady** - win a Conservative majority. ?]
+[? if game_achievement_prime_minister : **Prime Minister** - win power. ?]
 
-[? if game_achievement_landslide : **Landslide** - win a majority of 100 or more. ?]
+[? if game_achievement_re_elected : **Four More Years** - win re-election. ?]
 
-[? if game_achievement_one_nation : **One Nation** - win a majority with both the wets and the dries content. ?]
+[? if game_achievement_landslide : **Landslide** - be re-elected with a majority of 100 or more. ?]
+
+[? if game_achievement_one_nation : **One Nation** - be re-elected with both the wets and the dries content. ?]
+
+[? if game_achievement_thatcherism : **Thatcherism** - be re-elected with inflation beaten, the unions tamed, three privatisations and the right to buy. ?]
+
+[? if game_achievement_full_employment : **Full Employment** - be re-elected with unemployment below 8%. ?]
+
+[? if game_achievement_not_for_turning : **Not for Turning** - hold the economic course through the recession. ?]
+
+[? if game_achievement_lady_for_turning : **The Lady's for Turning** - be re-elected after a U-turn. ?]
+
+[? if game_achievement_rejoice : **Rejoice** - win the Falklands War. ?]
+
+[? if game_achievement_deterrence : **Deterrence** - prevent the Falklands War. ?]
+
+[? if game_achievement_money_back : **Our Own Money Back** - win the EEC budget rebate. ?]
 
 [? if game_achievement_no_confidence : **311 to 310** - bring down the government on a motion of no confidence. ?]
 
@@ -119,7 +287,7 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_crisis_what_crisis : **Crisis? What Crisis?** - live through the Winter of Discontent. ?]
 
-[? if game_achievement_debate_win : **The Great Debate** - win a televised debate against Callaghan. ?]
+[? if game_achievement_debate_win : **The Great Debate** - win a televised election debate. ?]
 
 [? if game_achievement_ilford_north : **Ilford North** - win the Ilford North by-election. ?]
 
@@ -127,39 +295,19 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 
 [? if game_achievement_lib_con : **Lib-Con** - govern with Liberal support. ?]
 
-[? if game_achievement_home_rule_tory : **Home Rule Tory** - win a majority after backing a Scottish Assembly. ?]
-
 [? if game_achievement_waiting_at_the_church : **Waiting at the Church** - win Callaghan's autumn 1978 election. ?]
 
 [? if game_achievement_sunny_jim : **Sunny Jim** - lose to Callaghan. ?]
 
+[? if game_achievement_et_tu : **Et Tu** - be ousted by your own party. ?]
+
+[? if game_achievement_purge : **Overboard** - purge the wets from the Cabinet. ?]
+
+[? if game_achievement_miners_beaten : **Not 1974** - defeat a miners' strike. ?]
+
 = Achievements not yet unlocked
 
-[? if not achievement_iron_lady : **The Iron Lady** ?]
-
-[? if not achievement_landslide : **Landslide** ?]
-
-[? if not achievement_one_nation : **One Nation** ?]
-
-[? if not achievement_no_confidence : **311 to 310** ?]
-
-[? if not achievement_labour_isnt_working : **Labour Isn't Working** ?]
-
-[? if not achievement_crisis_what_crisis : **Crisis? What Crisis?** ?]
-
-[? if not achievement_debate_win : **The Great Debate** ?]
-
-[? if not achievement_ilford_north : **Ilford North** ?]
-
-[? if not achievement_ulster_deal : **Ulster Says Yes** ?]
-
-[? if not achievement_lib_con : **Lib-Con** ?]
-
-[? if not achievement_home_rule_tory : **Home Rule Tory** ?]
-
-[? if not achievement_waiting_at_the_church : **Waiting at the Church** ?]
-
-[? if not achievement_sunny_jim : **Sunny Jim** ?]
+[? if not achievement_prime_minister : **Prime Minister** ?] [? if not achievement_re_elected : **Four More Years** ?] [? if not achievement_landslide : **Landslide** ?] [? if not achievement_one_nation : **One Nation** ?] [? if not achievement_thatcherism : **Thatcherism** ?] [? if not achievement_full_employment : **Full Employment** ?] [? if not achievement_not_for_turning : **Not for Turning** ?] [? if not achievement_lady_for_turning : **The Lady's for Turning** ?] [? if not achievement_rejoice : **Rejoice** ?] [? if not achievement_deterrence : **Deterrence** ?] [? if not achievement_money_back : **Our Own Money Back** ?] [? if not achievement_no_confidence : **311 to 310** ?] [? if not achievement_labour_isnt_working : **Labour Isn't Working** ?] [? if not achievement_crisis_what_crisis : **Crisis? What Crisis?** ?] [? if not achievement_debate_win : **The Great Debate** ?] [? if not achievement_ilford_north : **Ilford North** ?] [? if not achievement_ulster_deal : **Ulster Says Yes** ?] [? if not achievement_lib_con : **Lib-Con** ?] [? if not achievement_waiting_at_the_church : **Waiting at the Church** ?] [? if not achievement_sunny_jim : **Sunny Jim** ?] [? if not achievement_et_tu : **Et Tu** ?] [? if not achievement_purge : **Overboard** ?] [? if not achievement_miners_beaten : **Not 1974** ?]
 
 @end_game
 game-over: true

@@ -1,0 +1,31 @@
+title: Foreign Affairs
+new-page: true
+is-card: true
+tags: govt_affairs
+view-if: con_in_government = 1 and foreign_affairs_timer <= 0
+on-arrival: foreign_affairs_timer = 5; month_actions += 1
+
+= Foreign Affairs
+
+[+ foreign_secretary +] briefs you at the Foreign Office. Britain pays far more into the Common Market budget than it gets back, and the Americans want help with the Soviet Union.
+
+- @rebate: Demand our money back from Brussels.
+- @europe: Compromise with our European partners.
+- @america: Stand shoulder to shoulder with Washington.
+- @easy_discard
+
+@rebate
+view-if: eec_rebate < 2
+on-arrival: eec_rebate += 1; europe_relation -= 10; c2_con += 2*(1-dissent); thatcher_rating += 2; wet_dissent += 2; budget += 1 if eec_rebate = 2
+
+[? if eec_rebate = 1 : At the summit, you refuse to discuss anything else until Britain's contribution is cut. The other leaders are appalled; the British press loves it. ?][? if eec_rebate = 2 : Worn down, the Community agrees a substantial refund of Britain's contributions. ?]
+
+@europe
+on-arrival: europe_relation += 8; wet_dissent -= 2; right_dissent += 2; thatcher_rating -= 1
+
+We agree to a farm price settlement and a temporary refund. Europe is relieved, and the Eurosceptics on our backbenches are not.
+
+@america
+on-arrival: us_relation += 10; c1_lib += 1; right_dissent -= 2
+
+We back American sanctions against the Soviet Union over Afghanistan, and agree to station cruise missiles in Britain. The Campaign for Nuclear Disarmament fills Hyde Park.

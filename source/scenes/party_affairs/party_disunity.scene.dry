@@ -1,0 +1,44 @@
+title: Party Disunity
+new-page: true
+is-card: true
+tags: party_affairs
+view-if: party_disunity_timer <= 0 and (dissent >= 0.25 or wet_dissent > 40 or dry_dissent > 40 or right_dissent > 40)
+on-arrival: party_disunity_timer = 4; month_actions += 1
+frequency: 200
+
+= Party Disunity
+
+The party is quarrelling in public. Ministers brief against each other, backbenchers write to the papers, and the whips are losing count.
+
+[? if wet_dissent > 40 : The wets think the government is wrecking the country and the party with it. ?]
+[? if dry_dissent > 40 : The dries think we have lost our nerve. ?]
+[? if right_dissent > 40 : The right thinks we have gone soft on immigration, crime and the Union. ?]
+
+- @discipline: Enforce discipline.
+- @wets: Make concessions to the wets.
+- @dries: Reassure the dries.
+- @right: Throw the right a bone.
+- @easy_discard
+
+@discipline
+subtitle: -1 resource
+choose-if: resources >= 1
+unavailable-subtitle: Requires 1 resource.
+on-arrival: resources -= 1; dry_dissent -= 5; wet_dissent -= 5; loyalist_dissent -= 5; right_dissent -= 5; rebellion -= 1
+
+The whips and the party chairman remind everybody that a divided party loses elections.
+
+@wets
+on-arrival: wet_dissent -= 12; dry_dissent += 6; economic_liberalism -= 1; budget -= 1 if con_in_government; spending += 1 if con_in_government
+
+A little more money for the regions and a softer tone in speeches. The wets are mollified for now.
+
+@dries
+on-arrival: dry_dissent -= 12; wet_dissent += 6; economic_liberalism += 1
+
+A speech recommitting the government to sound money and lower taxes. The dries cheer; the wets wince.
+
+@right
+on-arrival: right_dissent -= 12; wet_dissent += 4; c1_lib += 1
+
+Tough words on crime and immigration at the party conference. The hall is on its feet.

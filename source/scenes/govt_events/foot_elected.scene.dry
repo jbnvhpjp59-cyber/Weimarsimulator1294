@@ -1,0 +1,26 @@
+title: Labour Chooses Michael Foot
+tags: event
+view-if: con_in_government = 1 and time >= 35 and lab_leader == "Callaghan"
+max-visits: 1
+new-page: true
+on-arrival: {!
+Q.lab_leader = "Foot";
+Q.lab_leader_rating = 38;
+Q.lab_left = 1;
+// a lasting shift: Labour's left turn costs it middle-class voters
+Q.baseline_support.c1_lab -= 4;
+Q.baseline_support.ab_lab -= 3;
+Q.baseline_support.c2_lab -= 2;
+Q.baseline_support.de_lab -= 1;
+Q.c1_lab -= 4;
+Q.ab_lab -= 3;
+Q.c2_lab -= 2;
+Q.de_lab -= 1;
+Q.labour_credibility -= 5;
+!}
+
+= Labour Chooses Michael Foot
+
+James Callaghan has stood down, and Labour MPs have elected Michael Foot to succeed him, narrowly beating Denis Healey. Foot is a brilliant orator, a lifelong left-winger and a unilateral nuclear disarmer.
+
+The Labour conference has voted to leave the Common Market and to let the unions and party members choose future leaders. The party's right is talking openly about breaking away.

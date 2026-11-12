@@ -6,6 +6,10 @@ Q.inflation_2 = Q.inflation ? Q.inflation.toFixed(1) : '0';
 Q.unemployment_2 = Q.unemployment ? Q.unemployment.toFixed(1) : '0';
 Q.economic_growth_2 = Q.economic_growth ? Q.economic_growth.toFixed(1) : '0';
 Q.dissent_disp = Math.round(Q.dissent_percent || 0);
+Q.budget_disp = Math.round(Q.budget * 10) / 10;
+Q.interest_rate_disp = Math.round(Q.interest_rate * 10) / 10;
+Q.thatcher_rating_disp = Math.round(Q.thatcher_rating);
+Q.lab_leader_rating_disp = Math.round(Q.lab_leader_rating);
 !}
 
 = Status
@@ -18,9 +22,9 @@ Conservative position: [? if con_in_government : in government ?][? if not con_i
 
 Party dissent: [+ dissent_disp : dissent +]
 
-Your rating: [+ thatcher_rating : rating +]
+Your rating: [+ thatcher_rating : rating +] ([+ thatcher_rating_disp +])
 
-Callaghan's rating: [+ callaghan_rating : rating +]
+Labour leader ([+ lab_leader +]): [+ lab_leader_rating : rating +] ([+ lab_leader_rating_disp +])
 
 = Government
 
@@ -28,13 +32,17 @@ Prime Minister: [+ prime_minister +] ([+ pm_party +])
 
 [? if lib_lab_pact : The Lib-Lab Pact is in force. ?]
 
-House of Commons (635 seats, 318 for a majority):
+[? if con_in_government : Chancellor: [+ chancellor +]. Employment: [+ employment_secretary +]. Industry: [+ industry_secretary +]. ?]
+
+[? if con_in_government : Cabinet: [+ cabinet_dry +]% dry. Backbench rebellion: [+ rebellion_disp +]/10. ?][? if con_in_government and cabinet_dry < 60 : Cabinet revolt: [+ cabinet_revolt_disp +]/10. ?][? if govt_type >= 2 and con_in_government : Partners' discontent: [+ partner_dissent_disp +]/10. ?]
+
+House of Commons ([+ total_seats +] seats, [+ majority_line +] for a majority):
 
 {!<span class="tooltip-text" title="Conservative and Unionist Party">Conservative</span>!}: [+ con_mps +]
 
 {!<span class="tooltip-text" title="Labour Party">Labour</span>!}: [+ lab_mps +]
 
-{!<span class="tooltip-text" title="Liberal Party">Liberal</span>!}: [+ lib_mps +]
+{!<span class="tooltip-text" title="Liberals, and the SDP once it is founded">[+ lib_name +]</span>!}: [+ lib_mps +]
 
 {!<span class="tooltip-text" title="Scottish National Party">SNP</span>!}: [+ snp_mps +]
 
@@ -52,13 +60,23 @@ Inflation: [+ inflation_2 +]%
 
 Unemployment: [+ unemployment_2 +]%
 
-Pay norm: [+ pay_norm +]%
+Growth: [+ economic_growth_2 +]%
+
+[? if not con_in_government : Pay norm: [+ pay_norm +]% ?]
+
+[? if con_in_government : Bank Rate: [+ interest_rate_disp +]% ?]
+
+[? if con_in_government : Budget: [+ budget_disp +] ?][? if con_in_government and budget < 0 : (borrowing) ?]
+
+[? if con_in_government : Income tax: [+ basic_rate +]% basic, [+ top_rate +]% top. VAT: [+ vat +]% ?]
+
+[? if con_in_government : Public spending: [+ spending : taxation +] ?]
 
 @politics
 
 = Other Parties
 
-{!<span class="tooltip-text" title="David Steel's Liberals">Liberals</span>!}: [+ lib_relation : relationships +]
+{!<span class="tooltip-text" title="David Steel's Liberals (and the SDP, once the Alliance forms)">[+ lib_name +]s</span>!}: [+ lib_relation : relationships +]
 
 {!<span class="tooltip-text" title="Scottish National Party">SNP</span>!}: [+ snp_relation : relationships +]
 
@@ -117,7 +135,7 @@ Conservative: [+ con_votes +]%
 
 Labour: [+ lab_votes +]%
 
-Liberal: [+ lib_votes +]%
+[+ lib_name +]: [+ lib_votes +]%
 
 SNP: [+ snp_votes +]% (in Scotland: [+ snp_share_disp +]%)
 
@@ -125,11 +143,11 @@ Plaid Cymru: [+ pc_votes +]%
 
 Others: [+ other_votes +]%
 
-**Projected seats** (318 for a majority)
+**Projected seats** ([+ projected_majority_line +] for a majority)
 
-Conservative [+ con_seats +], Labour [+ lab_seats +], Liberal [+ lib_seats +], SNP [+ snp_seats +], Plaid [+ pc_seats +], Northern Ireland [+ ni_seats +]
+Conservative [+ con_seats +], Labour [+ lab_seats +], [+ lib_name +] [+ lib_seats +], SNP [+ snp_seats +], Plaid [+ pc_seats +], Northern Ireland [+ ni_seats +]
 
-[? if con_seats >= 318 : Projected result: Conservative majority. ?][? if lab_seats >= 318 : Projected result: Labour majority. ?][? if con_seats < 318 and lab_seats < 318 : Projected result: hung parliament. ?]
+[? if con_seats >= projected_majority_line : Projected result: Conservative majority. ?][? if lab_seats >= projected_majority_line : Projected result: Labour majority. ?][? if con_seats < projected_majority_line and lab_seats < projected_majority_line : Projected result: hung parliament. ?]
 
 **Support by social grade**
 

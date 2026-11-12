@@ -1,0 +1,12 @@
+title: The Iranian Embassy Siege
+tags: event
+view-if: con_in_government = 1 and time >= 29 and time <= 30 and embassy_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: embassy_seen = 1; thatcher_rating += 3; right_dissent -= 3
+
+= The Iranian Embassy Siege
+
+Gunmen have held the Iranian Embassy in Princes Gate for six days. When they kill a hostage, you authorise the SAS to storm the building. On live television, soldiers abseil down the front of the embassy. Nineteen of the twenty hostages are freed.
+
+The country is gripped, and the government looks decisive.

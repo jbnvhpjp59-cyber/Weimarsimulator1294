@@ -1,0 +1,54 @@
+title: Monetary Policy
+new-page: true
+is-card: true
+tags: govt_affairs
+view-if: con_in_government = 1 and monetary_policy_timer <= 0
+on-arrival: monetary_policy_timer = 3; month_actions += 1
+
+= Monetary Policy
+
+The money supply is the heart of our economic strategy. Inflation is [+ inflation_2 +]%, Bank Rate is [+ interest_rate_disp +]%, and the pound is [? if sterling >= 65 : painfully strong ?][? if sterling < 65 and sterling >= 45 : steady ?][? if sterling < 45 : weak ?].
+
+- @raise_rates: Raise interest rates.
+- @cut_rates: Cut interest rates.
+- @mtfs: Adopt a Medium-Term Financial Strategy.
+- @exchange_controls: Abolish exchange controls.
+- @hold: Hold rates steady.
+- @easy_discard
+
+@raise_rates
+view-if: interest_rate < 17
+subtitle: Bears down on inflation. Hurts mortgage holders, exporters and jobs.
+on-arrival: interest_rate += 2; inflation -= 0.5; sterling += 3; c1_con -= 1; c2_con -= 1; dry_dissent -= 2; wet_dissent += 2
+
+Bank Rate rises to [+ interest_rate +]%. Mortgage payments go up with it.
+
+@cut_rates
+view-if: interest_rate > 7
+subtitle: Eases the recession and helps homeowners. Risks letting inflation back in.
+choose-if: inflation < 14 or chancellor_dry = 0
+unavailable-subtitle: With inflation at [+ inflation_2 +]%, the Treasury and the Bank won't hear of it.
+on-arrival: interest_rate -= 2; inflation += 0.3; sterling -= 3; c1_con += 1*(1-dissent); c2_con += 1*(1-dissent); wet_dissent -= 2; dry_dissent += 2 if inflation > 8
+
+Bank Rate falls to [+ interest_rate +]%.
+
+@mtfs
+view-if: mtfs = 0
+subtitle: Publishes falling targets for money supply and borrowing for years ahead. Requires a dry Chancellor.
+choose-if: chancellor_dry = 1
+unavailable-subtitle: [+ chancellor +] doesn't believe in it.
+on-arrival: mtfs = 1; inflation -= 1; economic_liberalism += 3; dry_dissent -= 5; wet_dissent += 4
+
+The Medium-Term Financial Strategy commits the government to steadily lower monetary growth and borrowing. Nigel Lawson wrote most of it. Its purpose is to convince wage bargainers that the government won't print money to bail them out.
+
+@exchange_controls
+view-if: exchange_controls = 1
+subtitle: Lets capital move freely in and out of Britain for the first time since 1939.
+on-arrival: exchange_controls = 0; sterling -= 2; economic_liberalism += 2; ab_con += 1*(1-dissent); dry_dissent -= 3; wet_dissent += 1
+
+Forty years of controls end overnight. Britons can buy foreign shares and take as much money on holiday as they like. Labour warns of a flood of capital leaving the country.
+
+@hold
+on-arrival: dry_dissent -= 1
+
+Bank Rate stays at [+ interest_rate_disp +]%. The markets read it as steadiness.

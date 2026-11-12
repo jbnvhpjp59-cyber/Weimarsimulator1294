@@ -6,20 +6,32 @@ new-page: true
 
 = Sir Geoffrey Howe
 
-Shadow Chancellor. Mild in manner and relentless on detail. Denis Healey said being attacked by him was "like being savaged by a dead sheep", but Howe usually wins on the substance.
+[? if con_in_government = 0 : Shadow Chancellor. ?][? if con_in_government = 1 and chancellor = "Howe" : Chancellor of the Exchequer. ?][? if con_in_government = 1 and chancellor != "Howe" : Leader of the House, kept out of the Treasury. ?] Mild in manner and relentless on detail. Denis Healey said being attacked by him was "like being savaged by a dead sheep", but Howe usually wins on the substance.
 
 - @alternative_budget
+- @emergency_package
 - @city
 - @root: Return
 
 @alternative_budget
 title: Publish an alternative budget
+view-if: con_in_government = 0
 subtitle: Undermines Labour's economic credibility.
 choose-if: advisor_action_timer = 0
 unavailable-subtitle: [+ advisor_action_timer +] months before the next Shadow Cabinet action.
 on-arrival: advisor_action_timer = 6; last_advisor_action = 1; labour_credibility -= 4; economic_liberalism += 3; c1_con += 2*(1-dissent)
 
 Howe's alternative budget is costed down to the last million. Even the Financial Times concedes it adds up.
+
+@emergency_package
+title: An emergency fiscal package
+view-if: con_in_government = 1
+subtitle: +2 budget, through mid-year spending cuts. The wets will object.
+choose-if: advisor_action_timer = 0
+unavailable-subtitle: [+ advisor_action_timer +] months before the next Cabinet action.
+on-arrival: advisor_action_timer = 6; last_advisor_action = 1; budget += 2; spending -= 1; wet_dissent += 5; cabinet_revolt += 1 if cabinet_dry < 60
+
+Howe announces a package of mid-year spending cuts to keep borrowing on target. The departments that lose out complain loudly.
 
 @city
 title: Reassure the City

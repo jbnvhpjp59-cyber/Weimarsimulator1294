@@ -14,6 +14,7 @@ Background on British politics in 1978.
 - @parties: The parties
 - @factions: The factions of the Conservative Party
 - @elections: How elections work in this game
+- @governing: How government works in this game
 - @backSpecialScene: Leave the library.
 
 @system
@@ -78,3 +79,18 @@ Your national vote share comes from your support among four social grades: profe
 Seats are projected region by region. Each region starts from its approximate October 1974 result and moves with the national swing. The South swings harder than the North, and Scotland and Wales have their own nationalist parties. Within a region, the leading party takes a share of seats well above its share of votes (a "square law"). The Liberals, whose vote is spread thinly, win very few seats.
 
 Given the real vote shares, the model reproduces the October 1974 result to within a few seats. On election night, actual results can differ from the final polls by a couple of points.
+
+@governing
+go-to: menu
+
+Winning power is only the beginning. The game continues until the next general election, which must come within five years. Win it, and the verdict of history weighs up your record.
+
+**The Cabinet.** When you take office you choose a dry or a wet for the Treasury, Employment and Industry. The minister decides which policies are possible: a wet Chancellor won't raise taxes in a recession, and Jim Prior won't strip the unions of their immunities. A reshuffle can change that, at a price.
+
+**The Treasury.** The budget is the government's fiscal headroom. Tax cuts, spending and bail-outs use it up; cuts, privatisation and North Sea oil add to it. Every January the cost of unemployment benefit is deducted and growth brings in revenue. If the budget falls to -5, the markets revolt.
+
+**The economy.** High interest rates beat inflation but cost jobs and push up the pound, which hurts manufacturing. The second oil shock and a world recession hit in 1979-81; recovery comes from 1982. Voters judge the government on unemployment, prices, mortgage rates and growth.
+
+**Threats.** Angry factions fuel a backbench rebellion. Wets in the Cabinet resist spending cuts and can revolt. Without a majority, your partners grow restless and a vote of no confidence may follow. If the rebellion gets out of hand, or the polls collapse with the party divided, you may face a leadership challenge, and you can lose.
+
+**The opposition.** Labour may lurch left and split; the Social Democrats and Liberals may form an Alliance strong enough to reshape British politics. From 1983, elections are fought on new boundaries: 650 seats, 326 for a majority.

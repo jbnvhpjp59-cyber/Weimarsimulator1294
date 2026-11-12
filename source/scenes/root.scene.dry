@@ -69,7 +69,8 @@ Q.heath_hostility = 60;
 // ---------------------------------------------------------------
 // net-ish satisfaction ratings, 0 to 100
 Q.thatcher_rating = 40;
-Q.callaghan_rating = 55;
+Q.lab_leader = "Callaghan";
+Q.lab_leader_rating = 55;
 // public appetite for free-market economics, 0 to 100
 Q.economic_liberalism = 40;
 // share of the public who think the unions have too much power, 0 to 100
@@ -179,6 +180,8 @@ Q.snp_mps = 11;
 Q.pc_mps = 3;
 Q.ni_mps = 12;
 Q.other_mps = 5;
+// Unionist MPs among the Northern Irish members (15 of 17 after 1983)
+Q.unionist_seats = 10;
 
 Q.prime_minister = "Callaghan";
 Q.pm_party = "Labour";
@@ -193,6 +196,11 @@ Q.election_deadline_time = 22;
 Q.next_election_month = 10;
 Q.next_election_year = 1979;
 Q.months_to_election = 21;
+Q.months_since_election = 0;
+Q.months_in_office = 0;
+Q.rebellion_disp = 0;
+Q.cabinet_revolt_disp = 0;
+Q.partner_dissent_disp = 0;
 Q.in_campaign = 0;
 Q.election_called = 0;
 Q.n_elections = 0;
@@ -236,6 +244,119 @@ Q.last_advisor_action = 0;
 Q.pmq_success = 0;
 Q.debate_win = 0;
 Q.callaghan_calls = 0;
+Q.sun_endorsed = 0;
+
+// ---------------------------------------------------------------
+// Government. Everything below matters once we win power.
+// ---------------------------------------------------------------
+// the game ends after this many general elections (the re-election)
+Q.final_election = 2;
+Q.last_election_time = 0;
+Q.term_start_time = 0;
+// 1 = majority, 2 = Unionist deal, 3 = Liberal deal, 4 = minority
+Q.govt_type = 0;
+Q.con_majority = 0;
+Q.ousted = 0;
+Q.government_fell = 0;
+
+// The Treasury. budget is the government's fiscal headroom: negative
+// means borrowing. Below -5, the markets revolt.
+Q.budget = 0;
+Q.basic_rate = 33;
+Q.top_rate = 83;
+Q.vat = 8;
+// public spending relative to Labour's plans (negative = cuts)
+Q.spending = 0;
+// Minimum Lending Rate (Bank Rate), in %
+Q.interest_rate = 12;
+// exchange-rate index: high sterling hurts manufacturing
+Q.sterling = 50;
+Q.mtfs = 0;
+Q.exchange_controls = 1;
+Q.north_sea_oil = 0;
+// "The lady's not for turning": 1 = held course, -1 = U-turn
+Q.u_turn = 0;
+
+// Industry and unions
+// union power, 0-100: falls with union law, rises with defeats
+Q.union_power = 70;
+Q.employment_acts = 0;
+Q.privatisations = 0;
+Q.right_to_buy_progress = 0;
+Q.industry_subsidy = 0;
+// coal stocks at power stations, 0-3: a miners' strike can't be won without them
+Q.coal_stocks = 0;
+Q.miners_beaten = 0;
+
+// The Cabinet. Treasury, Employment and Industry each go to a dry or a wet.
+// cabinet_dry (0-100) is how far the Cabinet backs the radical programme.
+Q.chancellor = "Howe";
+Q.chancellor_dry = 1;
+Q.employment_secretary = "Prior";
+Q.employment_dry = 0;
+Q.industry_secretary = "Joseph";
+Q.industry_dry = 1;
+Q.foreign_secretary = "Carrington";
+Q.cabinet_dry = 40;
+Q.wets_purged = 0;
+// pressure from the wets inside Cabinet, 0-10: at 10 they revolt
+Q.cabinet_revolt = 0;
+// backbench rebellion, 0-10: high values defeat bills and threaten the leader
+Q.rebellion = 0;
+// discontent of our partners if we govern without a majority, 0-10
+Q.partner_dissent = 0;
+Q.leadership_challenge_time = 0;
+
+// Opposition
+Q.lab_left = 0;
+Q.alliance_formed = 0;
+Q.lib_name = "Liberal";
+Q.sdp_defections = 0;
+Q.falklands_factor = 0;
+
+// Foreign affairs and defence
+Q.europe_relation = 50;
+Q.us_relation = 55;
+Q.eec_rebate = 0;
+Q.defence_cuts = 0;
+Q.endurance_withdrawn = 0;
+// 0 = nothing, 1 = invaded, 2 = task force sailing, 3 = won, 4 = lost, 5 = negotiated away, 6 = deterred
+Q.falklands = 0;
+Q.falklands_odds = 0;
+
+// One-off events in government
+Q.howe_budget_done = 0;
+Q.unemployment_2m = 0;
+Q.unemployment_3m = 0;
+Q.riots = 0;
+Q.hunger_strike_conceded = 0;
+Q.new_boundaries = 0;
+Q.police_pay_done = 0;
+Q.nationality_act = 0;
+Q.scarman_done = 0;
+Q.trident = 0;
+Q.was_in_government = 0;
+Q.final_election_reached = 0;
+Q.last_new_year = 0;
+Q.benefit_cost = 0;
+Q.budget_disp = 0;
+Q.interest_rate_disp = 12;
+Q.inflation_2 = '9.9';
+Q.unemployment_2 = '5.8';
+Q.economic_growth_2 = '3.0';
+Q.projected_majority_line = 318;
+Q.howe_resigned = 0;
+Q.invaded = 0;
+Q.war_won = 0;
+Q.survived = 0;
+Q.survived_confidence = 0;
+Q.challenge_support = 0;
+Q.miners_win = 0;
+Q.by_election_loss = 0;
+Q.by_election_winner = "";
+Q.crosby_lost = 0;
+Q.hillhead_lost = 0;
+Q.last_defection_time = 0;
 
 // ---------------------------------------------------------------
 // Timers. Each card sets its own timer; post_event counts them down.
@@ -244,9 +365,16 @@ Q.timers = ['advisor_action',
             // party affairs
             'fundraising', 'speaking_tour', 'media', 'policy_group',
             'shadow_cabinet', 'target_voters', 'other_parties',
+            'party_disunity',
             // commons
             'opposition_day', 'pmqs', 'devolution', 'pay_policy',
-            'no_confidence'];
+            'no_confidence', 'whips',
+            // government
+            'budget', 'monetary_policy', 'public_spending', 'union_law',
+            'industry', 'housing', 'law_order', 'foreign_affairs',
+            'defence', 'northern_ireland', 'public_pay', 'reshuffle',
+            // events
+            'by_election', 'gilt_crisis'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -255,6 +383,7 @@ Q.whitelaw_advisor = 1;
 Q.joseph_advisor = 1;
 Q.howe_advisor = 1;
 Q.reece_advisor = 1;
+Q.tebbit_advisor = 0;
 
 // project the starting polls
 this._runActions(this.game.scenes['election_algorithm'].onArrival);
@@ -291,4 +420,4 @@ You have led the Conservative Party for nearly three years, and most of your own
 
 Across the dispatch box, James Callaghan runs a minority Labour government that has lost its majority through by-elections and defections. It survives on the Lib-Lab Pact with David Steel's Liberals. The IMF crisis of 1976 is fading, inflation has fallen from 26% to under 10%, and North Sea oil is starting to flow. "Sunny Jim" is more popular than you are.
 
-Parliament must be dissolved by the autumn of 1979. Callaghan can call an election before then, or the Commons can bring him down sooner. Your job is to make sure that when the country votes, it votes for you.
+Parliament must be dissolved by the autumn of 1979. Callaghan can call an election before then, or the Commons can bring him down sooner. Win that election, and the real test begins: governing Britain, and winning a second term.

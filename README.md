@@ -1,23 +1,54 @@
 # Conservatism: An Alternate History
 
-A total-conversion mod of [Social Democracy: An Alternate History](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen. Instead of the SPD in Weimar Germany, you lead Margaret Thatcher's Conservative Party in opposition, starting in **January 1978**.
-
-Callaghan's minority Labour government survives on the Lib-Lab Pact. Inflation is falling and "Sunny Jim" is more popular than you. Parliament must be dissolved by autumn 1979. You have until then (or until Callaghan calls an early election, or you bring him down in the Commons) to win.
+A total-conversion mod of [Social Democracy: An Alternate History](https://github.com/aucchen/social_democracy_alternate_history) by Autumn Chen. Instead of the SPD in Weimar Germany, you lead Margaret Thatcher's Conservative Party from **January 1978**. You start in opposition, win power, then govern Britain through the recession, the unions, the SDP and the South Atlantic, and finally fight for re-election.
 
 *Conservatism: An Alternate History* is a working title. Change it in `source/info.dry` and `out/html/index.html`.
 
-## Playing
+## How the game plays
 
-Each month you play one card from your hand:
+Like the original, each month you play one card from your hand. Historical and conditional events fire between turns.
 
-- **Party Affairs**: fundraising, speaking tours, media strategy, the policy group (adopt manifesto planks), Shadow Cabinet management, target voters and the other parties.
-- **The Commons**: Opposition Day debates, PMQs, devolution, pay policy and the motion of no confidence.
-- **The Campaign**: the manifesto launch, the TV debate challenge and the campaign trail. Only available in the two months before polling day.
-- **Shadow Cabinet** (pinned cards): Whitelaw, Joseph, Howe and Reece each have special actions, with one action every six months.
+**Opposition (1978–79).** Callaghan's minority government survives on the Lib-Lab Pact. Build a manifesto, manage the wets and dries, court the minor parties, and decide how to play the Winter of Discontent. If Labour leads in September 1978, Callaghan may call an early election. After the devolution referendums, you can try to bring him down with a no-confidence motion.
 
-Historical events fire on their dates, including the World in Action interview, Ilford North, Saatchi & Saatchi, the 5% pay norm, Callaghan's autumn decision, the Ford strike, the Winter of Discontent, the devolution referendums, the no-confidence vote and the election. Some of them branch. If Labour leads the polls in September 1978, Callaghan may call an October election.
+**Taking office.** Win a majority, or govern with the Ulster Unionists, the Liberals or as a minority. Then form your Cabinet: Treasury, Employment and Industry each go to a dry or a wet. Like the ministries in the original, the ministers decide which policies you can pursue.
 
-The current version ends at the first general election, with endings for a majority, a Unionist deal, a Liberal deal, a minority government, or defeat.
+**Government (1979–84).** The Government Affairs deck opens:
+
+| Card | What it does |
+| --- | --- |
+| The Budget | Shift tax from income to VAT, cut or raise taxes, or reflate (only with a wet Chancellor, or after a U-turn) |
+| Monetary Policy | Bank Rate, the Medium-Term Financial Strategy, abolishing exchange controls |
+| Public Spending | Cuts, deep cuts (dry Chancellor only), protecting the NHS, capital investment |
+| Trade Union Law | A cautious Employment Act, stripping immunities (dry Employment Secretary only), ballots, talks with the TUC |
+| Nationalised Industries | Bail-outs, cutting subsidies, privatisation, building coal stocks |
+| Housing | Right to buy, discounts, council building, mortgage relief |
+| Law and Order | Police pay, the "short sharp shock", the Nationality Act, the Scarman reforms |
+| Foreign Affairs | The EEC rebate, compromise with Europe, the special relationship |
+| Defence | The Nott review (which invites the Falklands), Trident, HMS Endurance, NATO spending |
+| Northern Ireland, Public Sector Pay | Security vs. talks, cash limits vs. peace |
+| Reshuffle | Purge the wets, bring them back, promote loyalists |
+| Government Business (Commons) | Whip the rebels, keep partners on side |
+
+Pinned Cabinet cards include Number 10, which can call a snap election after three years. Tebbit appears once he joins the Cabinet.
+
+**The economy** runs every month. Interest rates trade inflation against jobs and the pound. The 1979 oil shock and the 1980–81 world recession hit, and recovery comes from 1982. Budget deficits feed inflation, and every January brings North Sea revenue, benefit costs and revenue from growth. Voters respond to unemployment, inflation, mortgage rates, growth and right-to-buy sales.
+
+**Threats**, mirroring the original's coalition dissent, capital strike and coup meters:
+
+- **Backbench rebellion** comes from angry factions, and **Cabinet revolt** from wets resisting cuts.
+- **Partner discontent** builds if you govern without a majority, and can lead to a **vote of no confidence**.
+- **A sterling crisis** hits if the budget reaches -5.
+- **A leadership challenge** can oust you.
+
+**Events, 1979–84:**
+
+- **1979:** Howe's first Budget, the Clegg awards, Lancaster House, the Dublin summit, 17% Bank Rate.
+- **1980:** the steel strike, the Iranian Embassy, two million unemployed, "the lady's not for turning" (or a U-turn), Foot.
+- **1981:** the Gang of Four and the Alliance, the pit closures, the 1981 Budget, the hunger strike, Brixton and Toxteth, the Cabinet revolt and the September purge, Crosby.
+- **1982:** three million unemployed, Hillhead, the Falklands (deterred, negotiated, won or lost).
+- **1983:** recovery, the "longest suicide note", and by-elections and defections throughout.
+
+**The end.** The game ends when you lose an election, are ousted, or win re-election. A legacy assessment covers inflation, unemployment, the unions, privatisation, the right to buy, the Falklands, Europe, and whether you turned. There are 23 achievements.
 
 ## Building
 
@@ -29,51 +60,65 @@ npm run build        # dendrynexus make-html -> out/html/
 npm run check        # static checks on the scene files (no dependencies)
 ```
 
-Then open `out/html/index.html` in a browser. Some browsers block `game.json` loading from `file://`; if so, serve the folder with something like `npx http-server out/html`.
+Then open `out/html/index.html` in a browser. Some browsers block loading `game.json` from `file://`; if so, serve the folder with something like `npx http-server out/html`.
 
-Pushing to `main` runs `.github/workflows/build.yaml`, which builds the game and deploys it to GitHub Pages. To use it, set **Settings → Pages → Source** to "GitHub Actions" in the repository.
+Pushing to `main` runs `.github/workflows/build.yaml`, which builds the game and deploys it to GitHub Pages. To use it, set **Settings → Pages → Source** to "GitHub Actions".
 
-## How it works
+## Code layout
 
-| File | Purpose |
+| Path | Purpose |
 | --- | --- |
-| `source/scenes/root.scene.dry` | The starting state (January 1978): parties, factions, social grades, the Commons, the economy |
-| `source/scenes/post_event.scene.dry` | The monthly tick: dates, timers, faction dissent, economy and opinion drift, then routing to events or the main hand |
-| `source/scenes/election_algorithm.scene.dry` | The election model: vote shares and the regional seat model |
+| `source/scenes/root.scene.dry` | The starting state (January 1978): every variable, including the government ones |
+| `source/scenes/post_event.scene.dry` | The monthly tick: dates, timers, dissent, the opposition-era drift, the government economy, opinion, threat meters, then routing |
+| `source/scenes/election_algorithm.scene.dry` | Vote shares and the regional seat model (with the 1983 boundaries and the Alliance) |
+| `source/scenes/taking_office.scene.dry` | Forming the government and the Cabinet |
 | `source/scenes/main.scene.dry` | The hand and the decks |
 | `source/scenes/status.scene.dry` | The sidebar tabs: Main, Politics, Industry, Polls |
-| `source/scenes/party_affairs/`, `commons/`, `campaign/` | Cards |
-| `source/scenes/advisors/` | Shadow Cabinet pinned cards |
-| `source/scenes/events/` | Dated and conditional events, including the general election |
-| `source/scenes/game_over.scene.dry` | Endings and achievements |
-| `source/scenes/library.scene.dry` | In-game background reading |
-| `tools/check_scenes.js` | Static checker (run with `npm run check`) |
+| `source/scenes/party_affairs/`, `commons/`, `campaign/` | Cards usable in opposition and in government |
+| `source/scenes/government/` | The Government Affairs deck |
+| `source/scenes/advisors/` | Shadow Cabinet and Cabinet pinned cards |
+| `source/scenes/events/` | 1978–79 events and the (recurring) general election |
+| `source/scenes/govt_events/` | 1979–84 events and threats |
+| `source/scenes/game_over.scene.dry` | Endings, the legacy assessment and achievements |
+| `tools/check_scenes.js` | Static checker (`npm run check`) |
 
-**Votes.** Support for each party is tracked across four social grades: AB (professional), C1 (white-collar), C2 (skilled manual) and DE (unskilled and pensioners). Cards and events move these numbers. Each month, support drifts 8% of the way back towards its January 1978 level, so gains have to be sustained. When the Conservative lead grows, Labour pushes back.
+**Votes.** Support for each party is tracked across four social grades: AB, C1, C2 and DE. Each month, support drifts 8% of the way back towards a baseline, so gains have to be sustained. Lasting shifts, like Labour's lurch left and the Alliance, move the baseline itself.
 
-**Seats.** There are eleven regions, each starting from its approximate October 1974 result and moving with the national swing (the South swings harder than the North). Within each region, seats follow a "square law", with efficiency factors for the thinly spread Liberals and the concentrated Plaid vote. The Liberals get a stronghold floor, and Northern Ireland's 12 seats are fixed. Given the real vote shares, the model gives:
+**Seats.** There are eleven regions, each starting from its approximate October 1974 result and moving with the national swing. Seats follow a square law with efficiency factors and a Liberal/Alliance stronghold floor. Given the real vote shares, the model gives:
 
 | Election | Model (Con/Lab/Lib/SNP/PC) | Actual |
 | --- | --- | --- |
 | Oct 1974 | 276 / 316 / 15 / 12 / 4 | 277 / 319 / 13 / 11 / 3 |
 | Feb 1974 | 303 / 293 / 17 / 6 / 4 | 297 / 301 / 14 / 7 / 2 |
 | 1979 | 357 / 250 / 11 / 3 / 2 | 339 / 269 / 11 / 2 / 2 |
+| 1983 (650 seats) | 414 / 189 / 26 / 2 / 2 | 397 / 209 / 23 / 2 / 2 |
 
-The regional baseline figures are approximations and are worth refining against real constituency data.
+The regional baselines are approximations and are worth refining against real constituency data.
 
-**Balance** (from automated playtests on normal difficulty): random play wins a majority about 70% of the time and loses about 13%. Doing nothing at all wins a majority only about 30% of the time. A strong strategy averages around 358 seats.
+## Balance
+
+From automated playthroughs of the full game on normal difficulty (300 games per strategy):
+
+| Strategy | Re-elected | Ousted | Lost re-election | Lost in 1979 |
+| --- | --- | --- | --- | --- |
+| Thatcher's historical choices | 79% | 9% | 3% | 10% |
+| Random choices | 65% | 15% | 5% | 15% |
+| Chasing the polls | 74% | 24% | 0% | 2% |
+| Doing nothing on your own turns | 44% | 6% | 7% | 43% |
+
+On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
 
 ## Adding content
 
-A new card is one file. Here is a minimal example of a Party Affairs card:
+A new card is one file. Here is a minimal example of a Government Affairs card:
 
 ```
 title: My New Card
 new-page: true
 is-card: true
-tags: party_affairs
-view-if: my_card_timer <= 0
-on-arrival: my_card_timer = 4; month_actions += 1
+tags: govt_affairs
+view-if: con_in_government = 1 and my_card_timer <= 0
+on-arrival: my_card_timer = 6; month_actions += 1
 
 = My New Card
 
@@ -83,21 +128,22 @@ Some text.
 - @easy_discard
 
 @option_a
-on-arrival: c2_con += 3*(1-dissent)
+subtitle: -1 budget
+on-arrival: budget -= 1; c2_con += 3*(1-dissent); wet_dissent -= 2
 
 What happened.
 ```
 
 Add `'my_card'` to `Q.timers` in `root.scene.dry` and initialise any new variables there. Then run `npm run check`.
 
-Events use `tags: event`, a `view-if` on `time` (1 = January 1978, 13 = January 1979) and `max-visits: 1`.
+For opposition-era cards, use `tags: party_affairs` or `commons` (add `con_in_government = 0` to `view-if` if the card only makes sense in opposition). Events use `tags: event` and a `view-if` on `time` (1 = January 1978, 17 = May 1979, 61 = January 1983).
 
 ## Not done yet
 
-- The years in government (1979 onwards).
-- Images and music. Card and event art is optional in dendrynexus and none is included yet.
-- Leadership challenges, a full Shadow Cabinet reshuffle system, by-elections beyond Ilford North, and the National Front as a separate party.
-- The build hasn't yet been run end-to-end with dendrynexus. The scene files pass the static checker and an automated playtest harness, but the first real build may turn up syntax issues.
+- The second term (1983–87): the miners' strike, Brighton, Westland, the Big Bang. The game ends at re-election; `Q.final_election` in `root.scene.dry` controls when.
+- Images and music. Card and event art is optional in dendrynexus and none is included.
+- Losing the 1979 election ends the game. In the original, defeat means continuing in opposition.
+- The build hasn't yet been run end-to-end with dendrynexus. The scene files pass the static checker and an automated playtest harness that interprets them, but the first real build may still turn up syntax issues.
 
 ## Credits and licence
 

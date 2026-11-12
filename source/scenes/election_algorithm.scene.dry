@@ -79,6 +79,29 @@ var BASE = {con: 38.15, lab: 40.27, lib: 20.4, other: 1.18};
 var NI_SEATS = 12;
 var K = 2;
 var EFF = {con: 1, lab: 0.98, lib: 0.45, other: 0.3, snp: 0.65, pc: 1.7};
+// The Liberal-SDP Alliance: same efficiency by default (its seats come
+// mostly from the stronghold floor below, with a higher cap).
+// Given 1983's real vote shares the model gives Con 414, Lab 189,
+// Alliance 26 (actual 397/209/23).
+if (Q.alliance_formed) {
+    EFF.lib = Q.alliance_eff || 0.45;
+}
+// The 1983 boundary review: 650 seats, 17 of them in Northern Ireland.
+// Scale every region's seats up to the new GB total of 633.
+if (Q.new_boundaries) {
+    NI_SEATS = 17;
+    var old_total = 0;
+    for (var r0 of REGIONS) {
+        old_total += r0.seats;
+    }
+    var scaled = 0;
+    for (var r1 of REGIONS) {
+        r1.seats = Math.round(r1.seats * 633 / old_total);
+        scaled += r1.seats;
+    }
+    // put any rounding difference in the South East, which gained most seats
+    REGIONS[7].seats += 633 - scaled;
+}
 // regional modifiers set by events (e.g. a Scottish campaign)
 var scot_con_bonus = Q.scotland_con_bonus || 0;
 var midlands_con_bonus = Q.midlands_con_bonus || 0;
@@ -156,7 +179,8 @@ for (var r of REGIONS) {
 // strongholds (Steel, Grimond, Smith, Beith...). Guarantee a floor based
 // on their national vote: about 11 seats on 13.8% (1979), capped at 14.
 var lib_gb = votes.lib / gb_seats;
-var lib_floor = Math.round(Math.max(0, Math.min(14, (lib_gb - 5) * 1.25)));
+var lib_cap = Q.alliance_formed ? 30 : 14;
+var lib_floor = Math.round(Math.max(0, Math.min(lib_cap, (lib_gb - 5) * 1.25)));
 if (seats.lib < lib_floor) {
     var extra = lib_floor - seats.lib;
     var con_take = Math.round(extra * seats.con / (seats.con + seats.lab));
@@ -172,6 +196,7 @@ for (var p in votes) {
     Q[p + '_seats'] = seats[p];
 }
 Q.ni_seats = NI_SEATS;
+Q.projected_majority_line = Q.new_boundaries ? 326 : 318;
 Q.snp_share_disp = Math.round(Q.snp_share);
 Q.pc_share_disp = Math.round(Q.pc_share);
 Q.region_results = region_results;

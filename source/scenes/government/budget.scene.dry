@@ -1,0 +1,55 @@
+title: The Budget
+new-page: true
+is-card: true
+tags: govt_affairs
+view-if: con_in_government = 1 and budget_timer <= 0
+on-arrival: budget_timer = 9; month_actions += 1
+
+= The Budget
+
+[+ chancellor +] brings his Budget to Cabinet. The Treasury's headroom stands at [+ budget_disp +][? if budget < 0 : , and we are borrowing heavily ?].
+
+Income tax: [+ basic_rate +]% basic rate, [+ top_rate +]% top rate. VAT: [+ vat +]%.
+
+- @shift_to_vat: Cut income tax and pay for it with VAT.
+- @cut_income_tax: Cut income tax, and borrow to pay for it.
+- @raise_taxes: Raise taxes to bring borrowing down, recession or not.
+- @reflate: A reflationary Budget to fight unemployment.
+- @standstill: A standstill Budget.
+- @easy_discard
+
+@shift_to_vat
+view-if: basic_rate > 25 and vat < 20
+subtitle: Budget-neutral. Rewards effort and enterprise, but VAT pushes up prices.
+on-arrival: basic_rate -= 3; top_rate -= 23 if top_rate >= 83; top_rate -= 5 if top_rate < 83 and top_rate > 45; vat += 7 if vat < 10; vat += 3 if vat >= 10; inflation += 3; ab_con += 4*(1-dissent); c1_con += 3*(1-dissent); c2_con += 1*(1-dissent); de_con -= 2; economic_liberalism += 2; dry_dissent -= 3; wet_dissent += 2
+
+The basic rate falls to [+ basic_rate +]% and the top rate to [+ top_rate +]%. VAT rises to [+ vat +]%. The shift from taxing income to taxing spending is the point; the jump in prices is the price.
+
+@cut_income_tax
+view-if: basic_rate > 25
+subtitle: -2 budget. Popular, and inflationary.
+choose-if: budget > -4
+unavailable-subtitle: The gilt market would not stand for more borrowing.
+on-arrival: budget -= 2; basic_rate -= 2; inflation += 0.5; c1_con += 3*(1-dissent); c2_con += 3*(1-dissent); ab_con += 2*(1-dissent); dry_dissent += 2
+
+Two pence off the basic rate. The tabloids are delighted; the Bank of England is not.
+
+@raise_taxes
+subtitle: +3 budget. Lets us cut interest rates. Deeply unpopular in a recession.
+choose-if: chancellor_dry = 1
+unavailable-subtitle: [+ chancellor +] will not raise taxes with unemployment rising.
+on-arrival: budget += 3; inflation -= 1; unemployment += 0.5; economic_growth -= 0.3; interest_rate -= 2 if interest_rate > 10; ab_con -= 2; c1_con -= 3; c2_con -= 3; de_con -= 2; wet_dissent += 6 if unemployment > 8; dry_dissent -= 3; rebellion += 1
+
+Personal allowances are frozen and duties on drink, tobacco and petrol go up. [? if unemployment > 8 : With unemployment at [+ unemployment_2 +]%, economists queue up to write to The Times that the policy will deepen the slump. ?] With borrowing coming down, the Bank can cut interest rates.
+
+@reflate
+subtitle: -3 budget. Cuts unemployment; the dries will see it as a betrayal.
+choose-if: chancellor_dry = 0 or u_turn = -1
+unavailable-subtitle: Sir Geoffrey Howe would resign rather than present it.
+on-arrival: budget -= 3; unemployment -= 0.8; economic_growth += 1; inflation += 1.5; c2_con += 3*(1-dissent); de_con += 3*(1-dissent); wet_dissent -= 8; dry_dissent += 10; economic_liberalism -= 3
+
+More money for public works, regional aid and employment schemes. The wets call it common sense. The dries call it 1972 all over again.
+
+@standstill
+
+Nothing much changes. The Chancellor's speech is short, and the City is reassured.

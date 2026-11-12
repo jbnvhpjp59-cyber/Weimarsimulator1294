@@ -3,7 +3,7 @@ tags: event
 view-if: time >= 14 and time <= 15 and winter_of_discontent = 1
 max-visits: 1
 new-page: true
-on-arrival: strike_wave -= 3; labour_credibility += 2; callaghan_rating += 2
+on-arrival: strike_wave -= 3; labour_credibility += 2; lab_leader_rating += 2
 
 = The St Valentine's Day Concordat
 

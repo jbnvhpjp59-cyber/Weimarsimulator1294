@@ -1,0 +1,29 @@
+title: A Sterling Crisis
+tags: event
+priority: 2
+view-if: con_in_government = 1 and budget <= -5 and gilt_crisis_timer <= 0
+new-page: true
+on-arrival: gilt_crisis_timer = 12; interest_rate += 3; interest_rate = 17 if interest_rate > 17; thatcher_rating -= 6; economic_growth -= 1; sterling -= 8
+
+= A Sterling Crisis
+
+Government borrowing is out of control. The gilt market has gone on strike: the Bank of England can't sell government debt except at punishing rates. The pound is falling, and Bank Rate has been forced up to [+ interest_rate +]%. The memory of 1976, when Labour had to go cap in hand to the IMF, is very fresh.
+
+- @cuts: Emergency spending cuts.
+- @taxes: Emergency tax rises.
+- @imf: Go to the IMF.
+
+@cuts
+on-arrival: budget += 4; spending -= 2; unemployment += 0.5; wet_dissent += 10; de_con -= 3; c2_con -= 2; cabinet_revolt += 2 if cabinet_dry < 60
+
+Cuts are announced across Whitehall. The markets calm down; the country doesn't.
+
+@taxes
+on-arrival: budget += 4; inflation -= 0.5; unemployment += 0.3; c1_con -= 3; c2_con -= 3; ab_con -= 2; dry_dissent += 6
+
+A mini-Budget raises taxes in the middle of the year. The markets calm down, and the dries ask what happened to the tax-cutting party.
+
+@imf
+on-arrival: budget += 5; thatcher_rating -= 10; dry_dissent += 10; wet_dissent += 5; economic_liberalism -= 4; rebellion += 2
+
+The IMF lends, on condition of cuts the government would have made anyway. The humiliation is total: a Conservative government has gone to the IMF, just as Labour did.

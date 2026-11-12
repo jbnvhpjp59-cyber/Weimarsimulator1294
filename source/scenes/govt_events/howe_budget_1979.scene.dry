@@ -1,0 +1,24 @@
+title: The First Budget
+tags: event
+view-if: con_in_government = 1 and howe_budget_done = 0 and months_in_office >= 1 and months_in_office <= 3
+new-page: true
+on-arrival: howe_budget_done = 1; budget_timer = 9
+
+= The First Budget
+
+[+ chancellor +] must present the new government's first Budget within weeks of taking office. It will set the tone for everything that follows.
+
+- @radical: Cut the basic rate to 30% and the top rate to 60%, and nearly double VAT to 15%.
+- @cautious: A cautious start: modest tax cuts and spending restraint.
+
+@radical
+choose-if: chancellor_dry = 1
+unavailable-subtitle: [+ chancellor +] won't risk it.
+on-arrival: basic_rate = 30; top_rate = 60; vat = 15; inflation += 4; ab_con += 5*(1-dissent); c1_con += 3*(1-dissent); de_con -= 2; spending -= 1; budget += 1; interest_rate = 14; economic_liberalism += 3; dry_dissent -= 6; wet_dissent += 4
+
+Income tax falls sharply; VAT rises from 8% (12.5% on luxuries) to a single rate of 15%. Bank Rate goes up to 14%. Prices jump overnight. The Budget is a statement that the government means what it said.
+
+@cautious
+on-arrival: basic_rate = 32; top_rate = 75; vat = 10; inflation += 1; c1_con += 2*(1-dissent); ab_con += 2*(1-dissent); wet_dissent -= 3; dry_dissent += 6
+
+A modest trim to income tax, a small rise in VAT and some restraint in spending. The dries complain that the government has wasted its honeymoon.

@@ -15,7 +15,7 @@ go-to: election if callaghan_calls = 1; no_election if callaghan_calls = 0
 All summer, Westminster has assumed Callaghan will go to the country in October, before the 5% pay limit can unravel. At the TUC conference, all he offered was a music-hall song, "There was I, waiting at the church". Tonight he makes a television broadcast to the nation.
 
 @election
-on-arrival: autumn_election_1978 = 1; time_to_election = 1; callaghan_rating += 2
+on-arrival: autumn_election_1978 = 1; time_to_election = 1; lab_leader_rating += 2
 call: set_election
 
 With the polls running his way, Callaghan seizes his moment. Parliament will be dissolved, and the country votes in [+ next_election_month : month +] [+ next_election_year +].
@@ -23,7 +23,7 @@ With the polls running his way, Callaghan seizes his moment. Parliament will be 
 We have weeks, not months. Whatever we have built so far is what we fight with.
 
 @no_election
-on-arrival: callaghan_rating -= 2; labour_credibility -= 1; wet_dissent -= 2; loyalist_dissent -= 2
+on-arrival: lab_leader_rating -= 2; labour_credibility -= 1; wet_dissent -= 2; loyalist_dissent -= 2
 
 Callaghan says there will be no election this autumn. He has decided to see out the winter and go to the country in 1979.
 

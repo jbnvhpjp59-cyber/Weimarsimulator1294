@@ -1,0 +1,38 @@
+title: The Pit Closures
+tags: event
+view-if: con_in_government = 1 and time >= 38 and time <= 40 and pit_closures_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: pit_closures_seen = 1
+
+= The Pit Closures
+
+The National Coal Board has announced plans to close 23 uneconomic pits. Miners in South Wales have walked out, and Joe Gormley of the National Union of Mineworkers says a national strike is coming. Coal stocks at the power stations are [? if coal_stocks >= 2 : high ?][? if coal_stocks = 1 : modest ?][? if coal_stocks = 0 : low ?].
+
+The miners brought down Heath in 1974. Can we take them on now?
+
+- @back_down: Back down: withdraw the closures and fund the Coal Board.
+- @confront: Stand firm and let them strike.
+
+@back_down
+on-arrival: budget -= 2; union_power += 4; coal_stocks += 1; dry_dissent += 5; thatcher_rating -= 1
+
+Within a week, the closures are withdrawn and the Coal Board gets more money. The miners celebrate. Privately, the Energy Department is told to prepare for next time: bigger coal stocks, oil-fired power stations, and police coordination.
+
+@confront
+on-arrival: {!
+var odds = 20 + 30 * Q.coal_stocks + (Q.union_power < 50 ? 10 : 0);
+Q.miners_win = (Math.random() * 100 < odds) ? 0 : 1;
+!}
+go-to: miners_win if miners_win = 1; miners_lose if miners_win = 0
+
+@miners_win
+on-arrival: union_power += 15; strike_wave += 4; economic_growth -= 1; thatcher_rating -= 8; rebellion += 2; wet_dissent += 8; budget -= 2
+
+The strike spreads across every coalfield. Within a month the power stations are running short of coal and the lights start going out, as they did under Heath. The government has to settle on the miners' terms.
+
+@miners_lose
+on-arrival: union_power -= 15; miners_beaten = 1; thatcher_rating += 4; budget += 1; dry_dissent -= 5; c2_con += 2*(1-dissent)
+achievement: miners_beaten
+
+The power stations hold out. With other unions unwilling to join a sympathy strike, the NUM's action crumbles within weeks. No government has beaten the miners since 1926.

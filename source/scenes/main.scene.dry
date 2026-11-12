@@ -1,12 +1,13 @@
 title: Next month
 is-hand: true
 on-arrival: {!
+var label = Q.con_in_government ? 'Cabinet' : 'Shadow Cabinet';
 if (Q.advisor_action_timer <= 0) {
-    Q.pinnedCardsDescription = 'Shadow Cabinet - an action is available.';
+    Q.pinnedCardsDescription = label + ' - an action is available.';
 } else if (Q.advisor_action_timer == 1) {
-    Q.pinnedCardsDescription = 'Shadow Cabinet - next action available in 1 month.';
+    Q.pinnedCardsDescription = label + ' - next action available in 1 month.';
 } else {
-    Q.pinnedCardsDescription = 'Shadow Cabinet - next action available in ' + Q.advisor_action_timer + ' months.';
+    Q.pinnedCardsDescription = label + ' - next action available in ' + Q.advisor_action_timer + ' months.';
 }
 !}
 max-cards: 3
@@ -16,6 +17,7 @@ max-cards: 3
 [? if in_campaign : **The general election campaign is under way.** Polling day is [+ next_election_month : month +] [+ next_election_year +]. ?]
 
 - @party
+- @govt
 - @commons
 - @campaign
 - #advisor
@@ -23,12 +25,13 @@ max-cards: 3
 @main_easy
 is-hand: true
 on-arrival: {!
+var label = Q.con_in_government ? 'Cabinet' : 'Shadow Cabinet';
 if (Q.advisor_action_timer <= 0) {
-    Q.pinnedCardsDescription = 'Shadow Cabinet - an action is available.';
+    Q.pinnedCardsDescription = label + ' - an action is available.';
 } else if (Q.advisor_action_timer == 1) {
-    Q.pinnedCardsDescription = 'Shadow Cabinet - next action available in 1 month.';
+    Q.pinnedCardsDescription = label + ' - next action available in 1 month.';
 } else {
-    Q.pinnedCardsDescription = 'Shadow Cabinet - next action available in ' + Q.advisor_action_timer + ' months.';
+    Q.pinnedCardsDescription = label + ' - next action available in ' + Q.advisor_action_timer + ' months.';
 }
 !}
 max-cards: 4
@@ -36,6 +39,7 @@ max-cards: 4
 [? if in_campaign : **The general election campaign is under way.** Polling day is [+ next_election_month : month +] [+ next_election_year +]. ?]
 
 - @party
+- @govt
 - @commons
 - @campaign
 - #advisor
@@ -45,6 +49,13 @@ title: Party Affairs
 is-deck: true
 
 - #party_affairs
+
+@govt
+title: Government Affairs
+view-if: con_in_government = 1
+is-deck: true
+
+- #govt_affairs
 
 @commons
 title: The Commons

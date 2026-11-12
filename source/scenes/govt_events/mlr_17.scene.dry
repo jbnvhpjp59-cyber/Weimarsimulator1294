@@ -1,0 +1,23 @@
+title: Seventeen Per Cent
+tags: event
+view-if: con_in_government = 1 and time >= 23 and time <= 25 and interest_rate < 17 and mlr17_seen = 0 and inflation >= 12
+max-visits: 1
+new-page: true
+on-arrival: mlr17_seen = 1
+
+= Seventeen Per Cent
+
+The money supply is growing far faster than our target, and inflation is [+ inflation_2 +]%. The Bank of England recommends raising Bank Rate to an unprecedented 17%.
+
+- @raise: Do it.
+- @refuse: Refuse. The recession is bad enough.
+
+@raise
+on-arrival: interest_rate = 17; inflation -= 1; sterling += 4; c1_con -= 2; c2_con -= 1; dry_dissent -= 4; wet_dissent += 4
+
+Bank Rate goes to 17%, the highest in its history. Mortgage rates follow, and industry howls.
+
+@refuse
+on-arrival: inflation += 1; economic_liberalism -= 2; dry_dissent += 6; wet_dissent -= 3
+
+We hold rates where they are. The markets conclude the government's monetarism has limits.

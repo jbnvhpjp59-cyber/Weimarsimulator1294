@@ -1,9 +1,8 @@
 title: The Sun Says
 tags: event
-view-if: in_campaign = 1 and tabloid_support >= 1 and months_to_election <= 1
-max-visits: 1
+view-if: in_campaign = 1 and tabloid_support >= 1 and months_to_election <= 1 and sun_endorsed = 0
 new-page: true
-on-arrival: c2_con += 3*(1-dissent); de_con += 2*(1-dissent)
+on-arrival: sun_endorsed = 1; c2_con += 3*(1-dissent); de_con += 2*(1-dissent)
 
 = The Sun Says
 

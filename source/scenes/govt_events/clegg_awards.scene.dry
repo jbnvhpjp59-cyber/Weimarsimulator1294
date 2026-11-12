@@ -1,0 +1,23 @@
+title: The Clegg Awards
+tags: event
+view-if: con_in_government = 1 and time >= 18 and time <= 21 and clegg_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: clegg_seen = 1
+
+= The Clegg Awards
+
+During the Winter of Discontent, Labour set up Professor Clegg's commission to compare public-sector pay with the private sector. Its awards are now arriving, and they are expensive. During the campaign we promised to honour them.
+
+- @honour: Honour the awards.
+- @refuse: Refuse to pay in full.
+
+@honour
+on-arrival: budget -= 2; strike_wave -= 1; inflation += 0.5; wet_dissent -= 2; dry_dissent += 3
+
+We keep our promise. Public-sector pay jumps, and so does public spending.
+
+@refuse
+on-arrival: strike_wave += 2; union_power += 3; thatcher_rating -= 2; c2_con -= 1; de_con -= 2; dry_dissent -= 3
+
+We phase the awards and cut them back. The public-sector unions accuse us of breaking an election promise, and they have a point.

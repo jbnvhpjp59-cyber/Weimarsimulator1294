@@ -2,7 +2,7 @@ title: Pay Policy
 new-page: true
 is-card: true
 tags: commons
-view-if: pay_policy_timer <= 0
+view-if: pay_policy_timer <= 0 and con_in_government = 0
 on-arrival: pay_policy_timer = 6; month_actions += 1
 
 = Pay Policy
