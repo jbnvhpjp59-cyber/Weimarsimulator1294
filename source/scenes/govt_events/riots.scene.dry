@@ -39,11 +39,11 @@ In July the riots spread: Toxteth in Liverpool, Moss Side in Manchester, Handswo
 - @managed_decline: Let the city decline: we can't throw money at it.
 
 @minister_for_merseyside
-on-arrival: budget -= 1; wet_dissent -= 5; de_con += 1*(1-dissent); dry_dissent += 3
+on-arrival: budget -= 1; wet_dissent -= 5; de_con += 1*(1-dissent); dry_dissent += 3; ru_northwest -= 0.4
 
 Heseltine spends three weeks in Liverpool with bankers and businessmen, and comes back with a plan for urban regeneration. The dries see it as a spending spree.
 
 @managed_decline
-on-arrival: dry_dissent -= 3; wet_dissent += 5; de_con -= 2; de_lab += 2
+on-arrival: dry_dissent -= 3; wet_dissent += 5; de_con -= 2; de_lab += 2; ru_northwest += 0.3
 
 The Treasury argues that the money would be better spent elsewhere. If word of the argument ever leaks, Liverpool won't forgive it.

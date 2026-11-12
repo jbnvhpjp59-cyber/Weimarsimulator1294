@@ -33,7 +33,7 @@ on-arrival: union_power += 15; strike_wave += 4; economic_growth -= 1; thatcher_
 The strike spreads across every coalfield. Within a month the power stations are running short of coal and the lights start going out, as they did under Heath. The government has to settle on the miners' terms.
 
 @miners_lose
-on-arrival: union_power -= 15; miners_beaten = 1; thatcher_rating += 4; budget += 1; dry_dissent -= 5; c2_con += 2*(1-dissent)
+on-arrival: union_power -= 15; miners_beaten = 1; ru_yorkshire += 0.6; ru_wales += 0.5; ru_scotland += 0.4; ru_north += 0.4; ru_eastmids += 0.2; thatcher_rating += 4; budget += 1; dry_dissent -= 5; c2_con += 2*(1-dissent)
 achievement: miners_beaten
 
 The power stations hold out. With other unions unwilling to join a sympathy strike, the NUM's action crumbles within weeks. No government has beaten the miners since 1926.

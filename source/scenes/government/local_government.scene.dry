@@ -57,7 +57,7 @@ The government will abolish the Greater London Council and the six metropolitan 
 @docklands
 view-if: docklands = 0
 subtitle: -0.5 budget. New jobs, and a showcase for enterprise.
-on-arrival: docklands = 1; budget -= 0.5; economic_growth += 0.2; unemployment -= 0.1; c2_con += 1*(1-dissent); wet_dissent -= 2
+on-arrival: docklands = 1; budget -= 0.5; economic_growth += 0.2; unemployment -= 0.1; ru_london -= 0.4; ru_northwest -= 0.2; c2_con += 1*(1-dissent); wet_dissent -= 2
 achievement: docklands
 
 The Environment Secretary creates development corporations for the London and Merseyside docklands, and Sir Geoffrey Howe declares the first enterprise zones, free of rates and planning controls. Eight square miles of derelict wharves on the Isle of Dogs wait for the developers.

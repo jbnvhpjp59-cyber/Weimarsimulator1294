@@ -55,6 +55,19 @@ Q.largest_party = (Q.con_mps >= Q.lab_mps) ? 'con' : 'lab';
 Q.con_plus_lib = Q.con_mps + Q.lib_mps;
 Q.con_plus_ni = Q.con_mps + Q.unionist_seats;
 Q.final_election_reached = (Q.n_elections >= Q.final_election) ? 1 : 0;
+// region by region, with the change since the last general election
+var prev = {};
+for (var pr of (Q.prev_regions || [])) {
+    prev[pr.id] = pr;
+}
+Q.election_regions = Q.region_results.map(function (r) {
+    var p = prev[r.id] || r;
+    return {name: r.name, seats: r.seats, con: r.con, lab: r.lab, lib: r.lib, nat: r.nat,
+            dcon: r.con - p.con, dlab: r.lab - p.lab, dlib: r.lib - p.lib, dnat: r.nat - p.nat, u: r.u};
+});
+Q.prev_regions = Q.region_results.map(function (r) {
+    return {id: r.id, con: r.con, lab: r.lab, lib: r.lib, nat: r.nat};
+});
 Q.election_records.push({'date': new Date(Q.year, Q.month - 1),
                          'con': Q.con_mps, 'lab': Q.lab_mps, 'lib': Q.lib_mps,
                          'snp': Q.snp_mps, 'pc': Q.pc_mps, 'ni': Q.ni_mps});
@@ -97,6 +110,22 @@ if (typeof window !== 'undefined' && typeof d3 !== 'undefined' && d3.parliament)
     parliament.exit.toCenter(false).bigToSmall(true);
     d3.select("#commons").datum(data).call(parliament);
 }
+// the regional breakdown
+var table = (typeof document !== 'undefined') ? document.getElementById('region_table') : null;
+if (table && Q.election_regions && Q.election_regions.length) {
+    var cell = function (n, d) {
+        var change = d ? ' <span class="change">' + (d > 0 ? '+' : '') + d + '</span>' : '';
+        return '<td>' + n + change + '</td>';
+    };
+    var html = '<table class="regions"><tr><th>Region</th><th>Con</th><th>Lab</th><th>' +
+        (Q.alliance_formed ? 'All.' : 'Lib') + '</th><th>Nat.</th><th>Jobless</th></tr>';
+    for (var r of Q.election_regions) {
+        html += '<tr><td>' + r.name + '</td>' + cell(r.con, r.dcon) + cell(r.lab, r.dlab) +
+            cell(r.lib, r.dlib) + (r.nat || r.dnat ? cell(r.nat, r.dnat) : '<td></td>') +
+            '<td>' + (r.u ? r.u.toFixed(1) + '%' : '') + '</td></tr>';
+    }
+    table.innerHTML = html + '</table>';
+}
 !}
 go-to: formation
 
@@ -115,6 +144,10 @@ go-to: formation
 {!</table>!}
 
 [? if con_mps >= majority_line : **A Conservative majority of [+ con_majority +].** ?][? if lab_mps >= majority_line : **Labour has won a majority.** ?]
+
+**Region by region.** Seats won, with the change since the last general election[? if new_boundaries : (the new boundaries add seats, mostly in the South) ?], and unemployment in each region.
+
+{!<div id="region_table"></div>!}
 
 [? if con_mps < majority_line and lab_mps < majority_line and largest_party == "con" : **A hung parliament.** We are the largest party, [+ con_short +] seats short of a majority. ?][? if con_mps < majority_line and lab_mps < majority_line and largest_party == "lab" : **A hung parliament.** Labour is the largest party. ?]
 

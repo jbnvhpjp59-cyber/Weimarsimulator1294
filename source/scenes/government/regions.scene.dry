@@ -1,0 +1,45 @@
+title: Regional Policy
+new-page: true
+is-card: true
+card-image: img/cards/regions.jpg
+tags: govt_affairs, cabinet
+view-if: con_in_government = 1 and regions_timer <= 0
+on-arrival: regions_timer = 5; month_actions += 1
+
+= Regional Policy
+
+Unemployment is highest in [+ worst_region +], at [+ worst_region_u +]%, and lowest in the South East, at [+ u_southeast_disp +]%. [? if time >= 30 : The recession has hit the old industrial regions hardest: steel, ships, cars, coal and textiles. ?] [+ industry_secretary +] holds the regional aid budget, and the Scottish and Welsh Offices want their share of it.
+
+- @cut_regional_aid: Cut regional aid.
+- @restore_regional_aid: Restore regional aid.
+- @development_agencies: Back the Scottish and Welsh Development Agencies.
+- @nissan: Bring a Japanese car plant to the North East.
+- @easy_discard
+- @cancel_advisor_action
+
+@cut_regional_aid
+view-if: regional_aid = 0
+subtitle: +1 budget. Unemployment rises in the assisted areas. The dries approve.
+on-arrival: regional_aid = -1; budget += 1; ru_north += 0.4; ru_northwest += 0.3; ru_yorkshire += 0.2; ru_wales += 0.4; ru_scotland += 0.4; dry_dissent -= 3; wet_dissent += 3; economic_liberalism += 1
+
+Regional development grants are cut, and fewer areas qualify for them. The Treasury saves money, and the firms that were thinking of moving to Consett or Merthyr think again.
+
+@restore_regional_aid
+view-if: regional_aid = -1
+subtitle: -1 budget. The wets approve. The dries call it a U-turn in miniature.
+on-arrival: regional_aid = 0; budget -= 1; ru_north -= 0.3; ru_northwest -= 0.2; ru_wales -= 0.3; ru_scotland -= 0.3; wet_dissent -= 3; dry_dissent += 3; economic_liberalism -= 1
+
+The grants are restored and the map of the assisted areas is redrawn more generously. The members for the northern seats stop writing letters to the Chief Whip.
+
+@development_agencies
+subtitle: -0.5 budget. Helps Scotland and Wales. The dries call it picking winners.
+on-arrival: budget -= 0.5; ru_scotland -= 0.4; ru_wales -= 0.4; scotland_con_bonus += 0.3 if scotland_con_bonus < 4; snp_share -= 0.3; dry_dissent += 2; wet_dissent -= 1
+
+The Scottish Development Agency gets money to clear derelict land around Glasgow and to lure American electronics firms to the new towns; the Welsh agency builds advance factories along the M4.
+
+@nissan
+view-if: nissan = 0 and time >= 55
+subtitle: -1 budget. Thousands of jobs in the North East, in time.
+on-arrival: nissan = 1; budget -= 1; ru_north -= 0.6; economic_growth += 0.1; c2_con += 1*(1-dissent); wet_dissent -= 2; dry_dissent += 1
+
+After long negotiations and a generous grant, Nissan agrees to build its first European car factory on the old airfield at Washington, near Sunderland. The company wants to deal with a single union, and the unions are already arguing about which one it will be.

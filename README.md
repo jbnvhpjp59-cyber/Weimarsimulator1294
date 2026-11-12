@@ -36,6 +36,7 @@ Like the original, each month you play one card from your hand. Historical and c
 | The Common Market | The Exchange Rate Mechanism, farm policy reform, the "lamb war", fisheries, the single market |
 | Immigration and Nationality | The British Nationality Bill, immigration rules, the Vietnamese boat people, inner-city projects |
 | Energy and North Sea Oil | Oil taxes, selling BP shares, a nuclear programme (which weakens the miners), market energy prices |
+| Regional Policy | Cutting or restoring regional aid, the Scottish and Welsh Development Agencies, a Japanese car plant for the North East |
 | Local Government | Rate Support Grant cuts, bills for rate-capping and for abolishing the GLC, abolishing the rates, the Docklands, tendering |
 | Reshuffle | Move any minister, purge the wets department by department, bring them back, promote loyalists |
 | Government Business (Commons) | Whip the rebels, guillotine a bill in committee, keep partners on side |
@@ -55,6 +56,8 @@ The Commons has time for three major bills at once. The Government Business card
 **Losing.** As in the original, defeat doesn't end the game. Lose in 1979 and Labour governs on, the recession hits them instead, and you fight on as Leader of the Opposition, facing a leadership challenge, until the final election.
 
 **The economy** runs every month. Interest rates trade inflation against jobs and the pound. The 1979 oil shock and the 1980–81 world recession hit, and recovery comes from 1982. Budget deficits feed inflation, and every January brings North Sea revenue, benefit costs and revenue from growth. Voters respond to unemployment, inflation, mortgage rates, growth and right-to-buy sales.
+
+**The regions.** Each of the seat model's eleven regions has its own unemployment rate, shown in the Industry tab. As the recession deepens, the pattern shifts from the old one (the North, Scotland and Wales far above the South) to the 1980s one, with the West Midlands and the North West hit hardest. Policy moves it too: closures, pit closures and the steel settlement push up unemployment in the industrial regions, the strong pound hurts manufacturing, and bail-outs, regional aid, the development agencies, Docklands and a Minister for Merseyside pull it down. A region where unemployment has risen faster than the national rate swings against the governing party. On election night, a table shows the seats won in each region, the change since the last election, and each region's unemployment.
 
 **Threats**, mirroring the original's coalition dissent, capital strike and coup meters:
 
@@ -112,6 +115,7 @@ Pushing to `main` runs `.github/workflows/build.yaml`, which builds the game and
 | `source/scenes/root.scene.dry` | The starting state (January 1978): every variable, including the government ones |
 | `source/scenes/post_event.scene.dry` | The monthly tick: dates, timers, dissent, the opposition-era drift, the government economy, opinion, threat meters, then routing |
 | `source/scenes/election_algorithm.scene.dry` | Vote shares and the regional seat model (with the 1983 boundaries and the Alliance) |
+| `source/scenes/regional_economy.scene.dry` | Unemployment in each region, and how far it has moved against the national rate |
 | `source/scenes/taking_office.scene.dry` | Forming the government and the Cabinet |
 | `source/scenes/main.scene.dry` | The hand and the decks |
 | `source/scenes/status.scene.dry` | The sidebar tabs: Main, Politics, Industry, Polls |
@@ -127,7 +131,7 @@ Pushing to `main` runs `.github/workflows/build.yaml`, which builds the game and
 
 **Votes.** Support for each party is tracked across four social grades: AB, C1, C2 and DE. Each month, support drifts 8% of the way back towards a baseline, so gains have to be sustained. Lasting shifts, like Labour's lurch left and the Alliance, move the baseline itself.
 
-**Seats.** There are eleven regions, each starting from its approximate October 1974 result and moving with the national swing. Seats follow a square law with efficiency factors and a Liberal/Alliance stronghold floor. Given the real vote shares, the model gives:
+**Seats.** There are eleven regions, each starting from its approximate October 1974 result and moving with the national swing. Seats follow a square law with efficiency factors and a Liberal/Alliance stronghold floor, whose seats go to the regions where the Liberal vote is highest. In each region, the governing party loses 0.4 points of vote share for every point by which that region's unemployment has risen faster than the nation's. The table below comes from the election simulation, which uses only the real vote shares and leaves that regional effect out. Given the real vote shares, the model gives:
 
 | Election | Model (Con/Lab/Lib/SNP/PC) | Actual |
 | --- | --- | --- |
@@ -145,7 +149,7 @@ From automated playthroughs of the full game on normal difficulty (1,200 games p
 | Strategy | Re-elected | Ousted in government | Lost the second election | Lost in 1979 |
 | --- | --- | --- | --- | --- |
 | Thatcher's historical choices | 88% | 8% | 4% | 1% |
-| Random choices | 61% | 18% | 7% | 14% |
+| Random choices | 63% | 17% | 6% | 13% |
 
 On the historical path, inflation ends near 4% and unemployment near 14%, close to the real 1983 figures. That path passes about four bills a game, and loses about one Second Reading in a hundred, usually Tebbit's Employment Bill or the GLC bill when the wets are at their angriest. Chasing the polls avoids the recession but leaves inflation near 15%. Most of that strategy's ousters follow a lost Falklands war after the Nott defence cuts.
 

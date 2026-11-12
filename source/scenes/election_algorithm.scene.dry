@@ -123,6 +123,16 @@ for (var r of REGIONS) {
         v.con += midlands_con_bonus;
         v.lab -= midlands_con_bonus;
     }
+    // regional unemployment: a region where the jobless rate has risen
+    // faster than the nation's swings against the governing party
+    if (!Q.no_regional_swing && Q['u_diff_' + r.id] !== undefined) {
+        var gp_r = Q.con_in_government ? 'con' : 'lab';
+        var op_r = Q.con_in_government ? 'lab' : 'con';
+        var jobs_swing = 0.4 * Q['u_diff_' + r.id];
+        v[gp_r] -= jobs_swing;
+        v[op_r] += 0.7 * jobs_swing;
+        v.lib += 0.3 * jobs_swing;
+    }
     for (var p of ['con', 'lab', 'lib', 'other']) {
         if (v[p] < 0.5) {
             v[p] = 0.5;
@@ -170,8 +180,10 @@ for (var r of REGIONS) {
     gb_seats += r.seats;
     region_results.push({id: r.id, name: r.name, seats: r.seats,
                          con: rs.con, lab: rs.lab, lib: rs.lib,
-                         nat: r.nat ? rs[r.nat] : 0,
-                         con_share: Math.round(v.con), lab_share: Math.round(v.lab)});
+                         nat: r.nat ? rs[r.nat] : 0, nat_name: r.nat || '',
+                         con_share: Math.round(v.con), lab_share: Math.round(v.lab),
+                         lib_share: Math.round(v.lib), nat_share: r.nat ? Math.round(v[r.nat]) : 0,
+                         u: Q['u_' + r.id] || 0});
 }
 
 // ---- Liberal strongholds ----
@@ -184,9 +196,27 @@ var lib_floor = Math.round(Math.max(0, Math.min(lib_cap, (lib_gb - 5) * 1.25)));
 if (seats.lib < lib_floor) {
     var extra = lib_floor - seats.lib;
     var con_take = Math.round(extra * seats.con / (seats.con + seats.lab));
+    var lab_take = extra - con_take;
     seats.con -= con_take;
-    seats.lab -= extra - con_take;
+    seats.lab -= lab_take;
     seats.lib = lib_floor;
+    // the strongholds are in the regions where the Liberal vote is highest,
+    // so the regional results still add up to the national ones
+    var by_lib = region_results.slice().sort(function(a, b) {
+        return b.lib_share - a.lib_share;
+    });
+    for (var i = 0; (con_take > 0 || lab_take > 0) && i < 2000; i++) {
+        var rr = by_lib[i % by_lib.length];
+        if (con_take > 0 && rr.con > 0) {
+            rr.con -= 1;
+            rr.lib += 1;
+            con_take -= 1;
+        } else if (lab_take > 0 && rr.lab > 0) {
+            rr.lab -= 1;
+            rr.lib += 1;
+            lab_take -= 1;
+        }
+    }
 }
 
 // ---- Step 3: outputs ----

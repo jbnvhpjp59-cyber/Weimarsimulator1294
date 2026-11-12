@@ -366,8 +366,9 @@ for (const s of Object.values(scenes)) {
 
 // qualities that JavaScript assigns by building their names: each bill's
 // stage and flags (Q['bill_' + key + '_watered']) and the bill lines shown
-// in the Politics tab (Q['bill_line_' + n])
-const dynamic = /^bill_[a-z0-9]+(_[a-z]+)?$|^bill_line_\d+$/;
+// in the Politics tab (Q['bill_line_' + n]), and each region's unemployment
+// (Q['u_' + region], Q['u_' + region + '_disp'])
+const dynamic = /^bill_[a-z0-9]+(_[a-z]+)?$|^bill_line_\d+$|^u_[a-z]+(_disp)?$/;
 for (const [name, loc] of read) {
   if (!initialised.has(name) && !name.startsWith('achievement_') && !name.startsWith('game_achievement_') && !dynamic.test(name)) {
     warn(loc, `"${name}" is read but never assigned`);

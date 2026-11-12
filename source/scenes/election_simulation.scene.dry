@@ -60,6 +60,8 @@ Q.new_boundaries = Q.sim.boundaries;
 Q.total_seats = Q.sim.boundaries ? 650 : 635;
 Q.lib_name = Q.sim.alliance ? "Alliance" : "Liberal";
 Q.apply_poll_error = 0;
+// the simulation tests the seat model on real vote shares alone
+Q.no_regional_swing = 1;
 !}
 go-to: election_algorithm
 

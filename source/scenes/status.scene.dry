@@ -158,6 +158,30 @@ Government pay norm: [+ pay_norm +]%
 
 Our position on pay: [? if pay_stance = 0 : undecided ?][? if pay_stance = 1 : back the pay norm ?][? if pay_stance = 2 : free collective bargaining ?][? if pay_stance = 3 : statutory wage controls ?]
 
+= Unemployment by Region
+
+[? if u_north > 0 : North of England: [+ u_north_disp +]% ?]
+
+[? if u_northwest > 0 : North West: [+ u_northwest_disp +]% ?]
+
+[? if u_yorkshire > 0 : Yorkshire: [+ u_yorkshire_disp +]% ?]
+
+[? if u_eastmids > 0 : East Midlands: [+ u_eastmids_disp +]% ?]
+
+[? if u_westmids > 0 : West Midlands: [+ u_westmids_disp +]% ?]
+
+[? if u_eastanglia > 0 : East Anglia: [+ u_eastanglia_disp +]% ?]
+
+[? if u_london > 0 : London: [+ u_london_disp +]% ?]
+
+[? if u_southeast > 0 : South East: [+ u_southeast_disp +]% ?]
+
+[? if u_southwest > 0 : South West: [+ u_southwest_disp +]% ?]
+
+[? if u_wales > 0 : Wales: [+ u_wales_disp +]% ?]
+
+[? if u_scotland > 0 : Scotland: [+ u_scotland_disp +]% ?]
+
 = Public Opinion
 
 Support for free-market economics: [+ economic_liberalism_disp +]%
