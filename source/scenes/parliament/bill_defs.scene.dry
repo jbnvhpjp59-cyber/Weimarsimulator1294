@@ -139,7 +139,7 @@ Q.bill_defs = {
 };
 Q.bill_keys = ["employment1", "employment2", "trade_union", "housing", "education", "nationality", "rates", "glc", "pace", "telecoms"];
 for (var k of Q.bill_keys) {
-    for (var f of ["", "_due", "_time", "_wait", "_watered", "_tough", "_amend", "_lords", "_fast", "_insisted", "_fell"]) {
+    for (var f of ["", "_due", "_time", "_wait", "_watered", "_tough", "_amend", "_lords", "_fast", "_insisted", "_fell", "_lc", "_lnc"]) {
         if (Q['bill_' + k + f] === undefined) {
             Q['bill_' + k + f] = 0;
         }

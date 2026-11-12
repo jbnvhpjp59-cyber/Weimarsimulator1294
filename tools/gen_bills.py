@@ -250,7 +250,7 @@ defs = {}
 for b in BILLS:
     defs[b['key']] = {k: b[k] for k in ['name', 'act', 'faction', 'weight', 'champion', 'committee', 'lords',
                                         'amend', 'lords_risk', 'lib', 'ulster']}
-fields = ['', '_due', '_time', '_wait', '_watered', '_tough', '_amend', '_lords', '_fast', '_insisted', '_fell']
+fields = ['', '_due', '_time', '_wait', '_watered', '_tough', '_amend', '_lords', '_fast', '_insisted', '_fell', '_lc', '_lnc']
 with open(os.path.join(out_dir, 'bill_defs.scene.dry'), 'w') as f:
     f.write("""title: Bill Definitions
 on-arrival: {!
@@ -276,7 +276,9 @@ for (var k of Q.bill_keys) {
 # ---- per-bill events ----
 WHIP = """**The whips' count.** [? if div_proj_rebels >= 1 : About [+ div_proj_rebels +] Conservatives are expected to vote against, and [+ div_proj_abstain +] more to abstain. ?][? if div_proj_rebels = 0 : The party is solid behind the bill. ?][? if div_partner_n = 1 : [+ div_partner_text +] ?] [? if div_proj_majority > 0 : The whips expect a majority of [+ div_proj_majority +]. ?][? if div_proj_majority <= 0 : The whips expect the government to lose by [+ div_proj_deficit +] votes. ?]"""
 
-RESULT = """[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
+RESULT = """{!<span class="division" id="commons_division"></span>!}
+
+[? if div_passed = 1 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The bill is read a second time, with a majority of [+ div_majority +], and goes upstairs to a standing committee. ?][? if div_passed = 0 : **Ayes [+ div_ayes +], Noes [+ div_noes +].** The government is defeated by [+ div_deficit +] votes, and the Opposition benches erupt. The bill is lost, and can't be brought back for a year. ?]
 
 [? if div_rebels >= 1 : [+ div_rebels +] Conservatives voted against the government, and about [+ div_abstain +] more stayed away. ?][? if div_rebels = 0 : Every Conservative in the House voted with the government. ?]"""
 
@@ -323,6 +325,7 @@ face-image: img/events/commons_1970s.jpg
 subtitle: Put it to the vote as it stands.
 on-arrival: div_key = "{k}"; div_mode = "press"
 call: bill_vote
+on-display: {{! if (typeof window !== 'undefined' && window.drawDivision) {{ window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); }} !}}
 
 The division bells ring across Westminster, and the members file through the lobbies.
 
@@ -333,6 +336,7 @@ view-if: div_proj_rebels >= 4
 subtitle: Most rebels come back. The bill is weakened, and {champion} are annoyed.
 on-arrival: div_key = "{k}"; div_mode = "concede"
 call: bill_vote
+on-display: {{! if (typeof window !== 'undefined' && window.drawDivision) {{ window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); }} !}}
 
 The minister promises the rebels changes in committee, and the whips spend the afternoon in the tea room explaining what they mean.
 
@@ -343,6 +347,7 @@ view-if: div_proj_majority < 30
 subtitle: Most rebels will fall into line. They won't forget it.
 on-arrival: div_key = "{k}"; div_mode = "confidence"
 call: bill_vote
+on-display: {{! if (typeof window !== 'undefined' && window.drawDivision) {{ window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); }} !}}
 
 The Chief Whip tells every Conservative member that a defeat tonight would bring down the government.
 
@@ -355,6 +360,7 @@ choose-if: resources >= 1
 unavailable-subtitle: Requires 1 resource.
 on-arrival: div_key = "{k}"; div_mode = "deal"
 call: bill_vote
+on-display: {{! if (typeof window !== 'undefined' && window.drawDivision) {{ window.drawDivision('commons_division', ['Ayes', 'Noes'], [Q.div_ayes, Q.div_noes], ['govt', 'against']); }} !}}
 
 A road here, a factory there, and a promise about the next bill. The minor parties agree to support us on this one.
 
@@ -398,11 +404,16 @@ title: {b['lords_title']}
 tags: event
 view-if: con_in_government = 1 and bill_{k} = 4 and bill_{k}_lords = 1
 new-page: true
-face-image: img/events/westminster.jpg
+face-image: img/events/lords.jpg
+on-display: {{! if (typeof window !== 'undefined' && window.drawDivision) {{ window.drawDivision('lords_division_{k}', ['Contents', 'Not-Contents'], [Q.bill_{k}_lc, Q.bill_{k}_lnc], ['against', 'govt']); }} !}}
 
 = {b['lords_title']}
 
 {b['lords_text']}
+
+{{!<span class="division" id="lords_division_{k}"></span>!}}
+
+The government is defeated by [+ bill_{k}_lc +] votes to [+ bill_{k}_lnc +].
 
 - @lords_yes_{k}: {b['lords_yes'][0]}
 - @lords_no_{k}: {b['lords_no'][0]}
@@ -427,7 +438,7 @@ view-if: bill_{k} = 5
 new-page: true
 on-arrival: {b['law']}; bill_{k} = 6; assent_key = "{k}"
 call: bill_assent
-face-image: img/events/westminster.jpg
+face-image: img/events/lords_throne.jpg
 """ + (f"achievement: {b['achievement']}\n" if b['achievement'] else '') + f"""
 = Royal Assent: the {b['act']}
 

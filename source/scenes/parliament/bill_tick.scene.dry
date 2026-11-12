@@ -71,6 +71,11 @@ if (!Q.con_in_government) {
             } else if (Q[b] == 4 && Q[b + '_lords'] != 1) {
                 if (Q[b + '_lords'] == 0 && Math.random() < D[k].lords_risk) {
                     Q[b + '_lords'] = 1;
+                    // the division: a few hundred peers, and a defeat for the government
+                    var turnout = 220 + Math.floor(Math.random() * 120) + (Q.alliance_formed ? 15 : 0);
+                    var margin = 15 + Math.floor(Math.random() * 70);
+                    Q[b + '_lc'] = Math.round((turnout + margin) / 2);
+                    Q[b + '_lnc'] = turnout - Q[b + '_lc'];
                 } else {
                     Q[b] = 5;
                 }

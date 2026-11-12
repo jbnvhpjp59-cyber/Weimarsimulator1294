@@ -242,6 +242,18 @@ img/map.jpg, img/cards/regions.jpg (a crop)
   Licence: Public domain, CC BY 4.0
   Source: https://commons.wikimedia.org/wiki/File%3AOrdnance_Survey_Great_Britain_Sheet_2%2C_Published_1933.jpg
 
+img/*/lords.jpg
+  House of Lords Chamber.png
+  Author: UK Parliament
+  Licence: CC BY 3.0
+  Source: https://commons.wikimedia.org/wiki/File%3AHouse_of_Lords_Chamber.png
+
+img/*/lords_throne.jpg
+  Sovereign's Throne, House of Lords.jpg
+  Author: ukhouseoflords (flickr)
+  Licence: CC BY 2.0
+  Source: https://commons.wikimedia.org/wiki/File%3ASovereign%27s_Throne%2C_House_of_Lords.jpg
+
 Images used with permission
 
 The following portraits and photographs are used with the permission of their rights holders.

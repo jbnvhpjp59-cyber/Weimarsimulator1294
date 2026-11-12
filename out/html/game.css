@@ -598,6 +598,56 @@ table {
     border-spacing: 0.5em;
 }
 
+/* the House of Lords chart */
+.seat.cross {
+    fill: #9A9A9A;
+}
+.seat.bishops {
+    fill: #7B4F9E;
+}
+.seat.sdp {
+    fill: #2E9A92;
+}
+.seat.unaffiliated {
+    fill: #D6D2C4;
+}
+
+/* a division in either House */
+.division {
+    display: block;
+    margin: 0.6em 0;
+}
+.division_row {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0.25em 0;
+}
+.division_label {
+    flex: 0 0 7.5em;
+    font-size: 0.9em;
+}
+.division_track {
+    flex: 1 1 auto;
+    height: 0.9em;
+    background: rgba(128, 128, 128, 0.15);
+}
+.division_bar {
+    display: block;
+    height: 100%;
+}
+.division_bar.govt {
+    background: #3C7A3C;
+}
+.division_bar.against {
+    background: #A23B3B;
+}
+.division_count {
+    flex: 0 0 3em;
+    text-align: right;
+    font-weight: bold;
+}
+
 /* the front page on the main screen */
 .front_page {
     display: block;
