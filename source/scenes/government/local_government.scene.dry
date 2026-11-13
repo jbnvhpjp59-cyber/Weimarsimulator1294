@@ -17,6 +17,7 @@ Councils spend a quarter of public money, and many of the biggest are run by Lab
 - @docklands: Create urban development corporations for the docklands.
 - @tendering: Make councils put their services out to tender.
 - @settlement: Settle this year's grant to the councils generously.
+- @scottish_rates: Introduce a bill to replace the rates in Scotland.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -75,3 +76,13 @@ subtitle: -0.5 budget. The rates rise less; the dries grumble.
 on-arrival: budget -= 0.5; c1_con += 0.5*(1-dissent); de_con += 0.5*(1-dissent); wet_dissent -= 2; dry_dissent += 2
 
 The Rate Support Grant settlement is kinder than the councils feared. Rate bills still go up, but by less, and the shire Conservatives stop writing to their MPs for a while.
+
+@scottish_rates
+view-if: second_term = 1 and bill_scot_rates = 0 and poll_tax = 0 and rates_pledge = 1 and time >= bill_scot_rates_wait
+subtitle: Keeps your promise to abolish the rates, in Scotland first. The Scots may not thank you.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: right_dissent -= 2; wet_dissent += 2; bill_new = "scot_rates"
+call: bill_introduce
+
+The Scottish Office publishes a bill to replace the rates with a community charge, flat-rate, on every adult.

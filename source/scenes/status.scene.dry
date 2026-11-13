@@ -154,6 +154,8 @@ Q.labour_credibility_disp = Math.round(Q.labour_credibility);
 
 Strikes: [+ strike_wave : strikes +]
 
+[? if miners_strike = 1 : **The miners' strike**, month [+ strike_months +]: [+ strike_strength : strikehold +]. ?][? if miners_strike = 2 : The miners' strike was defeated. ?][? if miners_strike = 3 : The miners won their strike. ?][? if miners_strike = 4 : The miners' strike ended in a settlement. ?]
+
 Public who say the unions have too much power: [+ union_backlash_disp +]%
 
 Government pay norm: [+ pay_norm +]%
@@ -162,9 +164,9 @@ Our position on pay: [? if pay_stance = 0 : undecided ?][? if pay_stance = 1 : b
 
 = The Union Leaders
 
-Len Murray (TUC): [+ tuc_mood : unionmood +]
+[+ tuc_leader +] (TUC): [+ tuc_mood : unionmood +]
 
-Moss Evans (transport workers): [+ tgwu_mood : unionmood +]
+[+ tgwu_leader +] (transport workers): [+ tgwu_mood : unionmood +]
 
 [+ num_leader +] (miners): [+ num_mood : unionmood +]
 
@@ -172,7 +174,7 @@ Bill Sirs (steelworkers): [+ istc_mood : unionmood +]
 
 [+ nupe_leader +] (public employees): [+ nupe_mood : unionmood +]
 
-Chapple and Duffy (electricians and engineers): [+ moderates_mood : unionmood +]
+[+ moderates_short +] (electricians and engineers): [+ moderates_mood : unionmood +]
 
 = Unemployment by Region
 

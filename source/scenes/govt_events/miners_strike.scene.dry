@@ -1,0 +1,212 @@
+title: Cortonwood
+tags: event
+view-if: con_in_government = 1 and in_campaign = 0 and time >= 74 and time <= 86 and miners_strike = 0
+max-visits: 1
+new-page: true
+on-arrival: {!
+// how strong the strike will be: the NUM's mood and union power push it up;
+// coal stocked at the power stations and a nuclear programme pull it down
+var s = 55 + 0.5 * (Q.num_mood - 60) + 0.3 * (Q.union_power - 40) - 10 * Q.coal_stocks - (Q.nuclear_programme ? 6 : 0);
+s += Q.miners_win ? 8 : 0;
+s -= Q.miners_beaten ? 8 : 0;
+Q.strike_strength = Math.max(10, Math.min(90, s));
+!}
+face-image: img/events/pit_rally.jpg
+
+= Cortonwood
+
+The National Coal Board, now run by Ian MacGregor, has announced that it will close Cortonwood colliery in South Yorkshire, and twenty more pits this year. The Yorkshire miners have walked out, and [+ num_leader +] has called the rest of the coalfields out with them, area by area, without a national ballot.
+
+The power stations hold [? if coal_stocks >= 3 : enough coal to last the winter and beyond ?][? if coal_stocks = 2 : a good deal of coal, though not enough for a long winter ?][? if coal_stocks <= 1 : too little coal for a long dispute ?].
+
+- @stand_firm: Back the Coal Board. The closures go ahead.
+- @withdraw_plan: Withdraw the closure plan, as in 1981.
+
+@stand_firm
+subtitle: The longest strike in British history begins.
+on-arrival: miners_strike = 1; strike_months = 0; strike_wave += 3; num_mood += 10; dry_dissent -= 4; wet_dissent += 3
+
+The miners in Nottinghamshire vote to keep working; most of the rest come out. Flying pickets set off for the working pits before dawn. The government says it is a matter for the Coal Board, and everyone knows it is not.
+
+@withdraw_plan
+subtitle: Peace in the coalfields. The dries call it 1981 all over again.
+on-arrival: miners_strike = -1; num_mood -= 10; union_power += 5; dry_dissent += 10; thatcher_rating -= 2; budget -= 1
+
+The closures are withdrawn and the Coal Board gets more money. The NUM claims a second victory over the government in three years, and starts to believe it can never lose.
+
+#################### During the strike
+
+@orgreave
+title: Orgreave
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and strike_months >= 2 and orgreave_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: orgreave_seen = 1
+face-image: img/events/pit_rally.jpg
+
+= Orgreave
+
+Thousands of pickets have converged on the coking plant at Orgreave, near Sheffield, to stop the lorries carrying coke to the Scunthorpe steelworks. Thousands of police in riot gear, some of them on horseback, are there to keep the gates open. The pictures on the evening news are of mounted charges and men with blood on their faces.
+
+- @back_police: Back the police.
+- @urge_restraint: Call for calm on both sides.
+
+@back_police
+subtitle: The right approves. The pickets don't get through. The wets wince.
+on-arrival: strike_strength -= 6; union_backlash += 4; num_mood += 5; right_dissent -= 3; wet_dissent += 2; lib_relation -= 2
+
+You tell the Commons that what we have seen is an attempt to substitute the rule of the mob for the rule of law, and that it must not succeed. The lorries keep moving.
+
+@urge_restraint
+subtitle: The wets approve. The pickets take heart.
+on-arrival: strike_strength += 4; right_dissent += 4; wet_dissent -= 2
+
+The Home Office calls for restraint from pickets and police alike. The NUM reads it as a sign that the government's nerve is going.
+
+@working_miners
+title: The Working Miners
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and strike_months >= 3 and working_miners_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: working_miners_seen = 1
+face-image: img/events/pit_rally.jpg
+
+= The Working Miners
+
+Most of Nottinghamshire's miners are still at work. They were never given a national ballot, and they say they won't strike without one. Some of them have gone to the High Court to have the strike declared unofficial in their area.
+
+- @back_working: Back the working miners and their court cases.
+- @leave_coal_board: Leave it to the Coal Board.
+
+@back_working
+subtitle: The strike weakens. The NUM is furious.
+on-arrival: strike_strength -= 8; num_mood += 5; union_power -= 2; moderates_mood -= 3; wet_dissent += 1
+
+The courts rule that the strike in Nottinghamshire and Derbyshire is unofficial. The working miners begin to talk of a union of their own.
+
+@leave_coal_board
+on-arrival: strike_strength -= 2
+
+The government stays out of it, officially. The working miners carry on working, unofficially encouraged.
+
+@sequestration
+title: The NUM's Funds
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and strike_months >= 6 and employment_acts >= 2 and sequestration_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: sequestration_seen = 1
+face-image: img/events/westminster.jpg
+
+= The NUM's Funds
+
+The High Court has fined the NUM for contempt after it ignored a ruling that the strike breaches its own rules. The union won't pay. Under the Employment Acts, its funds can now be seized, and the NUM has already moved some of them abroad.
+
+- @seize_funds: Let the courts seize the NUM's funds.
+- @hold_back: Hold back, for fear of making martyrs.
+
+@seize_funds
+subtitle: The strike is starved of money. The TUC protests; the wets wince.
+on-arrival: strike_strength -= 10; union_power -= 4; tuc_mood += 5; wet_dissent += 3; right_dissent -= 2
+achievement: sequestration
+
+Sequestrators take control of the NUM's assets and start tracing the money sent abroad. The union can no longer pay its pickets' petrol or its strikers' rent.
+
+@hold_back
+subtitle: The strike has more time.
+on-arrival: strike_strength += 3; right_dissent += 2
+
+The Attorney General lets it be known that the government has no wish to see the courts used as a weapon. The NUM's money stays where it is.
+
+@nacods
+title: The Pit Deputies
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and strike_months >= 7 and nacods_seen = 0
+max-visits: 1
+new-page: true
+on-arrival: nacods_seen = 1
+face-image: img/events/pit_rally.jpg
+
+= The Pit Deputies
+
+NACODS, the union of the pit deputies who certify that a mine is safe to work, has voted to strike against the closure plan. Without them, even the working pits in Nottinghamshire would have to shut.
+
+- @settle_nacods: Settle with the pit deputies.
+- @face_nacods: Let the Coal Board face them down.
+
+@settle_nacods
+subtitle: -0.5 budget. The working pits stay open.
+on-arrival: budget -= 0.5; strike_strength -= 4; dry_dissent += 2
+
+The Coal Board agrees a new review procedure for closures. The deputies call off their strike, and the NUM is left on its own.
+
+@face_nacods
+subtitle: A gamble: it may break the strike, or win it for the miners.
+on-arrival: {!
+Q.nacods_struck = (Math.random() < 0.4) ? 1 : 0;
+if (Q.nacods_struck) {
+    Q.strike_strength += 20;
+    Q.thatcher_rating -= 3;
+} else {
+    Q.strike_strength -= 6;
+}
+!}
+
+[? if nacods_struck = 1 : The deputies walk out. The working pits close for a fortnight, and the coal reaching the power stations slows to a trickle. ?][? if nacods_struck = 0 : The deputies back down at the last minute. The working pits stay open. ?]
+
+@drift_back
+title: The Drift Back to Work
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and strike_months >= 8 and drift_seen = 0 and strike_strength < 55 and (month >= 11 or month <= 1)
+max-visits: 1
+new-page: true
+on-arrival: drift_seen = 1; strike_strength -= 10
+face-image: img/events/pit_rally.jpg
+
+= The Drift Back to Work
+
+Christmas is coming, and the strikers' families have been living on soup kitchens and the generosity of strangers since March. The Coal Board offers a Christmas bonus to anyone who returns, and thousands do.
+
+#################### How it ends
+
+@march_back
+title: The March Back
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and ((strike_strength <= 10 and strike_months >= 9) or (strike_months >= 13 and strike_strength < 50))
+max-visits: 1
+new-page: true
+on-arrival: miners_strike = 2; strike_wave = 1; union_power -= 20; num_mood = 80; union_backlash += 5; thatcher_rating += 3; c2_con += 2*(1-dissent); wet_dissent += 3; dry_dissent -= 6; labour_credibility -= 3; ru_yorkshire += 1; ru_wales += 0.8; ru_north += 0.6; ru_scotland += 0.5; ru_eastmids += 0.3
+achievement: long_strike
+face-image: img/events/pit_rally.jpg
+
+= The March Back
+
+After [+ strike_months +] months, a special delegate conference of the NUM votes to go back to work without an agreement. In the pit villages, the miners march back behind their colliery bands and banners. No union will challenge a government like this again for a generation, and the closures that follow will empty whole valleys.
+
+@lights_out
+title: The Lights Go Out
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and strike_strength >= 85 and coal_stocks < 2 and (month >= 11 or month <= 2)
+max-visits: 1
+new-page: true
+on-arrival: miners_strike = 3; union_power += 15; num_mood = 55; thatcher_rating -= 10; rebellion += 3; budget -= 2; economic_growth -= 1; c2_con -= 2; dry_dissent += 10; strike_wave += 2
+face-image: img/events/pit_rally.jpg
+
+= The Lights Go Out
+
+The coal stocks at the power stations have run out. The Central Electricity Generating Board starts rota cuts, and for the first time since 1974 the lights go out across Britain. The government settles on the miners' terms. The closures are abandoned, and [+ num_leader +] tells a rally that the miners have beaten two Tory governments.
+
+@negotiated_end
+title: A Settlement
+tags: event
+view-if: con_in_government = 1 and miners_strike = 1 and strike_months >= 13 and strike_strength >= 50
+max-visits: 1
+new-page: true
+on-arrival: miners_strike = 4; union_power += 5; num_mood -= 10; thatcher_rating -= 2; dry_dissent += 6; strike_wave = 1
+face-image: img/events/pit_rally.jpg
+
+= A Settlement
+
+After more than a year, ACAS brokers a deal. The closure programme will go ahead more slowly, with an independent review for each pit. Both sides claim victory, and neither believes it.

@@ -13,7 +13,7 @@ for (var c of Q.classes) {
 }
 
 // clamp 0-100 opinion meters
-var meters = ['thatcher_rating', 'lab_leader_rating', 'economic_liberalism',
+var meters = ['thatcher_rating', 'lab_leader_rating', 'economic_liberalism', 'union_power',
               'union_backlash', 'labour_credibility', 'heath_hostility',
               'lib_relation', 'snp_relation', 'pc_relation', 'uup_relation'];
 for (var m of meters) {
@@ -151,6 +151,16 @@ if (Q.month_actions >= 1) {
         if (Q.year >= 1982 && Q.economic_growth < 3) {
             Q.economic_growth += 0.15;
         }
+        // early 1986: the oil price halves, taking inflation and the pound with it
+        if (Q.time >= 97 && Q.time <= 100) {
+            Q.oil_collapse = 1;
+            Q.inflation -= 0.4;
+            Q.sterling -= 1.5;
+        }
+        // the Lawson boom: from 1986 the economy takes off, if money is cheap enough
+        if (Q.second_term && Q.year >= 1986 && Q.interest_rate <= 12 && Q.economic_growth < 4.5) {
+            Q.economic_growth += 0.12;
+        }
         // growth drifts back towards its long-run trend
         Q.economic_growth += (1.5 - Q.economic_growth) * 0.04;
         // monetary policy: dear money beats inflation, at the cost of jobs
@@ -243,7 +253,7 @@ if (Q.month_actions >= 1) {
         if (Q.inflation > 10) {
             var inf = Q.inflation - 10;
             for (var c of Q.classes) {
-                Q[c + '_' + gp] -= 0.03 * inf;
+                Q[c + '_' + gp] -= 0.05 * inf;
             }
         } else if (Q.inflation < 7 && (Q.months_in_office > 12 || !Q.con_in_government)) {
             Q['c1_' + gp] += 0.15;
@@ -282,6 +292,8 @@ if (Q.month_actions >= 1) {
             Q.falklands_factor -= 1;
         }
         Q.thatcher_rating += (7 - Q.unemployment) * 0.05 + (8 - Q.inflation) * 0.03;
+        // the Leader of the Opposition's honeymoon fades too
+        Q.lab_leader_rating += (44 - Q.lab_leader_rating) * 0.03;
 
         // ---- threat meters ----
         // backbench rebellion grows when factions are angry, and fades slowly
@@ -400,6 +412,8 @@ this._runActions(this.game.scenes['regional_economy'].onArrival);
 // the union leaders' moods, and Labour fighting itself
 this._runActions(this.game.scenes['union_leaders'].onArrival);
 this._runActions(this.game.scenes['labour_civil_war'].onArrival);
+// the miners' strike, if it has begun
+this._runActions(this.game.scenes['miners_tick'].onArrival);
 
 // recalculate projected votes and seats
 this._runActions(this.game.scenes['election_algorithm'].onArrival);

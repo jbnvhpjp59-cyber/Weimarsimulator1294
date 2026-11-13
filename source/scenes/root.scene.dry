@@ -488,9 +488,9 @@ Q.timers = ['advisor_action',
             'industry', 'housing', 'law_order', 'foreign_affairs',
             'defence', 'northern_ireland', 'public_pay', 'reshuffle',
             'nhs', 'education', 'social_security', 'europe', 'immigration',
-            'energy', 'local_government', 'regions', 'union_leaders',
+            'energy', 'local_government', 'regions', 'union_leaders', 'coal_dispute',
             // events
-            'by_election', 'gilt_crisis'];
+            'by_election', 'gilt_crisis', 'opp_byelection'];
 for (var t of Q.timers) {
     Q[t + '_timer'] = 0;
 }
@@ -627,6 +627,10 @@ Q.istc_mood = 40;
 Q.nupe_mood = 60;
 Q.moderates_mood = 35;
 Q.num_leader = 'Joe Gormley';
+Q.tuc_leader = 'Len Murray';
+Q.tgwu_leader = 'Moss Evans';
+Q.moderates_names = 'Frank Chapple of the electricians and Terry Duffy of the engineers';
+Q.moderates_short = 'Chapple and Duffy';
 Q.nupe_leader = 'Alan Fisher';
 Q.unions_last_tick = 0;
 Q.day_of_action_seen = 0;
@@ -642,6 +646,59 @@ Q.sdp_lab_mps = 0;
 Q.sdp_month_defections = 0;
 Q.militant_seen = 0;
 Q.sdp_twenty_seen = 0;
+
+// ---------------------------------------------------------------
+// The miners' strike of 1984-85 (govt_events/miners_strike.scene.dry,
+// miners_tick.scene.dry). miners_strike: 0 not yet, -1 avoided, 1 on
+// strike, 2 the miners lost, 3 the miners won, 4 a settlement.
+// ---------------------------------------------------------------
+Q.miners_strike = 0;
+Q.strike_strength = 0;
+Q.strike_months = 0;
+Q.miners_tick_last = 0;
+Q.orgreave_seen = 0;
+Q.working_miners_seen = 0;
+Q.sequestration_seen = 0;
+Q.nacods_seen = 0;
+Q.nacods_struck = 0;
+Q.drift_seen = 0;
+Q.police_national = 0;
+
+// ---------------------------------------------------------------
+// The second term's events (govt_events/second_term_events.scene.dry)
+// ---------------------------------------------------------------
+Q.parkinson_seen = 0;
+Q.parkinson_resigned = 0;
+Q.gchq_seen = 0;
+Q.gchq_ban = 0;
+Q.brighton_seen = 0;
+Q.hong_kong_declaration = 0;
+Q.sterling_1985_seen = 0;
+Q.bournemouth_seen = 0;
+Q.riots_1985_seen = 0;
+Q.anglo_irish_seen = 0;
+Q.anglo_irish = 0;
+Q.westland_seen = 0;
+Q.heseltine_out = 0;
+Q.libya_seen = 0;
+Q.wapping_seen = 0;
+Q.teachers_seen = 0;
+Q.labour_1987_seen = 0;
+// the second term's reforms, sales and economy
+Q.gas_sold = 0;
+Q.sunday_trading = 0;
+Q.buses_deregulated = 0;
+Q.big_bang = 0;
+Q.fowler_reform = 0;
+Q.poll_tax = 0;
+Q.big_sales = 0;
+Q.oil_collapse = 0;
+// a second Labour term, if we lose in 1979 (events/labour_government.scene.dry)
+Q.sterling_labour_seen = 0;
+Q.labour_left_revolt_seen = 0;
+Q.falklands_labour_seen = 0;
+Q.falklands_labour_won = 0;
+Q.opp_byelection_gain = 0;
 
 // ---------------------------------------------------------------
 // The front page (newsroom.scene.dry) and the chronicle of decisions

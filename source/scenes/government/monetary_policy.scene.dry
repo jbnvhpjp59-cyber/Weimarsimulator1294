@@ -15,6 +15,7 @@ The money supply is the heart of our economic strategy. Inflation is [+ inflatio
 - @mtfs: Adopt a Medium-Term Financial Strategy.
 - @exchange_controls: Abolish exchange controls.
 - @hold: Hold rates steady.
+- @big_bang: Introduce a bill for the Big Bang in the City.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -55,3 +56,13 @@ Forty years of controls end overnight. Britons can buy foreign shares and take a
 on-arrival: dry_dissent -= 1
 
 Bank Rate stays at [+ interest_rate_disp +]%. The markets read it as steadiness.
+
+@big_bang
+view-if: second_term = 1 and bill_city = 0 and big_bang = 0 and time >= bill_city_wait
+subtitle: The City booms, and London with it, once it becomes law in about seven months.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: dry_dissent -= 2; bill_new = "city"
+call: bill_introduce
+
+The Financial Services Bill is published. The Stock Exchange has already agreed to scrap its fixed commissions by October.

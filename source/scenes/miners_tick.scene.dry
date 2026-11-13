@@ -1,0 +1,25 @@
+title: The Coal Dispute
+on-arrival: {!
+// The miners' strike, month by month. miners_strike: 0 not yet, -1 avoided,
+// 1 on strike, 2 the miners lost, 3 the miners won, 4 a settlement.
+// strike_strength (0-100) is how well the strike is holding: hardship wears
+// it down; in winter, low coal stocks at the power stations push it up.
+if (Q.miners_strike != 1 || Q.miners_tick_last == Q.time) {
+    return;
+}
+Q.miners_tick_last = Q.time;
+Q.strike_months += 1;
+var winter = (Q.month >= 11 || Q.month <= 2);
+var drift = -1.1 + (winter ? 5 * (1 - Q.coal_stocks / 3) : 0) + (Q.num_mood - 70) / 20 + (Math.random() * 6 - 3);
+Q.strike_strength = Math.max(0, Math.min(100, Q.strike_strength + drift));
+// the cost: lost output, policing and imported coal
+Q.budget -= 0.25;
+Q.economic_growth -= 0.05;
+Q.strike_wave = Math.max(Q.strike_wave, 4);
+Q.union_backlash += 0.5;
+if (Q.strike_strength > 60) {
+    Q.thatcher_rating -= 0.4;
+}
+!}
+
+# Run by post_event after every action; acts once a month during the strike.

@@ -15,6 +15,7 @@ The Department of Health and Social Security spends a quarter of all public mone
 - @sick_pay: Make employers pay sick pay.
 - @child_benefit: Raise child benefit.
 - @fraud: Crack down on benefit fraud.
+- @fowler: Introduce Fowler's reform of social security.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -54,3 +55,13 @@ subtitle: +0.5 budget. Popular with the tabloids; the Liberals object to the met
 on-arrival: fraud_drive += 1; budget += 0.5; right_dissent -= 2; c2_con += 1*(1-dissent); de_con -= 1; lib_relation -= 2
 
 Specialist claims teams descend on benefit offices in search of "scroungers". In Oxford, a raid arrests 283 people at a fake benefit office the police set up to catch them. The Sun is delighted.
+
+@fowler
+view-if: second_term = 1 and bill_fowler = 0 and fowler_reform = 0 and time >= bill_fowler_wait
+subtitle: +1.5 budget, once it becomes law. The poverty lobby and the wets will fight it.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: wet_dissent += 3; dry_dissent -= 2; bill_new = "fowler"
+call: bill_introduce
+
+[+ health_secretary +] publishes the Social Security Bill, the result of the biggest review of the welfare state since the war.

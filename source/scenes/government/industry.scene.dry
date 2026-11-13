@@ -15,6 +15,8 @@ on-arrival: industry_timer = 4; month_actions += 1
 - @privatise: Sell a state enterprise.
 - @telecoms: Introduce a bill to sell British Telecom.
 - @coal_stocks: Quietly build up coal stocks at the power stations.
+- @buses: Introduce a bill to deregulate the buses.
+- @sell_more: Sell another state company.
 - @easy_discard
 - @cancel_advisor_action
 
@@ -57,3 +59,20 @@ subtitle: -1 budget. Prepares for a future miners' strike.
 on-arrival: coal_stocks += 1; budget -= 1
 
 The Central Electricity Generating Board is told to build up coal stocks at the power stations and to convert some to burn oil. Nobody says why, and nobody needs to.
+
+@buses
+view-if: second_term = 1 and bill_buses = 0 and buses_deregulated = 0 and time >= bill_buses_wait
+subtitle: +0.5 budget, once it becomes law. The countryside worries about its buses.
+choose-if: bill_room = 1
+unavailable-subtitle: [+ bill_room_text +]
+on-arrival: dry_dissent -= 1; wet_dissent += 1; bill_new = "buses"
+call: bill_introduce
+
+The Transport Secretary publishes the Transport Bill. Bus timetables everywhere will be torn up.
+
+@sell_more
+view-if: second_term = 1 and big_sales < 3
+subtitle: +2 budget. Popular capitalism, one flotation at a time.
+on-arrival: big_sales += 1; privatisations += 1; budget += 2; economic_liberalism += 2; ab_con += 1*(1-dissent); c1_con += 1*(1-dissent); dry_dissent -= 2; wet_dissent += 1
+
+[? if big_sales = 1 : British Airways, turned round by Lord King, is floated. The offer is eleven times oversubscribed. ?][? if big_sales = 2 : Rolls-Royce, nationalised when it went bust in 1971, goes back to the market. ?][? if big_sales = 3 : The British Airports Authority is sold, with Heathrow and Gatwick. ?]
