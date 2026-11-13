@@ -253,7 +253,7 @@ if (Q.month_actions >= 1) {
         if (Q.inflation > 10) {
             var inf = Q.inflation - 10;
             for (var c of Q.classes) {
-                Q[c + '_' + gp] -= 0.03 * inf;
+                Q[c + '_' + gp] -= 0.05 * inf;
             }
         } else if (Q.inflation < 7 && (Q.months_in_office > 12 || !Q.con_in_government)) {
             Q['c1_' + gp] += 0.15;
